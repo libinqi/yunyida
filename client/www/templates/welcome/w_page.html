@@ -1,0 +1,13 @@
+<div class="guide-start" on-drag-left="onSwipeLeft()">
+	<div id="guide">
+		<div id="guide-wrapper" data-value="0" style="-webkit-transition: 180ms ease-out; transition: 180ms ease-out; transform:translateX(0px) translateZ(0px); -webkit-transform: translateX(0px) translateZ(0px);">
+			<div class="guide-bg-a"></div>
+			<div class="guide-bg-b"></div>
+		</div>
+		<ul id="guide-arrow" ng-if="guideFlag == 'a'">
+			<li class="active"></li>
+			<li></li>
+		</ul>
+		<div class="guide-sure" ng-if="guideFlag == 'b'" ng-click="guideSure()"></div>
+	</div>
+</div>

@@ -1,0 +1,63 @@
+<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+  <a class="button icon-left ion-ios-arrow-left button-clear button-light" style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="backGo()"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">发布货源</div>
+  <a class="button button-clear" href="#/message"><img src="img/icon-zn-b.png" alt="最新消息" style="width:20px;position:relative;top:2px;"></a>
+</ion-header-bar>
+<ion-view view-title="发货">
+  <ion-content >
+
+<div class="list">
+  <label class="item item-input" style="width:100%">
+    <div class="input-label" style="width:40%">起始地</div>
+    <ionic-city-picker placeholder="出发城市" tag="" backdrop=true backdrop-click-to-close=false css-class="text-align-r" okText="确定" citydata="goodsInfo.placeOfDeparture"  style="width:55%" ></ionic-city-picker>
+    <i class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;"></i>
+  </label>
+
+  <label class="item item-input" style="width:100%">
+    <div class="input-label" style="width:40%">目的地</div>
+    <ionic-city-picker placeholder="目的城市" tag="" backdrop=true backdrop-click-to-close=false css-class="text-align-r" okText="确定" citydata="goodsInfo.destination"  style="width:55%" ></ionic-city-picker>
+    <i class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;"></i>
+  </label>
+
+  <label class="item item-input" style="width:100%">
+    <div class="input-label" style="width:40%"> 货物类型</div>
+    <ionic-dict-picker   backdrop=true backdrop-click-to-close=false css-class="text-align-r" dictmodel="goodsInfo.goodsClassificationName" dict-data="goods_type" okText="确定"   style="width:55%" ></ionic-dict-picker>
+    <i class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;"></i>
+    <!-- <select ng-model="goodsInfo.goodsClassificationCode" ng-options="dic.id as dic.name for dic in dictService.goods_type" ng-init="goodsInfo.goodsClassificationCode=dictService.goods_type[0].id"></select> -->
+  </label>
+
+  <label class="item item-input" ng-if="goodsInfo.goodsClassificationName != '泡货' " style="width:100%">
+    <div class="input-label" style="width:40%">货重</div>
+    <input type="tel" ng-model="goodsInfo.goodsItemGrossWeight" class="item-input text-align-r" style="padding-right:0.5em;width:35%" ><div style="width:25%" class="input-label">吨</div>
+    <i class="icon  icon-accessory"></i>
+  </label>
+
+  <label class="item item-input" ng-if="goodsInfo.goodsClassificationName == '泡货'" style="width:100%">
+    <div class="input-label" style="width:40%">体积</div>
+    <input type="tel" ng-model="goodsInfo.goodsCube" class="item-input text-align-r" style="padding-right:0.5em;width:40%"><div class="input-label" style="width:20%">方</div>
+    <i class="icon  icon-accessory"></i>
+  </label>
+
+  <label class="item item-input " style="width:100%">
+    <div class="input-label" style="width:40%">求车类型</div>
+     <ionic-dict-picker   backdrop=true backdrop-click-to-close=false css-class="text-align-r" dictmodel="goodsInfo.vehicleTypeName" dict-data="car_type" okText="确定"   style="width:55%" ></ionic-dict-picker>
+     <i class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;"></i>
+   <!--  <select ng-model="goodsInfo.vehicleType" ng-options="dic.id as dic.name for dic in dictService.car_type" ng-init="goodsInfo.vehicleType=dictService.car_type[1].id"></select> -->
+  </label>
+
+  <label class="item item-input " style="width:100%">
+    <div class="input-label" style="width:40%" >有效期</div>
+    <ionic-dict-picker   backdrop=true backdrop-click-to-close=false css-class="text-align-r" dictmodel="goodsInfo.availablePeriodName" dict-data="validate_type" okText="确定"  style="width:55%"  ></ionic-dict-picker>
+    <i class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;"></i>
+<!--     <select ng-model="goodsInfo.availablePeriod" ng-options="dic.id as dic.name for dic in dictService.validate_type" ng-init="goodsInfo.availablePeriod=dictService.validate_type[1].id"></select> -->
+  </label>
+
+
+</div>
+
+<div class="button-bar">
+  <a class="button" href="#/tab/index" style="margin-right:10px;margin-left:10px;">取消</a>
+  <a class="button button-positive" ng-click="addGoods()" style="margin-right:10px;margin-left:10px;">发布</a>
+</div>
+  </ion-content>
+</ion-view>

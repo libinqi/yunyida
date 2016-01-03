@@ -1,0 +1,80 @@
+<ion-header-bar class="bar-subheader">
+  <ul class="tabs tabs-light">
+    <li class="tab-item text-fr padding-right">1.填写托运信息</li>
+    <li>
+      <a class="icon-left ion-ios-arrow-right button-clear button-dark"></a>
+    </li>
+    <li class="tab-item">2.填写货物信息</li>
+    <li>
+      <a class="icon-left ion-ios-arrow-right button-clear button-dark"></a>
+    </li>
+    <li class="tab-item text-fl padding-left assertive">3.信息确认</li>
+  </ul>
+</ion-header-bar>
+<ion-content>
+  <form>
+    <div class="list padding" style="margin-top:20px">
+      <label class=" item-detail padding-left padding-right" >
+      <div class="input-label">订单编号</div>：
+        <label  >{{orderData.originalDocumentNumber}}</label>
+      </label>
+      <label class=" item-detail padding-left padding-right" >
+        <div class="input-label">托运方</div>：
+        <label >{{userData.deptname}}</label>
+      </label>
+      <label class=" item-detail padding-left padding-right" >
+        <div class="input-label">收货方</div>：
+        <label  >{{orderData.consigneeInfo}}</label>
+      </label>
+      <label class=" item-detail padding-left padding-right" >
+        <div class="input-label">承运人</div>：
+        <label >{{orderData.carrier}}</label>
+      </label>
+      <label class=" item-detail  padding-left padding-right" >
+        <div class="input-label">托运日期</div>：
+        <label  >{{orderData.consignmentDateTime}}</label>
+      </label>
+      <label class=" item-detail padding-left padding-right" >
+        <div class="input-label">货物名称</div>：
+        <label  >{{orderData.descriptionOfGoods}}</label>
+      </label>
+      <label class=" item-detail padding-left padding-right" >
+        <div class="input-label">货物总值</div>：
+        <label  >{{orderData.monetaryTotalAmount}}</label>
+      </label>
+      <label class=" item-detail padding-left padding-right" >
+        <div class="input-label">件数</div>：
+        <label   >{{orderData.goodsNumber}}</label>
+      </label>
+ <label class=" item-detail padding-left padding-right" ng-if="orderData.goodsItemGrossWeight!=0">
+        <div class="input-label">重量</div>：
+        <label  >{{orderData.goodsItemGrossWeight}}</label>
+      </label>
+      <label class=" item-detail padding-left padding-right" ng-if="orderData.goodsItemGrossWeight==0">
+        <div class="input-label">体积</div>：
+        <label  >{{orderData.goodsCube}}</label>
+      </label>
+      <label class=" item-detail padding-left padding-right" >
+        <div class="input-label">运费</div>：
+        <label  >{{orderData.freightCharges}}</label>
+      </label>
+      <label class=" item-detail padding-left padding-right" >
+        <div class="input-label">付款方式</div>：
+        <label  >{{orderData.payTypeName}}</label>
+      </label>
+      <label class=" item-detail padding-left padding-right" >
+        <div class="input-label">司机</div>：
+        <label  >{{orderData.carrier}}</label>
+      </label>
+      <!-- <label class=" item-detail padding-left padding-right" >
+        <div class="input-label">车牌号码</div>：
+        <label  >{{orderData.vehicleNumber}}</label>
+      </label> -->
+
+      <div class="button-bar" style="margin-top:20px;">
+        <a class="button" ng-click="backGo()" style="margin-right:10px;margin-left:10px;">取消</a>
+        <a class="button button-positive" ng-click="addbizOrder()" style="margin-right:10px;margin-left:10px;">确认</a>
+    </div>
+    </div>
+  </form>
+</ion-content>

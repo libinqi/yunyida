@@ -1,0 +1,96 @@
+<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+  <a class="button icon-left ion-ios-arrow-left button-clear button-light" style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="backGo()"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">订单详情</div>
+  <a class="button button-clear" style="width:40px;height:25px" ></a>
+</ion-header-bar>
+
+<ion-content >
+<div style="margin-top:20px;margin-right: auto;margin-left: auto; width:98%;">
+      <!-- <label style="margin:0" > -->
+      <div style="margin-top:10px;width:100%;text-align: center;color:#ef6600" >订单号：{{orderdetail.originalDocumentNumber}}</div>
+
+      <!-- </label> -->
+      <label class="item-detail padding-left padding-right " style="margin-left:23px;margin-top:20px" >
+        <img src="img/person.png" width="20px" height="20px" style="margin-right:5px;">
+        <div class="order-detail-div" style="font-size: 16px;">承运方</div>
+        <label style="margin-left:-8px">：{{orderdetail.carrier}}</label>
+      </label>
+      <label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderdetail.placeOfDeparture">
+        <div class="order-detail-div">起始地</div>
+        <label >：{{orderdetail.placeOfDeparture}}</label>
+      </label>
+      <label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderdetail.destination">
+        <div class="order-detail-div">目的地</div>
+        <label >：{{orderdetail.destination}}</label>
+      </label>
+      <label class="item-detail padding-left padding-right" style="margin-left:50px;" ng-if="orderdetail.carrierTelephoneNumber">
+        <div class="order-detail-div">电话</div>
+        <label >：{{orderdetail.carrierTelephoneNumber}}</label>
+      </label>
+      <label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderdetail.consignmentDateTime">
+        <div class="order-detail-div">日期</div>：
+        <label style="font-size: 12px;">{{orderdetail.consignmentDateTime}}</label>
+      </label>
+      <label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderdetail.descriptionOfGoods">
+        <div class="order-detail-div">名称</div>
+        <label >：{{orderdetail.descriptionOfGoods}}</label>
+      </label>
+      <label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderdetail.monetaryTotalAmount">
+        <div class="order-detail-div">货物总值</div>
+        <label >：{{orderdetail.monetaryTotalAmount}}元</label>
+      </label>
+
+      <label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderdetail.goodsNumber">
+        <div class="order-detail-div">件数</div>
+        <label >：{{orderdetail.goodsNumber}}</label>
+      </label>
+      <label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderdetail.goodsItemGrossWeight!=0">
+        <div class="order-detail-div">重量</div>
+        <label >：{{orderdetail.goodsItemGrossWeight}}吨</label>
+      </label>
+      <label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderdetail.goodsCube!=0">
+        <div class="order-detail-div">体积</div>
+        <label >：{{orderdetail.goodsCube}}方</label>
+      </label>
+
+
+      <label class="item-detail padding-left padding-right" style="margin-left:23px;margin-top:20px" ng-if="orderdetail.consigneeInfo">
+        <img src="img/person.png" width="20px" height="20px" style="margin-right:5px;">
+        <div class="order-detail-div" style="font-size: 16px;">收货人</div>
+        <label style="margin-left:-8px">：{{orderdetail.consigneeInfo}}</label>
+      </label>
+      <label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderdetail.consignee">
+        <div class="order-detail-div">联系人</div>
+        <label >：{{orderdetail.consignee}}</label>
+      </label>
+      <label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderdetail.consigneeTelephoneNumber">
+        <div class="order-detail-div">电话</div>
+        <label >：{{orderdetail.consigneeTelephoneNumber}}</label>
+      </label>
+      <label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderdetail.payTypeName">
+        <div class="order-detail-div">付款方式</div>
+        <label >：{{orderdetail.payTypeName}}</label>
+      </label>
+      <label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderdetail.freightCharges">
+        <div class="order-detail-div">运费</div>
+        <label >：{{orderdetail.freightCharges}}元</label>
+      </label>
+      <label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderdetail.remark">
+        <div class="order-detail-div">备注</div>
+        <label >：{{orderdetail.remark}}</label>
+      </label>
+
+      <label class="item-detail padding-left padding-right" ng-if="orderdetail.status == 'YPJ'" style="margin-left:50px">
+        <div class="order-detail-div">评价内容</div>
+        <label >：{{orderdetail.goodsEvaluate || '无'}}</label>
+      </label>
+</div>
+
+<div class="button-bar" style="margin-top:20px">
+    <button class="button button-positive" ng-if="orderdetail.status == 'WQH'"  ng-click="cancelOrder(orderdetail.orderId)" style="margin-right:10px;margin-left:10px;">撤单</button>
+   <button class="button button-positive" ng-if="orderdetail.status == 'WQH'"  ng-click="confirmPickup(orderdetail.orderId)" style="margin-right:10px;margin-left:10px;">确认发货</button>
+   <button class="button button-positive" ng-if="orderdetail.status == 'YQH'" ng-click="confirmSign(orderdetail.orderId)" style="margin-right:10px;margin-left:10px;">确认签收</button>
+   <button class="button button-positive" ng-if="orderdetail.status == 'DPJ'"  ng-click="pingjia(orderdetail.orderId)" style="margin-right:10px;margin-left:10px;">评价</button>
+   <button class="button button-positive" ng-if="orderdetail.status == 'DPJ'"  ng-click="backGo()" style="margin-right:10px;margin-left:10px;">取消</button>
+</div>
+  </ion-content>

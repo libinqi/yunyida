@@ -1,0 +1,51 @@
+<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+  <a class="button icon-left ion-ios-arrow-left button-clear button-light"
+     style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="closedetail()"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">车源详情</div>
+  <a class="button button-clear" style="width:40px;height:25px"></a>
+</ion-header-bar>
+<ion-view view-title="车源详情">
+  <ion-content class="padding">
+
+    <!-- <div class="list" style="width:16.5em;margin:10px auto;text-ailgn:center;"> -->
+
+    <label class="item item-input" style=" border-width: 0px;    margin-left: 30px;">起始地：
+      <span class="item-input">{{carinfo.sCity}}</span>
+    </label>
+    <label class="item item-input" style=" border-width: 0px;    margin-left: 30px;">目的地：
+      <span class="item-input">{{carinfo.eCity ||'全国'}}</span>
+    </label>
+
+    <label class="item item-input" ng-if="carinfo.vehicleType" style=" border-width: 0px;    margin-left: 30px;">
+      <span class="item-input">车型：<span style="margin-left:1em">{{carinfo.vehicleType}}</span></span>
+
+    </label>
+    <label class="item item-input" ng-if="carinfo.vehicleLength" style=" border-width: 0px;    margin-left: 30px;">
+      <span class="item-input">车长：<span style="margin-left:1em">{{carinfo.vehicleLength}}米</span></span>
+    </label>
+
+
+    <label class="item item-input" ng-if="carinfo.loadWeight" style=" border-width: 0px;    margin-left: 30px;">
+      <span class="item-input">载重：<span style="margin-left:1em">{{carinfo.loadWeight}}吨</span></span>
+
+    </label>
+    <label class="item item-input" ng-if="carinfo.contact" style=" border-width: 0px;    margin-left: 30px;">联系人：
+      <span class="item-input">{{carinfo.contact}}</span>
+    </label>
+
+    <label class="item item-input" ng-if="carinfo.phone" style=" border-width: 0px;    margin-left: 30px;">
+      <span class="item-input">电话：<span style="margin-left:1em">{{carinfo.phone}}</span></span>
+    </label>
+
+    <div class="button-bar" style="margin-top:20px">
+
+      <a ng-href="tel: {{carinfo.phone}}" class="button icon-left ion-ios-telephone button-positive button-outline tel"
+         ng-if="carinfo.phone"><span class="tel">马上联系</span></a>
+      <button class="button button-positive" ng-click="consign(carinfo.infoId)" style="">我要托运</button>
+
+      <!-- </div> -->
+
+    </div>
+
+  </ion-content>
+</ion-view>

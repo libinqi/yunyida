@@ -1,0 +1,33 @@
+<ion-header-bar class="bar-subheader">
+  <ul class="tabs tabs-light">
+    <li class="tab-item text-fr padding-right assertive">1.填写基本信息</li>
+    <li>
+      <a class="icon-left ion-ios-arrow-right button-clear button-dark"></a>
+    </li>
+    <li class="tab-item">2.完善用户资料</li>
+  </ul>
+</ion-header-bar>
+<ion-content>
+    <div class="list padding">
+      <label class="item item-input margin10" style="border-bottom:1px solid #ccc">
+        <span class="input-label">手&nbsp;&nbsp;机&nbsp;&nbsp;号</span>
+        <input type="text" ng-model="userData.phoneNumber">
+      </label>
+      <div class="item item-input-inset margin10" style="padding-top:6px;padding-bottom:6px;padding-left:12px;">
+        <span class="input-label">验&nbsp;&nbsp;证&nbsp;&nbsp;码</span>
+        <input type="text" ng-model="formData.securityCode" style="width: 135px;padding-left:7px;">
+        <button class="button button-small button-assertive" ng-click="getValidCode()" ng-disabled="flag==0">{{validBtnText}}</button>
+      </div>
+      <label class="item item-input margin10">
+        <span class="input-label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span>
+        <input type="password" ng-model="userData.password">
+      </label>
+      <label class="item item-input margin10">
+        <span class="input-label">确认密码</span>
+        <input type="password" ng-model="formData.repassword">
+      </label>
+      <div class="padding">
+        <button class="button button-block button-assertive" ng-click="saveUserInfo()">下一步</button>
+      </div>
+    </div>
+</ion-content>

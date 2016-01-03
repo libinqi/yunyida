@@ -1,0 +1,9 @@
+{
+  "name": "goodsapp",
+  "app_id": "",
+  "gulpStartupTasks": [
+      "index",
+      "watch",
+      "sass"
+  ]
+}

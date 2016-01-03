@@ -1,0 +1,25 @@
+<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+
+  <a class="button icon-left ion-ios-arrow-left button-clear button-light" style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="backGo()"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">意向车辆</div>
+  <a class="button button-clear" href="#/message"><img src="img/icon-zn-b.png" alt="最新消息" style="width:20px;position:relative;top:2px;"></a>
+
+</ion-header-bar>
+  <ion-content >
+    <ion-list>
+        <ion-item class="item-remove-animate item-icon-right " ng-repeat="item in items" type="item-text-wrap" style="padding-right: 80px;">
+        <h2 ng-click="placecardetail(item.bizVehicleInfo)">{{item.bizVehicleInfo.placeOfDeparture||'全国'}} → {{item.bizVehicleInfo.destination||'全国'}}</h2>
+        <p class="content" ng-click="placecardetail(item.bizVehicleInfo)">
+            <span ng-if="item.bizVehicleInfo.contactName">{{item.bizVehicleInfo.contactName}}，</span>
+            <span ng-if="item.bizVehicleInfo.telephoneNumber">电话:{{item.bizVehicleInfo.telephoneNumber}}</span>
+            <span ng-if="item.bizVehicleInfo.vehicleLength">车长:{{item.bizVehicleInfo.vehicleLength}}米</span>
+            <!-- <span ng-if="item.bizVehicleInfo.vehicleTonnage">载重:{{item.bizVehicleInfo.vehicleTonnage}}吨</span> -->
+            <span ng-if="item.bizVehicleInfo.vehicleTypeName">类型:{{item.bizVehicleInfo.vehicleTypeName}}</span>
+        </p>
+        <i class="small-button icon" ng-if="item.yxCount!=0" ng-click="placeOrde(item.goodsIntentionId)" 
+        style="float: right;width: 50px;height: 30px;font-size: 14px;margin-top: 20px;display: inline-block;padding: 5px 0px 5px 0px;right: 1em;">下单</i>
+
+      </ion-item>
+    </ion-list>
+
+  </ion-content>

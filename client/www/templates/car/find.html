@@ -1,0 +1,66 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+    <a class="button icon-left ion-ios-arrow-left button-clear button-light"
+       style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="closesearch()"></a>
+    <div class="title title-center header-item" style="color:#fff !important;">查找车源</div>
+    <a class="button button-clear" style="width:40px;height:25px"></a>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list">
+      <label class="item item-input" style="width:100%">
+        <div class="input-label" style="width:40%">起始地</div>
+        <ionic-city-picker placeholder="出发城市" backdrop=true backdrop-click-to-close=false css-class="text-align-r"
+                           okText="确定" citydata="carInfoList.sCity" style="width:55%;"></ionic-city-picker>
+        <i class="icon ion-chevron-right " style="color: #ACACAC;"></i>
+      </label>
+
+
+      <label class="item item-input" style="width:100%">
+        <div class="input-label" style="width:40%">目的地</div>
+        <ionic-city-picker placeholder="目的城市" backdrop=true backdrop-click-to-close=false css-class="text-align-r"
+                           okText="确定" citydata="carInfoList.eCity" style="width:55%"></ionic-city-picker>
+        <i class="icon ion-chevron-right" style="color: #ACACAC;"></i>
+      </label>
+      <!-- <label class="item item-input item-select">
+        <div class="input-label">货物类型：</div>
+        <select ng-model="vm.goodsInfo.goodsClassificationCode" ng-options="dic.id as dic.name for dic in dictService.goods_type"></select>
+      </label> -->
+
+      <label class="item item-input " style="width:100%">
+        <div class="input-label" style="width:40%">车长</div>
+        <ionic-dict-picker placeholder="选择车长" backdrop=true backdrop-click-to-close=false css-class="text-align-r"
+                           dictmodel="carInfoList.vehicleLength" dict-data="car_length" okText="确定"
+                           style="width:55%"></ionic-dict-picker>
+        <i class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;"></i>
+        <!-- <input type="text" ng-model="carInfoList.vehicleLength" readonly="true" ng-click="carlengthdictopen()"> -->
+        <!-- <select ng-model="carInfoList.vehicleLength" ng-options="dic.value as dic.name for dic in dictService.car_length"
+        ng-init="carInfoList.vehicleLength=dictService.car_length[0].value"></select> -->
+      </label>
+      <label class="item item-input " style="width:100%">
+        <div class="input-label" style="width:40%">载重</div>
+        <ionic-dict-picker placeholder="选择载重" backdrop=true backdrop-click-to-close=false css-class="text-align-r"
+                           dictmodel="carInfoList.loadWeight" dict-data="goods_weight" okText="确定"
+                           style="width:55%;color:#000"></ionic-dict-picker>
+        <i class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;"></i>
+        <!--     <select ng-model="carInfoList.loadWeight" ng-options="dic.value as dic.name for dic in dictService.goods_weight"
+            ng-init="carInfoList.loadWeight=dictService.goods_weight[0].value"></select> -->
+      </label>
+      <label class="item item-input " style="width:100%">
+        <div class="input-label" style="width:40%">车型</div>
+        <!-- <input type="text" ng-model="carInfoList.vehicleType" readonly="true" ng-click="cartypedictopen()"> -->
+        <ionic-dict-picker placeholder="选择车型" backdrop=true backdrop-click-to-close=false css-class="text-align-r"
+                           dictmodel="carInfoList.vehicleType" dict-data="car_type" okText="确定"
+                           style="width:55%"></ionic-dict-picker>
+        <i class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;"></i>
+      </label>
+
+    </div>
+
+    <div class="button-bar">
+      <a class="button" ng-click="research()" style="margin-right:10px;margin-left:10px;">重置</a>
+      <a class="button button-positive" ng-click="closesearch()" style="margin-right:10px;margin-left:10px;">查询</a>
+
+    </div>
+  </ion-content>
+
+</ion-modal-view>
