@@ -41,6 +41,25 @@ module.exports = {
                     res.json(user);
                 })
             });
+    },
+    getValidCode: function (req, res) {
+        var phoneNumber = req.query.phoneNumber;
+        SMSService.Send(phoneNumber, function (code) {
+            if (code) {
+                req.session.validCode = code;
+                res.json({validCode: code});
+            }
+        });
+    },
+    checkValidCode: function (req, res) {
+        var phoneNumber = req.query.phoneNumber;
+        var validCode = req.query.validCode;
+        if (req.session.validCode == validCode) {
+            res.json({message: 'ok'});
+        }
+        else {
+            res.json({message: 'no'});
+        }
     }
 };
 
