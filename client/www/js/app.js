@@ -224,39 +224,6 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         controller: "ChangePWDCtrl"
       })
 
-      .state('backstep.step1', {
-        url: '/step1',
-        cache: 'false',
-        views: {
-          'getbackstep': {
-            templateUrl: 'templates/user/getbackstep1.html',
-            controller: 'ChangePWDCtrl'
-          }
-        }
-      })
-
-      .state('backstep.step2', {
-        url: '/step2',
-        cache: 'false',
-        views: {
-          'getbackstep': {
-            templateUrl: 'templates/user/getbackstep2.html',
-            controller: 'ChangePWDCtrl'
-          }
-        }
-      })
-
-      .state('backstep.step3', {
-        url: '/step3',
-        cache: 'false',
-        views: {
-          'getbackstep': {
-            templateUrl: 'templates/user/getbackstep3.html',
-            controller: 'ChangePWDCtrl'
-          }
-        }
-      })
-
       .state('account', {
         url: '/account',
         templateUrl: 'templates/user/account.html',
