@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('starter.controllers').controller('IndexCtrl', function($scope, $rootScope, $state, $http, $ionicPopover, $cordovaGeolocation, $timeout,$ionicModal,Userinfo, geolocationService) {
-  if (!Userinfo.data.userid) {
+  if (!Userinfo.data.userId) {
     $state.go('start');
   }
 

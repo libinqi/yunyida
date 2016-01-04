@@ -46,6 +46,7 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
     '/user/login': 'UserController.login',
+    '/user/checkIsExist': 'UserController.checkIsExist',
     'post /user/register': 'UserController.register',
     'post /user/restPwd': 'UserController.restPwd',
     '/user/getValidCode': 'UserController.getValidCode',

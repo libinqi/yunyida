@@ -681,6 +681,9 @@ input[type="text"], input[type="password"], input[type="datetime"], input[type="
     color: #fff;
     text-align: center;
 }
+.text-align-l{
+  text-align: left;
+}
 .text-align-r{
   text-align: right;
 }

@@ -31,31 +31,42 @@ angular.module('starter.controllers')
         template: "正在登录..."
       });
 
-      io.socket.get('/user/login', {
-        userName: user.username,
-        password: user.password
-      }, function serverResponded(body, JWR) {
+      loginService.userLogin(user.username, user.password, function (data) {
         $ionicLoading.hide();
-        if (JWR.statusCode == 200) {
-          if (body.userType !== '货主') {
-            $scope.showMsg('您不是货主用户，不能登录！');
-          }
-          else if (!body.status) {
-            $scope.showMsg('您的账号异常,不允许登录！');
-          }
-          else {
-            body.userName = user.username;
-            user = body;
-            Userinfo.save(user);
-            $state.go('tab.index');
-          }
-        }
-        else if (JWR.statusCode == 500) {
-          $scope.showMsg(body.msg);
+        if (typeof(data) == "object") {
+          Userinfo.save(data);
+          $state.go('tab.index');
         }
         else {
-          $scope.showMsg('请检查网络是否正常！');
+          $scope.showMsg(data);
         }
       });
+
+      //io.socket.get('/user/login', {
+      //  userName: user.username,
+      //  password: user.password
+      //}, function serverResponded(body, JWR) {
+      //  $ionicLoading.hide();
+      //  if (JWR.statusCode == 200) {
+      //    if (body.userType !== '货主') {
+      //      $scope.showMsg('您不是货主用户，不能登录！');
+      //    }
+      //    else if (!body.status) {
+      //      $scope.showMsg('您的账号异常,不允许登录！');
+      //    }
+      //    else {
+      //      body.userName = user.username;
+      //      user = body;
+      //      Userinfo.save(user);
+      //      $state.go('tab.index');
+      //    }
+      //  }
+      //  else if (JWR.statusCode == 500) {
+      //    $scope.showMsg(body.msg);
+      //  }
+      //  else {
+      //    $scope.showMsg('请检查网络是否正常！');
+      //  }
+      //});
     }
   });

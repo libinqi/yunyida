@@ -4,7 +4,7 @@ angular.module('starter.services').service('geolocationService', function ($root
       province: "湖南省",
       city: "长沙市"
     },
-    getCurrentPosition: function () {
+    getCurrentPosition: function (cb) {
       var geolocation = new BMap.Geolocation();
       var myGeo = new BMap.Geocoder();
       geolocation.getCurrentPosition(function (r) {
@@ -16,6 +16,7 @@ angular.module('starter.services').service('geolocationService', function ($root
               geolocationService.locationInfo.city = result.addressComponents.city;
               geolocationService.locationInfo.district = result.addressComponents.district;
               $rootScope.$broadcast('geolocation.load');
+              if (cb)cb(result);
             }
           });
         } else {

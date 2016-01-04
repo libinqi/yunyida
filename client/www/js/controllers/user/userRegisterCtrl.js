@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('UserRegisterCtrl', function ($scope, $http, $timeout, $ionicHistory, $ionicLoading, $ionicPopover, $state, Userinfo, loginService) {
+angular.module('starter.controllers').controller('UserRegisterCtrl', function ($scope, $http, $timeout, $ionicHistory, $ionicLoading, $ionicPopover, $state, Userinfo, loginService, geolocationService) {
     //$scope.userData = {
     //  phoneNumber: '', //手机
     //  username: '', //用户名
@@ -18,9 +18,10 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
     $scope.userData = {
       phoneNumber: '', //手机
       userName: '', //用户名
-      userType: '货主', //用户类型(货主, 物流企业, 司机)
+      realName: '', //姓名
+      userType: '', //用户类型(货主, 物流企业, 司机)
       password: '', //密码
-      enterprisename: '', //企业名称
+      enterpriseName: '', //企业名称
       province: '',//省
       city: '',//市
       area: '',//区,县
@@ -31,6 +32,20 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
       lng: '',//经度
       lat: ''//纬度
     };
+
+    geolocationService.getCurrentPosition(function (result) {
+      $scope.userData.province = result.addressComponents.province;
+      $scope.userData.province = $scope.userData.province.replace(/省/g, "");
+      $scope.userData.city = result.addressComponents.city;
+      $scope.userData.city = $scope.userData.city.replace(/市/g, "");
+      $scope.userData.area = result.addressComponents.district;
+      $scope.userData.street = result.addressComponents.street;
+      $scope.userData.address = result.addressComponents.street + result.addressComponents.streetNumber;
+      $scope.location = $scope.userData.province + $scope.userData.city + $scope.userData.area;
+
+      $scope.userData.lng = result.point.lng;
+      $scope.userData.lat = result.point.lat;
+    });
 
     $scope.formData = {
       validCode: '',
@@ -169,46 +184,40 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
     }
 
     $scope.saveEnterpriseInfo = function () {
-      if (!$scope.userData.enterprisename) {
-        $scope.showMsg('企业名称不能为空');
+      if (!$scope.userData.realName) {
+        $scope.showMsg('姓名不能为空');
         return false;
       }
-      if (!$scope.userData.contactname) {
-        $scope.showMsg('联系人不能为空');
+      if (!$scope.userData.cardNumber) {
+        $scope.showMsg('身份证号码不能为空');
         return false;
       }
-      if (!$scope.userData.phoneNumber) {
-        $scope.showMsg('联系电话不能为空');
+      if (!$scope.location) {
+        $scope.showMsg('所在城市不能为空');
         return false;
       }
-      if (!$scope.userData.location) {
-        $scope.showMsg('企业地址不能为空');
-        return false;
-      }
-      $scope.userData.enterprisekind = 2;
       $ionicLoading.show({
         template: "正在注册..."
       });
-      $http.post(ApiUrl + '/ws/system/sysUser/registerEnterpriseUser', $scope.userData)
-        .success(function (data) {
-          $ionicLoading.hide();
-          if (!data.body) {
-            $scope.showMsg(data.msg);
-          } else {
-            loginService.userLogin($scope.userData.phoneNumber, $scope.userData.password, function (data, msg) {
-              for (var p in Userinfo.data) {
-                Userinfo.remove(p);
-              }
-              if (data) {
-                Userinfo.save(data);
-                $state.go('tab.index');
-              } else {
-                $state.go('start');
-              }
-            });
-          }
-        }).error(function (data, status, headers, config) {
-        $scope.showMsg('请求失败,网络不给力！');
+      $scope.userData.userType='货主';
+      io.socket.get('/user/register', $scope.userData, function serverResponded(body, JWR) {
+        $ionicLoading.hide();
+        if (JWR.statusCode !== 200) {
+          $scope.showMsg('请求失败,网络不给力！');
+        }
+        else {
+          loginService.userLogin($scope.userData.phoneNumber, $scope.userData.password, function (data) {
+            for (var p in Userinfo.data) {
+              Userinfo.remove(p);
+            }
+            if (typeof(data) == "object") {
+              Userinfo.save(data);
+              $state.go('tab.index');
+            } else {
+              $state.go('start');
+            }
+          });
+        }
       });
     }
   }
