@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('UserRegisterCtrl', function ($scope, $http, $timeout, $ionicHistory, $ionicLoading, $ionicPopover, $state, Userinfo, loginService, geolocationService) {
+angular.module('starter.controllers').controller('UserRegisterCtrl', function ($scope, $http, $timeout, $ionicHistory, $ionicLoading, $ionicPopover, $state, UserInfo, loginService, geolocationService) {
     //$scope.userData = {
     //  phoneNumber: '', //手机
     //  username: '', //用户名
@@ -58,8 +58,8 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
     $scope.validBtnText = '获取验证码';
     //$scope.formData.repassword = ''; //重复密码
 
-    if (Userinfo.data) {
-      $scope.userData = Userinfo.data;
+    if (UserInfo.data) {
+      $scope.userData = UserInfo.data;
     }
 
     $scope.backGo = function () {
@@ -173,7 +173,7 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
                     $scope.showMsg('密码和确认密码不一致');
                     return false;
                   }
-                  Userinfo.save($scope.userData);
+                  UserInfo.save($scope.userData);
                   $state.go('register.register2');
                 }
               });
@@ -200,14 +200,14 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
         template: "正在注册..."
       });
       $scope.userData.userType='货主';
-      io.socket.get('/user/register', $scope.userData, function serverResponded(body, JWR) {
+      io.socket.post('/user/register', $scope.userData, function serverResponded(body, JWR) {
         $ionicLoading.hide();
         if (JWR.statusCode !== 200) {
           $scope.showMsg('请求失败,网络不给力！');
         }
         else {
           loginService.userLogin($scope.userData.phoneNumber, $scope.userData.password, function (data) {
-            for (var p in Userinfo.data) {
+            for (var p in UserInfo.data) {
               Userinfo.remove(p);
             }
             if (typeof(data) == "object") {

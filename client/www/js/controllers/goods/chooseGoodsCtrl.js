@@ -1,5 +1,5 @@
-angular.module('starter.controllers').controller('chooseGoodsCtrl', function($scope,$state,$stateParams,loginService,Userinfo,$ionicListDelegate,$timeout,$ionicPopover,$ionicHistory,$http) {
-	var user = Userinfo.data;
+angular.module('starter.controllers').controller('chooseGoodsCtrl', function($scope,$state,$stateParams,loginService,UserInfo,$ionicListDelegate,$timeout,$ionicPopover,$ionicHistory,$http) {
+	var user = UserInfo.data;
 
 var vm = this;
 	vm.querydata = {
@@ -67,7 +67,7 @@ var vm = this;
        $scope.items = $scope.items.concat(response.data.body.data);
         vm.querydata.page++;
         $scope.$broadcast("scroll.infiniteScrollComplete");
-        
+
       }else{
 
       }
@@ -98,7 +98,7 @@ var vm = this;
 
       }
     });
-     
+
 
   }
 

@@ -6,6 +6,12 @@
  */
 
 module.exports = {
-	
+    add: function (req, res) {
+        var data_from = req.params.all();
+        Goods.create(data_from).exec(function (err, goods) {
+            if (err) res.badRequest(err);
+            res.ok(goods);
+        })
+    }
 };
 

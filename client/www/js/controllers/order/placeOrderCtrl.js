@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('starter.controllers').controller('PlaceOrderCtrl', function($scope,$ionicHistory, $http, $timeout, $ionicLoading, $ionicPopover, $state, Userinfo, loginService) {
+angular.module('starter.controllers').controller('PlaceOrderCtrl', function($scope,$ionicHistory, $http, $timeout, $ionicLoading, $ionicPopover, $state, UserInfo, loginService) {
 
-	$scope.userData = Userinfo.data;
+	$scope.userData = UserInfo.data;
 	if($scope.userData.flagtab==1){
 		var querydata = {
       		goodsIntentionId:$scope.userData.goodsIntentionId       //货源ID
@@ -21,8 +21,8 @@ angular.module('starter.controllers').controller('PlaceOrderCtrl', function($sco
 	 	 var flagtab = {
      		 flagtab:2
     	}
-	 	Userinfo.save(flagtab);
-	 	$scope.userData = Userinfo.data;
+	 	UserInfo.save(flagtab);
+	 	$scope.userData = UserInfo.data;
 	}
 	 $scope.backGo = function() {
        $ionicHistory.goBack();
@@ -71,7 +71,7 @@ angular.module('starter.controllers').controller('PlaceOrderCtrl', function($sco
 
  	//确认
 	$scope.addbizOrder = function() {
-		$scope.orderData.dataSource = Userinfo.data.datasource;
+		$scope.orderData.dataSource = UserInfo.data.datasource;
 		 $http.post(ApiUrl + '/ws/morder/bizOrder/save', $scope.orderData).success(function(data) {
         if(data.code == "200"){
         	$scope.showMsg('下单成功');

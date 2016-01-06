@@ -1,10 +1,10 @@
 ﻿'use strict';
 angular.module('starter.controllers')
-  .controller('LoginCtrl', function ($scope, $state, $http, $timeout, $ionicLoading, $ionicPopover, $location, loginService, Userinfo) {
+  .controller('LoginCtrl', function ($scope, $state, $http, $timeout, $ionicLoading, $ionicPopover, $location, loginService, UserInfo) {
     var vm = this;
     vm.user = {
-      username: Userinfo.data.username || '',
-      password: Userinfo.data.password || ''
+      username: UserInfo.data.username || '',
+      password: UserInfo.data.password || ''
     }
 
     $scope.showMsg = function (txt) {
@@ -34,7 +34,7 @@ angular.module('starter.controllers')
       loginService.userLogin(user.username, user.password, function (data) {
         $ionicLoading.hide();
         if (typeof(data) == "object") {
-          Userinfo.save(data);
+          UserInfo.save(data);
           $state.go('tab.index');
         }
         else {
@@ -57,7 +57,7 @@ angular.module('starter.controllers')
       //    else {
       //      body.userName = user.username;
       //      user = body;
-      //      Userinfo.save(user);
+      //      UserInfo.save(user);
       //      $state.go('tab.index');
       //    }
       //  }

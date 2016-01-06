@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('CarListCtrl', function ($rootScope, $state, $http, $scope, $ionicModal, $ionicScrollDelegate, $location, $ionicHistory, $ionicLoading, loginService, cacheService, Userinfo, $timeout, geolocationService, $filter, dictService) {
+angular.module('starter.controllers').controller('CarListCtrl', function ($rootScope, $state, $http, $scope, $ionicModal, $ionicScrollDelegate, $location, $ionicHistory, $ionicLoading, loginService, cacheService, UserInfo, $timeout, geolocationService, $filter, dictService) {
 
   $scope.carInfoList = {
     currentPage: 1,
@@ -189,7 +189,7 @@ angular.module('starter.controllers').controller('CarListCtrl', function ($rootS
       params: {
         page: 1,
         rows: 10,
-        issuerUserId: Userinfo.data.userid
+        issuerUserId: UserInfo.data.userid
       }
     }).success(function (data) {
       if (data.body && data.body.data.length > 0) {

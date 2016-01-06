@@ -55,7 +55,7 @@ angular.module('starter.services').factory('loginService', function($http) {
             body.password = password;
             cb(body);
             //user = body;
-            //Userinfo.save(user);
+            //UserInfo.save(user);
             //$state.go('tab.index');
           }
         }

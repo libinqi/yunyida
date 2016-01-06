@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('EnterPriseInfoCtrl', function ($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $state, $stateParams, Userinfo, loginService) {
+angular.module('starter.controllers').controller('EnterPriseInfoCtrl', function ($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $state, $stateParams, UserInfo, loginService) {
   $scope.userData = {
     userid: '', //用户id
     phone: '', //手机
@@ -33,7 +33,7 @@ angular.module('starter.controllers').controller('EnterPriseInfoCtrl', function 
   }
 
   $scope.getEnterpriseInfo = function () {
-    $http.get(ApiUrl + '/ws/system/sysEnterprise/queryEnterpriseByUserid/' + Userinfo.data.userid)
+    $http.get(ApiUrl + '/ws/system/sysEnterprise/queryEnterpriseByUserid/' + UserInfo.data.userid)
       .success(function (data) {
         if (data.body) {
           $scope.enterpriseData.enterpriseid = data.body.enterpriseid;

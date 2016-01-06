@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('starter.controllers').controller('UserCtrl', function($scope, $state, $http, $timeout, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, Userinfo) {
+angular.module('starter.controllers').controller('UserCtrl', function($scope, $state, $http, $timeout, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, UserInfo) {
   $scope.pulltextchange = '下拉刷新';
-  $scope.userInfo = Userinfo.data;
+  $scope.userInfo = UserInfo.data;
 
   $scope.doRefresh = function() {
-    $http.get(ApiUrl + '/ws/system/sysUser/queryById/' + Userinfo.data.userid)
+    $http.get(ApiUrl + '/ws/system/sysUser/queryById/' + UserInfo.data.userid)
       .success(function(data) {
         if (data.body) {
           if (!data.body.image || data.body.image == 'null') {
@@ -16,7 +16,7 @@ angular.module('starter.controllers').controller('UserCtrl', function($scope, $s
           //头像缓存问题
           // if (!window.localStorage['avatar_img']) {
           //   var avatarImg = data.body.image ? data.body.image : 'img/default-ava.png';
-          //   Userinfo.addLong('avatar_img', data.body.image);
+          //   UserInfo.addLong('avatar_img', data.body.image);
           // } else {
           //   $scope.userInfo.image = window.localStorage['avatar_img'];
           // }
@@ -178,8 +178,8 @@ angular.module('starter.controllers').controller('UserCtrl', function($scope, $s
   };
 
   $scope.exit = function() {
-    for (var p in Userinfo.data) {
-      Userinfo.remove(p);
+    for (var p in UserInfo.data) {
+      UserInfo.remove(p);
     }
     $state.go('start');
   }

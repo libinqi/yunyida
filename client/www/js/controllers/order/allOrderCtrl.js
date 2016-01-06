@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('AllOrderCtrl', function($scope, $http, $timeout, $ionicModal,$ionicLoading, $ionicHistory, $ionicPopover, $state, $stateParams, Userinfo, loginService) {
+angular.module('starter.controllers').controller('AllOrderCtrl', function($scope, $http, $timeout, $ionicModal,$ionicLoading, $ionicHistory, $ionicPopover, $state, $stateParams, UserInfo, loginService) {
 
   var tag =0;
   $scope.isActive = $stateParams.data ? $stateParams.data : 'a';
@@ -88,8 +88,8 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function($scope
     rows: 8,
     placeOfDeparture: '',
     destination: '',
-    consignorID:Userinfo.data.userid,
-    issuerEnterpriseId: Userinfo.data.enterpriseid,
+    consignorID:UserInfo.data.userid,
+    issuerEnterpriseId: UserInfo.data.enterpriseid,
     order: 'issueDateTime',
     sort: 'DESC'
   // issuerEnterpriseId:user.datasource
@@ -103,8 +103,8 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function($scope
   //   sort: 'DESC'
   // };
 
-  // $scope.querydata.consignorID=Userinfo.data.userid;
-  // $scope.querydata.issuerEnterpriseId=Userinfo.data.enterpriseid;
+  // $scope.querydata.consignorID=UserInfo.data.userid;
+  // $scope.querydata.issuerEnterpriseId=UserInfo.data.enterpriseid;
 
 // $ionicLoading.show({
 //         template: "加载中..."
@@ -134,7 +134,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function($scope
     $timeout(function() {
     $scope.querydata.status = null;
     $scope.querydata.goodsResStatus = "GYYX,GWYX";
-    $scope.querydata.issuerEnterpriseId = Userinfo.data.enterpriseid;
+    $scope.querydata.issuerEnterpriseId = UserInfo.data.enterpriseid;
 
     $http.get(ApiUrl + '/ws/sinfo/bizGoodsInfo/getlist',{ params: $scope.querydata})
       .success(function(data) {

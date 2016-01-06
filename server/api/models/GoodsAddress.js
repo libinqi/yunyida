@@ -17,7 +17,10 @@ module.exports = {
         city: {type: 'string'},//市
         area: {type: 'string'},//区,县
         street: {type: 'string'},//街道
-        address: {type: 'string'}//详细地址
+        address: {type: 'string'},//详细地址
+        user: {
+            model: 'user'//所属用户
+        },
     }
 };
 

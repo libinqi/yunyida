@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('UserInfoCtrl', function($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $state, Userinfo, loginService) {
+angular.module('starter.controllers').controller('UserInfoCtrl', function($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $state, UserInfo, loginService) {
   $scope.userData = {
     userid: '', //用户id
     phone: '', //手机
@@ -24,7 +24,7 @@ angular.module('starter.controllers').controller('UserInfoCtrl', function($scope
   }
 
   $scope.getUserInfo = function() {
-    $http.get(ApiUrl + '/ws/system/sysUser/queryById/' + Userinfo.data.userid)
+    $http.get(ApiUrl + '/ws/system/sysUser/queryById/' + UserInfo.data.userid)
       .success(function(data) {
         if (data.body) {
           $scope.userData.userid = data.body.userid;

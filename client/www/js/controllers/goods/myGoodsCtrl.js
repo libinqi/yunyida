@@ -1,5 +1,5 @@
-angular.module('starter.controllers').controller('MyGoodsCtrl', function($scope,$state,loginService,Userinfo,$ionicListDelegate,$timeout,$ionicPopover,$ionicHistory,$http) {
-	var user = Userinfo.data;
+angular.module('starter.controllers').controller('MyGoodsCtrl', function($scope,$state,loginService,UserInfo,$ionicListDelegate,$timeout,$ionicPopover,$ionicHistory,$http) {
+	var user = UserInfo.data;
   $scope.pulltextchange = '下拉刷新';
 var vm = this;
 	vm.querydata = {
@@ -60,8 +60,8 @@ var vm = this;
     var flagtab = {
       flagtab:1
     }
-    Userinfo.save(querydata);
-    Userinfo.save(flagtab);
+    UserInfo.save(querydata);
+    UserInfo.save(flagtab);
     $state.go('order.orderstep1');
 
   }

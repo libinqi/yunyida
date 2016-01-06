@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('PassWordInfoCtrl', function($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $state, $stateParams, Userinfo, loginService) {
+angular.module('starter.controllers').controller('PassWordInfoCtrl', function($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $state, $stateParams, UserInfo, loginService) {
 
 
 
@@ -35,7 +35,7 @@ angular.module('starter.controllers').controller('PassWordInfoCtrl', function($s
       $scope.showMsg('新密码不能为空');
       return false;
     }
-    $scope.changePwdData.userid = Userinfo.data.userid;
+    $scope.changePwdData.userid = UserInfo.data.userid;
     $ionicLoading.show({
       template: "正在修改密码..."
     });

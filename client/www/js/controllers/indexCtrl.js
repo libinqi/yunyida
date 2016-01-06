@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('starter.controllers').controller('IndexCtrl', function($scope, $rootScope, $state, $http, $ionicPopover, $cordovaGeolocation, $timeout,$ionicModal,Userinfo, geolocationService) {
-  if (!Userinfo.data.userId) {
+angular.module('starter.controllers').controller('IndexCtrl', function($scope, $rootScope, $state, $http, $ionicPopover, $cordovaGeolocation, $timeout,$ionicModal,UserInfo, geolocationService) {
+  if (!UserInfo.data.userId) {
     $state.go('start');
   }
 
@@ -56,7 +56,7 @@ angular.module('starter.controllers').controller('IndexCtrl', function($scope, $
         }
       }).success(function(data) {
         if (data.body && data.body.data.length > 0) {
-          Userinfo.remove('unread_msg_count');
+          UserInfo.remove('unread_msg_count');
           if ($scope.page > 3) {
             $scope.load_over = false;
             return;
@@ -98,7 +98,7 @@ angular.module('starter.controllers').controller('IndexCtrl', function($scope, $
         params: {
           page: 1,
           rows: 10,
-          issuerUserId: Userinfo.data.userid
+          issuerUserId: UserInfo.data.userid
         }
       }).success(function(data) {
         if (data.body && data.body.data.length > 0) {

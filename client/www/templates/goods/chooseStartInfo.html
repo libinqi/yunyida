@@ -1,0 +1,36 @@
+<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+  <!--<a class="button icon-left ion-ios-arrow-left button-clear button-light"-->
+  <!--style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="backGo()"></a>-->
+  <div class="title title-center header-item" style="color:#fff !important;">发货人信息</div>
+</ion-header-bar>
+<ion-view view-title="发货人信息">
+  <ion-content overflow-scroll="true" padding="true" class="has-header">
+    <div class="list padding">
+      <label class="item item-input">
+        <span class="input-label" style="width:35%">所在城市</span>
+        <ionic-city-picker placeholder="起始城市" backdrop=true backdrop-click-to-close=false css-class="text-align-l"
+                           okText="确定" citydata="goodsInfo.sCity" style="width:60%;"></ionic-city-picker>
+        <i class="icon ion-chevron-right " style="color: #ACACAC;"></i>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">街道</span>
+        <input type="text" ng-model="goodsInfo.sStreet">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">详细地址</span>
+        <input type="text" placeholder="选题" ng-model="goodsInfo.sAddress">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">发货人</span>
+        <input type="text" ng-model="goodsInfo.consignor">
+      </label>
+      <label class="item item-input" style="border-bottom:1px solid #ccc">
+        <span class="input-label">手机号码</span>
+        <input type="text" ng-model="goodsInfo.sPhoneNumber">
+      </label>
+    </div>
+    <div class="button-bar">
+      <a class="button button-assertive" ng-click="hideStartInfo()" style="margin-right:10px;margin-left:10px;">确定</a>
+    </div>
+  </ion-content>
+</ion-view>

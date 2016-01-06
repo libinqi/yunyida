@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('MessageCtrl', function ($scope, $state, $stateParams, $timeout, $http, $ionicPopover, Userinfo, $ionicHistory) {
+angular.module('starter.controllers').controller('MessageCtrl', function ($scope, $state, $stateParams, $timeout, $http, $ionicPopover, UserInfo, $ionicHistory) {
 
   $scope.items = [];
   $scope.page = 1;
@@ -61,7 +61,7 @@ angular.module('starter.controllers').controller('MessageCtrl', function ($scope
     $timeout(function () {
       $http.get(ApiUrl + '/ws/msg/sysMsg/getlist', {
         params: {
-          receiver: Userinfo.data.enterpriseid,
+          receiver: UserInfo.data.enterpriseid,
           ishaveread: 0,
           page: $scope.page,
           rows: $scope.page_size,
@@ -70,7 +70,7 @@ angular.module('starter.controllers').controller('MessageCtrl', function ($scope
         }
       }).success(function (data) {
         if (data.body && data.body.data.length > 0) {
-          Userinfo.remove('unread_msg_count');
+          UserInfo.remove('unread_msg_count');
           if ($scope.page > data.body.totalPage) {
             $scope.load_over = false;
             return;
@@ -98,7 +98,7 @@ angular.module('starter.controllers').controller('MessageCtrl', function ($scope
     $scope.arrId = [];
     $scope.arrId.push(id);
     $scope.items.splice(k, 1);
-    $http.delete(ApiUrl + '/ws/cm/cmMessage/delete/' + Userinfo.userid + '/' + id).success(function (data) {
+    $http.delete(ApiUrl + '/ws/cm/cmMessage/delete/' + UserInfo.userid + '/' + id).success(function (data) {
       if (data.code != '200') {
         alert(data.msg);
       }
@@ -112,11 +112,11 @@ angular.module('starter.controllers').controller('MessageCtrl', function ($scope
           msgtype: $scope.msg_type[0],
           page: $scope.page,
           rows: $scope.page_size,
-          datasource: Userinfo.data.enterpriseid
+          datasource: UserInfo.data.enterpriseid
         }
       }).success(function (data) {
         if (data.body && data.body.data.length > 0) {
-          Userinfo.remove('unread_msg_count');
+          UserInfo.remove('unread_msg_count');
           if ($scope.page > data.body.totalPage) {
             $scope.load_over = false;
             return;

@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('PlaceCarListCtrl', function($scope,$state,loginService,Userinfo,$ionicModal,$ionicListDelegate,$stateParams,$timeout,$ionicPopover,$ionicHistory,$http) {
+angular.module('starter.controllers').controller('PlaceCarListCtrl', function($scope,$state,loginService,UserInfo,$ionicModal,$ionicListDelegate,$stateParams,$timeout,$ionicPopover,$ionicHistory,$http) {
 
 
   //货源意向
@@ -43,8 +43,8 @@ angular.module('starter.controllers').controller('PlaceCarListCtrl', function($s
     var flagtab = {
       flagtab:1
     }
-    Userinfo.save(querydata);
-    Userinfo.save(flagtab);
+    UserInfo.save(querydata);
+    UserInfo.save(flagtab);
     $state.go('order.orderstep1');
 
   }

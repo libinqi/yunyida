@@ -137,8 +137,9 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         cache: 'false',
         views: {
           'tab-index': {
-            templateUrl: 'templates/tab-index.html',
-            controller: 'IndexCtrl'
+            cache: 'false',
+            templateUrl: 'templates/goods/add.html',
+            controller: 'AddGoodsCtrl'
           }
         }
       })
@@ -232,17 +233,17 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
 
       .state('userinfo', {
         url: '/userinfo',
-        templateUrl: 'templates/user/userinfo.html',
+        templateUrl: 'templates/user/userInfo.html',
         controller: 'UserInfoCtrl'
       })
       .state('enterpriseinfo', {
         url: '/enterpriseinfo',
-        templateUrl: 'templates/user/enterpriseinfo.html',
+        templateUrl: 'templates/user/enterpriseInfo.html',
         controller: 'EnterPriseInfoCtrl'
       })
       .state('passwordinfo', {
         url: '/passwordinfo',
-        templateUrl: 'templates/user/passwordinfo.html',
+        templateUrl: 'templates/user/passwordInfo.html',
         controller: 'PassWordInfoCtrl'
       })
       .state('message', {
@@ -261,7 +262,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       .state('mygoods', {
         url: '/mygoods',
         cache: 'false',
-        templateUrl: 'templates/goods/mygoods.html',
+        templateUrl: 'templates/goods/myGoods.html',
         controller: 'MyGoodsCtrl'
       })
       .state('order', {
@@ -322,7 +323,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       })
       .state('choosegoods', {
         url: '/choosegoods/:data',
-        templateUrl: 'templates/goods/choosegoods.html',
+        templateUrl: 'templates/goods/chooseGoods.html',
         controller: 'chooseGoodsCtrl'
       })
       .state('placecarlist', {

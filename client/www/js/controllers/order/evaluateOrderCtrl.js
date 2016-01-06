@@ -1,5 +1,5 @@
 'use strict';
-angular.module('starter.controllers').controller('evaluateOrderCtrl', ['$scope', '$http', '$state', '$stateParams', 'Userinfo', '$ionicHistory', '$ionicPopover', '$timeout', function ($scope, $http, $state, $stateParams, Userinfo, $ionicHistory, $ionicPopover, $timeout) {
+angular.module('starter.controllers').controller('evaluateOrderCtrl', ['$scope', '$http', '$state', '$stateParams', 'UserInfo', '$ionicHistory', '$ionicPopover', '$timeout', function ($scope, $http, $state, $stateParams, UserInfo, $ionicHistory, $ionicPopover, $timeout) {
   var fentip = ["很差", "一般", "好", "很好", "非常好"];
 
   $scope.is$scopeouseEnter = false;

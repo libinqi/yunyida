@@ -38,11 +38,7 @@ module.exports.routes = {
 
     /***************************************************************************
      *                                                                          *
-     * Custom routes here...                                                    *
-     *                                                                          *
-     * If a request to a URL doesn't match any of the custom routes above, it   *
-     * is matched against Sails route blueprints. See `config/blueprints.js`    *
-     * for configuration options and examples.                                  *
+     * 用户登录,注册等相关API...                                                   *
      *                                                                          *
      ***************************************************************************/
     '/user/login': 'UserController.login',
@@ -51,4 +47,11 @@ module.exports.routes = {
     'post /user/restPwd': 'UserController.restPwd',
     '/user/getValidCode': 'UserController.getValidCode',
     '/user/checkValidCode': 'UserController.checkValidCode',
+
+    /***************************************************************************
+     *                                                                          *
+     * 货源相关API...                                                            *
+     *                                                                          *
+     ***************************************************************************/
+    'post /goods/add': 'GoodsController.add',
 };

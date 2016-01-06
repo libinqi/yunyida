@@ -592,6 +592,43 @@ a{
   font-weight: bold;
 }
 
+.button-tabs{
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.button-tabs > .button.button-assertive{
+  border: 0px !important;
+  border-top: solid 1px #ef6600 !important;
+  border-bottom: solid 1px #ef6600 !important;
+  border-radius:0px !important;
+  background-color: #ffffff !important;
+  color:#ef6600;
+  font-size: 14px;
+  font-weight: bold;
+  height: 35px !important;
+  line-height: 35px !important;
+  min-height: 35px !important;
+  padding: 0px !important;
+  width: 33.3%;
+}
+.button-tabs > .button.button-assertive:first-child
+{
+  border:solid 1px #ef6600 !important;
+  border-radius: 10px 0px 0px 10px !important;
+}
+.button-tabs > .button.button-assertive:last-child
+{
+  border:solid 1px #ef6600 !important;
+  border-radius: 0px 10px 10px 0px !important;
+}
+.button-tabs > .button.button-active
+{
+  background-color: #ef6600 !important;
+  color: #ffffff;
+}
+
 .button-bar > .button {
   border-width: 1px 1px 1px 1px !important;
 }

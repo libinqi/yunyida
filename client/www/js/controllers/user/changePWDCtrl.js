@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('ChangePWDCtrl', function($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $state, Userinfo, loginService) {
+angular.module('starter.controllers').controller('ChangePWDCtrl', function($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $state, UserInfo, loginService) {
   $scope.formData = {
     phoneNumber: '', //手机
     securityCode: '', //验证码

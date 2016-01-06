@@ -1,12 +1,12 @@
-angular.module('starter.services').factory('Userinfo', function() {
-  var userinfo = {};
+angular.module('starter.services').factory('UserInfo', function() {
+  var userInfo = {};
 
   return {
     save: function(j) {
       for (var k in j) {
-        window.localStorage[k] = userinfo[k] = j[k];
+        window.localStorage[k] = userInfo[k] = j[k];
       };
-      return userinfo;
+      return userInfo;
     },
 
     remove: function(f) {
