@@ -20,7 +20,7 @@ module.exports = {
         address: {type: 'string'},//详细地址
         user: {
             model: 'user'//所属用户
-        },
+        }
     }
 };
 
