@@ -11,9 +11,9 @@ module.exports = {
     autoPK: true,
     attributes: {
         goodsId: {type: 'integer', primaryKey: true, autoIncrement: true},//货物Id
-        goodsType: {type: 'string', required: true, enum: ['零担', '整车', '城市配送']},//货物类型
+        goodsType: {type: 'string', required: true, enum: ['零担', '整车', '城市配送'],defaultsTo: '零担'},//货物类型
         goodsName: {type: 'string', required: true},//货物名称
-        goodsAttribute: {type: 'string', required: true, enum: ['普通', '加急']},//货物属性
+        goodsAttribute: {type: 'string', required: true, enum: ['普通', '加急'],defaultsTo: '普通'},//货物属性
         goodsNumber: {type: 'float', required: true},//货物数量
         goodsUnit: {type: 'string', required: true, enum: ['件', '方', '吨']},//数量单位
         carType:{type: 'string'},//需车类型
@@ -31,8 +31,9 @@ module.exports = {
         user: {
             model: 'user'//所属用户
         },
-        goodsOrder:{
-            model: 'goodsOrder'//关联订单
+        goodsOrders:{
+            collection: 'goodsOrder',//关联订单列表
+            via: 'goods'
         }
     }
 };

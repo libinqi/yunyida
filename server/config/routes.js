@@ -54,4 +54,5 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
     'post /goods/add': 'GoodsController.add',
+    '/goods/userGoodsOrder': 'GoodsController.userGoodsOrder',
 };
