@@ -1,20 +1,6 @@
 'use strict';
 
 angular.module('starter.controllers').controller('UserRegisterCtrl', function ($scope, $http, $timeout, $ionicHistory, $ionicLoading, $ionicPopover, $state, UserInfo, loginService, geolocationService) {
-    //$scope.userData = {
-    //  phoneNumber: '', //手机
-    //  username: '', //用户名
-    //  securitycode: '', //验证码
-    //  password: '', //密码
-    //  repassword: '', //重复密码
-    //  usertype: 2, //用户类型(3:企业用户 2:货主用户 1:司机用户 0:普通用户)
-    //  enterprisename: '', //企业名称
-    //  contactname: '', //联系人
-    //  location: '', //企业地址
-    //  telephoneNumbernumber: '', //企业电话
-    //  enterprisekind: 2 // 企业类型（3：物流企业 2：货主企业）
-    //};
-
     $scope.userData = {
       phoneNumber: '', //手机
       userName: '', //用户名
@@ -22,9 +8,7 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
       userType: '', //用户类型(货主, 物流企业, 司机)
       password: '', //密码
       enterpriseName: '', //企业名称
-      province: '',//省
       city: '',//市
-      area: '',//区,县
       street: '',//街道
       address: '',//详细地址
       cityCode: '',//城市或者地址代码
@@ -34,15 +18,9 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
     };
 
     geolocationService.getCurrentPosition(function (result) {
-      $scope.userData.province = result.addressComponents.province;
-      $scope.userData.province = $scope.userData.province.replace(/省/g, "");
-      $scope.userData.city = result.addressComponents.city;
-      $scope.userData.city = $scope.userData.city.replace(/市/g, "");
-      $scope.userData.area = result.addressComponents.district;
+      $scope.userData.city = result.addressComponents.province.replace(/省/g, "")+result.addressComponents.city.replace(/市/g, "")+result.addressComponents.district;
       $scope.userData.street = result.addressComponents.street;
       $scope.userData.address = result.addressComponents.street + result.addressComponents.streetNumber;
-      $scope.location = $scope.userData.province + $scope.userData.city + $scope.userData.area;
-
       $scope.userData.lng = result.point.lng;
       $scope.userData.lat = result.point.lat;
     });
@@ -192,7 +170,7 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
         $scope.showMsg('身份证号码不能为空');
         return false;
       }
-      if (!$scope.location) {
+      if (!$scope.userData.city) {
         $scope.showMsg('所在城市不能为空');
         return false;
       }

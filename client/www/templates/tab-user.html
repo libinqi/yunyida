@@ -2,7 +2,7 @@
   <!-- <a class="button icon-left ion-ios-arrow-left button-clear button-light" ng-click="backGo()"></a> -->
   <a class="button button-clear" style="width:40px;height:25px" ></a>
   <div class="title title-center header-item" style="color:#fff !important;">我</div>
-<a class="button button-clear" href="#/message"><img src="img/icon-zn-b.png" alt="最新消息" style="width:20px;position:relative;top:2px;"></a>
+<a class="button icon-left ion-gear-a button-clear button-light" style="color: #fff !important;" href="#/userSetting"></a>
 </ion-header-bar>
 <ion-content style="background-color:#fafafa">
 	<ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()" on-pulling="pulltext()" spinner="ripple" pulling-icon="ion-ios-refresh-empty"></ion-refresher>
@@ -17,25 +17,19 @@
 				</div>
 				<div class="user-info fl">
 					<p>
-						 <span style="padding-left:5px;">{{userInfo.enterprisename}}</span>
-						 <span style="padding-left:25px;">{{userInfo.username}}</span>
+						 <span style="padding-left:5px;">{{userInfo.enterpriseName}}</span>
+						 <span style="padding-left:25px;">{{userInfo.userName}}</span>
 					</p>
 				</div>
 			</div>
 		</section>
 		<section>
 			<ul class="list list-li-bg">
-				<!-- <li class="item" ng-click="goTo(1)"><img src="img/icon-fanli.png" alt="">我的货源</li> -->
-				<li class="item" ng-click="goTo(1)"><img src="img/icon-user.png" alt="">个人信息</li>
-				<li class="item" ng-click="goTo(2)"><img src="img/icon-enter.png" alt="">企业信息</li>
+				<li class="item" ng-click="goTo(1)"><img src="img/icon-user.png" alt="">我的资料</li>
+				<li class="item" ng-click="goTo(2)"><img src="img/icon-enter.png" alt="">我的发货地址</li>
 				<li class="item" ng-click="goTo(3)"><img src="img/icon-zn.png" alt="">我的消息</li>
-				<li class="item" ng-click="goTo(4)"><img src="img/icon-xg.png" alt="">修改密码</li>
+				<li class="item" ng-click="goTo(4)"><img src="img/icon-xg.png" alt="">分享邀请好友</li>
 			</ul>
 		</section>
-		<div class="padding">
-			<button class="button button-block button-assertive" ng-click="exit()">
-				退出当前账号
-			</button>
-		</div>
 	</div>
 </ion-content>

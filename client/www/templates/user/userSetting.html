@@ -1,0 +1,21 @@
+<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+   <a class="button icon-left ion-ios-arrow-left button-clear button-light" ng-click="backGo()"></a>
+  <!--<a class="button button-clear" style="width:40px;height:25px" ></a>-->
+  <div class="title title-center header-item" style="color:#fff !important;">系统设置</div>
+</ion-header-bar>
+<ion-content style="background-color:#fafafa">
+  <div id="content">
+    <section>
+      <ul class="list list-li-bg">
+        <li class="item" ng-click="goTo(1)"><img src="img/icon-xg.png" alt="">修改密码</li>
+        <li class="item" ng-click="goTo(2)"><img src="img/icon-enter.png" alt="">版本更新</li>
+        <li class="item" ng-click="goTo(3)"><img src="img/icon-zn.png" alt="">关于我们</li>
+      </ul>
+    </section>
+    <div class="padding">
+      <button class="button button-block button-assertive" ng-click="exit()">
+        退出当前账号
+      </button>
+    </div>
+  </div>
+</ion-content>

@@ -228,21 +228,28 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       .state('account', {
         url: '/account',
         templateUrl: 'templates/user/account.html',
-        controller: 'AccountCtrl'
+        controller: 'AccountCtrl',
+        cache: 'false'
       })
 
-      .state('userinfo', {
-        url: '/userinfo',
+      .state('userInfo', {
+        url: '/userInfo',
         templateUrl: 'templates/user/userInfo.html',
         controller: 'UserInfoCtrl'
+      })
+      .state('userSetting', {
+        url: '/userSetting',
+        templateUrl: 'templates/user/userSetting.html',
+        controller: 'UserSettingCtrl'
       })
       .state('enterpriseinfo', {
         url: '/enterpriseinfo',
         templateUrl: 'templates/user/enterpriseInfo.html',
         controller: 'EnterPriseInfoCtrl'
       })
-      .state('passwordinfo', {
-        url: '/passwordinfo',
+      .state('passwordInfo', {
+        url: '/passwordInfo',
+        cache: 'false',
         templateUrl: 'templates/user/passwordInfo.html',
         controller: 'PassWordInfoCtrl'
       })

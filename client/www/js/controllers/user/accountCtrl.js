@@ -1,22 +1,16 @@
 'use strict';
 
-angular.module('starter.controllers').controller('AccountCtrl', function($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $state, $stateParams, UserInfo, loginService) {
+angular.module('starter.controllers').controller('AccountCtrl', function ($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $state, $stateParams, UserInfo, loginService) {
   $scope.userData = {
-    userid: '', //用户id
-    phone: '', //手机
-    realname: '', //姓名
-    email: '' //电子邮箱
+    userId: '', //用户id
+    cardNumber: '', //证件号码
+    realName: '', //姓名
+    email: '', //电子邮箱
+    enterpriseName: '', //企业名称
+    city: '',//市
+    street: '',//街道
+    address: ''//详细地址
   };
-
-  $scope.enterpriseData = {
-    enterpriseid: '', //企业Id
-    enterprisename: '', //企业名称
-    contactname: '', //联系人
-    location: '', //企业地址
-    telephonenumber: '', //企业电话
-    logourl: '' //企业logo
-  };
-
 
   $scope.changePwdData = {
     userid: '', //用户id
@@ -24,122 +18,75 @@ angular.module('starter.controllers').controller('AccountCtrl', function($scope,
     newpassword: '' //新密码
   }
 
-  $scope.isActive = $stateParams.data ? $stateParams.data : 'a';
-
-  $scope.changeTab = function(evt) {
-    var elem = evt.currentTarget;
-    $scope.isActive = elem.getAttributeNode('data-active').value;
-    $scope.items = [];
-    $scope.page = 1;
-    if ($scope.isActive == 'a') {
-      $scope.getUserInfo();
-    }
-    if ($scope.isActive == 'b') {
-      $scope.getEnterpriseInfo();
-    }
-  }
-
-  $scope.backGo = function() {
+  $scope.backGo = function () {
     $ionicHistory.goBack();
   };
 
-  $scope.showMsg = function(txt) {
+  $scope.showMsg = function (txt) {
     var template = '<ion-popover-view style = "background-color:#ef473a !important" class = "light padding" > ' + txt + ' </ion-popover-view>';
     $scope.popover = $ionicPopover.fromTemplate(template, {
       scope: $scope
     });
     $scope.popover.show();
-    $timeout(function() {
+    $timeout(function () {
       $scope.popover.hide();
     }, 1400);
   }
 
-  $scope.getUserInfo = function() {
-    $http.get(ApiUrl + '/ws/system/sysUser/queryById/' + UserInfo.data.userid)
-      .success(function(data) {
-        if (data.body) {
-          $scope.userData.userid = data.body.userid;
-          $scope.userData.phone = data.body.phone;
-          $scope.userData.realname = data.body.realname;
-          $scope.userData.email = data.body.email;
-        }
-      });
+  $scope.getUserInfo = function () {
+    io.socket.get('/user/' + UserInfo.data.userId, function serverResponded(body, JWR) {
+      if (JWR.statusCode !== 200) {
+        $scope.showMsg('请求失败,网络不给力！');
+      }
+      else {
+        $scope.userData.userId = body.userId;
+        $scope.userData.cardNumber = body.cardNumber;
+        $scope.userData.realName = body.realName;
+        $scope.userData.email = body.email;
+        $scope.userData.enterpriseName = body.enterpriseName;
+        $scope.userData.city = body.city;
+        $scope.userData.street = body.street;
+        $scope.userData.address = body.address;
+      }
+    });
   }
 
   $scope.getUserInfo();
 
-  $scope.saveUserInfo = function() {
-    if (!$scope.userData.realname && !$scope.userData.email) {
-      $scope.showMsg('请输入要更新的内容');
+  $scope.saveUserInfo = function () {
+    if (!$scope.userData.realName) {
+      $scope.showMsg('请填写真实姓名');
+      return false;
+    }
+    if (!$scope.userData.cardNumber) {
+      $scope.showMsg('请填写身份证号码');
+      return false;
+    }
+    if (!$scope.userData.enterpriseName) {
+      $scope.showMsg('请填写企业名称');
+      return false;
+    }
+    if (!$scope.userData.city) {
+      $scope.showMsg('请选择所在城市');
+      return false;
+    }
+    if (!$scope.userData.street) {
+      $scope.showMsg('请选择所属街道');
       return false;
     }
     $ionicLoading.show({
-      template: "正在更新用户信息..."
+      template: "正在更新个人资料..."
     });
-    $http.post(ApiUrl + '/ws/system/sysUser/saveOrUpdate', $scope.userData)
-      .success(function(data) {
-        $ionicLoading.hide();
-        if (!data.body) {
-          $scope.showMsg(data.msg);
-        } else {
-          $scope.showMsg('更新成功');
-        }
-      }).error(function(data, status, headers, config) {
-          $scope.showMsg('请求失败,网络不给力！');
-      });
-  }
 
-  $scope.getEnterpriseInfo = function() {
-    $http.get(ApiUrl + '/ws/system/sysEnterprise/queryEnterpriseByUserid/' + UserInfo.data.userid)
-      .success(function(data) {
-        if (data.body) {
-          $scope.enterpriseData.enterpriseid = data.body.enterpriseid;
-          $scope.enterpriseData.enterprisename = data.body.enterprisename;
-          $scope.enterpriseData.contactname = data.body.contactname;
-          $scope.enterpriseData.location = data.body.location;
-          $scope.enterpriseData.telephonenumber = data.body.telephonenumber;
-
-          if (!data.body.logourl || data.body.logourl == 'null') {
-            $scope.enterpriseData.logourl = 'img/upload_image.png';
-          } else {
-            $scope.enterpriseData.logourl = data.body.logourl || 'img/upload_image.png';
-          }
-        }
-      });
-  }
-
-  $scope.saveEnterpriseInfo = function() {
-    var input = false;
-    if ($scope.enterpriseData.contactname) {
-      input = true;
-    }
-    if ($scope.enterpriseData.telephonenumber) {
-      input = true;
-    }
-    if ($scope.enterpriseData.location) {
-      input = true;
-    }
-    if ($scope.enterpriseData.logourl) {
-      input = true;
-    }
-    if (!input) {
-      $scope.showMsg('请输入要更新的内容');
-      return false;
-    }
-    $ionicLoading.show({
-      template: "正在更新企业信息..."
+    io.socket.post('/user/update', $scope.userData, function serverResponded(body, JWR) {
+      $ionicLoading.hide();
+      if (JWR.statusCode !== 200) {
+        $scope.showMsg('请求失败,网络不给力！');
+      }
+      else {
+        $scope.showMsg('更新成功');
+      }
     });
-    $http.post(ApiUrl + '/ws/system/sysEnterprise/update', $scope.enterpriseData)
-      .success(function(data) {
-        $ionicLoading.hide();
-        if (!data.body) {
-          $scope.showMsg(data.msg);
-        } else {
-          $scope.showMsg('更新成功');
-        }
-      }).error(function(data, status, headers, config) {
-          $scope.showMsg('请求失败,网络不给力！');
-      });
   }
 
   var options = {
@@ -150,9 +97,9 @@ angular.module('starter.controllers').controller('AccountCtrl', function($scope,
     winphoneEnableCancelButton: true
   };
 
-  $scope.upLoadImg = function() {
+  $scope.upLoadImg = function () {
     $cordovaActionSheet.show(options)
-      .then(function(btnIndex) {
+      .then(function (btnIndex) {
         switch (btnIndex) {
           case 1:
             $scope.pickImg();
@@ -166,7 +113,7 @@ angular.module('starter.controllers').controller('AccountCtrl', function($scope,
       });
   };
 
-  $scope.pickImg = function() {
+  $scope.pickImg = function () {
     var options = {
       maximumImagesCount: 1,
       width: 800,
@@ -178,25 +125,25 @@ angular.module('starter.controllers').controller('AccountCtrl', function($scope,
     var option = {};
 
     $cordovaImagePicker.getPictures(options)
-      .then(function(results) {
+      .then(function (results) {
         $cordovaFileTransfer.upload(server, results[0], option, true)
-          .then(function(result) {
+          .then(function (result) {
             $scope.showMsg('企业Logo更新成功');
             $scope.enterpriseData.logourl = JSON.parse(result.response).body;
             $http.post(ApiUrl + '/ws/system/sysEnterprise/update', {
                 enterpriseid: $scope.enterpriseData.enterpriseid,
                 logourl: $scope.enterpriseData.logourl
               })
-              .success(function(data) {
+              .success(function (data) {
                 if (!data.body) {
                   alert('上传失败，请重试');
                 } else {
                   $scope.getEnterpriseInfo();
                 }
               });
-          }, function(err) {
+          }, function (err) {
             alert('上传失败，请重试');
-          }, function(progress) {
+          }, function (progress) {
             $ionicLoading.show({
               template: "正在上传..." + Math.round((progress.loaded / progress.total) * 100) + '%'
             });
@@ -204,12 +151,12 @@ angular.module('starter.controllers').controller('AccountCtrl', function($scope,
               $ionicLoading.hide();
             }
           });
-      }, function(error) {
+      }, function (error) {
         alert('上传失败，请重试');
       });
   };
 
-  $scope.cameraImg = function() {
+  $scope.cameraImg = function () {
     var server = ApiUrl + '/ws/system/fastdfs/upload';
     var trustHosts = true
     var option = {};
@@ -224,9 +171,9 @@ angular.module('starter.controllers').controller('AccountCtrl', function($scope,
       popoverOptions: CameraPopoverOptions,
       saveToPhotoAlbum: false
     };
-    $cordovaCamera.getPicture(options).then(function(imageData) {
+    $cordovaCamera.getPicture(options).then(function (imageData) {
       $cordovaFileTransfer.upload(server, "data:image/jpeg;base64," + imageData, option, true)
-        .then(function(result) {
+        .then(function (result) {
           $scope.userInfo.image = JSON.parse(result.response).body;
           $scope.showMsg('企业Logo更新成功');
           $scope.enterpriseData.logourl = JSON.parse(result.response).body;
@@ -234,29 +181,30 @@ angular.module('starter.controllers').controller('AccountCtrl', function($scope,
               enterpriseid: $scope.enterpriseData.enterpriseid,
               logourl: $scope.enterpriseData.logourl
             })
-            .success(function(data) {
+            .success(function (data) {
               if (!data.body) {
                 alert('上传失败，请重试');
               } else {
                 $scope.getEnterpriseInfo();
               }
             });
-        }, function(err) {
+        }, function (err) {
           alert('上传失败，请重试');
-        }, function(progress) {
+        }, function (progress) {
           $ionicLoading.show({
             template: "正在上传..." + Math.round((progress.loaded / progress.total) * 100) + '%'
           });
           if (Math.round((progress.loaded / progress.total) * 100) >= 99) {
             $ionicLoading.hide();
-          };
+          }
+          ;
         });
-    }, function(err) {
+    }, function (err) {
       alert('上传失败，请重试');
     });
   };
 
-  $scope.changePwd = function() {
+  $scope.changePwd = function () {
     if (!$scope.changePwdData.oldpassword) {
       $scope.showMsg('原始密码不能为空');
       return false;
@@ -270,16 +218,16 @@ angular.module('starter.controllers').controller('AccountCtrl', function($scope,
       template: "正在修改密码..."
     });
     $http.post(ApiUrl + '/ws/system/sysUser/changePwd', $scope.changePwdData)
-      .success(function(data) {
+      .success(function (data) {
         $ionicLoading.hide();
         if (data.code != '200') {
           $scope.showMsg(data.msg);
         } else {
           $scope.showMsg('密码修改成功');
         }
-      }).error(function(data, status, headers, config) {
-          $scope.showMsg('请求失败,网络不给力！');
-      });
+      }).error(function (data, status, headers, config) {
+      $scope.showMsg('请求失败,网络不给力！');
+    });
   }
 
 });

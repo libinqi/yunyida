@@ -29,6 +29,14 @@ module.exports = {
                 }
             });
     },
+    update: function (req, res) {
+        var data_from = req.params.all();
+        User.update({userId: data_from.userId}, data_from)
+            .exec(function (err, user) {
+                if (err) res.badRequest(err);
+                res.ok(user[0]);
+            });
+    },
     checkIsExist: function (req, res) {
         var userName = req.body.userName || req.query.userName;
         User.find({
@@ -63,6 +71,24 @@ module.exports = {
                 })
             });
     },
+    changePwd: function (req, res) {
+        var data_from = req.params.all();
+        User.findOne({userId: data_from.userId})
+            .exec(function (err, user) {
+                if (err) res.badRequest(err);
+                if(user.password == EncryptService.Encrypt(data_from.oldPassword))
+                {
+                    user.password = EncryptService.Encrypt(data_from.newPassword);
+                    user.save(function (err, user) {
+                        if (err) res.badRequest(err);
+                        res.ok(user);
+                    })
+                }
+                else{
+                   res.badRequest('您输入的原始密码不正确');
+                }
+            });
+    },
     getValidCode: function (req, res) {
         var phoneNumber = req.body.phoneNumber || req.query.phoneNumber;
         SMSService.Send(phoneNumber, function (code) {
@@ -81,6 +107,31 @@ module.exports = {
         else {
             res.serverError({msg: 'no'});
         }
+    },
+
+    /**
+     * 上传头像
+     *
+     * (POST /user/uploadAvatar)
+     */
+    uploadAvatar: function (req, res) {
+        req.file('avatar').upload({
+            dirname: require('path').resolve(sails.config.appPath, '/assets/images'),
+            maxBytes: 10000000            // 允许最大上传的文件大小为10MB
+        },function whenDone(err, uploadedFiles) {
+            if (err) {
+                return res.negotiate(err);
+            }
+
+            // 如果文件上传不成功,返回一个错误.
+            if (uploadedFiles.length === 0){
+                return res.badRequest('文件上传失败');
+            }
+
+            return res.json({
+                url: uploadedFiles[0].fd
+            });
+        });
     }
 };
 

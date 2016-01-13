@@ -45,6 +45,9 @@ module.exports.routes = {
     '/user/checkIsExist': 'UserController.checkIsExist',
     'post /user/register': 'UserController.register',
     'post /user/restPwd': 'UserController.restPwd',
+    'post /user/changePwd': 'UserController.changePwd',
+    'post /user/update': 'UserController.update',
+    'post /user/uploadAvatar': 'UserController.uploadAvatar',
     '/user/getValidCode': 'UserController.getValidCode',
     '/user/checkValidCode': 'UserController.checkValidCode',
 
