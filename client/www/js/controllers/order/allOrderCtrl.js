@@ -54,6 +54,10 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     $state.go('orderdetail', {data: orderId});
   }
 
+  $scope.orderlist = [];
+  $scope.load_over = true;
+  $scope.pulltextchange = '下拉刷新';
+
   $scope.query = {
     page: 1,
     rows: 8,
@@ -85,52 +89,35 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
           $scope.showMsg('请求失败,网络不给力！');
         }
         else {
-          if (body.length == 0) {
-            $scope.load_over = false;
-            return;
+          if (body.length > 0) {
+            $scope.orderlist = $scope.orderlist.concat(body);
+            $scope.query.page++;
+            $scope.$broadcast("scroll.infiniteScrollComplete");
           }
-          $scope.orderlist = $scope.orderlist.concat(body);
-          $scope.query.page++;
-          $scope.$broadcast("scroll.infiniteScrollComplete");
+          else{
+            $scope.load_over = false;
+            $scope.orderlist = $scope.orderlist.concat([]);
+            $scope.$broadcast("scroll.infiniteScrollComplete");
+          }
         }
       });
-
-      //$http.get(ApiUrl + '/ws/sinfo/bizGoodsInfo/getlist', {params: $scope.querydata})
-      //  .success(function (data) {
-      //    if ($scope.querydata.page > data.body.totalPage) {
-      //      $scope.load_over = false;
-      //      return;
-      //    }
-      //
-      //    if (data.body.data) {
-      //      $scope.pendinglist = $scope.pendinglist.concat(data.body.data);
-      //      for (var i = 0; i < data.body.data.length; i++) {
-      //        $scope.getGoodsIntentionList(data.body.data[i]);
-      //      }
-      //      $scope.querydata.page++;
-      //      $scope.$broadcast("scroll.infiniteScrollComplete");
-      //    }
-      //
-      //    // }
-      //  });
-
-    }, 200);
+    }, 800);
   };
 
-  //查看货源详情
-  $scope.goodsdetail = function (item) {
-    $scope.goodsinfo = item;
+  //查看订单详情
+  $scope.orderDetail = function (item) {
+    $scope.orderItem = item;
     $scope.detail.show();
-
   }
+
   //触发弹出层事件
-  $ionicModal.fromTemplateUrl('templates/order/mygoodsdetail.html ', {
+  $ionicModal.fromTemplateUrl('templates/order/allOrderDetail.html ', {
     scope: $scope
   }).then(function (detail) {
     $scope.detail = detail;
   });
   //返回
-  $scope.closedetail = function () {
+  $scope.closeDetail = function () {
     $scope.detail.hide();
   };
 
@@ -150,6 +137,6 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     }, 1000);
   }
 
-  $scope.doRefresh();
+  //$scope.doRefresh();
 
 });

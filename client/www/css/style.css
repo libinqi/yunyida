@@ -728,8 +728,9 @@ input[type="text"], input[type="password"], input[type="datetime"], input[type="
     display: table;
     padding: 3px 10px 3px 0px;
     max-width: 200px;
-    width: 35%;
+    width: 30%;
     color: #909090;
+    text-align: right;
 }
 .tel{
   color: #444;

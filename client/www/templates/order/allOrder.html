@@ -5,29 +5,38 @@
                                                        style="width:20px;position:relative;top:2px;"></a>
 </ion-header-bar>
 <ion-content>
-  <ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()"
-                 on-pulling="pulltext()" spinner="ripple" pulling-icon="ion-ios-refresh-empty"></ion-refresher>
   <ion-list>
+    <ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()"
+                   on-pulling="pulltext()" spinner="ripple" pulling-icon="ion-ios-refresh-empty"></ion-refresher>
     <ion-item ng-repeat="item in orderlist" style="margin: 0px;padding: 0px;border: 0px;">
-      <p style="height: 28px;padding:5px 12px 2px 12px;color: #222222;" ng-click="goodsdetail(item)">{{item.goods.sCity}}→{{item.goods.eCity}}
-        <i class="icon ion-android-time" style="float: right;"><span style="font-size: 14px;display: inline-block;padding: 0px 0px 0px 4px;" am-time-ago="item.updatedAt"></span></i>
+      <p style="height: 28px;padding:5px 12px 2px 12px;color: #222222;" ng-click="goodsdetail(item)">
+        {{item.goods.sCity}}→{{item.goods.eCity}}
+        <i class="icon ion-android-time" style="float: right;"><span
+          style="font-size: 14px;display: inline-block;padding: 0px 0px 0px 4px;"
+          am-time-ago="item.updatedAt"></span></i>
       </p>
-      <p style="height: 45px;padding:12px;color: #222222;border-top: dotted 1px #c0c0c0;border-bottom: dotted 1px #c0c0c0;background-color: #e9e9e9" ng-click="goodsdetail(item)">
+      <p
+        style="height: 45px;padding:12px;color: #222222;border-top: dotted 1px #c0c0c0;border-bottom: dotted 1px #c0c0c0;background-color: #e9e9e9"
+        ng-click="orderDetail(item)">
         <span>{{item.goods.goodsName}}</span>
         <span>{{item.goods.goodsNumber+item.goods.goodsUnit}}</span>
-        <span ng-if="item.goods.carType!=不限">需{{item.goods.carType}}</span>
+        <span ng-if="item.goods.carType!='不限'">需{{item.goods.carType}}</span>
         <span style="color: #ff0000;float: right">{{item.goodsOrderStatus}}</span>
       </p>
-      <p style="height: 36px;padding:2px 12px 2px 12px;color: #222222;border-bottom: solid 1px #c0c0c0;">
-        <span style="padding-top: 5px;display: inline-block;">{{item.goods.goodsType}}</span>
-        <span style="color: #ff0000;padding-top: 5px;display: inline-block;">/ {{item.goods.goodsAttribute}}</span>
-        <button class="button button-small button-positive icon-left ion-android-cancel" style="float: right;height: 23px;line-height: 23px;">取消发布</button>
-        <button class="button button-small button-assertive icon-left ion-android-refresh" style="float: right;height: 23px;line-height: 23px;margin-right: 5px;">重新发布</button>
+      <p style="height: 36px;padding:2px 5px 2px 12px;color: #222222;border-bottom: solid 1px #c0c0c0;">
+        <span style="padding-top: 5px;display: inline-block;">{{item.goods.goodsType}} /</span>
+        <span style="color: #ff0000;padding-top: 5px;display: inline-block;">{{item.goods.goodsAttribute}}</span>
+        <button class="button button-small button-positive icon-right ion-android-cancel"
+                style="float: right;height: 23px;line-height: 23px;">取消发布
+        </button>
+        <button class="button button-small button-assertive icon-right ion-android-refresh"
+                style="float: right;height: 23px;line-height: 23px;margin-right: 5px;">重新发布
+        </button>
       </p>
     </ion-item>
   </ion-list>
+  <ion-infinite-scroll ng-if="load_over" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
   <div ng-if="orderlist.length==0" class="bar bar-stable">
     <div class="no-content">目前还没有订单</div>
   </div>
-  <ion-infinite-scroll ng-if="load_over" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
 </ion-content>
