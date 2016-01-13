@@ -15,18 +15,6 @@ module.exports = {
                 res.ok(goods);
             });
         })
-    },
-    userGoodsOrder: function (req, res) {
-        var userId = req.body.userId;
-        var page = req.body.page;
-        var rows = req.body.rows;
-        GoodsOrder.find({shipper: userId})
-            .sort('updatedAt DESC')
-            .paginate({page: page, limit: rows})
-            .populate('goods').exec(function (err, data) {
-            if (err) res.badRequest(err);
-            res.ok(data);
-        });
     }
 };
 

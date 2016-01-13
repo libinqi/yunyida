@@ -54,5 +54,16 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
     'post /goods/add': 'GoodsController.add',
-    '/goods/userGoodsOrder': 'GoodsController.userGoodsOrder',
+
+
+    /***************************************************************************
+     *                                                                          *
+     * 订单相关API...                                                            *
+     *                                                                          *
+     ***************************************************************************/
+    '/order/userOrder': 'GoodsOrderController.userOrder',
+    'post /order/cancelOrder': 'GoodsOrderController.cancelOrder',
+    'post /order/refreshOrder': 'GoodsOrderController.refreshOrder',
+    'post /order/deleteOrder': 'GoodsOrderController.deleteOrder',
+    'post /order/evaluateOrder': 'GoodsOrderController.evaluateOrder',
 };

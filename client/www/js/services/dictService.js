@@ -39,8 +39,7 @@ angular.module('starter.services').factory('dictService', function() {
         {"id": "7", "name": "冷藏车"},
         {"id": "8", "name": "危险品车"},
         {"id": "9", "name": "大件车"},
-        {"id": "10", "name": "半挂车"},
-        {"id": "11", "name": "其它"}
+        {"id": "10", "name": "半挂车"}
     ],
 
     //发车班次

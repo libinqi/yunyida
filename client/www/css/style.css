@@ -592,6 +592,32 @@ a{
   font-weight: bold;
 }
 
+.button.button-order{
+  float: right;
+  height: 23px;
+  line-height: 23px;
+  margin-right: 10px;
+  background-color: #ffffff;
+  color:#666666;
+  border:1px solid #666666;
+  font-weight: normal !important;
+  font-size: 14px;
+  width: 70px;
+}
+
+.button.button-order-active{
+  float: right;
+  height: 23px;
+  line-height: 23px;
+  margin-right: 5px;
+  background-color: #ffffff;
+  color:#ef6600;
+  border:1px solid #ef6600;
+  font-weight: normal !important;
+  font-size: 14px;
+  width: 70px;
+}
+
 .button-tabs{
   display: flex;
   width: 100%;
@@ -724,13 +750,21 @@ input[type="text"], input[type="password"], input[type="datetime"], input[type="
 .text-align-r{
   text-align: right;
 }
-.order-detail-div{
+.order-detail-label{
     display: table;
-    padding: 3px 10px 3px 0px;
+    padding: 3px 0px 3px 0px;
     max-width: 200px;
-    width: 30%;
+    width: 24%;
     color: #909090;
     text-align: right;
+}
+.order-detail-label2{
+  display: table;
+  padding: 3px 0px 3px 0px;
+  max-width: 200px;
+  /*width: 30%;*/
+  color: #909090;
+  text-align: right;
 }
 .tel{
   color: #444;

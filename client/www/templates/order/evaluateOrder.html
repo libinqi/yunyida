@@ -1,31 +1,24 @@
 <ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
-  <a class="button icon-left ion-ios-arrow-left button-clear button-light" style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;"  ng-click="backGo()"></a>
-  <div class="title title-center header-item" style="color:#fff !important;">评价</div>
-  <a class="button button-clear" style="width:40px;height:25px" ></a>
+  <a class="button icon-left ion-ios-arrow-left button-clear button-light"
+     style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="closeEvaluate()"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">交易评价</div>
+  <a class="button button-clear" style="width:40px;height:25px"></a>
 </ion-header-bar>
-
-<!-- <ion-content class="has-subheader"> -->
-      <label class="item" style="margin-top:48px;">交易评价：</label>
-      <label class="item item-input" style="    height: 55px;">
-              <label >信息准确：</label>
-              <label ng-click="evaluatevehicleClick(1)" ng-mouseenter="vehicleMouseEnter(1)" ng-mouseleave="vehicleMouseLeave(0)" ng-class="evaluatevehicleClass(1)"></label>
-              <label ng-click="evaluatevehicleClick(2)" ng-mouseenter="vehicleMouseEnter(2)" ng-mouseleave="vehicleMouseLeave(0)" ng-class="evaluatevehicleClass(2)"></label>
-              <label ng-click="evaluatevehicleClick(3)" ng-mouseenter="vehicleMouseEnter(3)" ng-mouseleave="vehicleMouseLeave(0)" ng-class="evaluatevehicleClass(3)"></label>
-              <label ng-click="evaluatevehicleClick(4)" ng-mouseenter="vehicleMouseEnter(4)" ng-mouseleave="vehicleMouseLeave(0)" ng-class="evaluatevehicleClass(4)"></label>
-              <label ng-click="evaluatevehicleClick(5)" ng-mouseenter="vehicleMouseEnter(5)" ng-mouseleave="vehicleMouseLeave(0)" ng-class="evaluatevehicleClass(5)"></label>
+<ion-view view-title="交易评价">
+  <ion-content class="padding">
+    <div style="width:100%;margin:10px auto;text-ailgn:center;">
+      <label class="item item-input" style="height: 50px;">
+              <label >满意度：</label>
+              <label title="{{msgPeople}}" class="item-input"  ng-click="evaluatePeopleClick(1)" ng-mouseenter="peopleMouseEnter(1)" ng-mouseleave="peopleMouseLeave(0)" ng-class="evaluatePeopleClass(1)"></label>
+              <label title="{{msgPeople}}"  ng-click="evaluatePeopleClick(2)" ng-mouseenter="peopleMouseEnter(2)" ng-mouseleave="peopleMouseLeave(0)" ng-class="evaluatePeopleClass(2)"></label>
+              <label title="{{msgPeople}}"  ng-click="evaluatePeopleClick(3)" ng-mouseenter="peopleMouseEnter(3)" ng-mouseleave="peopleMouseLeave(0)" ng-class="evaluatePeopleClass(3)"></label>
+              <label title="{{msgPeople}}"  ng-click="evaluatePeopleClick(4)" ng-mouseenter="peopleMouseEnter(4)" ng-mouseleave="peopleMouseLeave(0)" ng-class="evaluatePeopleClass(4)"></label>
+              <label title="{{msgPeople}}"  ng-click="evaluatePeopleClick(5)" ng-mouseenter="peopleMouseEnter(5)" ng-mouseleave="peopleMouseLeave(0)" ng-class="evaluatePeopleClass(5)"></label>
       </label>
-      <label class="item item-input" style="    height: 55px;">
-              <label >运输速度：</label>
-              <label class="item-input"  ng-click="evaluatePeopleClick(1)" ng-mouseenter="PeopleMouseEnter(1)" ng-mouseleave="PeopleMouseLeave(0)" ng-class="evaluatePeopleClass(1)"></label>
-              <label ng-click="evaluatePeopleClick(2)" ng-mouseenter="PeopleMouseEnter(2)" ng-mouseleave="PeopleMouseLeave(0)" ng-class="evaluatePeopleClass(2)"></label>
-              <label ng-click="evaluatePeopleClick(3)" ng-mouseenter="PeopleMouseEnter(3)" ng-mouseleave="PeopleMouseLeave(0)" ng-class="evaluatePeopleClass(3)"></label>
-              <label ng-click="evaluatePeopleClick(4)" ng-mouseenter="PeopleMouseEnter(4)" ng-mouseleave="PeopleMouseLeave(0)" ng-class="evaluatePeopleClass(4)"></label>
-              <label ng-click="evaluatePeopleClick(5)" ng-mouseenter="PeopleMouseEnter(5)" ng-mouseleave="PeopleMouseLeave(0)" ng-class="evaluatePeopleClass(5)"></label>
-
-      </label>
-      <!-- <label class="item-input">服务评价：</label> -->
-      <textarea placeholder="评价内容" style="width:90%;height:70px;margin:20px auto;border-width: 1px;border-color: #ef6600;border-style: solid;" type="textarea" ng-model="pingjiatext"></textarea>
+      <textarea placeholder="评价内容" rows="3" style="width: 100%;margin:20px auto;padding:10px;border: 1px solid #ddd;" ng-model="evaluateData.evaluationContent"></textarea>
       <div class="text-center">
-        <button type="button" class="button button-positive" ng-click="evaluateVehicle()" style="width:60%">提交</button>
+        <button type="button" class="button button-assertive" ng-click="evaluateSubmit()" style="width:75%">提交</button>
       </div>
-<!-- </ion-content> -->
+    </div>
+  </ion-content>
+</ion-view>

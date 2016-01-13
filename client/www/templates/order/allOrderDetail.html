@@ -7,89 +7,115 @@
 <ion-view view-title="订单详情">
   <ion-content class="padding">
     <div style="width:100%;margin:10px auto;text-ailgn:center;">
-      <!-- 发货人信息 -->
-      <label class="item-detail padding-left">
-        <img src="img/person.png" width="20px" height="20px">
-        <div class="order-detail-div" style="font-size: 16px;">发货人：</div>
-        <label>{{orderItem.goods.consignor}}</label>
-      </label>
-      <label class="item-detail padding-left" style="margin-left:27px">
-        <div class="order-detail-div">地址：</div>
-        <label>{{orderItem.goods.sCity+orderItem.goods.sStreet+orderItem.goods.sAddress}}</label>
-      </label>
-      <label class="item-detail padding-left" style="margin-left:27px;">
-        <div class="order-detail-div">电话：</div>
-        <label>{{orderItem.goods.sPhoneNumber}}</label>
-      </label>
-      <!-- 收货人信息 -->
-      <label class="item-detail padding-left" style="margin-top:10px">
-        <img src="img/person.png" width="20px" height="20px">
-        <div class="order-detail-div" style="font-size: 16px;">收货人：</div>
-        <label>{{orderItem.goods.consignee}}</label>
-      </label>
-      <label class="item-detail padding-left" style="margin-left:27px">
-        <div class="order-detail-div">地址：</div>
-        <label>{{orderItem.goods.eCity+orderItem.goods.eStreet+orderItem.goods.eAddress}}</label>
-      </label>
-      <label class="item-detail padding-left" style="margin-left:27px;">
-        <div class="order-detail-div">电话：</div>
-        <label>{{orderItem.goods.ePhoneNumber}}</label>
-      </label>
+      <div class="card" style="margin:5px 0px !important;">
+        <div class="item item-divider">
+          收发货信息
+        </div>
+        <div class="item item-text-wrap">
+          <!-- 发货人信息 -->
+          <label class="item-detail">
+            <img src="img/person.png" width="20px" height="20px">
+            <div class="order-detail-label" style="font-size: 16px;">发货人：</div>
+            <label>{{orderItem.goods.consignor}}</label>
+          </label>
+          <label class="item-detail" style="margin-left:27px">
+            <div class="order-detail-label">地址：</div>
+            <label>{{orderItem.goods.sCity+orderItem.goods.sStreet+orderItem.goods.sAddress}}</label>
+          </label>
+          <label class="item-detail" style="margin-left:27px;">
+            <div class="order-detail-label">电话：</div>
+            <label>{{orderItem.goods.sPhoneNumber}}</label>
+          </label>
+          <!-- 收货人信息 -->
+          <label class="item-detail" style="margin-top:10px">
+            <img src="img/person.png" width="20px" height="20px">
+            <div class="order-detail-label" style="font-size: 16px;">收货人：</div>
+            <label>{{orderItem.goods.consignee}}</label>
+          </label>
+          <label class="item-detail" style="margin-left:27px">
+            <div class="order-detail-label">地址：</div>
+            <label>{{orderItem.goods.eCity+orderItem.goods.eStreet+orderItem.goods.eAddress}}</label>
+          </label>
+          <label class="item-detail" style="margin-left:27px;">
+            <div class="order-detail-label">电话：</div>
+            <label>{{orderItem.goods.ePhoneNumber}}</label>
+          </label>
+        </div>
+      </div>
       <!-- 货物信息 -->
-      <label class="item-detail padding-left" style="margin-left:28px;margin-top:10px">
-        <div class="order-detail-div" style="font-size: 16px;">货物信息：</div>
-        <label>{{orderItem.goods.goodsName+' '+orderItem.goods.goodsNumber+orderItem.goods.goodsUnit}}</label>
-      </label>
-      <!-- 货物属性 -->
-      <label class="item-detail padding-left" style="margin-left:28px;margin-top:10px">
-        <div class="order-detail-div" style="font-size: 16px;">货物属性：</div>
-        <label>{{orderItem.goods.goodsType+' '+orderItem.goods.goodsAttribute}}</label>
-      </label>
-      <!-- 订单状态 -->
-      <label class="item-detail padding-left" style="margin-left:28px;margin-top:10px">
-        <div class="order-detail-div" style="font-size: 16px;">订单状态：</div>
-        <label style="color: #ff0000">{{orderItem.goodsOrderStatus}}</label>
-      </label>
-      <!-- 创建时间 -->
-      <label class="item-detail padding-left" style="margin-left:28px;margin-top:10px">
-        <div class="order-detail-div" style="font-size: 16px;">创建时间：</div>
-        <label>{{orderItem.createdAt|amDateFormat:'YYYY-MM-DD H:mm:ss'}}</label>
-      </label>
+      <div class="card" style="margin:10px 0px !important;">
+        <div class="item item-divider">
+          货物订单信息
+        </div>
+        <div class="item item-text-wrap">
+          <label class="item-detail">
+            <div class="order-detail-label2" style="font-size: 16px;">货物信息：</div>
+            <label>{{orderItem.goods.goodsName+' '+orderItem.goods.goodsNumber+orderItem.goods.goodsUnit}}</label>
+          </label>
+          <!-- 货物属性 -->
+          <label class="item-detail">
+            <div class="order-detail-label2" style="font-size: 16px;">货物属性：</div>
+            <label>{{orderItem.goods.goodsType+' '+orderItem.goods.goodsAttribute}}</label>
+          </label>
+          <!-- 需求车辆 -->
+          <label class="item-detail" ng-if="orderItem.goods.carType!='不限'">
+            <div class="order-detail-label2" style="font-size: 16px;">需求车辆：</div>
+            <label>{{orderItem.goods.carType}}</label>
+          </label>
+          <!-- 订单状态 -->
+          <label class="item-detail">
+            <div class="order-detail-label2" style="font-size: 16px;">订单状态：</div>
+            <label style="color: #ff0000">{{orderItem.goodsOrderStatus}}</label>
+          </label>
+          <!-- 创建时间 -->
+          <label class="item-detail">
+            <div class="order-detail-label2" style="font-size: 16px;">创建时间：</div>
+            <label>{{orderItem.createdAt|amDateFormat:'YYYY-MM-DD H:mm:ss'}}</label>
+          </label>
+        </div>
+      </div>
       <div class="button-bar" style="margin-top:10px">
-        <button class="button button-assertive" style="margin-right:10px;margin-left:10px;" ng-click="backGo()">重新发布
+        <button class="button button-positive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus=='未接单'||orderItem.goodsOrderStatus=='接单'"
+                ng-click="cancelOrder(orderItem.goodsOrderId)">取消订单
         </button>
-        <button class="button button-positive" ng-click="backGo()">取消发布
+        <button class="button button-positive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus=='已取消'||orderItem.goodsOrderStatus=='已完成'"
+                ng-click="deleteOrder(orderItem.goodsOrderId)">删除订单
+        </button>
+        <button class="button button-positive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus=='未评价'"
+                ng-click="orderEvaluate(orderItem.goodsOrderId)">马上评价
+        </button>
+        <button class="button button-assertive" ng-if="orderItem.goodsOrderStatus=='未接单'||orderItem.goodsOrderStatus=='接单'||orderItem.goodsOrderStatus=='取消接单'||orderItem.goodsOrderStatus=='已取消'" ng-click="refreshOrder(orderItem.goodsOrderId)">重新发布
         </button>
       </div>
 
       <!--<label class="item-detail padding-left padding-right" style="margin-left:50px"-->
       <!--ng-if="orderItem.consignmentDateTime">-->
-      <!--<div class="order-detail-div">日期</div>-->
+      <!--<div class="order-detail-label">日期</div>-->
       <!--：-->
       <!--<label style="font-size: 12px;">{{orderItem.consignmentDateTime}}</label>-->
       <!--</label>-->
       <!--<label class="item-detail padding-left padding-right" style="margin-left:50px"-->
       <!--ng-if="orderItem.descriptionOfGoods">-->
-      <!--<div class="order-detail-div">名称</div>-->
+      <!--<div class="order-detail-label">名称</div>-->
       <!--<label>：{{orderItem.descriptionOfGoods}}</label>-->
       <!--</label>-->
       <!--<label class="item-detail padding-left padding-right" style="margin-left:50px"-->
       <!--ng-if="orderItem.monetaryTotalAmount">-->
-      <!--<div class="order-detail-div">货物总值</div>-->
+      <!--<div class="order-detail-label">货物总值</div>-->
       <!--<label>：{{orderItem.monetaryTotalAmount}}元</label>-->
       <!--</label>-->
 
       <!--<label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderItem.goodsNumber">-->
-      <!--<div class="order-detail-div">件数</div>-->
+      <!--<div class="order-detail-label">件数</div>-->
       <!--<label>：{{orderItem.goodsNumber}}</label>-->
       <!--</label>-->
       <!--<label class="item-detail padding-left padding-right" style="margin-left:50px"-->
       <!--ng-if="orderItem.goodsItemGrossWeight!=0">-->
-      <!--<div class="order-detail-div">重量</div>-->
+      <!--<div class="order-detail-label">重量</div>-->
       <!--<label>：{{orderItem.goodsItemGrossWeight}}吨</label>-->
       <!--</label>-->
       <!--<label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderItem.goodsCube!=0">-->
-      <!--<div class="order-detail-div">体积</div>-->
+      <!--<div class="order-detail-label">体积</div>-->
       <!--<label>：{{orderItem.goodsCube}}方</label>-->
       <!--</label>-->
 
@@ -97,33 +123,33 @@
       <!--<label class="item-detail padding-left padding-right" style="margin-left:23px;margin-top:20px"-->
       <!--ng-if="orderItem.consigneeInfo">-->
       <!--<img src="img/person.png" width="20px" height="20px" style="margin-right:5px;">-->
-      <!--<div class="order-detail-div" style="font-size: 16px;">收货人</div>-->
+      <!--<div class="order-detail-label" style="font-size: 16px;">收货人</div>-->
       <!--<label style="margin-left:-8px">：{{orderItem.consigneeInfo}}</label>-->
       <!--</label>-->
       <!--<label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderItem.consignee">-->
-      <!--<div class="order-detail-div">联系人</div>-->
+      <!--<div class="order-detail-label">联系人</div>-->
       <!--<label>：{{orderItem.consignee}}</label>-->
       <!--</label>-->
       <!--<label class="item-detail padding-left padding-right" style="margin-left:50px"-->
       <!--ng-if="orderItem.consigneeTelephoneNumber">-->
-      <!--<div class="order-detail-div">电话</div>-->
+      <!--<div class="order-detail-label">电话</div>-->
       <!--<label>：{{orderItem.consigneeTelephoneNumber}}</label>-->
       <!--</label>-->
       <!--<label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderItem.payTypeName">-->
-      <!--<div class="order-detail-div">付款方式</div>-->
+      <!--<div class="order-detail-label">付款方式</div>-->
       <!--<label>：{{orderItem.payTypeName}}</label>-->
       <!--</label>-->
       <!--<label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderItem.freightCharges">-->
-      <!--<div class="order-detail-div">运费</div>-->
+      <!--<div class="order-detail-label">运费</div>-->
       <!--<label>：{{orderItem.freightCharges}}元</label>-->
       <!--</label>-->
       <!--<label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderItem.remark">-->
-      <!--<div class="order-detail-div">备注</div>-->
+      <!--<div class="order-detail-label">备注</div>-->
       <!--<label>：{{orderItem.remark}}</label>-->
       <!--</label>-->
 
       <!--<label class="item-detail padding-left padding-right" ng-if="orderItem.status == 'YPJ'" style="margin-left:50px">-->
-      <!--<div class="order-detail-div">评价内容</div>-->
+      <!--<div class="order-detail-label">评价内容</div>-->
       <!--<label>：{{orderItem.goodsEvaluate || '无'}}</label>-->
       <!--</label>-->
       <!--</div>-->
