@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('UserCtrl', function ($scope, $state, $http, $timeout, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, UserInfo) {
+angular.module('starter.controllers').controller('UserCtrl', function ($scope, $state, $http, $timeout, $ionicPopover, $ionicLoading, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, UserInfo) {
   $scope.pulltextchange = '下拉刷新';
   $scope.userInfo = UserInfo.data;
 
@@ -10,7 +10,7 @@ angular.module('starter.controllers').controller('UserCtrl', function ($scope, $
         $scope.userInfo.image = 'img/default-ava.png';
       }
       else {
-        $scope.userInfo.image = body.logo || 'img/default-ava.png';
+        $scope.userInfo.image = io.sails.url +'/user/avatar/'+body.logo || 'img/default-ava.png';
       }
       //头像缓存问题
       // if (!window.localStorage['avatar_img']) {
@@ -94,15 +94,17 @@ angular.module('starter.controllers').controller('UserCtrl', function ($scope, $
       quality: 80
     };
     var server = io.sails.url + '/user/uploadAvatar';
-    var trustHosts = true
-    var option = {};
+    var trustHosts = true;
+    var option = {
+      fileKey: "avatar"
+    };
 
     $cordovaImagePicker.getPictures(options)
       .then(function (results) {
-        $cordovaFileTransfer.upload(server, results[0], option, true)
+        $cordovaFileTransfer.upload(server, results[0], option, trustHosts)
           .then(function (result) {
             $scope.showMsg('头像更新成功');
-            $scope.userInfo.logo = JSON.parse(result.response).body;
+            $scope.userInfo.logo = result.response;
             io.socket.post('/user/update', {
               userId: $scope.userInfo.userId,
               logo: $scope.userInfo.logo
@@ -133,15 +135,18 @@ angular.module('starter.controllers').controller('UserCtrl', function ($scope, $
   $scope.cameraImg = function () {
     var server = io.sails.url + '/user/uploadAvatar';
     var trustHosts = true;
-    var option = {};
+    var option = {
+      fileKey: "avatar"
+    };
     var options = {
       quality: 50,
       destinationType: Camera.DestinationType.DATA_URL,
       sourceType: Camera.PictureSourceType.CAMERA,
+      mediaType:Camera.MediaType.PICTURE,
       allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 100,
-      targetHeight: 100,
+      targetWidth: 320,
+      targetHeight: 480,
       popoverOptions: CameraPopoverOptions,
       saveToPhotoAlbum: false
     };
@@ -149,7 +154,7 @@ angular.module('starter.controllers').controller('UserCtrl', function ($scope, $
       $cordovaFileTransfer.upload(server, "data:image/jpeg;base64," + imageData, option, true)
         .then(function (result) {
           $scope.showMsg('头像更新成功');
-          $scope.userInfo.logo = JSON.parse(result.response).body;
+          $scope.userInfo.logo = result.response;
           io.socket.post('/user/update', {
             userId: $scope.userInfo.userId,
             logo: $scope.userInfo.logo

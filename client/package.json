@@ -22,7 +22,6 @@
     "cordova-plugin-splashscreen",
     "com.ionic.keyboard",
     "cordova-plugin-file",
-    "cordova-plugin-camera",
     "cordova-plugin-file-transfer",
     "cordova-plugin-actionsheet",
     {
@@ -32,10 +31,11 @@
     {
       "locator": "https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git",
       "id": "cordova-plugin-x-toast"
-    }
+    },
+    "cordova-plugin-camera"
   ],
   "cordovaPlatforms": [
-    "android",
-    "ios"
+    "ios",
+    "android"
   ]
 }

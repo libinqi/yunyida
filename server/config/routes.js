@@ -48,6 +48,7 @@ module.exports.routes = {
     'post /user/changePwd': 'UserController.changePwd',
     'post /user/update': 'UserController.update',
     'post /user/uploadAvatar': 'UserController.uploadAvatar',
+    '/user/avatar/:id': 'UserController.avatar',
     '/user/getValidCode': 'UserController.getValidCode',
     '/user/checkValidCode': 'UserController.checkValidCode',
 

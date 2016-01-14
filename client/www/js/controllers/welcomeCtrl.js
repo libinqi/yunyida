@@ -3,7 +3,7 @@
 angular.module('starter.controllers').controller('Welcome', function($scope, $ionicModal, $state, $timeout) {
   $scope.guideFlag = 'a';
   $scope.guideSure = function() {
-    $state.go('start');
+    $state.go('login');
     window.localStorage['first'] = '1';
   };
 

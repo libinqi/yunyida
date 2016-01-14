@@ -25,7 +25,7 @@ angular.module('starter.controllers').controller('UserSettingCtrl', function ($s
     for (var p in UserInfo.data) {
       UserInfo.remove(p);
     }
-    $state.go('start');
+    $state.go('login');
   }
 
 });

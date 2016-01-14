@@ -1,4 +1,8 @@
 angular.module('starter.controllers').controller('AddGoodsCtrl', function ($rootScope, $scope, $location, $ionicLoading, loginService, dictService, UserInfo, $state, $ionicPopover, $ionicHistory, $ionicModal, $timeout, geolocationService) {
+  if (!UserInfo.data.userId) {
+    $state.go('login');
+  }
+
   var userInfo = UserInfo.data;
   // var $scope = this;
   $scope.goodsInfo = {

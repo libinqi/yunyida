@@ -30,7 +30,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
     //双击退出
     $ionicPlatform.registerBackButtonAction(function (e) {
       //判断处于哪个页面时双击退出
-      if ($location.path() == '/tab/index' || $location.path() == '/start') {
+      if ($location.path() == '/tab/index' || $location.path() == '/login') {
         if ($rootScope.backButtonPressedOnceToExit) {
           ionic.Platform.exitApp();
         } else {
@@ -118,8 +118,8 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
     $stateProvider
 
     // setup an abstract state for the tabs directive
-      .state('start', {
-        url: '/start',
+      .state('login', {
+        url: '/login',
         templateUrl: 'templates/login/login.html',
         controller: 'LoginCtrl'
       })
@@ -342,9 +342,12 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
 
     // if none of the above states are matched, use this as the fallback
     // console.log(!window.localStorage['first']);
-    if (!window.localStorage['first']) {
-      $urlRouterProvider.otherwise('/welcome/w_page');
-    } else {
-      $urlRouterProvider.otherwise('/tab/index');
-    }
+    //if (!window.localStorage['first']) {
+    //  $urlRouterProvider.otherwise('/welcome/w_page');
+    //} else {
+    //  $urlRouterProvider.otherwise('/tab/index');
+    //}
+    //
+    $urlRouterProvider.otherwise('/tab/index');
+
   });

@@ -2,9 +2,9 @@
 html, body {
   background-color: #fff;
 }
-div, span, a, h1, h2, h3, h4, h5, label, input, button, li {
-  font-family: "微软雅黑", Verdana, Arial, Helvetica, sans-serif !important;
-}
+/*div, span, a, h1, h2, h3, h4, h5, label, input, button, li {*/
+  /*font-family: "微软雅黑", Verdana, Arial, Helvetica, sans-serif !important;*/
+/*}*/
 a{
   text-decoration: none;
 }
@@ -587,9 +587,8 @@ a{
 }
 
 .button.button-assertive{
-  border-color: #ef6600 !important;
   background-color: #ef6600 !important;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .button.button-order{
@@ -631,8 +630,7 @@ a{
   border-radius:0px !important;
   background-color: #ffffff !important;
   color:#ef6600;
-  font-size: 14px;
-  font-weight: bold;
+  font-weight: 500;
   height: 35px !important;
   line-height: 35px !important;
   min-height: 35px !important;

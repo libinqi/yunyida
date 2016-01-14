@@ -2,7 +2,7 @@
 
 angular.module('starter.controllers').controller('IndexCtrl', function($scope, $rootScope, $state, $http, $ionicPopover, $cordovaGeolocation, $timeout,$ionicModal,UserInfo, geolocationService) {
   if (!UserInfo.data.userId) {
-    $state.go('start');
+    $state.go('login');
   }
 
   $scope.count = 0;

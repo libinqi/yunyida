@@ -1,7 +1,7 @@
 {
   "name": "sails.io.js",
   "main": "dist/sails.io.js",
-  "version": "0.12.0",
+  "version": "0.12.3",
   "homepage": "https://github.com/balderdashy/sails.io.js",
   "authors": [
     "Mike McNeil <mike@balderdash.co>"
@@ -33,13 +33,14 @@
     "package.json",
     "tests"
   ],
-  "_release": "0.12.0",
+  "_release": "0.12.3",
   "_resolution": {
     "type": "version",
-    "tag": "v0.12.0",
-    "commit": "35dc51abd4c95c70c193913ee10648b7d8cc57e3"
+    "tag": "v0.12.3",
+    "commit": "f8693e459ed6e20945e0236ef6022f83b0546720"
   },
   "_source": "git://github.com/balderdashy/sails.io.js.git",
-  "_target": "~0.12.0",
-  "_originalSource": "sails.io.js"
+  "_target": "~0.12.3",
+  "_originalSource": "sails.io.js",
+  "_direct": true
 }

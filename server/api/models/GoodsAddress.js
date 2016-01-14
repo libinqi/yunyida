@@ -13,9 +13,7 @@ module.exports = {
         goodsAddressId: {type: 'integer', primaryKey: true, autoIncrement: true},//发货地址Id
         consignor: {type: 'string', required: true},//发货人
         phoneNumber: {type: 'string', required: true},//手机号码
-        province: {type: 'string'},//省
-        city: {type: 'string'},//市
-        area: {type: 'string'},//区,县
+        city: {type: 'string'},//所在城市
         street: {type: 'string'},//街道
         address: {type: 'string'},//详细地址
         user: {

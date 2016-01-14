@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <!--<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">-->
   <title></title>
 
   <link href="lib/ionic/css/ionic.css" rel="stylesheet">
@@ -30,6 +31,12 @@
   <script src="lib/sails.io.js/dist/sails.io.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
+
+  <script type="text/javascript">
+    io.sails.url = 'http://192.168.0.103:1337';
+    io.sails.transports = ['websocket'];
+    //io.sails.useCORSRouteToGetCookie = false;
+  </script>
 
   <!-- ionic/angularjs js -->
   <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -74,7 +81,7 @@
   <script src="js/controllers/user/passwordInfoCtrl.js"></script>
   <script src="js/controllers/user/userCtrl.js"></script>
   <script src="js/controllers/user/userRegisterCtrl.js"></script>
-  <script src="js/controllers/user/UserSettingCtrl.js"></script>
+  <script src="js/controllers/user/userSettingCtrl.js"></script>
   <script src="js/directives/city/ionic-citydata.js"></script>
   <script src="js/directives/city/ionic-citypicker.js"></script>
   <script src="js/directives/dict/ionic-dictpicker.js"></script>

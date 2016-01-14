@@ -14,7 +14,7 @@ angular.module('starter.controllers').controller('ChangePWDCtrl', function($scop
   $scope.validBtnText = '获取验证码';
 
   $scope.backGo = function() {
-    $state.go('start');
+    $state.go('login');
   };
 
   $scope.showMsg = function(txt) {
@@ -116,7 +116,7 @@ angular.module('starter.controllers').controller('ChangePWDCtrl', function($scop
             }
             else{
               $scope.showMsg('密码修改成功！');
-              $state.go('start');
+              $state.go('login');
             }
           });
         }

@@ -90,7 +90,8 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
           }, function serverResponded(body, JWR) {
             if (JWR.statusCode == 200) {
               $scope.formData.validCode = body.validCode;
-              console.log($scope.formData.validCode);
+              $scope.formData.securityCode = body.validCode;
+              //console.log($scope.formData.validCode);
               $scope.timeOut();
             }
             else {
@@ -192,7 +193,7 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
               Userinfo.save(data);
               $state.go('tab.index');
             } else {
-              $state.go('start');
+              $state.go('login');
             }
           });
         }
