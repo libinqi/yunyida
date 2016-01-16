@@ -58,39 +58,40 @@ angular.module('starter.controllers').controller('MessageCtrl', function ($scope
     });
   };
   $scope.loadMore = function () {
-    $timeout(function () {
-      $http.get(ApiUrl + '/ws/msg/sysMsg/getlist', {
-        params: {
-          receiver: UserInfo.data.enterpriseid,
-          ishaveread: 0,
-          page: $scope.page,
-          rows: $scope.page_size,
-          order: "createdate",
-          sort: "DESC"
-        }
-      }).success(function (data) {
-        if (data.body && data.body.data.length > 0) {
-          UserInfo.remove('unread_msg_count');
-          if ($scope.page > data.body.totalPage) {
-            $scope.load_over = false;
-            return;
-          }
-          for (var k in data.body.data) {
-            var msg = data.body.data[k];
-            msg.title = '新的' + $scope.msg_type[msg.msgtype] + '消息';
-          }
-          $scope.items = $scope.items.concat(data.body.data);
-          $scope.page++;
-          $scope.$broadcast("scroll.infiniteScrollComplete");
-        } else {
-          $scope.load_over = false;
-          $scope.items = $scope.items.concat([]);
-          $scope.$broadcast("scroll.infiniteScrollComplete");
-        }
-      }).error(function (data, status, headers, config) {
-        $scope.showMsg('请求失败,网络不给力！');
-      });
-    }, 200);
+    $scope.items = $scope.items.concat([]);
+    //$timeout(function () {
+    //  $http.get(ApiUrl + '/ws/msg/sysMsg/getlist', {
+    //    params: {
+    //      receiver: UserInfo.data.enterpriseid,
+    //      ishaveread: 0,
+    //      page: $scope.page,
+    //      rows: $scope.page_size,
+    //      order: "createdate",
+    //      sort: "DESC"
+    //    }
+    //  }).success(function (data) {
+    //    if (data.body && data.body.data.length > 0) {
+    //      UserInfo.remove('unread_msg_count');
+    //      if ($scope.page > data.body.totalPage) {
+    //        $scope.load_over = false;
+    //        return;
+    //      }
+    //      for (var k in data.body.data) {
+    //        var msg = data.body.data[k];
+    //        msg.title = '新的' + $scope.msg_type[msg.msgtype] + '消息';
+    //      }
+    //      $scope.items = $scope.items.concat(data.body.data);
+    //      $scope.page++;
+    //      $scope.$broadcast("scroll.infiniteScrollComplete");
+    //    } else {
+    //      $scope.load_over = false;
+    //      $scope.items = $scope.items.concat([]);
+    //      $scope.$broadcast("scroll.infiniteScrollComplete");
+    //    }
+    //  }).error(function (data, status, headers, config) {
+    //    $scope.showMsg('请求失败,网络不给力！');
+    //  });
+    //}, 200);
   }
 
   // 系统公告
@@ -106,35 +107,32 @@ angular.module('starter.controllers').controller('MessageCtrl', function ($scope
   };
 
   $scope.loadMore2 = function () {
-    $timeout(function () {
-      $http.get(ApiUrl + '/ws/cm/cmMessage/getList', {
-        params: {
-          msgtype: $scope.msg_type[0],
-          page: $scope.page,
-          rows: $scope.page_size,
-          datasource: UserInfo.data.enterpriseid
-        }
-      }).success(function (data) {
-        if (data.body && data.body.data.length > 0) {
-          UserInfo.remove('unread_msg_count');
-          if ($scope.page > data.body.totalPage) {
-            $scope.load_over = false;
-            return;
-          }
-          $scope.items = $scope.items.concat(data.body.data);
-          $scope.page++;
-          $scope.$broadcast("scroll.infiniteScrollComplete");
-        } else {
-          $scope.load_over = false;
-          $scope.items = $scope.items.concat([]);
-          $scope.$broadcast("scroll.infiniteScrollComplete");
-        }
-      });
-    }, 200);
-  }
-
-  $scope.msgGo = function () {
-
+    //$timeout(function () {
+    //  $http.get(ApiUrl + '/ws/cm/cmMessage/getList', {
+    //    params: {
+    //      msgtype: $scope.msg_type[0],
+    //      page: $scope.page,
+    //      rows: $scope.page_size,
+    //      datasource: UserInfo.data.enterpriseid
+    //    }
+    //  }).success(function (data) {
+    //    if (data.body && data.body.data.length > 0) {
+    //      UserInfo.remove('unread_msg_count');
+    //      if ($scope.page > data.body.totalPage) {
+    //        $scope.load_over = false;
+    //        return;
+    //      }
+    //      $scope.items = $scope.items.concat(data.body.data);
+    //      $scope.page++;
+    //      $scope.$broadcast("scroll.infiniteScrollComplete");
+    //    } else {
+    //      $scope.load_over = false;
+    //      $scope.items = $scope.items.concat([]);
+    //      $scope.$broadcast("scroll.infiniteScrollComplete");
+    //    }
+    //  });
+    //}, 200);
+    $scope.items = $scope.items.concat([]);
   }
 
 });

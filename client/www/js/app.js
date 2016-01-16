@@ -232,10 +232,10 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         cache: 'false'
       })
 
-      .state('userInfo', {
-        url: '/userInfo',
-        templateUrl: 'templates/user/userInfo.html',
-        controller: 'UserInfoCtrl'
+      .state('userGoodsAddress', {
+        url: '/userGoodsAddress',
+        templateUrl: 'templates/user/userGoodsAddress.html',
+        controller: 'UserGoodsAddressCtrl'
       })
       .state('userSetting', {
         url: '/userSetting',

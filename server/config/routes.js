@@ -59,6 +59,17 @@ module.exports.routes = {
      ***************************************************************************/
     'post /goods/add': 'GoodsController.add',
 
+    /***************************************************************************
+     *                                                                          *
+     * 收发货地址相关API...                                                            *
+     *                                                                          *
+     ***************************************************************************/
+    '/goodsAddress/userGoodsAddress': 'GoodsAddressController.userGoodsAddress',
+    'post /goodsAddress/add': 'GoodsAddressController.add',
+    'post /goodsAddress/update': 'GoodsAddressController.update',
+    'post /goodsAddress/deleteGoodsAddress': 'GoodsAddressController.deleteGoodsAddress',
+    'post /goodsAddress/defaultGoodsAddress': 'GoodsOrderController.defaultGoodsAddress',
+
 
     /***************************************************************************
      *                                                                          *

@@ -16,39 +16,6 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     }, 1000);
   }
 
-//确认收货
-  $scope.confirmPickup = function (orderId) {
-    var params = {
-      orderId: orderId
-    }
-    $http.post(ApiUrl + '/ws/morder/bizOrder/confirmPickup', params)
-      .success(function (data) {
-        if (data.code == 200) {
-          $scope.showMsg('操作成功');
-          $scope.doRefresh();
-        }
-      });
-  }
-
-  //确认签收
-  $scope.confirmSign = function (orderId) {
-    var params = {
-      orderId: orderId
-    }
-    $http.post(ApiUrl + '/ws/morder/bizOrder/confirmSign', params)
-      .success(function (data) {
-        if (data.code == 200) {
-          $scope.showMsg('签收成功');
-          $scope.doRefresh();
-        }
-      });
-  }
-
-//评价按钮
-  $scope.pingjia = function (orderId) {
-    $state.go('evaluateorder', {data: orderId});
-  }
-
   $scope.orderList = [];
   $scope.load_over = true;
   $scope.pulltextchange = '下拉刷新';

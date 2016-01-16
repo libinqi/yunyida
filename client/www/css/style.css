@@ -696,6 +696,11 @@ input[type="text"], input[type="password"], input[type="datetime"], input[type="
 
 /*.star:hover{display: inline-block;background: url(/img/stared.png) no-repeat;width: 28px;height: 27px;margin-right: 2px;}*/
 
+.item-thumbnail-right, .item-thumbnail-right .item-content{
+  padding-right: 0px !important;
+  min-height: 45px !important;
+}
+
 .stared {
   display: inline-block;
   background: url(../img/stared.png) no-repeat;

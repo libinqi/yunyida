@@ -67,6 +67,11 @@
             <div class="order-detail-label2" style="font-size: 16px;">订单状态：</div>
             <label style="color: #ff0000">{{orderItem.goodsOrderStatus}}</label>
           </label>
+          <!-- 运价 -->
+          <label class="item-detail" ng-if="orderItem.pricing">
+            <div class="order-detail-label2" style="font-size: 16px;">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：</div>
+            <label style="color: #ff0000">{{orderItem.pricing}}元</label>
+          </label>
           <!-- 创建时间 -->
           <label class="item-detail">
             <div class="order-detail-label2" style="font-size: 16px;">创建时间：</div>

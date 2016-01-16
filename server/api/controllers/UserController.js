@@ -107,7 +107,6 @@ module.exports = {
             res.serverError({msg: 'no'});
         }
     },
-
     /**
      * 上传头像
      *
@@ -133,7 +132,7 @@ module.exports = {
         });
     },
     /**
-     * Download avatar of the user with the specified id
+     * 通过头像资源Id获取图片
      *
      * (GET /user/avatar/:id)
      */

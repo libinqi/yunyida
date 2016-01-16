@@ -16,6 +16,7 @@ module.exports = {
         city: {type: 'string'},//所在城市
         street: {type: 'string'},//街道
         address: {type: 'string'},//详细地址
+        isDefault: {type: 'boolean', defaultsTo: false},//是否默认发货地址
         user: {
             model: 'user'//所属用户
         }
