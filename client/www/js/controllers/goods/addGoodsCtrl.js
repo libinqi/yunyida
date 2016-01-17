@@ -141,7 +141,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       }
       else {
         $scope.showMsg('发货成功！');
-        $state.go('tab.index');
+        $state.go('tab.order');
       }
     });
   };
@@ -325,5 +325,4 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       }
     });
   }
-
 })

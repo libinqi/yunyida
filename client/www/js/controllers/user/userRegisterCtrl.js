@@ -187,10 +187,10 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
         else {
           loginService.userLogin($scope.userData.phoneNumber, $scope.userData.password, function (data) {
             for (var p in UserInfo.data) {
-              Userinfo.remove(p);
+              UserInfo.remove(p);
             }
             if (typeof(data) == "object") {
-              Userinfo.save(data);
+              UserInfo.save(data);
               $state.go('tab.index');
             } else {
               $state.go('login');

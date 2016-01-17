@@ -3,14 +3,18 @@
 angular.module('starter.controllers').controller('UserCtrl', function ($scope, $state, $http, $timeout, $ionicPopover, $ionicLoading, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, UserInfo) {
   $scope.pulltextchange = '下拉刷新';
   $scope.userInfo = UserInfo.data;
+  $scope.userInfo.image = 'img/default-ava.png';
 
   $scope.doRefresh = function () {
     io.socket.get('/user/' + UserInfo.data.userId, function serverResponded(body, JWR) {
       if (JWR.statusCode !== 200) {
         $scope.userInfo.image = 'img/default-ava.png';
       }
+      else if (body.logo && body.logo != null) {
+        $scope.userInfo.image = io.sails.url + '/user/avatar/' + body.logo;
+      }
       else {
-        $scope.userInfo.image = io.sails.url +'/user/avatar/'+body.logo || 'img/default-ava.png';
+        $scope.userInfo.image = 'img/default-ava.png';
       }
       //头像缓存问题
       // if (!window.localStorage['avatar_img']) {
@@ -142,7 +146,7 @@ angular.module('starter.controllers').controller('UserCtrl', function ($scope, $
       quality: 50,
       destinationType: Camera.DestinationType.DATA_URL,
       sourceType: Camera.PictureSourceType.CAMERA,
-      mediaType:Camera.MediaType.PICTURE,
+      mediaType: Camera.MediaType.PICTURE,
       allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
       targetWidth: 320,
