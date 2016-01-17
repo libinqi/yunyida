@@ -6,23 +6,7 @@
 <ion-view view-title="我的货源">
   <ion-content >
   <ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()" on-pulling="pulltext()" spinner="ripple" pulling-icon="ion-ios-refresh-empty"></ion-refresher>
-
-<!--     <ion-list class="list">
-      <ion-item  class="item-remove-animate item-icon-right" ng-repeat="item in items">
-        <label class="item item-radio" style="border-width: 0px;height:100%">
-        <input type="radio" name="group">
-       
-        <i class="radio-icon ion-checkmark"></i>
-        </label>
-
-      </ion-item>
-
-    </ion-list> -->
-
   <div class="list">
-<!--     <div class="item item-divider"> 
-          选取的值为: {{ carinfo.id }}
-   </div> -->
   <ion-radio ng-repeat="item in items"
                    ng-value="item.goodsId"
                    ng-model="carinfo.id" style="color: #9C9A9A;">
