@@ -70,7 +70,7 @@
           <!-- 运价 -->
           <label class="item-detail" ng-if="orderItem.pricing">
             <div class="order-detail-label2" style="font-size: 16px;">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：</div>
-            <label style="color: #ff0000">{{orderItem.pricing}}元</label>
+            <label style="color: #ff0000">&nbsp;{{orderItem.pricing}}元</label>
           </label>
           <!-- 创建时间 -->
           <label class="item-detail">
@@ -92,90 +92,6 @@
         <button class="button button-assertive" ng-if="orderItem.goodsOrderStatus=='未接单'||orderItem.goodsOrderStatus=='接单'||orderItem.goodsOrderStatus=='取消接单'||orderItem.goodsOrderStatus=='已取消'" ng-click="refreshOrder(orderItem.goodsOrderId)">重新发布
         </button>
       </div>
-
-      <!--<label class="item-detail padding-left padding-right" style="margin-left:50px"-->
-      <!--ng-if="orderItem.consignmentDateTime">-->
-      <!--<div class="order-detail-label">日期</div>-->
-      <!--：-->
-      <!--<label style="font-size: 12px;">{{orderItem.consignmentDateTime}}</label>-->
-      <!--</label>-->
-      <!--<label class="item-detail padding-left padding-right" style="margin-left:50px"-->
-      <!--ng-if="orderItem.descriptionOfGoods">-->
-      <!--<div class="order-detail-label">名称</div>-->
-      <!--<label>：{{orderItem.descriptionOfGoods}}</label>-->
-      <!--</label>-->
-      <!--<label class="item-detail padding-left padding-right" style="margin-left:50px"-->
-      <!--ng-if="orderItem.monetaryTotalAmount">-->
-      <!--<div class="order-detail-label">货物总值</div>-->
-      <!--<label>：{{orderItem.monetaryTotalAmount}}元</label>-->
-      <!--</label>-->
-
-      <!--<label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderItem.goodsNumber">-->
-      <!--<div class="order-detail-label">件数</div>-->
-      <!--<label>：{{orderItem.goodsNumber}}</label>-->
-      <!--</label>-->
-      <!--<label class="item-detail padding-left padding-right" style="margin-left:50px"-->
-      <!--ng-if="orderItem.goodsItemGrossWeight!=0">-->
-      <!--<div class="order-detail-label">重量</div>-->
-      <!--<label>：{{orderItem.goodsItemGrossWeight}}吨</label>-->
-      <!--</label>-->
-      <!--<label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderItem.goodsCube!=0">-->
-      <!--<div class="order-detail-label">体积</div>-->
-      <!--<label>：{{orderItem.goodsCube}}方</label>-->
-      <!--</label>-->
-
-
-      <!--<label class="item-detail padding-left padding-right" style="margin-left:23px;margin-top:20px"-->
-      <!--ng-if="orderItem.consigneeInfo">-->
-      <!--<img src="img/person.png" width="20px" height="20px" style="margin-right:5px;">-->
-      <!--<div class="order-detail-label" style="font-size: 16px;">收货人</div>-->
-      <!--<label style="margin-left:-8px">：{{orderItem.consigneeInfo}}</label>-->
-      <!--</label>-->
-      <!--<label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderItem.consignee">-->
-      <!--<div class="order-detail-label">联系人</div>-->
-      <!--<label>：{{orderItem.consignee}}</label>-->
-      <!--</label>-->
-      <!--<label class="item-detail padding-left padding-right" style="margin-left:50px"-->
-      <!--ng-if="orderItem.consigneeTelephoneNumber">-->
-      <!--<div class="order-detail-label">电话</div>-->
-      <!--<label>：{{orderItem.consigneeTelephoneNumber}}</label>-->
-      <!--</label>-->
-      <!--<label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderItem.payTypeName">-->
-      <!--<div class="order-detail-label">付款方式</div>-->
-      <!--<label>：{{orderItem.payTypeName}}</label>-->
-      <!--</label>-->
-      <!--<label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderItem.freightCharges">-->
-      <!--<div class="order-detail-label">运费</div>-->
-      <!--<label>：{{orderItem.freightCharges}}元</label>-->
-      <!--</label>-->
-      <!--<label class="item-detail padding-left padding-right" style="margin-left:50px" ng-if="orderItem.remark">-->
-      <!--<div class="order-detail-label">备注</div>-->
-      <!--<label>：{{orderItem.remark}}</label>-->
-      <!--</label>-->
-
-      <!--<label class="item-detail padding-left padding-right" ng-if="orderItem.status == 'YPJ'" style="margin-left:50px">-->
-      <!--<div class="order-detail-label">评价内容</div>-->
-      <!--<label>：{{orderItem.goodsEvaluate || '无'}}</label>-->
-      <!--</label>-->
-      <!--</div>-->
-
-      <!--<div class="button-bar" style="margin-top:20px">-->
-      <!--<button class="button button-positive" ng-if="orderItem.status == 'WQH'"-->
-      <!--ng-click="cancelOrder(orderItem.orderId)" style="margin-right:10px;margin-left:10px;">撤单-->
-      <!--</button>-->
-      <!--<button class="button button-positive" ng-if="orderItem.status == 'WQH'"-->
-      <!--ng-click="confirmPickup(orderItem.orderId)" style="margin-right:10px;margin-left:10px;">确认发货-->
-      <!--</button>-->
-      <!--<button class="button button-positive" ng-if="orderItem.status == 'YQH'"-->
-      <!--ng-click="confirmSign(orderItem.orderId)" style="margin-right:10px;margin-left:10px;">确认签收-->
-      <!--</button>-->
-      <!--<button class="button button-positive" ng-if="orderItem.status == 'DPJ'" ng-click="pingjia(orderItem.orderId)"-->
-      <!--style="margin-right:10px;margin-left:10px;">评价-->
-      <!--</button>-->
-      <!--<button class="button button-positive" ng-if="orderItem.status == 'DPJ'" ng-click="backGo()"-->
-      <!--style="margin-right:10px;margin-left:10px;">取消-->
-      <!--</button>-->
-
     </div>
   </ion-content>
 </ion-view>
