@@ -68,7 +68,7 @@ module.exports.routes = {
     'post /goodsAddress/add': 'GoodsAddressController.add',
     'post /goodsAddress/update': 'GoodsAddressController.update',
     'post /goodsAddress/deleteGoodsAddress': 'GoodsAddressController.deleteGoodsAddress',
-    'post /goodsAddress/defaultGoodsAddress': 'GoodsOrderController.defaultGoodsAddress',
+    'post /goodsAddress/defaultGoodsAddress': 'GoodsAddressController.defaultGoodsAddress',
 
 
     /***************************************************************************
