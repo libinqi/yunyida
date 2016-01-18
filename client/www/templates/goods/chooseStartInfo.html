@@ -8,10 +8,10 @@
 <ion-view>
 <ion-content>
   <ion-list>
-    <ion-item class="item item-thumbnail-right" ng-repeat="item in items" ng-click="selectStartInfo(item)">
-      <img style="width: 24px;height: 24px;" ng-if="item.isDefault" src="img/checkmark.png">
-      <h2>{{item.consignor}} {{item.phoneNumber}}</h2>
-      <p class="content"><span ng-if="item.isDefault">[默认]</span>{{item.city+item.street+item.address}}</p>
+    <ion-item class="item item-thumbnail-right" ng-repeat="item in items">
+      <img style="width: 24px;height: 24px;" ng-if="item.isDefault" src="img/checkmark.png" ng-click="selectStartInfo(item)">
+      <h2 ng-click="selectStartInfo(item)">{{item.consignor}} {{item.phoneNumber}}</h2>
+      <p class="content" ng-click="selectStartInfo(item)"><span ng-if="item.isDefault">[默认]</span>{{item.city+item.street+item.address}}</p>
       <ion-option-button class="button-stable" ng-if="!item.isDefault"
                          ng-click="defaultGoodsAddress(item.goodsAddressId)">设为默认
       </ion-option-button>
