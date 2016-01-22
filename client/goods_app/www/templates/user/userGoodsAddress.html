@@ -1,0 +1,29 @@
+<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+  <a class="button icon-left ion-ios-arrow-left button-clear button-light"
+     style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="backGo()"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">我的发货地址</div>
+  <a class="button button-clear button-light icon ion-ios-trash-outline" ng-if="items.length>0"
+     ng-click="flag.showDelete=!flag.showDelete"></a>
+</ion-header-bar>
+<ion-content>
+  <!--<ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()"-->
+  <!--on-pulling="pulltext()" spinner="ripple" pulling-icon="ion-ios-refresh-empty"></ion-refresher>-->
+  <ion-list show-delete="flag.showDelete">
+    <ion-item class="item item-thumbnail-right" ng-repeat="item in items">
+      <img style="width: 24px;height: 24px;" ng-if="item.isDefault" src="img/checkmark.png" ng-click="selectStartInfo(item)">
+      <h2 ng-click="showGoodsAddress(item)">{{item.consignor}} {{item.phoneNumber}}</h2>
+      <p class="content" ng-click="showGoodsAddress(item)"><span ng-if="item.isDefault">[默认]</span>{{item.city+item.street+item.address}}</p>
+      <ion-option-button class="button-stable" ng-if="!item.isDefault"
+                         ng-click="defaultGoodsAddress(item.goodsAddressId)">设为默认
+      </ion-option-button>
+      <ion-delete-button class="ion-minus-circled" ng-click="delGoodsAddress(item.goodsAddressId)"></ion-delete-button>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll ng-if="load_over" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+  <div ng-if="items.length==0" class="bar bar-stable">
+    <div class="no-content">没有发货地址,马上添加</div>
+  </div>
+</ion-content>
+<div class="bar bar-footer bar-assertive">
+  <div class="title" ng-click="showGoodsAddress()">新增发货地址</div>
+</div>

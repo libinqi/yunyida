@@ -1,0 +1,36 @@
+<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+  <!-- <a class="button icon-left ion-ios-arrow-left button-clear button-light" ng-click="backGo()"></a> -->
+  <a class="button button-clear" style="width:40px;height:25px"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">我</div>
+  <a class="button icon-left ion-gear-a button-clear button-light" style="color: #fff !important;"
+     href="#/userSetting"></a>
+</ion-header-bar>
+<ion-content style="background-color:#fafafa">
+  <ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()"
+                 on-pulling="pulltext()" spinner="ripple" pulling-icon="ion-ios-refresh-empty"></ion-refresher>
+  <div id="content">
+    <section id="user-bg" class="relative">
+      <!-- <a class="button button-clear" href="#/message" style="position:absolute;right:0;top:0;">
+                <img src="img/icon-zn-b.png" alt="最新消息" style="width:20px;position:relative;top:2px;">
+            </a> -->
+      <div class="user-ava relative">
+        <div class="fl" ng-click="upLoadImg()">
+          <img src="img/ava-block.png" alt="" class="ava" style="background-image:url('{{userInfo.image}}')">
+        </div>
+        <div class="user-info">
+          <span style="padding-left:5px;" class="fl">{{(userInfo.enterpriseName && userInfo.enterpriseName!='null')?userInfo.enterpriseName:userInfo.realName}}</span>
+          <span style="padding-left:25px;" class="fl">{{userInfo.phoneNumber}}</span>
+        </div>
+      </div>
+    </section>
+    <section>
+      <ul class="list list-li-bg">
+        <li class="item" ng-click="goTo(1)"><img src="img/icon-user.png" alt="">账户资料设置</li>
+        <li class="item" ng-click="goTo(2)"><img src="img/icon-enter.png" alt="">我的发货地址</li>
+        <li class="item" ng-click="goTo(3)"><img src="img/icon-zn.png" alt="">我的消息</li>
+        <li class="item"><img src="img/icon-xg.png" alt="">分享邀请好友</li>
+        <!--<li class="item" ng-click="goTo(4)"><img src="img/icon-xg.png" alt="">分享邀请好友</li>-->
+      </ul>
+    </section>
+  </div>
+</ion-content>

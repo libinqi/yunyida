@@ -1,0 +1,42 @@
+<ion-header-bar class="bar-subheader">
+  <ul class="tabs tabs-light">
+    <li class="tab-item text-fr padding-right">1.填写基本信息</li>
+    <li><a class="icon-left ion-ios-arrow-right button-clear button-dark"></a></li>
+    <li class="tab-item assertive">2.完善用户资料</li>
+  </ul>
+</ion-header-bar>
+<ion-content>
+  <form ng-submit="saveEnterpriseInfo()">
+    <div class="list padding">
+      <label class="item item-input">
+        <span class="input-label">姓名</span>
+        <input type="text" ng-model="userData.realName">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">身份证号码</span>
+        <input type="text" ng-model="userData.cardNumber">
+      </label>
+      <label class="item item-input">
+        <span class="input-label" style="width:35%">所在城市</span>
+        <ionic-city-picker placeholder="出发城市" backdrop=true backdrop-click-to-close=false css-class="text-align-l"
+                           okText="确定" citydata="userData.city" style="width:60%;"></ionic-city-picker>
+        <i class="icon ion-chevron-right " style="color: #ACACAC;"></i>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">街道</span>
+        <input type="text" ng-model="userData.street">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">详细地址</span>
+        <input type="text" ng-model="userData.address">
+      </label>
+      <label class="item item-input" style="border-bottom:1px solid #ccc">
+        <span class="input-label">企业名称</span>
+        <input type="text" ng-model="userData.enterpriseName">
+      </label>
+      <div class="padding">
+        <button class="button button-block button-assertive" type="submit">立即注册</button>
+      </div>
+    </div>
+  </form>
+</ion-content>
