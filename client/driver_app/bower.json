@@ -1,0 +1,11 @@
+{
+  "name": "driverapp",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.1.1",
+    "angular-moment": "~0.10.3"
+  },
+  "dependencies": {
+    "sails.io.js": "~0.12.3"
+  }
+}
