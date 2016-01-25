@@ -15,11 +15,13 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     consignor: '',//发货人
     sPhoneNumber: '',//起始地手机号码
     sCity: '',//起始地城市
+    sCityCode: '',//起始地城市代码
     sStreet: '',//起始地街道
     sAddress: '',//起始地详细地址
     consignee: '',//收货人
     ePhoneNumber: '',//目的地手机号码
     eCity: '',//目的地城市
+    eCityCode: '',//目的地城市代码
     eStreet: '',//目的地街道
     eAddress: '',//目的地详细地址
     status: true,//状态
@@ -29,13 +31,32 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   $scope.goodsInfo.goodsUnit = dictService.goods_unit[0].name;
   $scope.goodsInfo.carType = dictService.car_type[0].name;
 
-
   $scope.locationInfo = geolocationService.locationInfo;
   var province = $scope.locationInfo.province;
   province = province.replace(/省/g, "");
   var city = $scope.locationInfo.city;
   city = city.replace(/市/g, "");
   $scope.goodsInfo.placeOfDeparture = province + city;
+
+  dictService.street_data = [];
+
+  $scope.$watch('goodsInfo.eCityCode', function () {
+    if (!$scope.goodsInfo.eCityCode) {
+      dictService.street_data = [];
+      return;
+    }
+    io.socket.get('/areas/getStreetData', {cityCode: $scope.goodsInfo.eCityCode}, function serverResponded(body, JWR) {
+      if (JWR.statusCode !== 200) {
+        dictService.street_data = [];
+      }
+      else {
+        dictService.street_data = [];
+        for (var i = 0; i < body.length; i++) {
+          dictService.street_data.push(body[i].areaName);
+        }
+      }
+    });
+  });
 
   $scope.showMsg = function (txt) {
     var template = '<ion-popover-view style = "background-color:#ef473a !important" class = "light padding" > ' + txt + ' </ion-popover-view>';
@@ -116,18 +137,15 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   };
 
   $scope.addGoods = function () {
-    if(!$scope.goodsInfo.consignor||!$scope.goodsInfo.sCity||!$scope.goodsInfo.sPhoneNumber)
-    {
+    if (!$scope.goodsInfo.consignor || !$scope.goodsInfo.sCity || !$scope.goodsInfo.sPhoneNumber) {
       $scope.showMsg('请选择起始地发货信息！');
       return;
     }
-    if(!$scope.goodsInfo.consignee||!$scope.goodsInfo.eCity||!$scope.goodsInfo.ePhoneNumber)
-    {
+    if (!$scope.goodsInfo.consignee || !$scope.goodsInfo.eCity || !$scope.goodsInfo.ePhoneNumber) {
       $scope.showMsg('请选择目的地收货信息！');
       return;
     }
-    if(!$scope.goodsInfo.goodsName||!$scope.goodsInfo.goodsNumber)
-    {
+    if (!$scope.goodsInfo.goodsName || !$scope.goodsInfo.goodsNumber) {
       $scope.showMsg('请填写货物信息！');
       return;
     }
@@ -162,11 +180,12 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   };
   //选择发货地址信息
   $scope.selectStartInfo = function (item) {
-    $scope.goodsInfo.sCity=item.city;
-    $scope.goodsInfo.sStreet=item.street;
-    $scope.goodsInfo.consignor=item.consignor;
-    $scope.goodsInfo.sPhoneNumber=item.phoneNumber;
-    $scope.goodsInfo.sAddress=item.address;
+    $scope.goodsInfo.sCity = item.city;
+    $scope.goodsInfo.sCityCode = item.cityCode;
+    $scope.goodsInfo.sStreet = item.street;
+    $scope.goodsInfo.consignor = item.consignor;
+    $scope.goodsInfo.sPhoneNumber = item.phoneNumber;
+    $scope.goodsInfo.sAddress = item.address;
 
     $scope.startInfoModal.hide();
   };
@@ -179,6 +198,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     consignor: '',//发货人
     phoneNumber: '',//手机号码
     city: '',//所在城市
+    cityCode: '',//所在城市代码
     street: '',//街道
     address: '',//详细地址
     isDefault: false,//是否默认发货地址
@@ -204,6 +224,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
         consignor: '',//发货人
         phoneNumber: '',//手机号码
         city: '',//所在城市
+        cityCode: '',//所在城市代码
         street: '',//街道
         address: '',//详细地址
         isDefault: false,//是否默认发货地址
@@ -234,8 +255,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     $ionicLoading.show({
       template: "正在保存发货地址..."
     });
-    if($scope.isAdd)
-    {
+    if ($scope.isAdd) {
       io.socket.post('/goodsAddress/add', $scope.goodsAddress, function serverResponded(body, JWR) {
         $ionicLoading.hide();
         if (JWR.statusCode !== 200) {
@@ -248,7 +268,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
         }
       });
     }
-    else{
+    else {
       io.socket.post('/goodsAddress/update', $scope.goodsAddress, function serverResponded(body, JWR) {
         $ionicLoading.hide();
         if (JWR.statusCode !== 200) {

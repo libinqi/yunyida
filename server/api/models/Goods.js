@@ -20,11 +20,13 @@ module.exports = {
         consignor: {type: 'string', required: true},//发货人
         sPhoneNumber: {type: 'string', required: true},//起始地手机号码
         sCity: {type: 'string'},//起始地城市
+        sCityCode: {type: 'string'},//起始地城市代码
         sStreet: {type: 'string'},//起始地街道
         sAddress: {type: 'string'},//起始地详细地址
         consignee: {type: 'string', required: true},//收货人
         ePhoneNumber: {type: 'string', required: true},//目的地手机号码
         eCity: {type: 'string'},//目的地城市
+        eCityCode: {type: 'string'},//目的地城市代码
         eStreet: {type: 'string'},//目的地街道
         eAddress: {type: 'string'},//目的地详细地址
         status: {type: 'boolean', defaultsTo: true},//状态

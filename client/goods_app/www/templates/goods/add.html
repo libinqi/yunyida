@@ -9,11 +9,11 @@
       <button class="button button-assertive" ng-class="{'button-active':goodsInfo.goodsType=='零担'}"
               ng-click="changeGoodsType('零担')">零担
       </button>
-      <button class="button button-assertive" ng-class="{'button-active':goodsInfo.goodsType=='整车'}"
-              ng-click="changeGoodsType('整车')">整车
-      </button>
       <button class="button button-assertive" ng-class="{'button-active':goodsInfo.goodsType=='城市配送'}"
               ng-click="changeGoodsType('城市配送')">城市配送
+      </button>
+      <button class="button button-assertive" ng-class="{'button-active':goodsInfo.goodsType=='整车'}"
+              ng-click="changeGoodsType('整车')">整车
       </button>
     </div>
     <div class="list">
@@ -38,7 +38,7 @@
       <label ng-if="goodsInfo.goodsType!='零担'" class="item item-input" style="width:100%">
         <div class="input-label" style="width:40%">需车类型</div>
         <ionic-dict-picker backdrop=true backdrop-click-to-close=false css-class="text-align-r"
-                           dictmodel="goodsInfo.carType" dict-data="car_type" okText="确定"
+                           dictmodel="goodsInfo.carType" dictdata="car_type" okText="确定"
                            style="width:55%"></ionic-dict-picker>
         <i class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;"></i>
       </label>

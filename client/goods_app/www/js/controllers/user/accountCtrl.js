@@ -8,6 +8,7 @@ angular.module('starter.controllers').controller('AccountCtrl', function ($scope
     email: '', //电子邮箱
     enterpriseName: '', //企业名称
     city: '',//市
+    cityCode:'',//城市代码
     street: '',//街道
     address: ''//详细地址
   };

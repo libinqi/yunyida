@@ -33,6 +33,7 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
     consignor: '',//发货人
     phoneNumber: '',//手机号码
     city: '',//所在城市
+    cityCode:'',//城市代码
     street: '',//街道
     address: '',//详细地址
     isDefault: false,//是否默认发货地址

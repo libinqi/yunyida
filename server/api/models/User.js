@@ -22,7 +22,7 @@ module.exports = {
         city: {type: 'string'},//所在城市
         street: {type: 'string'},//街道
         address: {type: 'string'},//详细地址
-        cityCode: {type: 'string'},//城市或者地址代码
+        cityCode: {type: 'string'},//城市代码
         cardNumber: {type: 'string'},//证件号码
         lng: {type: 'string'},//经度
         lat: {type: 'string'},//纬度

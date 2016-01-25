@@ -13,21 +13,21 @@
           <div class="col col-33">
             <ion-scroll delegate-handle={{vm.provinceHandle}} on-scroll="vm.getData('province')" scrollbar-y=false>
               <ul>
-                <li ng-repeat="province in vm.cityData">{{province.name}}</li>
+                <li ng-repeat="province in vm.cityData">{{province.shortName}}</li>
               </ul>
             </ion-scroll>
           </div>
           <div class="col col-33">
             <ion-scroll delegate-handle={{vm.cityHandle}} on-scroll="vm.getData('city')" scrollbar-y=false>
               <ul>
-                <li ng-repeat="city in vm.province.sub">{{city.name}}</li>
+                <li ng-repeat="city in vm.province.sub">{{city.shortName}}</li>
               </ul>
             </ion-scroll>
           </div>
           <div class="col col-33">
             <ion-scroll delegate-handle={{vm.countryHandle}} on-scroll="vm.getData('country')" scrollbar-y=false>
               <ul>
-                <li ng-repeat="country in vm.city.sub">{{country.name}}</li>
+                <li ng-repeat="country in vm.city.sub">{{country.areaName}}</li>
               </ul>
             </ion-scroll>
           </div>
