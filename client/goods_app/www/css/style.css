@@ -781,3 +781,18 @@ input[type="text"], input[type="password"], input[type="datetime"], input[type="
     font-size: large;
     font-family: "微软雅黑", Verdana, Arial, Helvetica, sans-serif !important;
 }
+.share-friend{
+  background-color: #f5f5f5;
+  border: 1px solid #dfdfdf;
+  border-radius: 2px;
+  padding: 0.3rem 0;
+}
+.share-friend img{
+  width: 0.9rem;
+  vertical-align: middle;
+  margin: 0 0.3rem;
+}
+.share-friend span{
+  position: relative;
+  top: 0.06rem;
+}

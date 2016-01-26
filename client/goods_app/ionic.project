@@ -1,6 +1,6 @@
 {
   "name": "goodsapp",
-  "app_id": "",
+  "app_id": "yunyida56001",
   "gulpStartupTasks": [
       "index",
       "watch",

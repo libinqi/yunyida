@@ -32,7 +32,14 @@
       "locator": "https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git",
       "id": "cordova-plugin-x-toast"
     },
-    "cordova-plugin-camera"
+    "cordova-plugin-camera",
+    {
+      "variables": {
+        "wechatappid": "wx4a525790c75c494f"
+      },
+      "locator": "cordova-plugin-wechat",
+      "id": "cordova-plugin-wechat"
+    }
   ],
   "cordovaPlatforms": [
     "ios",

@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('AddGoodsCtrl', function ($rootScope, $scope, $location, $ionicLoading, loginService, dictService, UserInfo, $state, $ionicPopover, $ionicHistory, $ionicModal, $timeout, geolocationService) {
+angular.module('starter.controllers').controller('AddGoodsCtrl', function ($rootScope, $scope, $location, $ionicLoading, CityPickerService, dictService, UserInfo, $state, $ionicPopover, $ionicHistory, $ionicModal, $timeout, geolocationService) {
   if (!UserInfo.data.userId) {
     $state.go('login');
   }
@@ -39,23 +39,39 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   $scope.goodsInfo.placeOfDeparture = province + city;
 
   dictService.street_data = [];
+  $scope.streetList = [];
 
   $scope.$watch('goodsInfo.eCityCode', function () {
+    $scope.goodsInfo.eStreet = '';
     if (!$scope.goodsInfo.eCityCode) {
       dictService.street_data = [];
       return;
     }
-    io.socket.get('/areas/getStreetData', {cityCode: $scope.goodsInfo.eCityCode}, function serverResponded(body, JWR) {
-      if (JWR.statusCode !== 200) {
-        dictService.street_data = [];
-      }
-      else {
-        dictService.street_data = [];
-        for (var i = 0; i < body.length; i++) {
-          dictService.street_data.push(body[i].areaName);
-        }
+    else {
+      $scope.streetList = [];
+    }
+
+    $timeout(function () {
+      $scope.streetList = CityPickerService.getStreetData($scope.goodsInfo.eCityCode);
+      dictService.street_data = [];
+
+      for (var i = 0; i < $scope.streetList.length; i++) {
+        dictService.street_data.push({id: $scope.streetList[i].id, name: $scope.streetList[i].areaName});
       }
     });
+
+
+    //io.socket.get('/areas/getStreetData', {cityCode: $scope.goodsInfo.eCityCode}, function serverResponded(body, JWR) {
+    //  if (JWR.statusCode !== 200) {
+    //    dictService.street_data = [];
+    //  }
+    //  else {
+    //    dictService.street_data = [];
+    //    for (var i = 0; i < body.length; i++) {
+    //      dictService.street_data.push(body[i].areaName);
+    //    }
+    //  }
+    //});
   });
 
   $scope.showMsg = function (txt) {
@@ -86,6 +102,10 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   //弹出收货目的信息页面
   $scope.showEndInfo = function () {
     $scope.endInfoModal.show();
+  };
+  //弹出收货目的信息页面
+  $scope.closeEndInfo = function () {
+    $scope.endInfoModal.hide();
   };
   //隐藏收货目的信息页面
   $scope.hideEndInfo = function () {

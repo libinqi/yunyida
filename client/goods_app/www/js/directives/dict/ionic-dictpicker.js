@@ -7,7 +7,6 @@ app.directive('ionicDictPicker', ['$ionicPopup', '$timeout', '$ionicScrollDelega
     template: '<input type="text" placeholder={{vm.placeholder}} ng-model="dictmodel"  class={{vm.cssClass}} readonly>',
     scope: {
       dictmodel: '=',
-      dictdata: '=',
       backdrop: '@',
       backdropClickToClose: '@',
       buttonClicked: '&'
@@ -74,9 +73,6 @@ app.directive('ionicDictPicker', ['$ionicPopup', '$timeout', '$ionicScrollDelega
             dictpickerModel.show();
           }, 100)
         })
-      });
-      scope.$watch(vm.dictdata, function () {
-        vm.getData();
       });
       //销毁模型
       scope.$on('$destroy', function () {

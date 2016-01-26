@@ -224,6 +224,11 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         templateUrl: 'templates/user/userSetting.html',
         controller: 'UserSettingCtrl'
       })
+      .state('invitation', {
+        url: '/invitation',
+        templateUrl: 'templates/user/invitation.html',
+        controller: 'InvitationCtrl'
+      })
       .state('passwordInfo', {
         url: '/passwordInfo',
         cache: 'false',

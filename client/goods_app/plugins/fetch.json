@@ -86,5 +86,15 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "cordova-plugin-wechat": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-wechat"
+        },
+        "is_top_level": true,
+        "variables": {
+            "WECHATAPPID": "wx4a525790c75c494f"
+        }
     }
 }

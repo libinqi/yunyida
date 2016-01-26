@@ -60,7 +60,7 @@ angular.module('starter.controllers').controller('UserCtrl', function ($scope, $
         $state.go('message');
         break;
       case 4:
-        $state.go('passwordInfo');
+        $state.go('invitation');
         break;
       default:
         break;
@@ -186,5 +186,4 @@ angular.module('starter.controllers').controller('UserCtrl', function ($scope, $
       $scope.showMsg('上传失败，请重试');
     });
   };
-
 });

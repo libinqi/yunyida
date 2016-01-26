@@ -27,11 +27,18 @@ module.exports = {
         });
     },
     getStreetData: function (req, res) {
-        var cityCode = req.body.cityCode || req.query.cityCode;
-        Areas.find({level: 4, parentId: cityCode}).sort('sort ASC').exec(function (err, streets) {
-            if (err) res.badRequest(err);
-            res.ok(streets);
-        });
+        //if (req.body.cityCode) {
+        //    Areas.find({level: 4, parentId: req.body.cityCode}).sort('sort ASC').exec(function (err, streets) {
+        //        if (err) res.badRequest(err);
+        //        res.ok(streets);
+        //    });
+        //}
+        //else {
+            Areas.find({level: 4}).sort('id ASC').exec(function (err, streets) {
+                if (err) res.badRequest(err);
+                res.ok(streets);
+            });
+        //}
     }
 };
 
