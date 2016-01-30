@@ -42,6 +42,15 @@
                            style="width:55%"></ionic-dict-picker>
         <i class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;"></i>
       </label>
+      <label ng-if="goodsInfo.goodsType!='零担'&&(goodsInfo.carType&&goodsInfo.carType!='不限')" class="item item-input"
+             style="width:100%">
+        <div class="input-label" style="width:40%">需车长</div>
+        <ionic-dict-picker ng-if="carLengthList.length>0" backdrop=true backdrop-click-to-close=false
+                           css-class="text-align-r"
+                           dictmodel="goodsInfo.carLength" dictdata="car_length" okText="确定"
+                           style="width:55%"></ionic-dict-picker>
+        <i class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;"></i>
+      </label>
     </div>
     <div class="button-bar">
       <a class="button" href="#/tab/index" style="margin-right:10px;margin-left:10px;"

@@ -17,6 +17,7 @@ module.exports = {
         goodsNumber: {type: 'float', required: true},//货物数量
         goodsUnit: {type: 'string', required: true, enum: ['件', '方', '吨']},//数量单位
         carType:{type: 'string'},//需车类型
+        carLength:{type: 'string'},//需车长
         consignor: {type: 'string', required: true},//发货人
         sPhoneNumber: {type: 'string', required: true},//起始地手机号码
         sCity: {type: 'string'},//起始地城市

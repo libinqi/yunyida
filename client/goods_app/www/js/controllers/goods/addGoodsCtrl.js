@@ -12,6 +12,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     goodsNumber: '', //货物数量
     goodsUnit: '', //数量单位:件, 方,吨
     carType: '',//需车类型
+    carLength: '',//需车长
     consignor: '',//发货人
     sPhoneNumber: '',//起始地手机号码
     sCity: '',//起始地城市
@@ -40,6 +41,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
 
   dictService.street_data = [];
   $scope.streetList = [];
+  $scope.carLengthList = [];
 
   $scope.$watch('goodsInfo.eCityCode', function () {
     $scope.goodsInfo.eStreet = '';
@@ -72,6 +74,22 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     //    }
     //  }
     //});
+  });
+
+  $scope.$watch('goodsInfo.carType', function () {
+    $scope.goodsInfo.carLength = '';
+    if (!$scope.goodsInfo.carType) {
+      dictService.car_length = [];
+      return;
+    }
+    else {
+      $scope.carLengthList = [];
+    }
+
+    $timeout(function () {
+      $scope.carLengthList = dictService.getDictItem('car_type', $scope.goodsInfo.carType).car_length;
+      dictService.car_length = $scope.carLengthList;
+    });
   });
 
   $scope.showMsg = function (txt) {
@@ -400,7 +418,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     });
   }
 
-  $scope.postionGoods =  function(){
+  $scope.postionGoods = function () {
 
   }
 })
