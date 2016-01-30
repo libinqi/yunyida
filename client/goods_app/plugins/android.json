@@ -1,0 +1,55 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-actionsheet": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "cordova-plugin-wechat": {
+            "WECHATAPPID": "wx4a525790c75c494f",
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "com.qtong.cordova.bdlocation": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "com.synconset.imagepicker": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "com.verso.cordova.clipboard": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        }
+    },
+    "dependent_plugins": {}
+}

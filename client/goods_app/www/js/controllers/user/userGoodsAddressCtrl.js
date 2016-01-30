@@ -33,9 +33,11 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
     consignor: '',//发货人
     phoneNumber: '',//手机号码
     city: '',//所在城市
-    cityCode:'',//城市代码
+    cityCode: '',//城市代码
     street: '',//街道
     address: '',//详细地址
+    lng: '',//经度
+    lat: '',//纬度
     isDefault: false,//是否默认发货地址
     user: user.userId//所属用户
   };
@@ -61,10 +63,40 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
         city: '',//所在城市
         street: '',//街道
         address: '',//详细地址
+        lng: '',//经度
+        lat: '',//纬度
         isDefault: false,//是否默认发货地址
         user: user.userId//所属用户
       };
       $scope.isAdd = true;
+
+      window.LocationPlugin.getLocation(function (data) {
+        //data.longitude 经度
+        //data.latitude 纬度
+        //data.province 省份
+        //data.city 城市
+        //data.cityCode 城市编码
+        //data.district 区/县
+        //data.street 街道
+        //data.streetNumber 街道号码
+        //data.address 文字描述的地址信息
+        //data.hasRadius 是否有定位精度半径
+        //data.radius 定位精度半径
+        //data.type 定位方式
+        $timeout(function () {
+          var city = data.province.replace('省', '') + data.city.replace('市', '');
+          if (data.district) {
+            city += data.district;
+          }
+          if (data.street) {
+            $scope.goodsAddress.street = data.street;
+          }
+          $scope.goodsAddress.city = city;
+          $scope.goodsAddress.lng = data.longitude;
+          $scope.goodsAddress.lat = data.latitude;
+        });
+      }, function (err) {
+      });
     }
     $scope.goodsAddressModal.show();
   };
@@ -89,8 +121,7 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
     $ionicLoading.show({
       template: "正在保存发货地址..."
     });
-    if($scope.isAdd)
-    {
+    if ($scope.isAdd) {
       io.socket.post('/goodsAddress/add', $scope.goodsAddress, function serverResponded(body, JWR) {
         $ionicLoading.hide();
         if (JWR.statusCode !== 200) {
@@ -103,7 +134,7 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
         }
       });
     }
-    else{
+    else {
       io.socket.post('/goodsAddress/update', $scope.goodsAddress, function serverResponded(body, JWR) {
         $ionicLoading.hide();
         if (JWR.statusCode !== 200) {

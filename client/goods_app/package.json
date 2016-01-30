@@ -20,14 +20,9 @@
     "cordova-plugin-console",
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
-    "com.ionic.keyboard",
     "cordova-plugin-file",
     "cordova-plugin-file-transfer",
     "cordova-plugin-actionsheet",
-    {
-      "locator": "https://github.com/wymsee/cordova-imagePicker.git",
-      "id": "com.synconset.imagepicker"
-    },
     {
       "locator": "https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git",
       "id": "cordova-plugin-x-toast"
@@ -39,7 +34,8 @@
       },
       "locator": "cordova-plugin-wechat",
       "id": "cordova-plugin-wechat"
-    }
+    },
+    "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [
     "ios",

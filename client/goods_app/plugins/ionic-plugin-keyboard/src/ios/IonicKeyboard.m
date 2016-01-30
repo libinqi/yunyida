@@ -14,7 +14,7 @@
     __weak IonicKeyboard* weakSelf = self;
 
     //set defaults
-    self.hideKeyboardAccessoryBar = NO;
+    self.hideKeyboardAccessoryBar = YES;
     self.disableScroll = NO;
     //self.styleDark = NO;
     
@@ -68,14 +68,14 @@
 }
 
 - (void)setHideKeyboardAccessoryBar:(BOOL)hideKeyboardAccessoryBar {
-    if (hideKeyboardAccessoryBar == _hideKeyboardAccessoryBar) {
+    if (hideKeyboardAccessoryBar == _hideKeyboardAccessoryBar || ![self.webView isKindOfClass:[UIWebView class]]) {
         return;
     }
     if (hideKeyboardAccessoryBar) {
-        self.webView.hackishlyHidesInputAccessoryView = YES;
+        ((UIWebView*)self.webView).hackishlyHidesInputAccessoryView = YES;
     }
     else {
-        self.webView.hackishlyHidesInputAccessoryView = NO;
+        ((UIWebView*)self.webView).hackishlyHidesInputAccessoryView = NO;
     }
 
     _hideKeyboardAccessoryBar = hideKeyboardAccessoryBar;
@@ -124,8 +124,9 @@
       return;
     }
     id value = [command.arguments objectAtIndex:0];
-    
-    self.disableScroll = [value boolValue];
+    if (value != [NSNull null]) {
+      self.disableScroll = [value boolValue];
+    }
 }
 
 - (void) hideKeyboardAccessoryBar:(CDVInvokedUrlCommand*)command {
@@ -133,8 +134,9 @@
       return;
     }
     id value = [command.arguments objectAtIndex:0];
-    
-    self.hideKeyboardAccessoryBar = [value boolValue];
+    if (value != [NSNull null]) {
+      self.hideKeyboardAccessoryBar = [value boolValue];
+    }
 }
 
 - (void) close:(CDVInvokedUrlCommand*)command {

@@ -40,14 +40,16 @@ angular.module('starter.controllers').controller('AccountCtrl', function ($scope
         $scope.showMsg('请求失败,网络不给力！');
       }
       else {
-        $scope.userData.userId = body.userId;
-        $scope.userData.cardNumber = body.cardNumber;
-        $scope.userData.realName = body.realName;
-        $scope.userData.email = body.email;
-        $scope.userData.enterpriseName = body.enterpriseName;
-        $scope.userData.city = body.city;
-        $scope.userData.street = body.street;
-        $scope.userData.address = body.address;
+        $timeout(function(){
+          $scope.userData.userId = body.userId;
+          $scope.userData.cardNumber = body.cardNumber;
+          $scope.userData.realName = body.realName;
+          $scope.userData.email = body.email;
+          $scope.userData.enterpriseName = body.enterpriseName;
+          $scope.userData.city = body.city;
+          $scope.userData.street = body.street;
+          $scope.userData.address = body.address;
+        });
       }
     });
   }
