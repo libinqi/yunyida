@@ -26,6 +26,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     eStreet: '',//目的地街道
     eAddress: '',//目的地详细地址
     status: true,//状态
+    remark:'',//备注说明
     user: user.userId//所属用户
   };
   $scope.goodsInfo.goodsAttribute = dictService.goods_attr[0].name;
@@ -156,6 +157,11 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   $scope.showGoodsInfo = function () {
     $scope.goodsInfoModal.show();
   };
+  //关闭货物信息页面
+  $scope.closeGoodsInfo = function () {
+    $scope.goodsInfoModal.hide();
+  };
+
   //隐藏货物信息页面
   $scope.hideGoodsInfo = function () {
     if (!$scope.goodsInfo.goodsName) {

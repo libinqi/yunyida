@@ -31,6 +31,7 @@ module.exports = {
         eStreet: {type: 'string'},//目的地街道
         eAddress: {type: 'string'},//目的地详细地址
         status: {type: 'boolean', defaultsTo: true},//状态
+        remark: {type: 'string'},//备注说明
         user: {
             model: 'user'//所属用户
         },
