@@ -17,6 +17,8 @@ module.exports = {
         cityCode: {type: 'string'},//所在城市代码
         street: {type: 'string'},//街道
         address: {type: 'string'},//详细地址
+        lng: {type: 'string'},//经度
+        lat: {type: 'string'},//纬度
         isDefault: {type: 'boolean', defaultsTo: false},//是否默认发货地址
         user: {
             model: 'user'//所属用户
