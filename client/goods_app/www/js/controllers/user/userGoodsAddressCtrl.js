@@ -91,6 +91,9 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
           if (data.street) {
             $scope.goodsAddress.street = data.street;
           }
+          if (data.streetNumber) {
+            $scope.goodsAddress.address = data.streetNumber;
+          }
           $scope.goodsAddress.city = city;
           $scope.goodsAddress.lng = data.longitude;
           $scope.goodsAddress.lat = data.latitude;
