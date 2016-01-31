@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('UserGoodsAddressCtrl', function ($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $ionicModal, $state, UserInfo) {
+angular.module('starter.controllers').controller('UserGoodsAddressCtrl', function ($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $ionicModal, $state, UserInfo,CityPickerService ,dictService) {
   var user = UserInfo.data;
   $scope.pulltextchange = '下拉刷新';
 
@@ -44,6 +44,26 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
 
   $scope.isAdd = true;
 
+  $scope.$watch('goodsAddress.cityCode', function () {
+    $scope.goodsAddress.street = '';
+    if (!$scope.goodsAddress.cityCode) {
+      dictService.street_data = [];
+      return;
+    }
+    else {
+      $scope.streetList = [];
+    }
+
+    $timeout(function () {
+      $scope.streetList = CityPickerService.getStreetData($scope.goodsAddress.cityCode);
+      dictService.street_data = [];
+
+      for (var i = 0; i < $scope.streetList.length; i++) {
+        dictService.street_data.push({id: $scope.streetList[i].id, name: $scope.streetList[i].areaName});
+      }
+    });
+  });
+
   //触发发货地址弹出层事件
   $ionicModal.fromTemplateUrl('templates/user/addGoodsAddress.html ', {
     scope: $scope
@@ -61,6 +81,7 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
         consignor: '',//发货人
         phoneNumber: '',//手机号码
         city: '',//所在城市
+        cityCode: '',//城市代码
         street: '',//街道
         address: '',//详细地址
         lng: '',//经度

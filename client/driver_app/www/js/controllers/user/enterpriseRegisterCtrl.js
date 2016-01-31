@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('UserRegisterCtrl', function ($scope, $http, $timeout, $ionicHistory, $ionicLoading, $ionicPopover, $state, UserInfo, loginService, geolocationService) {
+angular.module('starter.controllers').controller('EnterpriseRegisterCtrl', function ($scope, $http, $timeout, $ionicHistory, $ionicLoading, $ionicPopover, $state, UserInfo, loginService, CityPickerService, dictService, geolocationService) {
     $scope.userData = {
       phoneNumber: '', //手机
       userName: '', //用户名
@@ -13,9 +13,37 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
       address: '',//详细地址
       cityCode: '',//城市或者地址代码
       cardNumber: '',//证件号码
+      businessLicenseNumber: '',//营业执照编号
+      businessType: '',//业务类型
       lng: '',//经度
       lat: ''//纬度
     };
+
+    $scope.businessTypeList = [
+      {text: "零担", checked: true},
+      {text: "城市配送", checked: false},
+      {text: "整车", checked: false}
+    ];
+
+    $scope.$watch('userData.cityCode', function () {
+      $scope.userData.street = '';
+      if (!$scope.userData.cityCode) {
+        dictService.street_data = [];
+        return;
+      }
+      else {
+        $scope.streetList = [];
+      }
+
+      $timeout(function () {
+        $scope.streetList = CityPickerService.getStreetData($scope.userData.cityCode);
+        dictService.street_data = [];
+
+        for (var i = 0; i < $scope.streetList.length; i++) {
+          dictService.street_data.push({id: $scope.streetList[i].id, name: $scope.streetList[i].areaName});
+        }
+      });
+    });
 
     //geolocationService.getCurrentPosition(function (result) {
     //  $scope.userData.city = result.addressComponents.province.replace(/省/g, "")+result.addressComponents.city.replace(/市/g, "")+result.addressComponents.district;
@@ -25,36 +53,36 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
     //  $scope.userData.lat = result.point.lat;
     //});
 
-  //window.LocationPlugin.getLocation(function (data) {
-  //  //data.longitude 经度
-  //  //data.latitude 纬度
-  //  //data.province 省份
-  //  //data.city 城市
-  //  //data.cityCode 城市编码
-  //  //data.district 区/县
-  //  //data.street 街道
-  //  //data.streetNumber 街道号码
-  //  //data.address 文字描述的地址信息
-  //  //data.hasRadius 是否有定位精度半径
-  //  //data.radius 定位精度半径
-  //  //data.type 定位方式
-  //  $timeout(function () {
-  //    var city = data.province.replace('省', '') + data.city.replace('市', '');
-  //    if (data.district) {
-  //      city += data.district;
-  //    }
-  //    if (data.street) {
-  //      $scope.userData.street = data.street;
-  //    }
-  //    if (data.streetNumber) {
-  //      $scope.userData.address = data.streetNumber;
-  //    }
-  //    $scope.userData.city = city;
-  //    $scope.userData.lng = data.longitude;
-  //    $scope.userData.lat = data.latitude;
-  //  });
-  //}, function (err) {
-  //});
+    //window.LocationPlugin.getLocation(function (data) {
+    //  //data.longitude 经度
+    //  //data.latitude 纬度
+    //  //data.province 省份
+    //  //data.city 城市
+    //  //data.cityCode 城市编码
+    //  //data.district 区/县
+    //  //data.street 街道
+    //  //data.streetNumber 街道号码
+    //  //data.address 文字描述的地址信息
+    //  //data.hasRadius 是否有定位精度半径
+    //  //data.radius 定位精度半径
+    //  //data.type 定位方式
+    //  $timeout(function () {
+    //    var city = data.province.replace('省', '') + data.city.replace('市', '');
+    //    if (data.district) {
+    //      city += data.district;
+    //    }
+    //    if (data.street) {
+    //      $scope.userData.street = data.street;
+    //    }
+    //    if (data.streetNumber) {
+    //      $scope.userData.address = data.streetNumber;
+    //    }
+    //    $scope.userData.city = city;
+    //    $scope.userData.lng = data.longitude;
+    //    $scope.userData.lat = data.latitude;
+    //  });
+    //}, function (err) {
+    //});
 
     $scope.formData = {
       validCode: '',
@@ -202,15 +230,46 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
         $scope.showMsg('身份证号码不能为空');
         return false;
       }
+      if (!$scope.userData.enterpriseName) {
+        $scope.showMsg('企业名称不能为空');
+        return false;
+      }
       if (!$scope.userData.city) {
         $scope.showMsg('所在城市不能为空');
         return false;
       }
+      if (!$scope.userData.street) {
+        $scope.showMsg('街道不能为空');
+        return false;
+      }
+      if (!$scope.userData.businessLicenseNumber) {
+        $scope.showMsg('营业执照编号不能为空');
+        return false;
+      }
+      var businessType = '';
+      for (var i = 0; i < $scope.businessTypeList.length; i++) {
+        if ($scope.businessTypeList[i].checked) {
+          if(businessType=='')
+          {
+            businessType += $scope.businessTypeList[i].text;
+          }
+          else{
+            businessType += ','+$scope.businessTypeList[i].text;
+          }
+        }
+      }
+      if (businessType=='') {
+        $scope.showMsg('业务类型必选一项');
+        return false;
+      }
+
+      $scope.userData.businessType=businessType;
+      $scope.userData.userType = '物流企业';
+
       $ionicLoading.show({
         template: "正在注册..."
       });
-      $scope.userData.userType='货主';
-      io.socket.post('/user/register', $scope.userData, function serverResponded(body, JWR) {
+      io.socket.post('/enterprise/register', $scope.userData, function serverResponded(body, JWR) {
         $ionicLoading.hide();
         if (JWR.statusCode !== 200) {
           $scope.showMsg('请求失败,网络不给力！');

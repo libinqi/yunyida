@@ -171,11 +171,17 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         }
       })
 
+      .state('registerSelect', {
+        url: '/registerSelect',
+        templateUrl: "templates/user/registerSelect.html",
+        controller: 'RegisterCtrl'
+      })
+
       .state('register', {
         url: '/register',
         abstract: true,
         templateUrl: "templates/user/register.html",
-        controller: "UserRegisterCtrl"
+        controller: 'RegisterCtrl'
       })
 
       .state('register.register1', {
@@ -184,7 +190,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         views: {
           'register': {
             templateUrl: 'templates/user/register1.html',
-            controller: 'UserRegisterCtrl'
+            controller: 'EnterpriseRegisterCtrl'
           }
         }
       })
@@ -195,10 +201,33 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         views: {
           'register': {
             templateUrl: 'templates/user/register2.html',
-            controller: 'UserRegisterCtrl'
+            controller: 'EnterpriseRegisterCtrl'
           }
         }
       })
+
+      .state('register.register3', {
+        url: '/register3',
+        cache: 'false',
+        views: {
+          'register': {
+            templateUrl: 'templates/user/register3.html',
+            controller: 'DriverRegisterCtrl'
+          }
+        }
+      })
+
+      .state('register.register4', {
+        url: '/register4',
+        cache: 'false',
+        views: {
+          'register': {
+            templateUrl: 'templates/user/register4.html',
+            controller: 'DriverRegisterCtrl'
+          }
+        }
+      })
+
 
       .state('backstep', {
         url: "/step",

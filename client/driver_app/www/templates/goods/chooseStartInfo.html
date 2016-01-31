@@ -1,4 +1,4 @@
-<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+<ion-header-bar class="bar-positive" style="border:0px !important;background-color:#387ef5;color:#fff !important;">
   <a class="button icon-left ion-ios-arrow-left button-clear button-light"
      style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="hideStartInfo()"></a>
   <div class="title title-center header-item" style="color:#fff !important;">我的发货地址</div>
@@ -18,11 +18,11 @@
     </ion-item>
   </ion-list>
   <ion-infinite-scroll ng-if="load_over" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
-  <div ng-if="items.length==0" class="bar bar-stable">
+  <div ng-if="items.length==0" class="bar bar-positive">
     <div class="no-content">没有发货地址,马上添加</div>
   </div>
 </ion-content>
-<div class="bar bar-footer bar-assertive">
+<div class="bar bar-footer bar-positive">
   <div class="title" ng-click="showGoodsAddress()">新增发货地址</div>
 </div>
 </ion-view>

@@ -22,7 +22,11 @@
       </label>
       <label class="item item-input">
         <span class="input-label">街道</span>
-        <input type="text" ng-model="goodsAddress.street">
+        <input ng-if="streetList.length<=0" type="text" ng-model="goodsAddress.street">
+        <ionic-dict-picker ng-if="streetList.length>0" backdrop=true backdrop-click-to-close=false
+                           css-class="text-align-l"
+                           dictmodel="goodsAddress.street" dictdata="street_data" okText="确定"
+                           style="width:55%"></ionic-dict-picker>
       </label>
       <label class="item item-input">
         <span class="input-label">详细地址</span>

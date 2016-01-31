@@ -7,6 +7,15 @@
         "files": {}
     },
     "installed_plugins": {
+        "com.qtong.cordova.bdlocation": {
+            "PACKAGE_NAME": "com.yunyida56.driverapp"
+        },
+        "com.synconset.imagepicker": {
+            "PACKAGE_NAME": "com.yunyida56.driverapp"
+        },
+        "com.verso.cordova.clipboard": {
+            "PACKAGE_NAME": "com.yunyida56.driverapp"
+        },
         "cordova-plugin-actionsheet": {
             "PACKAGE_NAME": "com.yunyida56.driverapp"
         },
@@ -38,16 +47,7 @@
         "cordova-plugin-x-toast": {
             "PACKAGE_NAME": "com.yunyida56.driverapp"
         },
-        "com.qtong.cordova.bdlocation": {
-            "PACKAGE_NAME": "com.yunyida56.driverapp"
-        },
         "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.yunyida56.driverapp"
-        },
-        "com.synconset.imagepicker": {
-            "PACKAGE_NAME": "com.yunyida56.driverapp"
-        },
-        "com.verso.cordova.clipboard": {
             "PACKAGE_NAME": "com.yunyida56.driverapp"
         }
     },

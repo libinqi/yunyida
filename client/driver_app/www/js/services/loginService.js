@@ -44,8 +44,8 @@ angular.module('starter.services').factory('loginService', function($http) {
         password: password
       }, function serverResponded(body, JWR) {
         if (JWR.statusCode == 200) {
-          if (body.userType !== '货主') {
-            cb('您不是货主用户，不能登录！');
+          if (body.userType == '货主') {
+            cb('您是货主用户，不能登录！');
           }
           else if (!body.status) {
             cb('您的账号异常,不允许登录！');

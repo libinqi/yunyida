@@ -1,18 +1,18 @@
-<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
-  <div class="title title-center header-item" style="color:#fff !important;">云驿达-货主</div>
+<ion-header-bar class="bar-positive" style="border:0px !important;background-color:#387ef5;color:#fff !important;">
+  <div class="title title-center header-item" style="color:#fff !important;">云驿达-{{user.userType}}</div>
   <a class="button button-clear" href="#/message"><img src="img/icon-zn-b.png" alt="最新消息"
                                                        style="width:20px;position:relative;top:2px;"></a>
 </ion-header-bar>
-<ion-view view-title="云驿达-货主">
+<ion-view>
   <ion-content padding="true" class="has-header">
     <div class="button-tabs">
-      <button class="button button-assertive" ng-class="{'button-active':goodsInfo.goodsType=='零担'}"
+      <button class="button button-positive" ng-class="{'button-active':goodsInfo.goodsType=='零担'}"
               ng-click="changeGoodsType('零担')">零担
       </button>
-      <button class="button button-assertive" ng-class="{'button-active':goodsInfo.goodsType=='城市配送'}"
+      <button class="button button-positive" ng-class="{'button-active':goodsInfo.goodsType=='城市配送'}"
               ng-click="changeGoodsType('城市配送')">城市配送
       </button>
-      <button class="button button-assertive" ng-class="{'button-active':goodsInfo.goodsType=='整车'}"
+      <button class="button button-positive" ng-class="{'button-active':goodsInfo.goodsType=='整车'}"
               ng-click="changeGoodsType('整车')">整车
       </button>
     </div>
@@ -55,7 +55,7 @@
     <div class="button-bar">
       <a class="button" href="#/tab/index" style="margin-right:10px;margin-left:10px;"
          ng-show="goodsInfo.goodsType=='零担'" ng-click="postionGoods()">指定发货</a>
-      <a class="button button-assertive" ng-click="addGoods()" style="margin-right:10px;margin-left:10px;">随机发货</a>
+      <a class="button button-positive" ng-click="addGoods()" style="margin-right:10px;margin-left:10px;">随机发货</a>
     </div>
   </ion-content>
 </ion-view>

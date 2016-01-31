@@ -84,6 +84,14 @@ angular.module('starter.services').factory('dictService', function() {
         {"id": "10106", "name": "半年", "day": 182},
         {"id": "10107", "name": "1年", "day": 365}
     ],
+
+//业务类型
+    business_type: [
+      {"id": "1", "name": "零担"},
+      {"id": "2", "name": "城市配送"},
+      {"id": "3", "name": "整车"}
+    ],
+
     getDictItem:function(dict_name,item_name){
         var dict=data[dict_name];
         for (var i =0;i<=dict.length;i++) {

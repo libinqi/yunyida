@@ -1,6 +1,6 @@
 <ion-side-menus>
   <ion-side-menu-content>
-    <ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+    <ion-header-bar class="bar-positive" style="border:0px !important;background-color:#387ef5;color:#fff !important;">
       <button class="button button-icon button-clear ion-navicon" style="color: #ffffff;" ng-click="toggleLeft()">
       </button>
       <div class="title title-center header-item" style="color:#fff !important;">订单</div>
@@ -18,8 +18,8 @@
                src="img/arrow-right.png" ng-click="orderDetail(item)">
           <p style="height: 28px;padding:5px 12px 2px 0px;" ng-click="orderDetail(item)">
             <span style="margin-right: 45px;">{{item.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</span>
-            <span style="color: #ef6600;">{{item.goods.goodsType}}-{{item.goods.publishType}}</span>
-            <span style="color: #ef6600;float: right;font-weight: bold;">{{item.goodsOrderStatus}}</span>
+            <span style="color: #387ef5;">{{item.goods.goodsType}}-{{item.goods.publishType}}</span>
+            <span style="color: #387ef5;float: right;font-weight: bold;">{{item.goodsOrderStatus}}</span>
           </p>
           <p style="height: 32px;color: #222222;font-size: 16px;margin-left: -10px;"
             ng-click="orderDetail(item)">
@@ -33,7 +33,7 @@
           </p>
           <!--<p style="height: 36px;padding:2px 5px 2px 12px;color: #222222;border-bottom: solid 1px #c0c0c0;">-->
           <!--<span style="padding-top: 5px;display: inline-block;">{{item.goods.goodsType}} /</span>-->
-          <!--<span style="color: #ef6600;padding-top: 5px;display: inline-block;">{{item.goods.goodsAttribute}}</span>-->
+          <!--<span style="color: #387ef5;padding-top: 5px;display: inline-block;">{{item.goods.goodsAttribute}}</span>-->
           <!--<button class="button button-small button-order-active"-->
           <!--ng-if="item.goodsOrderStatus=='未接单'||item.goodsOrderStatus=='接单'||item.goodsOrderStatus=='取消接单'||item.goodsOrderStatus=='已取消'"-->
           <!--ng-click="refreshOrder(item.goodsOrderId)">重新发布-->
@@ -55,14 +55,14 @@
         </ion-item>
       </ion-list>
       <ion-infinite-scroll ng-if="load_over" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
-      <div ng-if="orderList.length==0" class="bar bar-stable">
+      <div ng-if="orderList.length==0" class="bar bar-positive">
         <div class="no-content">目前没有订单</div>
       </div>
     </ion-content>
 
   </ion-side-menu-content>
   <ion-side-menu side="left">
-    <ion-header-bar class="bar bar-header bar-assertive">
+    <ion-header-bar class="bar bar-header bar-positive">
       <h1 class="title">订单状态</h1>
     </ion-header-bar>
     <ion-content has-header="true">

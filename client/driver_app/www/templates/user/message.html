@@ -1,4 +1,4 @@
-<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+<ion-header-bar class="bar-positive" style="border:0px !important;background-color:#387ef5;color:#fff !important;">
   <a class="button icon-left ion-ios-arrow-left button-clear button-light" ng-click="backGo()"></a>
   <div class="title title-center header-item" style="color:#fff !important;">我的消息</div>
   <a class="button button-clear button-light icon ion-ios-trash-outline" ng-if="items.length>0"
@@ -19,12 +19,12 @@
         <p>{{item.createdate}}</p>
         <p style="color:#000;font-weight:bold">{{item.title}}</p>
         <p style="color:#000;white-space: pre">{{item.msgtext}}</p>
-        <ion-option-button class="button-assertive icon ion-close-round"
+        <ion-option-button class="button-positive icon ion-close-round"
                            ng-click="deleteItem(item,item.id)"></ion-option-button>
         <ion-delete-button class="ion-minus-circled" ng-click="deleteItem(item,item.id)"></ion-delete-button>
       </ion-item>
     </ion-list>
-    <div ng-if="items.length==0" class="bar bar-stable">
+    <div ng-if="items.length==0" class="bar bar-positive">
       <div class="no-content">暂无通知消息</div>
     </div>
     <ion-infinite-scroll on-infinite="loadMore()" ng-if="load_over"></ion-infinite-scroll>
@@ -35,12 +35,12 @@
         <p>{{item.createtime}}</p>
         <p style="color:#000;font-weight:bold">{{item.title}}</p>
         <p style="color:#000;white-space: pre">{{item.content}}</p>
-        <ion-option-button class="button-assertive icon ion-close-round"
+        <ion-option-button class="button-positive icon ion-close-round"
                            ng-click="deleteItem2(item,item.mid)"></ion-option-button>
         <ion-delete-button class="ion-minus-circled" ng-click="deleteItem2(item,item.mid)"></ion-delete-button>
       </ion-item>
     </ion-list>
-    <div ng-if="items.length==0" class="bar bar-stable">
+    <div ng-if="items.length==0" class="bar bar-positive">
       <div class="no-content">暂无系统公告</div>
     </div>
     <ion-infinite-scroll on-infinite="loadMore2()" ng-if="load_over"></ion-infinite-scroll>

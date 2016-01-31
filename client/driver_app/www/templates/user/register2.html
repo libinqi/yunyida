@@ -2,7 +2,7 @@
   <ul class="tabs tabs-light">
     <li class="tab-item text-fr padding-right">1.填写基本信息</li>
     <li><a class="icon-left ion-ios-arrow-right button-clear button-dark"></a></li>
-    <li class="tab-item assertive">2.完善用户资料</li>
+    <li class="tab-item positive">2.完善用户资料</li>
   </ul>
 </ion-header-bar>
 <ion-content>
@@ -16,6 +16,10 @@
         <span class="input-label">身份证号码</span>
         <input type="text" ng-model="userData.cardNumber">
       </label>
+      <label class="item item-input" style="border-bottom:1px solid #ccc">
+        <span class="input-label">企业名称</span>
+        <input type="text" ng-model="userData.enterpriseName">
+      </label>
       <label class="item item-input">
         <span class="input-label" style="width:35%">所在城市</span>
         <ionic-city-picker placeholder="出发城市" backdrop=true backdrop-click-to-close=false css-class="text-align-l"
@@ -24,18 +28,31 @@
       </label>
       <label class="item item-input">
         <span class="input-label">街道</span>
-        <input type="text" ng-model="userData.street">
+        <input ng-if="streetList.length<=0" type="text" ng-model="userData.street">
+        <ionic-dict-picker ng-if="streetList.length>0" backdrop=true backdrop-click-to-close=false
+                           css-class="text-align-l"
+                           dictmodel="userData.street" dictdata="street_data" okText="确定"
+                           style="width:55%"></ionic-dict-picker>
       </label>
       <label class="item item-input">
         <span class="input-label">详细地址</span>
         <input type="text" ng-model="userData.address">
       </label>
       <label class="item item-input" style="border-bottom:1px solid #ccc">
-        <span class="input-label">企业名称</span>
-        <input type="text" ng-model="userData.enterpriseName">
+        <span class="input-label">营业执照编号</span>
+        <input type="text" ng-model="userData.businessLicenseNumber">
+      </label>
+      <label class="item item-input" style="width:100%">
+        <div class="input-label" style="width:auto">业务类型</div>
+        <ion-checkbox ng-repeat="item in businessTypeList"
+                      ng-model="item.checked"
+                      ng-checked="item.checked"
+                      style="border: 0px !important;font-size: 14px;padding: 16px 0px 16px 40px !important;">
+          {{ item.text }}
+        </ion-checkbox>
       </label>
       <div class="padding">
-        <button class="button button-block button-assertive" type="submit">立即注册</button>
+        <button class="button button-block button-positive" type="submit">立即注册</button>
       </div>
     </div>
   </form>

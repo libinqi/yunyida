@@ -89,4 +89,26 @@ module.exports.routes = {
     'post /order/refreshOrder': 'GoodsOrderController.refreshOrder',
     'post /order/deleteOrder': 'GoodsOrderController.deleteOrder',
     'post /order/evaluateOrder': 'GoodsOrderController.evaluateOrder',
+
+    /***************************************************************************
+     *                                                                          *
+     * 物流企业相关API...                                                            *
+     *                                                                          *
+     ***************************************************************************/
+    'post /enterprise/register': 'EnterpriseController.register',
+
+    /***************************************************************************
+     *                                                                          *
+     * 司机相关API...                                                            *
+     *                                                                          *
+     ***************************************************************************/
+    'post /driver/register': 'DriverController.register',
+
+    /***************************************************************************
+     *                                                                          *
+     * 车辆相关API...                                                            *
+     *                                                                          *
+     ***************************************************************************/
+    'post /car/upload': 'CarController.upload',
+    '/car/avatar/:id': 'CarController.avatar',
 };

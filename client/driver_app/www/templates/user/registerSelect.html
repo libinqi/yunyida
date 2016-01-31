@@ -1,0 +1,27 @@
+<ion-header-bar class="bar-positive" style="border:0px !important;color:#fff !important;">
+  <a class="button icon-left ion-ios-arrow-left button-clear button-light" ng-click="backGo()"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">账号注册</div>
+</ion-header-bar>
+<ion-view view-title="账号注册">
+  <ion-content padding="true" class="has-header">
+    <div class="row">
+      <div class="col">
+        <div class="card" style="text-align: center" ng-click="selectEnterprise()">
+          <div class="item item-text-wrap">
+            <img ng-src="{{enterpriseImage}}" /><br/>
+            我是企业
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="text-align: center" ng-click="selectDriver()">
+          <div class="item item-text-wrap">
+            <img  ng-src="{{driverImage}}"/><br/>
+            我是司机
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="{{registerUrl}}" class="button button-positive button-block ">开始注册</a>
+  </ion-content>
+</ion-view>

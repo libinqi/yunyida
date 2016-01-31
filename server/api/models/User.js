@@ -12,7 +12,7 @@ module.exports = {
     attributes: {
         userId: {type: 'integer', primaryKey: true, autoIncrement: true},//用户Id
         userName: {type: 'string', unique: true},//用户名
-        realName: {type: 'string', unique: true},//真实姓名
+        realName: {type: 'string'},//真实姓名
         userType: {type: 'string', required: true, enum: ['货主', '物流企业', '司机']},//用户类型
         password: {type: 'string', required: true},//密码
         phoneNumber: {type: 'string', unique: true, required: true},//手机号码

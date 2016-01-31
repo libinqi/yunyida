@@ -1,4 +1,4 @@
-<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+<ion-header-bar class="bar-positive" style="border:0px !important;background-color:#387ef5;color:#fff !important;">
   <a class="button icon-left ion-ios-arrow-left button-clear button-light"
   style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="hideGoodsAddress()"></a>
   <div class="title title-center header-item" style="color:#fff !important;">{{isAdd?'新增发货地址':'修改发货地址'}}</div>
@@ -22,7 +22,11 @@
       </label>
       <label class="item item-input">
         <span class="input-label">街道</span>
-        <input type="text" ng-model="goodsAddress.street">
+        <input ng-if="streetList.length<=0" type="text" ng-model="goodsAddress.street">
+        <ionic-dict-picker ng-if="streetList.length>0" backdrop=true backdrop-click-to-close=false
+                           css-class="text-align-l"
+                           dictmodel="goodsAddress.street" dictdata="street_data" okText="确定"
+                           style="width:55%"></ionic-dict-picker>
       </label>
       <label class="item item-input">
         <span class="input-label">详细地址</span>
@@ -30,7 +34,7 @@
       </label>
     </div>
     <div class="button-bar">
-      <a class="button button-assertive" ng-click="saveGoodsAddress()" style="margin-right:10px;margin-left:10px;">保存</a>
+      <a class="button button-positive" ng-click="saveGoodsAddress()" style="margin-right:10px;margin-left:10px;">保存</a>
     </div>
   </ion-content>
 </ion-view>

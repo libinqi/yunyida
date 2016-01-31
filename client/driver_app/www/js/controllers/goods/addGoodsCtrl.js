@@ -4,6 +4,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   }
 
   var user = UserInfo.data;
+  $scope.user=user;
   // var $scope = this;
   $scope.goodsInfo = {
     goodsType: '零担',//货物类型:零担, 整车, 城市配送
