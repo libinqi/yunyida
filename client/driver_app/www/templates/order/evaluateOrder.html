@@ -1,0 +1,24 @@
+<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+  <a class="button icon-left ion-ios-arrow-left button-clear button-light"
+     style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="closeEvaluate()"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">交易评价</div>
+  <a class="button button-clear" style="width:40px;height:25px"></a>
+</ion-header-bar>
+<ion-view view-title="交易评价">
+  <ion-content class="padding">
+    <div style="width:100%;margin:10px auto;text-ailgn:center;">
+      <label class="item item-input" style="height: 50px;">
+              <label >满意度：</label>
+              <label title="{{msgPeople}}" class="item-input"  ng-click="evaluatePeopleClick(1)" ng-mouseenter="peopleMouseEnter(1)" ng-mouseleave="peopleMouseLeave(0)" ng-class="evaluatePeopleClass(1)"></label>
+              <label title="{{msgPeople}}"  ng-click="evaluatePeopleClick(2)" ng-mouseenter="peopleMouseEnter(2)" ng-mouseleave="peopleMouseLeave(0)" ng-class="evaluatePeopleClass(2)"></label>
+              <label title="{{msgPeople}}"  ng-click="evaluatePeopleClick(3)" ng-mouseenter="peopleMouseEnter(3)" ng-mouseleave="peopleMouseLeave(0)" ng-class="evaluatePeopleClass(3)"></label>
+              <label title="{{msgPeople}}"  ng-click="evaluatePeopleClick(4)" ng-mouseenter="peopleMouseEnter(4)" ng-mouseleave="peopleMouseLeave(0)" ng-class="evaluatePeopleClass(4)"></label>
+              <label title="{{msgPeople}}"  ng-click="evaluatePeopleClick(5)" ng-mouseenter="peopleMouseEnter(5)" ng-mouseleave="peopleMouseLeave(0)" ng-class="evaluatePeopleClass(5)"></label>
+      </label>
+      <textarea placeholder="评价内容" rows="3" style="width: 100%;margin:20px auto;padding:10px;border: 1px solid #ddd;" ng-model="evaluateData.evaluationContent"></textarea>
+      <div class="text-center">
+        <button type="button" class="button button-assertive" ng-click="evaluateSubmit()" style="width:75%">提交</button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
