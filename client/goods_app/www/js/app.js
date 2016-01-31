@@ -23,7 +23,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         StatusBar.styleLightContent();
       }
       // 所在地定位
-      geolocationService.getCurrentPosition();
+      //geolocationService.getCurrentPosition();
       $rootScope.dictService = dictService;
     });
 
