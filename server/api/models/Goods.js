@@ -30,6 +30,7 @@ module.exports = {
         eCityCode: {type: 'string'},//目的地城市代码
         eStreet: {type: 'string'},//目的地街道
         eAddress: {type: 'string'},//目的地详细地址
+        publishType: {type: 'string', required: true, enum: ['随机发货', '指定发货'],defaultsTo: '随机发货'},//发布方式
         status: {type: 'boolean', defaultsTo: true},//状态
         remark: {type: 'string'},//备注说明
         user: {

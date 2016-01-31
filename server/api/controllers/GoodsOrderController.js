@@ -10,7 +10,25 @@ module.exports = {
         var userId = req.body.userId;
         var page = req.body.page;
         var rows = req.body.rows;
-        GoodsOrder.find({shipper: userId, status: true})
+        var orderStatus = req.body.orderStatus;
+
+        var option = {
+            shipper: userId,
+            status: true
+        };
+
+        if(orderStatus)
+        {
+            if(orderStatus=='已删除')
+            {
+                option.status=false;
+            }
+            else {
+                option.goodsOrderStatus=orderStatus;
+            }
+        }
+
+        GoodsOrder.find(option)
             .sort('updatedAt DESC')
             .paginate({page: page, limit: rows})
             .populate('goods').exec(function (err, data) {

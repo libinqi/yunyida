@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('AllOrderCtrl', function ($scope, $http, $timeout, $ionicModal, $ionicLoading, $ionicHistory, $ionicPopover, $state, $stateParams, UserInfo) {
+angular.module('starter.controllers').controller('AllOrderCtrl', function ($scope, $http, $timeout, $ionicModal, $ionicLoading, $ionicHistory, $ionicPopover,$ionicPopup,$ionicSideMenuDelegate, $state, $stateParams, UserInfo) {
   $scope.backGo = function () {
     $ionicHistory.goBack();
   };
@@ -20,10 +20,19 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   $scope.load_over = true;
   $scope.pulltextchange = '下拉刷新';
 
+  $scope.flag = {
+    showDelete: false
+  };
+
   $scope.query = {
     page: 1,
     rows: 8,
+    orderStatus:'',
     userId: UserInfo.data.userId
+  };
+
+  $scope.toggleLeft = function() {
+    $ionicSideMenuDelegate.toggleLeft();
   };
 
   //下拉刷新
@@ -66,6 +75,12 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     }, 800);
   };
 
+  $scope.orderFilter=function(orderStatus){
+    $scope.query.orderStatus=orderStatus;
+    $scope.doRefresh();
+    $scope.toggleLeft();
+  }
+
   //查看订单详情
   $scope.orderDetail = function (item) {
     $scope.orderItem = item;
@@ -85,62 +100,100 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
 
   //取消订单
   $scope.cancelOrder = function (orderId) {
-    io.socket.post('/order/cancelOrder', {orderId: orderId}, function serverResponded(body, JWR) {
-      if (JWR.statusCode !== 200) {
-        $scope.showMsg('请求失败,网络不给力！');
-      }
-      else {
-        for (var i = 0; i < $scope.orderList.length; i++) {
-          if ($scope.orderList[i].goodsOrderId == body.goodsOrderId) {
-            $scope.orderList[i] = body;
-            if ($scope.orderItem) {
-              $scope.orderItem = body;
+    var confirmPopup = $ionicPopup.confirm({
+      title: '取消订单',
+      template: '您确定要取消订单吗?',
+      buttons: [
+        { text: '暂不取消',onTap: function(e) {return false;}},
+        { text: '确定',type: 'button-assertive',onTap: function(e) {return true;}}
+      ]
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        io.socket.post('/order/cancelOrder', {orderId: orderId}, function serverResponded(body, JWR) {
+          if (JWR.statusCode !== 200) {
+            $scope.showMsg('请求失败,网络不给力！');
+          }
+          else {
+            for (var i = 0; i < $scope.orderList.length; i++) {
+              if ($scope.orderList[i].goodsOrderId == body.goodsOrderId) {
+                $scope.orderList[i] = body;
+                if ($scope.orderItem) {
+                  $scope.orderItem = body;
+                }
+              }
             }
           }
-        }
-      }
-    });
+        });
+      }});
   }
 
   //重新发布订单
   $scope.refreshOrder = function (orderId) {
-    io.socket.post('/order/refreshOrder', {orderId: orderId}, function serverResponded(body, JWR) {
-      if (JWR.statusCode !== 200) {
-        $scope.showMsg('请求失败,网络不给力！');
-      }
-      else {
-        for (var i = 0; i < $scope.orderList.length; i++) {
-          if ($scope.orderList[i].goodsOrderId == body.goodsOrderId) {
-            $scope.orderList[i] = body;
-            if ($scope.orderItem) {
-              $scope.orderItem = body;
+    var confirmPopup = $ionicPopup.confirm({
+      title: '重新发布订单',
+      template: '您确定要重新发布订单吗?',
+      buttons: [
+        { text: '暂不发布',onTap: function(e) {return false;}},
+        { text: '确定',type: 'button-assertive',onTap: function(e) {return true;}}
+      ]
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        io.socket.post('/order/refreshOrder', {orderId: orderId}, function serverResponded(body, JWR) {
+          if (JWR.statusCode !== 200) {
+            $scope.showMsg('请求失败,网络不给力！');
+          }
+          else {
+            for (var i = 0; i < $scope.orderList.length; i++) {
+              if ($scope.orderList[i].goodsOrderId == body.goodsOrderId) {
+                $scope.orderList[i] = body;
+                if ($scope.orderItem) {
+                  $scope.orderItem = body;
+                }
+              }
             }
           }
-        }
+        });
       }
     });
   }
 
   //删除订单
   $scope.deleteOrder = function (orderId) {
-    io.socket.post('/order/deleteOrder', {orderId: orderId}, function serverResponded(body, JWR) {
-      if (JWR.statusCode !== 200) {
-        $scope.showMsg('请求失败,网络不给力！');
-      }
-      else {
-        for (var i = 0; i < $scope.orderList.length; i++) {
-          if ($scope.orderList[i].goodsOrderId == body.goodsOrderId) {
-            if (body.status) {
-              $scope.orderList[i] = body;
-            }
-            else {
-              $scope.orderList.splice(i, 1);
-              if ($scope.orderItem) {
-                $scope.closeDetail();
+    var confirmPopup = $ionicPopup.confirm({
+      title: '删除订单',
+      template: '您确定要删除订单吗?',
+      buttons: [
+        { text: '取消',onTap: function(e) {return false;}},
+        { text: '确定',type: 'button-assertive',onTap: function(e) {return true;}}
+        ]
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        io.socket.post('/order/deleteOrder', {orderId: orderId}, function serverResponded(body, JWR) {
+          if (JWR.statusCode !== 200) {
+            $scope.showMsg('请求失败,网络不给力！');
+          }
+          else {
+            for (var i = 0; i < $scope.orderList.length; i++) {
+              if ($scope.orderList[i].goodsOrderId == body.goodsOrderId) {
+                if (body.status) {
+                  $scope.orderList[i] = body;
+                }
+                else {
+                  $scope.orderList.splice(i, 1);
+                  if ($scope.orderItem) {
+                    $scope.closeDetail();
+                  }
+                  $timeout(function(){
+                    $scope.flag.showDelete=false;
+                  });
+                }
               }
             }
           }
-        }
+        });
       }
     });
   }

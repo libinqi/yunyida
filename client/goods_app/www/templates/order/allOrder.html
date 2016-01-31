@@ -1,52 +1,82 @@
-<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
-  <a class="button button-clear" style="width:40px;height:25px"></a>
-  <div class="title title-center header-item" style="color:#fff !important;">订单</div>
-  <a class="button button-clear" href="#/message"><img src="img/icon-zn-b.png" alt="最新消息"
-                                                       style="width:20px;position:relative;top:2px;"></a>
-</ion-header-bar>
-<ion-content>
-  <ion-list>
-    <ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()"
-                   on-pulling="pulltext()" spinner="ripple" pulling-icon="ion-ios-refresh-empty"></ion-refresher>
-    <ion-item ng-repeat="item in orderList" style="margin: 0px;padding: 0px;border: 0px;">
-      <p style="height: 28px;padding:5px 12px 2px 12px;color: #222222;" ng-click="orderDetail(item)">
-        {{item.goods.sCity}}→{{item.goods.eCity}}
-        <i class="icon ion-android-time" style="float: right;"><span
-          style="font-size: 14px;display: inline-block;padding: 0px 0px 0px 4px;"
-          am-time-ago="item.updatedAt"></span></i>
-      </p>
-      <p
-        style="height: 45px;padding:12px;color: #222222;border-top: dashed 1px #c0c0c0;border-bottom: dashed 1px #c0c0c0;background-color: #f0f0f0"
-        ng-click="orderDetail(item)">
-        <span>{{item.goods.goodsName}}</span>
-        <span>{{item.goods.goodsNumber+item.goods.goodsUnit}}</span>
-        <span ng-if="item.goods.carType!='不限'">需{{item.goods.carType}}</span>
-        <span style="color: #ef6600;float: right">{{item.goodsOrderStatus}}</span>
-      </p>
-      <p style="height: 36px;padding:2px 5px 2px 12px;color: #222222;border-bottom: solid 1px #c0c0c0;">
-        <span style="padding-top: 5px;display: inline-block;">{{item.goods.goodsType}} /</span>
-        <span style="color: #ef6600;padding-top: 5px;display: inline-block;">{{item.goods.goodsAttribute}}</span>
-        <button class="button button-small button-order-active"
-                ng-if="item.goodsOrderStatus=='未接单'||item.goodsOrderStatus=='接单'||item.goodsOrderStatus=='取消接单'||item.goodsOrderStatus=='已取消'"
-                ng-click="refreshOrder(item.goodsOrderId)">重新发布
-        </button>
-        <button class="button button-small button-order"
-                ng-if="item.goodsOrderStatus=='未接单'||item.goodsOrderStatus=='接单'"
-                ng-click="cancelOrder(item.goodsOrderId)">取消订单
-        </button>
-        <button class="button button-small button-order"
-                ng-if="item.goodsOrderStatus=='已取消'||item.goodsOrderStatus=='已完成'"
-                ng-click="deleteOrder(item.goodsOrderId)">删除订单
-        </button>
-        <button class="button button-small button-order"
-                ng-if="item.goodsOrderStatus=='未评价'"
-                ng-click="orderEvaluate(item.goodsOrderId)">马上评价
-        </button>
-      </p>
-    </ion-item>
-  </ion-list>
-  <ion-infinite-scroll ng-if="load_over" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
-  <div ng-if="orderList.length==0" class="bar bar-stable">
-    <div class="no-content">目前没有订单</div>
-  </div>
-</ion-content>
+<ion-side-menus>
+  <ion-side-menu-content>
+    <ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+      <button class="button button-icon button-clear ion-navicon" style="color: #ffffff;" ng-click="toggleLeft()">
+      </button>
+      <div class="title title-center header-item" style="color:#fff !important;">订单</div>
+      <!--<a class="button button-clear" href="#/message"><img src="img/icon-zn-b.png" alt="最新消息"-->
+      <!--style="width:20px;position:relative;top:2px;"></a>-->
+      <a class="button button-clear button-light icon ion-ios-trash-outline" ng-if="orderList.length>0"
+         ng-click="flag.showDelete=!flag.showDelete"></a>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list show-delete="flag.showDelete">
+        <ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()"
+                       on-pulling="pulltext()" spinner="ripple" pulling-icon="ion-ios-refresh-empty"></ion-refresher>
+        <ion-item ng-repeat="item in orderList" class="item item-thumbnail-right">
+          <img style="width: 18px !important;height: 30px !important;top:64px !important;right:20px !important;"
+               src="img/arrow-right.png" ng-click="orderDetail(item)">
+          <p style="height: 28px;padding:5px 12px 2px 0px;" ng-click="orderDetail(item)">
+            <span style="margin-right: 45px;">{{item.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</span>
+            <span style="color: #ef6600;">{{item.goods.goodsType}}-{{item.goods.publishType}}</span>
+            <span style="color: #ef6600;float: right;font-weight: bold;">{{item.goodsOrderStatus}}</span>
+          </p>
+          <p style="height: 32px;color: #222222;font-size: 16px;margin-left: -10px;"
+            ng-click="orderDetail(item)">
+            <img style="width: 32px;height: 32px;vertical-align: bottom" src="img/red-marker.png"/>
+            <span>{{item.goods.sCity+item.goods.sStreet}}</span>
+          </p>
+          <p style="height: 32px;color: #222222;font-size: 16px;margin-left: -10px;"
+            ng-click="orderDetail(item)">
+            <img style="width: 32px;height: 32px;vertical-align: bottom" src="img/gray-marker.png"/>
+            <span>{{item.goods.eCity+item.goods.eStreet}}</span>
+          </p>
+          <!--<p style="height: 36px;padding:2px 5px 2px 12px;color: #222222;border-bottom: solid 1px #c0c0c0;">-->
+          <!--<span style="padding-top: 5px;display: inline-block;">{{item.goods.goodsType}} /</span>-->
+          <!--<span style="color: #ef6600;padding-top: 5px;display: inline-block;">{{item.goods.goodsAttribute}}</span>-->
+          <!--<button class="button button-small button-order-active"-->
+          <!--ng-if="item.goodsOrderStatus=='未接单'||item.goodsOrderStatus=='接单'||item.goodsOrderStatus=='取消接单'||item.goodsOrderStatus=='已取消'"-->
+          <!--ng-click="refreshOrder(item.goodsOrderId)">重新发布-->
+          <!--</button>-->
+          <!--<button class="button button-small button-order"-->
+          <!--ng-if="item.goodsOrderStatus=='未接单'||item.goodsOrderStatus=='接单'"-->
+          <!--ng-click="cancelOrder(item.goodsOrderId)">取消订单-->
+          <!--</button>-->
+          <!--<button class="button button-small button-order"-->
+          <!--ng-if="item.goodsOrderStatus=='已取消'||item.goodsOrderStatus=='已完成'"-->
+          <!--ng-click="deleteOrder(item.goodsOrderId)">删除订单-->
+          <!--</button>-->
+          <!--<button class="button button-small button-order"-->
+          <!--ng-if="item.goodsOrderStatus=='未评价'"-->
+          <!--ng-click="orderEvaluate(item.goodsOrderId)">马上评价-->
+          <!--</button>-->
+          <!--</p>-->
+          <ion-delete-button class="ion-minus-circled" ng-click="deleteOrder(item.goodsOrderId)"></ion-delete-button>
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll ng-if="load_over" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+      <div ng-if="orderList.length==0" class="bar bar-stable">
+        <div class="no-content">目前没有订单</div>
+      </div>
+    </ion-content>
+
+  </ion-side-menu-content>
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar bar-header bar-assertive">
+      <h1 class="title">订单状态</h1>
+    </ion-header-bar>
+    <ion-content has-header="true">
+      <ul class="list">
+        <a class="item" ng-click="orderFilter('')">默认</a>
+        <a class="item" ng-click="orderFilter('未接单')">未接单</a>
+        <a class="item" ng-click="orderFilter('接单')">接单</a>
+        <a class="item" ng-click="orderFilter('确认接单')">确认接单</a>
+        <a class="item" ng-click="orderFilter('取消接单')">取消接单</a>
+        <a class="item" ng-click="orderFilter('确认承运')">确认承运</a>
+        <a class="item" ng-click="orderFilter('已完成')">已完成</a>
+        <a class="item" ng-click="orderFilter('已删除')">已删除</a>
+      </ul>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
+
