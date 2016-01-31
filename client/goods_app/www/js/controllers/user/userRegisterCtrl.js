@@ -17,12 +17,43 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
       lat: ''//纬度
     };
 
-    geolocationService.getCurrentPosition(function (result) {
-      $scope.userData.city = result.addressComponents.province.replace(/省/g, "")+result.addressComponents.city.replace(/市/g, "")+result.addressComponents.district;
-      $scope.userData.street = result.addressComponents.street;
-      $scope.userData.address = result.addressComponents.street + result.addressComponents.streetNumber;
-      $scope.userData.lng = result.point.lng;
-      $scope.userData.lat = result.point.lat;
+    //geolocationService.getCurrentPosition(function (result) {
+    //  $scope.userData.city = result.addressComponents.province.replace(/省/g, "")+result.addressComponents.city.replace(/市/g, "")+result.addressComponents.district;
+    //  $scope.userData.street = result.addressComponents.street;
+    //  $scope.userData.address = result.addressComponents.street + result.addressComponents.streetNumber;
+    //  $scope.userData.lng = result.point.lng;
+    //  $scope.userData.lat = result.point.lat;
+    //});
+
+    window.LocationPlugin.getLocation(function (data) {
+      //data.longitude 经度
+      //data.latitude 纬度
+      //data.province 省份
+      //data.city 城市
+      //data.cityCode 城市编码
+      //data.district 区/县
+      //data.street 街道
+      //data.streetNumber 街道号码
+      //data.address 文字描述的地址信息
+      //data.hasRadius 是否有定位精度半径
+      //data.radius 定位精度半径
+      //data.type 定位方式
+      $timeout(function () {
+        var city = data.province.replace('省', '') + data.city.replace('市', '');
+        if (data.district) {
+          city += data.district;
+        }
+        if (data.street) {
+          $scope.userData.street = data.street;
+        }
+        if (data.streetNumber) {
+          $scope.userData.address = data.streetNumber;
+        }
+        $scope.userData.city = city;
+        $scope.userData.lng = data.longitude;
+        $scope.userData.lat = data.latitude;
+      });
+    }, function (err) {
     });
 
     $scope.formData = {
@@ -178,7 +209,7 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
       $ionicLoading.show({
         template: "正在注册..."
       });
-      $scope.userData.userType='货主';
+      $scope.userData.userType = '货主';
       io.socket.post('/user/register', $scope.userData, function serverResponded(body, JWR) {
         $ionicLoading.hide();
         if (JWR.statusCode !== 200) {
