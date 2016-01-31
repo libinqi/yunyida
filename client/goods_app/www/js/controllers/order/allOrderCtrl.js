@@ -130,33 +130,65 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
 
   //重新发布订单
   $scope.refreshOrder = function (orderId) {
-    var confirmPopup = $ionicPopup.confirm({
-      title: '重新发布订单',
-      template: '您确定要重新发布订单吗?',
-      buttons: [
-        { text: '暂不发布',onTap: function(e) {return false;}},
-        { text: '确定',type: 'button-assertive',onTap: function(e) {return true;}}
-      ]
-    });
-    confirmPopup.then(function(res) {
-      if(res) {
-        io.socket.post('/order/refreshOrder', {orderId: orderId}, function serverResponded(body, JWR) {
-          if (JWR.statusCode !== 200) {
-            $scope.showMsg('请求失败,网络不给力！');
-          }
-          else {
-            for (var i = 0; i < $scope.orderList.length; i++) {
-              if ($scope.orderList[i].goodsOrderId == body.goodsOrderId) {
-                $scope.orderList[i] = body;
-                if ($scope.orderItem) {
-                  $scope.orderItem = body;
+    if($scope.orderItem&&$scope.orderItem.goods.goodsType=='指定发货')
+    {
+      var confirmPopup = $ionicPopup.confirm({
+        title: '重新发布订单',
+        template: '此订单即转化为随机发货订单，是否继续?',
+        buttons: [
+          { text: '暂不发布',onTap: function(e) {return false;}},
+          { text: '确定',type: 'button-assertive',onTap: function(e) {return true;}}
+        ]
+      });
+      confirmPopup.then(function(res) {
+        if(res) {
+          io.socket.post('/order/refreshOrder', {orderId: orderId}, function serverResponded(body, JWR) {
+            if (JWR.statusCode !== 200) {
+              $scope.showMsg('请求失败,网络不给力！');
+            }
+            else {
+              for (var i = 0; i < $scope.orderList.length; i++) {
+                if ($scope.orderList[i].goodsOrderId == body.goodsOrderId) {
+                  $scope.orderList[i] = body;
+                  if ($scope.orderItem) {
+                    $scope.orderItem = body;
+                  }
                 }
               }
             }
-          }
-        });
-      }
-    });
+          });
+        }
+      });
+    }
+    else{
+      var confirmPopup = $ionicPopup.confirm({
+        title: '重新发布订单',
+        template: '您确定要重新发布订单吗?',
+        buttons: [
+          { text: '暂不发布',onTap: function(e) {return false;}},
+          { text: '确定',type: 'button-assertive',onTap: function(e) {return true;}}
+        ]
+      });
+      confirmPopup.then(function(res) {
+        if(res) {
+          io.socket.post('/order/refreshOrder', {orderId: orderId}, function serverResponded(body, JWR) {
+            if (JWR.statusCode !== 200) {
+              $scope.showMsg('请求失败,网络不给力！');
+            }
+            else {
+              for (var i = 0; i < $scope.orderList.length; i++) {
+                if ($scope.orderList[i].goodsOrderId == body.goodsOrderId) {
+                  $scope.orderList[i] = body;
+                  if ($scope.orderItem) {
+                    $scope.orderItem = body;
+                  }
+                }
+              }
+            }
+          });
+        }
+      });
+    }
   }
 
   //删除订单

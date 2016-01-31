@@ -51,6 +51,7 @@ module.exports = {
             if (err) res.badRequest(err);
             order.goodsOrderStatus = '未接单';
             order.status = true;
+            order.goods.publishType = '随机发货';
             order.save();
             res.ok(order);
         });
