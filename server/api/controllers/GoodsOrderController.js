@@ -31,9 +31,73 @@ module.exports = {
         GoodsOrder.find(option)
             .sort('updatedAt DESC')
             .paginate({page: page, limit: rows})
+            .populate('carrier')
             .populate('goods').exec(function (err, data) {
             if (err) res.badRequest(err);
             res.ok(data);
+        });
+    },
+    carrierOrder: function (req, res) {
+        var userId = req.body.userId;
+        var page = req.body.page;
+        var rows = req.body.rows;
+        var orderStatus = req.body.orderStatus;
+
+        var option = {
+            carrier: userId,
+            status: true
+        };
+
+        if(orderStatus)
+        {
+            if(orderStatus=='已删除')
+            {
+                option.status=false;
+            }
+            else {
+                option.goodsOrderStatus=orderStatus;
+            }
+        }
+
+        GoodsOrder.find(option)
+            .sort('updatedAt DESC')
+            .paginate({page: page, limit: rows})
+            .populate('goods').exec(function (err, data) {
+            if (err) res.badRequest(err);
+            res.ok(data);
+        });
+    },
+    addOrder: function (req, res) {
+        var orderId = req.body.orderId;
+        var userId = req.body.userId;
+        GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
+            if (err) res.badRequest(err);
+            order.goodsOrderStatus = '接单';
+            order.carrier=userId;
+            order.goods.status=false;
+            order.save();
+            res.ok(order);
+        });
+    },
+    updateOrder: function (req, res) {
+        var orderId = req.body.orderId;
+        var orderStatus = req.body.orderStatus;
+        GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
+            if (err) res.badRequest(err);
+            order.goodsOrderStatus = orderStatus;
+            order.save();
+            res.ok(order);
+        });
+    },
+    confirmCarrier: function (req, res) {
+        var orderId = req.body.orderId;
+        var pricing = req.body.pricing;
+        GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
+            if (err) res.badRequest(err);
+            order.goodsOrderStatus = '确认承运';
+            order.pricing=pricing;
+            order.save();
+            res.ok(order);
         });
     },
     cancelOrder: function (req, res) {

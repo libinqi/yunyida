@@ -38,7 +38,7 @@
           </label>
           <label class="item-detail" style="margin-left:27px;">
             <div class="order-detail-label">电话：</div>
-            <label>{{orderItem.goods.ePhoneNumber}}</label>
+            <label><a href="tel:{{orderItem.goods.ePhoneNumber}}">{{orderItem.goods.ePhoneNumber}}</a></label>
           </label>
         </div>
       </div>
@@ -67,9 +67,20 @@
             <div class="order-detail-label2" style="font-size: 16px;">订单状态：</div>
             <label style="color: #ff0000">{{orderItem.goodsOrderStatus}}</label>
           </label>
+          <!-- 承运人信息 -->
+          <label ng-if="orderItem.carrier" class="item-detail">
+            <div class="order-detail-label2" style="font-size: 16px;">承&nbsp;&nbsp;运&nbsp;人：</div>
+            <label>{{orderItem.carrier.userType=='物流企业'?
+              orderItem.carrier.realName+'('+orderItem.carrier.enterpriseName+')':orderItem.carrier.realName}}</label>
+          </label>
+          <label ng-if="orderItem.carrier" class="item-detail">
+            <div class="order-detail-label2" style="font-size: 16px;">承运人电话：</div>
+            <label style="color: #ff0000"><a href="tel:{{orderItem.carrier.phoneNumber}}">{{orderItem.carrier.phoneNumber}}</a></label>
+          </label>
           <!-- 运价 -->
           <label class="item-detail" ng-if="orderItem.pricing">
-            <div class="order-detail-label2" style="font-size: 16px;">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：</div>
+            <div class="order-detail-label2" style="font-size: 16px;">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：
+            </div>
             <label style="color: #ff0000">&nbsp;{{orderItem.pricing}}元</label>
           </label>
           <!-- 创建时间 -->
@@ -80,16 +91,21 @@
         </div>
       </div>
       <div class="button-bar" style="margin-top:10px">
-        <button class="button button-positive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus=='未接单'||orderItem.goodsOrderStatus=='接单'"
+        <button class="button button-positive" style="margin-right:10px;margin-left:10px;"
+                ng-if="orderItem.goodsOrderStatus=='未接单'||orderItem.goodsOrderStatus=='接单'"
                 ng-click="cancelOrder(orderItem.goodsOrderId)">取消订单
         </button>
-        <button class="button button-positive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus=='已取消'||orderItem.goodsOrderStatus=='已完成'"
+        <button class="button button-positive" style="margin-right:10px;margin-left:10px;"
+                ng-if="orderItem.goodsOrderStatus=='已取消'||orderItem.goodsOrderStatus=='已完成'"
                 ng-click="deleteOrder(orderItem.goodsOrderId)">删除订单
         </button>
-        <button class="button button-positive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus=='未评价'"
+        <button class="button button-positive" style="margin-right:10px;margin-left:10px;"
+                ng-if="orderItem.goodsOrderStatus=='未评价'"
                 ng-click="orderEvaluate(orderItem.goodsOrderId)">马上评价
         </button>
-        <button class="button button-assertive" ng-if="orderItem.goodsOrderStatus=='未接单'||orderItem.goodsOrderStatus=='接单'||orderItem.goodsOrderStatus=='取消接单'||orderItem.goodsOrderStatus=='已取消'" ng-click="refreshOrder(orderItem.goodsOrderId)">重新发布
+        <button class="button button-assertive"
+                ng-if="orderItem.goodsOrderStatus=='未接单'||orderItem.goodsOrderStatus=='接单'||orderItem.goodsOrderStatus=='取消接单'||orderItem.goodsOrderStatus=='已取消'"
+                ng-click="refreshOrder(orderItem.goodsOrderId)">重新发布
         </button>
       </div>
     </div>

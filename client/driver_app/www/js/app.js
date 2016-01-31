@@ -138,8 +138,8 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         views: {
           'tab-index': {
             cache: 'false',
-            templateUrl: 'templates/goods/add.html',
-            controller: 'AddGoodsCtrl'
+            templateUrl: 'templates/goods/goodsList.html',
+            controller: 'GoodsListCtrl'
           }
         }
       })
@@ -290,11 +290,6 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         url: '/orderdetail/:data',
         templateUrl: 'templates/order/allOrderDetail.html',
         controller: 'AllOrderDetailCtrl'
-      })
-      .state('evaluateorder', {
-        url: '/evaluateorder/:data',
-        templateUrl: 'templates/order/evaluateOrder.html',
-        controller: 'evaluateOrderCtrl'
       })
       .state('choosegoods', {
         url: '/choosegoods/:data',

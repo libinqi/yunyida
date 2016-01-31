@@ -31,26 +31,6 @@
             <img style="width: 32px;height: 32px;vertical-align: bottom" src="img/gray-marker.png"/>
             <span>{{item.goods.eCity+item.goods.eStreet}}</span>
           </p>
-          <!--<p style="height: 36px;padding:2px 5px 2px 12px;color: #222222;border-bottom: solid 1px #c0c0c0;">-->
-          <!--<span style="padding-top: 5px;display: inline-block;">{{item.goods.goodsType}} /</span>-->
-          <!--<span style="color: #387ef5;padding-top: 5px;display: inline-block;">{{item.goods.goodsAttribute}}</span>-->
-          <!--<button class="button button-small button-order-active"-->
-          <!--ng-if="item.goodsOrderStatus=='未接单'||item.goodsOrderStatus=='接单'||item.goodsOrderStatus=='取消接单'||item.goodsOrderStatus=='已取消'"-->
-          <!--ng-click="refreshOrder(item.goodsOrderId)">重新发布-->
-          <!--</button>-->
-          <!--<button class="button button-small button-order"-->
-          <!--ng-if="item.goodsOrderStatus=='未接单'||item.goodsOrderStatus=='接单'"-->
-          <!--ng-click="cancelOrder(item.goodsOrderId)">取消订单-->
-          <!--</button>-->
-          <!--<button class="button button-small button-order"-->
-          <!--ng-if="item.goodsOrderStatus=='已取消'||item.goodsOrderStatus=='已完成'"-->
-          <!--ng-click="deleteOrder(item.goodsOrderId)">删除订单-->
-          <!--</button>-->
-          <!--<button class="button button-small button-order"-->
-          <!--ng-if="item.goodsOrderStatus=='未评价'"-->
-          <!--ng-click="orderEvaluate(item.goodsOrderId)">马上评价-->
-          <!--</button>-->
-          <!--</p>-->
           <ion-delete-button class="ion-minus-circled" ng-click="deleteOrder(item.goodsOrderId)"></ion-delete-button>
         </ion-item>
       </ion-list>

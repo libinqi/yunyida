@@ -15,6 +15,25 @@ module.exports = {
                 res.ok(goods);
             });
         })
+    },
+    list: function (req, res) {
+        var page = req.body.page;
+        var rows = req.body.rows;
+        var goodsType = req.body.goodsType;
+
+        var option = {
+            goodsType: goodsType,
+            publishType:'随机发货',
+            status: true
+        };
+        Goods.find(option)
+            .sort('updatedAt DESC')
+            .paginate({page: page, limit: rows})
+            .populate('user')
+            .populate('goodsOrders',{goodsOrderStatus:'未接单'}).exec(function (err, data) {
+            if (err) res.badRequest(err);
+            res.ok(data);
+        });
     }
 };
 

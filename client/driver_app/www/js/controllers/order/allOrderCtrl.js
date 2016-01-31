@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('AllOrderCtrl', function ($scope, $http, $timeout, $ionicModal, $ionicLoading, $ionicHistory, $ionicPopover,$ionicPopup,$ionicSideMenuDelegate, $state, $stateParams, UserInfo) {
+angular.module('starter.controllers').controller('AllOrderCtrl', function ($scope, $http, $timeout, $ionicModal, $ionicLoading, $ionicHistory, $ionicPopover, $ionicPopup, $ionicSideMenuDelegate, $state, $stateParams, UserInfo) {
   $scope.backGo = function () {
     $ionicHistory.goBack();
   };
@@ -27,11 +27,11 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   $scope.query = {
     page: 1,
     rows: 8,
-    orderStatus:'',
+    orderStatus: '',
     userId: UserInfo.data.userId
   };
 
-  $scope.toggleLeft = function() {
+  $scope.toggleLeft = function () {
     $ionicSideMenuDelegate.toggleLeft();
   };
 
@@ -55,7 +55,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   $scope.loadMore = function () {
     //这里使用定时器是为了缓存一下加载过程，防止加载过快
     $timeout(function () {
-      io.socket.get('/order/userOrder', $scope.query, function serverResponded(body, JWR) {
+      io.socket.get('/order/carrierOrder', $scope.query, function serverResponded(body, JWR) {
         if (JWR.statusCode !== 200) {
           $scope.showMsg('请求失败,网络不给力！');
         }
@@ -75,8 +75,8 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     }, 800);
   };
 
-  $scope.orderFilter=function(orderStatus){
-    $scope.query.orderStatus=orderStatus;
+  $scope.orderFilter = function (orderStatus) {
+    $scope.query.orderStatus = orderStatus;
     $scope.doRefresh();
     $scope.toggleLeft();
   }
@@ -98,19 +98,30 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     $scope.detail.hide();
   };
 
-  //取消订单
+  //取消接单
   $scope.cancelOrder = function (orderId) {
     var confirmPopup = $ionicPopup.confirm({
-      title: '取消订单',
-      template: '您确定要取消订单吗?',
+      title: '取消接单',
+      template: '您确定要取消接单吗?',
       buttons: [
-        { text: '暂不取消',onTap: function(e) {return false;}},
-        { text: '确定',type: 'button-assertive',onTap: function(e) {return true;}}
+        {
+          text: '暂不取消', onTap: function (e) {
+          return false;
+        }
+        },
+        {
+          text: '确定', type: 'button-assertive', onTap: function (e) {
+          return true;
+        }
+        }
       ]
     });
-    confirmPopup.then(function(res) {
-      if(res) {
-        io.socket.post('/order/cancelOrder', {orderId: orderId}, function serverResponded(body, JWR) {
+    confirmPopup.then(function (res) {
+      if (res) {
+        io.socket.post('/order/updateOrder', {
+          orderId: orderId,
+          orderStatus: '取消接单'
+        }, function serverResponded(body, JWR) {
           if (JWR.statusCode !== 200) {
             $scope.showMsg('请求失败,网络不给力！');
           }
@@ -125,190 +136,66 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
             }
           }
         });
-      }});
-  }
-
-  //重新发布订单
-  $scope.refreshOrder = function (orderId) {
-    if($scope.orderItem&&$scope.orderItem.goods.goodsType=='指定发货')
-    {
-      var confirmPopup = $ionicPopup.confirm({
-        title: '重新发布订单',
-        template: '此订单即转化为随机发货订单，是否继续?',
-        buttons: [
-          { text: '暂不发布',onTap: function(e) {return false;}},
-          { text: '确定',type: 'button-assertive',onTap: function(e) {return true;}}
-        ]
-      });
-      confirmPopup.then(function(res) {
-        if(res) {
-          io.socket.post('/order/refreshOrder', {orderId: orderId}, function serverResponded(body, JWR) {
-            if (JWR.statusCode !== 200) {
-              $scope.showMsg('请求失败,网络不给力！');
-            }
-            else {
-              for (var i = 0; i < $scope.orderList.length; i++) {
-                if ($scope.orderList[i].goodsOrderId == body.goodsOrderId) {
-                  $scope.orderList[i] = body;
-                  if ($scope.orderItem) {
-                    $scope.orderItem = body;
-                  }
-                }
-              }
-            }
-          });
-        }
-      });
-    }
-    else{
-      var confirmPopup = $ionicPopup.confirm({
-        title: '重新发布订单',
-        template: '您确定要重新发布订单吗?',
-        buttons: [
-          { text: '暂不发布',onTap: function(e) {return false;}},
-          { text: '确定',type: 'button-assertive',onTap: function(e) {return true;}}
-        ]
-      });
-      confirmPopup.then(function(res) {
-        if(res) {
-          io.socket.post('/order/refreshOrder', {orderId: orderId}, function serverResponded(body, JWR) {
-            if (JWR.statusCode !== 200) {
-              $scope.showMsg('请求失败,网络不给力！');
-            }
-            else {
-              for (var i = 0; i < $scope.orderList.length; i++) {
-                if ($scope.orderList[i].goodsOrderId == body.goodsOrderId) {
-                  $scope.orderList[i] = body;
-                  if ($scope.orderItem) {
-                    $scope.orderItem = body;
-                  }
-                }
-              }
-            }
-          });
-        }
-      });
-    }
-  }
-
-  //删除订单
-  $scope.deleteOrder = function (orderId) {
-    var confirmPopup = $ionicPopup.confirm({
-      title: '删除订单',
-      template: '您确定要删除订单吗?',
-      buttons: [
-        { text: '取消',onTap: function(e) {return false;}},
-        { text: '确定',type: 'button-assertive',onTap: function(e) {return true;}}
-        ]
-    });
-    confirmPopup.then(function(res) {
-      if(res) {
-        io.socket.post('/order/deleteOrder', {orderId: orderId}, function serverResponded(body, JWR) {
-          if (JWR.statusCode !== 200) {
-            $scope.showMsg('请求失败,网络不给力！');
-          }
-          else {
-            for (var i = 0; i < $scope.orderList.length; i++) {
-              if ($scope.orderList[i].goodsOrderId == body.goodsOrderId) {
-                if (body.status) {
-                  $scope.orderList[i] = body;
-                }
-                else {
-                  $scope.orderList.splice(i, 1);
-                  if ($scope.orderItem) {
-                    $scope.closeDetail();
-                  }
-                  $timeout(function(){
-                    $scope.flag.showDelete=false;
-                  });
-                }
-              }
-            }
-          }
-        });
       }
     });
   }
 
-  var fentip = ["很差", "一般", "好", "很好", "非常好"];
-  $scope.isPMouseEnter = false;
-  $scope.selectPeople = 0;
-  $scope.msgPeople = "请给此项打分";
+  //确认接单
+  $scope.confirmOrder = function (orderId) {
+    io.socket.post('/order/updateOrder', {orderId: orderId, orderStatus: '确认接单'}, function serverResponded(body, JWR) {
+      if (JWR.statusCode !== 200) {
+        $scope.showMsg('请求失败,网络不给力！');
+      }
+      else {
+        for (var i = 0; i < $scope.orderList.length; i++) {
+          if ($scope.orderList[i].goodsOrderId == body.goodsOrderId) {
+            $scope.orderList[i] = body;
+            if ($scope.orderItem) {
+              $scope.orderItem = body;
+            }
+          }
+        }
+        $scope.showMsg('确认接单成功！');
+      }
+    });
+  }
 
-  $scope.evaluateData = {
-    orderId: '',
-    evaluationLevel: '',
-    evaluationContent: ''
-  };
 
-  //订单评价
-  $scope.orderEvaluate = function (orderId) {
-    $scope.evaluateData.orderId = orderId;
-    $scope.evaluate.show();
+  $scope.carrierOrder = {
+    pricing: '',
+    orderId: ''
+  }
+
+  //确认承运
+  $scope.confirmCarrier = function (orderId) {
+    $scope.carrierOrder.orderId = orderId;
+    $scope.confirmCarrierOrder.show();
   }
 
   //触发弹出层事件
-  $ionicModal.fromTemplateUrl('templates/order/evaluateOrder.html ', {
+  $ionicModal.fromTemplateUrl('templates/order/carrierOrder.html ', {
     scope: $scope
   }).then(function (detail) {
-    $scope.evaluate = detail;
+    $scope.confirmCarrierOrder = detail;
   });
-  //关闭订单评价
-  $scope.closeEvaluate = function () {
-    $scope.evaluate.hide();
+  //关闭确认承运
+  $scope.closeCarrier = function () {
+    $scope.confirmCarrierOrder.hide();
   };
 
-  $scope.evaluatePeopleClass = function (num) {
-    var rtnClass = "";
-    if ($scope.isPMouseEnter) {
-      if ($scope.selectPeople >= num) {
-        rtnClass = "stared";
-      }
-      else {
-        rtnClass = "star";
-      }
-    }
-    else {
-      if ($scope.evaluateData.evaluationLevel>= num) {
-        rtnClass = "stared";
-      }
-      else {
-        rtnClass = "star";
-      }
-    }
-    return rtnClass;
-  }
-
-  $scope.evaluatePeopleClick = function (num) {
-    $scope.evaluateData.evaluationLevel = num;
-    $scope.msgPeople = fentip[num - 1];
-  }
-
-  $scope.peopleMouseEnter = function (num) {
-    $scope.selectPeople = num;
-    $scope.isPMouseEnter = true;
-    $scope.msgPeople = fentip[num - 1];
-  }
-
-  $scope.peopleMouseLeave = function (num) {
-    $scope.selectPeople = num;
-    $scope.isPMouseEnter = false;
-    if ($scope.evaluateData.evaluationLevel> 0) {
-      $scope.msgPeople = fentip[$scope.evaluateData.evaluationLevel- 1];
-    }
-    else {
-      $scope.msgPeople = "请给此项打分";
-    }
-  }
-
   //评价
-  $scope.evaluateSubmit = function () {
-    if (!$scope.evaluateData.evaluationLevel) {
-      $scope.showMsg("请进行满意度评分");
+  $scope.carrierSubmit = function () {
+    if (!$scope.carrierOrder.pricing && $scope.carrierOrder.pricing <= 0) {
+      $scope.showMsg("请输入运费");
       return;
     }
 
-    io.socket.post('/order/evaluateOrder', $scope.evaluateData, function serverResponded(body, JWR) {
+    if (isNaN($scope.carrierOrder.pricing) || parseInt($scope.carrierOrder.pricing) <= 0) {
+      $scope.showMsg("您输入的运费格式不正确");
+      return;
+    }
+
+    io.socket.post('/order/confirmCarrier', $scope.carrierOrder, function serverResponded(body, JWR) {
       if (JWR.statusCode !== 200) {
         $scope.showMsg('请求失败,网络不给力！');
       }
@@ -317,16 +204,15 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
           if ($scope.orderList[i].goodsOrderId == body.goodsOrderId) {
             if (body.status) {
               $scope.orderList[i] = body;
-              $scope.showMsg('感谢您的评价!');
-              $scope.closeEvaluate();
+              if ($scope.orderItem) {
+                $scope.orderItem = body;
+              }
+              $scope.closeCarrier();
+              $scope.showMsg('承运成功，幸苦啦!');
             }
           }
         }
       }
     });
   }
-
-
-  //$scope.doRefresh();
-
 });

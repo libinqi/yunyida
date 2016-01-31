@@ -259,7 +259,6 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
             .then(function (result) {
               $scope.showMsg('行驶证上传成功');
               $scope.userData.drivingLicenseImage = io.sails.url +'/car/avatar/'+result.response;
-              alert($scope.userData.drivingLicenseImage);
             }, function (err) {
               $scope.showMsg('行驶证上传失败，请重试');
             }, function (progress) {
@@ -307,7 +306,6 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
             .then(function (result) {
               $scope.showMsg('驾驶证上传成功');
               $scope.userData.driverLicenseImage = io.sails.url +'/car/avatar/'+result.response;
-              alert($scope.userData.driverLicenseImage);
             }, function (err) {
               $scope.showMsg('驾驶证上传失败，请重试');
             }, function (progress) {

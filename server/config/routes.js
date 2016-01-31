@@ -66,6 +66,7 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
     'post /goods/add': 'GoodsController.add',
+    '/goods/list': 'GoodsController.list',
 
     /***************************************************************************
      *                                                                          *
@@ -85,6 +86,10 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
     '/order/userOrder': 'GoodsOrderController.userOrder',
+    '/order/carrierOrder': 'GoodsOrderController.carrierOrder',
+    'post /order/addOrder': 'GoodsOrderController.addOrder',
+    'post /order/updateOrder': 'GoodsOrderController.updateOrder',
+    'post /order/confirmCarrier': 'GoodsOrderController.confirmCarrier',
     'post /order/cancelOrder': 'GoodsOrderController.cancelOrder',
     'post /order/refreshOrder': 'GoodsOrderController.refreshOrder',
     'post /order/deleteOrder': 'GoodsOrderController.deleteOrder',

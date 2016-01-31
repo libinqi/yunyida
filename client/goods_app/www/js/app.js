@@ -262,11 +262,6 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         templateUrl: 'templates/order/allOrderDetail.html',
         controller: 'AllOrderDetailCtrl'
       })
-      .state('evaluateorder', {
-        url: '/evaluateorder/:data',
-        templateUrl: 'templates/order/evaluateOrder.html',
-        controller: 'evaluateOrderCtrl'
-      })
       .state('choosegoods', {
         url: '/choosegoods/:data',
         templateUrl: 'templates/goods/chooseGoods.html',
