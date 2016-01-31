@@ -50,36 +50,36 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
     //  $scope.userData.lat = result.point.lat;
     //});
 
-    //window.LocationPlugin.getLocation(function (data) {
-    //  //data.longitude 经度
-    //  //data.latitude 纬度
-    //  //data.province 省份
-    //  //data.city 城市
-    //  //data.cityCode 城市编码
-    //  //data.district 区/县
-    //  //data.street 街道
-    //  //data.streetNumber 街道号码
-    //  //data.address 文字描述的地址信息
-    //  //data.hasRadius 是否有定位精度半径
-    //  //data.radius 定位精度半径
-    //  //data.type 定位方式
-    //  $timeout(function () {
-    //    var city = data.province.replace('省', '') + data.city.replace('市', '');
-    //    if (data.district) {
-    //      city += data.district;
-    //    }
-    //    if (data.street) {
-    //      $scope.userData.street = data.street;
-    //    }
-    //    if (data.streetNumber) {
-    //      $scope.userData.address = data.streetNumber;
-    //    }
-    //    $scope.userData.city = city;
-    //    $scope.userData.lng = data.longitude;
-    //    $scope.userData.lat = data.latitude;
-    //  });
-    //}, function (err) {
-    //});
+    window.LocationPlugin.getLocation(function (data) {
+      //data.longitude 经度
+      //data.latitude 纬度
+      //data.province 省份
+      //data.city 城市
+      //data.cityCode 城市编码
+      //data.district 区/县
+      //data.street 街道
+      //data.streetNumber 街道号码
+      //data.address 文字描述的地址信息
+      //data.hasRadius 是否有定位精度半径
+      //data.radius 定位精度半径
+      //data.type 定位方式
+      $timeout(function () {
+        var city = data.province.replace('省', '') + data.city.replace('市', '');
+        if (data.district) {
+          city += data.district;
+        }
+        if (data.street) {
+          $scope.userData.street = data.street;
+        }
+        if (data.streetNumber) {
+          $scope.userData.address = data.streetNumber;
+        }
+        $scope.userData.city = city;
+        $scope.userData.lng = data.longitude;
+        $scope.userData.lat = data.latitude;
+      });
+    }, function (err) {
+    });
 
     $scope.formData = {
       validCode: '',
@@ -258,7 +258,8 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
           $cordovaFileTransfer.upload(server, results[0], option, trustHosts)
             .then(function (result) {
               $scope.showMsg('行驶证上传成功');
-              $scope.userData.drivingLicenseImage = result.response;
+              $scope.userData.drivingLicenseImage = io.sails.url +'/car/avatar/'+result.response;
+              alert($scope.userData.drivingLicenseImage);
             }, function (err) {
               $scope.showMsg('行驶证上传失败，请重试');
             }, function (progress) {
@@ -279,7 +280,7 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
         .then(function (btnIndex) {
           switch (btnIndex) {
             case 1:
-              $scope.picDriverImg();
+              $scope.pickDriverImg();
               break;
             default:
               break;
@@ -305,7 +306,8 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
           $cordovaFileTransfer.upload(server, results[0], option, trustHosts)
             .then(function (result) {
               $scope.showMsg('驾驶证上传成功');
-              $scope.userData.driverLicenseImage = result.response;
+              $scope.userData.driverLicenseImage = io.sails.url +'/car/avatar/'+result.response;
+              alert($scope.userData.driverLicenseImage);
             }, function (err) {
               $scope.showMsg('驾驶证上传失败，请重试');
             }, function (progress) {
@@ -353,7 +355,7 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
         $cordovaFileTransfer.upload(server, results[0], option, trustHosts)
           .then(function (result) {
             $scope.showMsg('车辆照片上传成功');
-            $scope.userData.carImage = result.response;
+            $scope.userData.carImage = io.sails.url +'/car/avatar/'+result.response;
           }, function (err) {
             $scope.showMsg('车辆照片上传失败，请重试');
           }, function (progress) {

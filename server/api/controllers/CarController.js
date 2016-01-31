@@ -25,7 +25,7 @@ module.exports = {
                 return res.badRequest('文件上传失败');
             }
 
-            var avatarId = uploadedFiles[0].fd.replace(sails.config.appPath + '/assets/images/car', '').replace('.jpg', '');
+            var avatarId = uploadedFiles[0].fd.replace(sails.config.appPath + '/assets/images/car/', '').replace('.jpg', '');
 
             return res.send(avatarId);
         });
