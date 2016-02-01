@@ -1,12 +1,12 @@
+<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+  <button class="button button-icon button-clear ion-navicon" style="color: #ffffff;" ng-click="toggleLeft()">
+  </button>
+  <div class="title title-center header-item" style="color:#fff !important;">订单</div>
+  <a class="button button-clear button-light icon ion-ios-trash-outline" ng-if="orderList.length>0"
+     ng-click="flag.showDelete=!flag.showDelete"></a>
+</ion-header-bar>
 <ion-side-menus>
   <ion-side-menu-content>
-    <ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
-      <button class="button button-icon button-clear ion-navicon" style="color: #ffffff;" ng-click="toggleLeft()">
-      </button>
-      <div class="title title-center header-item" style="color:#fff !important;">订单</div>
-      <a class="button button-clear button-light icon ion-ios-trash-outline" ng-if="orderList.length>0"
-         ng-click="flag.showDelete=!flag.showDelete"></a>
-    </ion-header-bar>
     <ion-content>
       <ion-list show-delete="flag.showDelete">
         <ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()"
