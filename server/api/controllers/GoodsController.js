@@ -12,6 +12,7 @@ module.exports = {
             if (err) res.badRequest(err);
             GoodsOrder.create({goods: goods.goodsId, shipper: goods.user}).exec(function (err, goodsOrder) {
                 if (err) res.badRequest(err);
+                goods.goodsOrder = goodsOrder;
                 res.ok(goods);
             });
         })
@@ -23,14 +24,14 @@ module.exports = {
 
         var option = {
             goodsType: goodsType,
-            publishType:'随机发货',
+            publishType: '随机发货',
             status: true
         };
         Goods.find(option)
             .sort('updatedAt DESC')
             .paginate({page: page, limit: rows})
             .populate('user')
-            .populate('goodsOrders',{goodsOrderStatus:'未接单'}).exec(function (err, data) {
+            .populate('goodsOrders', {goodsOrderStatus: '未接单'}).exec(function (err, data) {
             if (err) res.badRequest(err);
             res.ok(data);
         });
