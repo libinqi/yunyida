@@ -29,6 +29,16 @@ module.exports = {
                 }
             });
     },
+    getCarrier: function (req, res) {
+        User.find({
+                where: {status: true},
+                or: [{userType: '物流企业'}, {userType: '司机'}]
+            })
+            .exec(function (err, users) {
+                if (err) res.badRequest(err);
+                res.ok(users);
+            });
+    },
     update: function (req, res) {
         var data_from = req.params.all();
         User.update({userId: data_from.userId}, data_from)

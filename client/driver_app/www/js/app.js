@@ -282,7 +282,8 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         views: {
           'tab-order': {
             templateUrl: 'templates/order/allOrder.html',
-            controller: 'AllOrderCtrl'
+            controller: 'AllOrderCtrl',
+            abstract: true
           }
         }
       })
