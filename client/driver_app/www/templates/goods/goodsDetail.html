@@ -22,10 +22,10 @@
             <div class="order-detail-label">地址：</div>
             <label>{{goodsItem.sCity+goodsItem.sStreet+goodsItem.sAddress}}</label>
           </label>
-          <label class="item-detail" style="margin-left:27px;">
+          <div class="item-detail" style="margin-left:27px;">
             <div class="order-detail-label">电话：</div>
-            <label>{{goodsItem.sPhoneNumber}}</label>
-          </label>
+            <a href="tel:{{goodsItem.sPhoneNumber}}">{{goodsItem.sPhoneNumber}}</a>
+          </div>
           <!-- 收货人信息 -->
           <label class="item-detail" style="margin-top:10px">
             <img src="img/person.png" width="20px" height="20px">
@@ -36,10 +36,10 @@
             <div class="order-detail-label">地址：</div>
             <label>{{goodsItem.eCity+goodsItem.eStreet+goodsItem.eAddress}}</label>
           </label>
-          <label class="item-detail" style="margin-left:27px;">
+          <div class="item-detail" style="margin-left:27px;">
             <div class="order-detail-label">电话：</div>
-            <label>{{goodsItem.ePhoneNumber}}</label>
-          </label>
+            <a href="tel:{{goodsItem.ePhoneNumber}}">{{goodsItem.ePhoneNumber}}</a>
+          </div>
         </div>
       </div>
       <!-- 货物信息 -->

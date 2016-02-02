@@ -22,10 +22,10 @@
             <div class="order-detail-label">地址：</div>
             <label>{{orderItem.goods.sCity+orderItem.goods.sStreet+orderItem.goods.sAddress}}</label>
           </label>
-          <label class="item-detail" style="margin-left:27px;">
+          <div class="item-detail" style="margin-left:27px;">
             <div class="order-detail-label">电话：</div>
-            <label><a href="tel:{{orderItem.goods.sPhoneNumber}}">{{orderItem.goods.sPhoneNumber}}</a></label>
-          </label>
+            <a href="tel:{{orderItem.goods.sPhoneNumber}}">{{orderItem.goods.sPhoneNumber}}</a>
+          </div>
           <!-- 收货人信息 -->
           <label class="item-detail" style="margin-top:10px">
             <img src="img/person.png" width="20px" height="20px">
@@ -36,10 +36,10 @@
             <div class="order-detail-label">地址：</div>
             <label>{{orderItem.goods.eCity+orderItem.goods.eStreet+orderItem.goods.eAddress}}</label>
           </label>
-          <label class="item-detail" style="margin-left:27px;">
+          <div class="item-detail" style="margin-left:27px;">
             <div class="order-detail-label">电话：</div>
-            <label><a href="tel:{{orderItem.goods.ePhoneNumber}}">{{orderItem.goods.ePhoneNumber}}</a></label>
-          </label>
+            <a href="tel:{{orderItem.goods.ePhoneNumber}}">{{orderItem.goods.ePhoneNumber}}</a>
+          </div>
         </div>
       </div>
       <!-- 货物信息 -->
@@ -80,7 +80,7 @@
         </div>
       </div>
       <div class="button-bar" style="margin-top:10px">
-        <button class="button button-positive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus!='确认承运'&&orderItem.goodsOrderStatus!='取消接单'" ng-click="cancelOrder(orderItem.goodsOrderId)">取消接单
+        <button class="button button-assertive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus!='确认承运'&&orderItem.goodsOrderStatus!='取消接单'" ng-click="cancelOrder(orderItem.goodsOrderId)">取消接单
         </button>
         <button class="button button-positive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus=='接单'"
                 ng-click="confirmOrder(orderItem.goodsOrderId)">确认接单

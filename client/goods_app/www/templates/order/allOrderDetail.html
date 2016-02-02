@@ -36,10 +36,10 @@
             <div class="order-detail-label">地址：</div>
             <label>{{orderItem.goods.eCity+orderItem.goods.eStreet+orderItem.goods.eAddress}}</label>
           </label>
-          <label class="item-detail" style="margin-left:27px;">
+          <div class="item-detail" style="margin-left:27px;">
             <div class="order-detail-label">电话：</div>
-            <label><a href="tel:{{orderItem.goods.ePhoneNumber}}">{{orderItem.goods.ePhoneNumber}}</a></label>
-          </label>
+            <a href="tel:{{orderItem.goods.ePhoneNumber}}">{{orderItem.goods.ePhoneNumber}}</a>
+          </div>
         </div>
       </div>
       <!-- 货物信息 -->
@@ -73,10 +73,10 @@
             <label>{{orderItem.carrier.userType=='物流企业'?
               orderItem.carrier.realName+'('+orderItem.carrier.enterpriseName+')':orderItem.carrier.realName}}</label>
           </label>
-          <label ng-if="orderItem.carrier" class="item-detail">
+          <div ng-if="orderItem.carrier" class="item-detail">
             <div class="order-detail-label2" style="font-size: 16px;">承运人电话：</div>
-            <label style="color: #ff0000"><a href="tel:{{orderItem.carrier.phoneNumber}}">{{orderItem.carrier.phoneNumber}}</a></label>
-          </label>
+            <span style="color: #ff0000"><a href="tel:{{orderItem.carrier.phoneNumber}}">{{orderItem.carrier.phoneNumber}}</a></span>
+          </div>
           <!-- 运价 -->
           <label class="item-detail" ng-if="orderItem.pricing">
             <div class="order-detail-label2" style="font-size: 16px;">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：
