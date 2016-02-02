@@ -1,0 +1,17 @@
+<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+  <a class="button icon-left ion-ios-arrow-left button-clear button-light"
+     style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="hidePostionGoods()"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">指定发货</div>
+</ion-header-bar>
+<ion-view view-title="指定发货">
+  <ion-content>
+    <div class="list">
+      <a class="item item-avatar item-button-right"  ng-repeat="item in carrierList">
+        <img ng-src="{{item.logo?item.logo:'img/default-ava.png'}}">
+        <h2>{{item.enterpriseName?item.enterpriseName:item.realName}}</h2>
+        <p>{{item.city+item.street+item.address}}</p>
+        <button class="button button-assertive" style="top: 0;right: 0;height: 100%;" ng-click="selectPostionGoods(item)">下单</button>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>
