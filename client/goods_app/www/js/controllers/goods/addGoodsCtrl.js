@@ -457,7 +457,34 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     });
   }
 
+  $scope.carrierList=[];
+
+  //触发指定发货选择弹出层事件
+  $ionicModal.fromTemplateUrl('templates/goods/postionGoods.html ', {
+    scope: $scope
+  }).then(function (modal) {
+    $scope.postionGoodsModal = modal;
+  });
+  //弹出指定发货选择页面
+  $scope.showPostionGoods = function () {
+    $scope.postionGoodsModal.show();
+  };
+  //选择指定发货承运人信息
+  $scope.selectPostionGoods = function (item) {
+
+    $scope.postionGoodsModal.hide();
+  };
+  //隐藏指定发货选择页面
+  $scope.hidePostionGoods = function () {
+    $scope.postionGoodsModal.hide();
+  };
+
+  $scope.getCarrier=function(){
+
+  }
+
   $scope.postionGoods = function () {
 
   }
+
 })
