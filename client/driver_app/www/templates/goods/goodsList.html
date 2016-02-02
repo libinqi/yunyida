@@ -23,14 +23,14 @@
           <span style="margin-right: 45px;">{{item.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</span>
           <span style="color: #ef6600;font-weight: bold;">{{item.user.enterpriseName}}</span>
         </p>
-        <p style="height: 32px;color: #222222;font-size: 16px;margin-left: -10px;"
+        <p style="height: 32px;color: #222222;font-size: 16px;"
            ng-click="goodsDetail(item)">
-          <img style="width: 32px;height: 32px;vertical-align: bottom" src="img/red-marker.png"/>
+          <img style="width: 18px;height: 27px;vertical-align: bottom" src="img/red-marker.png"/>
           <span>{{item.sCity+item.sStreet}}</span>
         </p>
-        <p style="height: 32px;color: #222222;font-size: 16px;margin-left: -10px;"
+        <p style="height: 32px;color: #222222;font-size: 16px;"
            ng-click="goodsDetail(item)">
-          <img style="width: 32px;height: 32px;vertical-align: bottom" src="img/gray-marker.png"/>
+          <img style="width: 18px;height: 27px;vertical-align: bottom" src="img/gray-marker.png"/>
           <span>{{item.eCity+item.eStreet}}</span>
         </p>
         <button class="button button-positive" style="top: 0;right: 0;height: 100%;width: 22%;padding-left: 20px;" ng-click="addOrder(item.goodsOrders[0].goodsOrderId)">接单</button>
