@@ -31,8 +31,7 @@ module.exports = {
     },
     getCarrier: function (req, res) {
         User.find({
-                where: {status: true},
-                or: [{userType: '物流企业'}, {userType: '司机'}]
+                where: {status: true, userType: {'not': '货主'}}
             })
             .exec(function (err, users) {
                 if (err) res.badRequest(err);

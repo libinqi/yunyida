@@ -216,7 +216,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
 
       .state('userGoodsAddress', {
         url: '/userGoodsAddress',
-        templateUrl: 'templates/user/userGoodsLine.html',
+        templateUrl: 'templates/user/userGoodsAddress.html',
         controller: 'UserGoodsAddressCtrl'
       })
       .state('userSetting', {

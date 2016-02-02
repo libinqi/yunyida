@@ -66,7 +66,7 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
   });
 
   //触发发货地址弹出层事件
-  $ionicModal.fromTemplateUrl('templates/user/addGoodsLine.html ', {
+  $ionicModal.fromTemplateUrl('templates/user/addGoodsAddress.html ', {
     scope: $scope
   }).then(function (modal) {
     $scope.goodsAddressModal = modal;
