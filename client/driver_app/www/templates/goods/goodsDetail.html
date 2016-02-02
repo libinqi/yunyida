@@ -1,0 +1,80 @@
+<ion-header-bar class="bar-positive" style="border:0px !important;background-color:#387ef5;color:#fff !important;">
+  <a class="button icon-left ion-ios-arrow-left button-clear button-light"
+     style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="closeDetail()"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">货物详情</div>
+  <a class="button button-clear" style="width:40px;height:25px"></a>
+</ion-header-bar>
+<ion-view view-title="货物详情">
+  <ion-content class="padding">
+    <div style="width:100%;margin:10px auto;text-ailgn:center;">
+      <div class="card" style="margin:5px 0px !important;">
+        <div class="item item-divider">
+          收发货信息
+        </div>
+        <div class="item item-text-wrap">
+          <!-- 发货人信息 -->
+          <label class="item-detail">
+            <img src="img/person.png" width="20px" height="20px">
+            <div class="order-detail-label" style="font-size: 16px;">发货人：</div>
+            <label>{{goodsItem.consignor}}</label>
+          </label>
+          <label class="item-detail" style="margin-left:27px">
+            <div class="order-detail-label">地址：</div>
+            <label>{{goodsItem.sCity+goodsItem.sStreet+goodsItem.sAddress}}</label>
+          </label>
+          <label class="item-detail" style="margin-left:27px;">
+            <div class="order-detail-label">电话：</div>
+            <label>{{goodsItem.sPhoneNumber}}</label>
+          </label>
+          <!-- 收货人信息 -->
+          <label class="item-detail" style="margin-top:10px">
+            <img src="img/person.png" width="20px" height="20px">
+            <div class="order-detail-label" style="font-size: 16px;">收货人：</div>
+            <label>{{goodsItem.consignee}}</label>
+          </label>
+          <label class="item-detail" style="margin-left:27px">
+            <div class="order-detail-label">地址：</div>
+            <label>{{goodsItem.eCity+goodsItem.eStreet+goodsItem.eAddress}}</label>
+          </label>
+          <label class="item-detail" style="margin-left:27px;">
+            <div class="order-detail-label">电话：</div>
+            <label>{{goodsItem.ePhoneNumber}}</label>
+          </label>
+        </div>
+      </div>
+      <!-- 货物信息 -->
+      <div class="card" style="margin:10px 0px !important;">
+        <div class="item item-divider">
+          货物信息
+        </div>
+        <div class="item item-text-wrap">
+          <label class="item-detail">
+            <div class="order-detail-label2" style="font-size: 16px;">货物信息：</div>
+            <label>{{goodsItem.goodsName+' '+goodsItem.goodsNumber+goodsItem.goodsUnit}}</label>
+          </label>
+          <!-- 货物属性 -->
+          <label class="item-detail">
+            <div class="order-detail-label2" style="font-size: 16px;">货物属性：</div>
+            <label>{{goodsItem.goodsType+' '+goodsItem.goodsAttribute}}</label>
+          </label>
+          <!-- 需求车辆 -->
+          <label class="item-detail" ng-if="goodsItem.carType!='不限'">
+            <div class="order-detail-label2" style="font-size: 16px;">需求车辆：</div>
+            <label>{{goodsItem.carType}}</label>
+          </label>
+          <!-- 创建时间 -->
+          <label class="item-detail">
+            <div class="order-detail-label2" style="font-size: 16px;">创建时间：</div>
+            <label style="min-width: 150px;">{{goodsItem.createdAt|amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</label>
+          </label>
+        </div>
+      </div>
+      <div class="button-bar" style="margin-top:10px">
+        <a class="button button-assertive" style="margin-right:10px;margin-left:10px;" href="tel:{{goodsItem.sPhoneNumber}}">马上联系
+        </a>
+        <a class="button button-positive" style="margin-right:10px;margin-left:10px;" ng-click="addOrder(goodsItem.goodsOrders[0].goodsOrderId)">立即接单
+        </a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

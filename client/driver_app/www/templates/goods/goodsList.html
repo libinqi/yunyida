@@ -1,0 +1,43 @@
+<ion-header-bar class="bar-positive" style="border:0px !important;background-color:#387ef5;color:#fff !important;">
+  <div class="title title-center header-item" style="color:#fff !important;">云驿达-{{user.userType}}</div>
+  <a class="button button-clear" href="#/message"><img src="img/icon-zn-b.png" alt="最新消息"
+                                                       style="width:20px;position:relative;top:2px;"></a>
+</ion-header-bar>
+<div class="button-tabs">
+  <button class="button button-positive" ng-class="{'button-active':query.goodsType=='零担'}"
+          ng-click="changeGoodsType('零担')">零担
+  </button>
+  <button class="button button-positive" ng-class="{'button-active':query.goodsType=='城市配送'}"
+          ng-click="changeGoodsType('城市配送')">城市配送
+  </button>
+  <button class="button button-positive" ng-class="{'button-active':query.goodsType=='整车'}"
+          ng-click="changeGoodsType('整车')">整车
+  </button>
+</div>
+<ion-content padding="true" class="has-header" style="margin-top: 40px;">
+  <ion-list>
+    <ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()"
+                   on-pulling="pulltext()" spinner="ripple" pulling-icon="ion-ios-refresh-empty"></ion-refresher>
+    <ion-item ng-repeat="item in goodsList" class="item item-button-right">
+        <p style="height: 28px;padding:5px 12px 2px 0px;" ng-click="goodsDetail(item)">
+          <span style="margin-right: 45px;">{{item.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</span>
+          <span style="color: #ef6600;font-weight: bold;">{{item.user.enterpriseName}}</span>
+        </p>
+        <p style="height: 32px;color: #222222;font-size: 16px;margin-left: -10px;"
+           ng-click="goodsDetail(item)">
+          <img style="width: 32px;height: 32px;vertical-align: bottom" src="img/red-marker.png"/>
+          <span>{{item.sCity+item.sStreet}}</span>
+        </p>
+        <p style="height: 32px;color: #222222;font-size: 16px;margin-left: -10px;"
+           ng-click="goodsDetail(item)">
+          <img style="width: 32px;height: 32px;vertical-align: bottom" src="img/gray-marker.png"/>
+          <span>{{item.eCity+item.eStreet}}</span>
+        </p>
+        <button class="button button-positive" style="top: 0;right: 0;height: 100%;width: 22%;padding-left: 20px;" ng-click="addOrder(item.goodsOrders[0].goodsOrderId)">接单</button>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll ng-if="load_over" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+  <div ng-if="goodsList.length==0" class="bar bar-positive">
+    <div class="no-content">目前没有{{query.goodsType}}货源</div>
+  </div>
+</ion-content>

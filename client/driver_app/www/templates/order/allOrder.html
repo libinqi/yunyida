@@ -21,14 +21,14 @@
             <span style="color: #387ef5;">{{item.goods.goodsType}}-{{item.goods.publishType}}</span>
             <span style="color: #387ef5;float: right;font-weight: bold;">{{item.goodsOrderStatus}}</span>
           </p>
-          <p style="height: 32px;color: #222222;font-size: 16px;margin-left: -10px;"
+          <p style="height: 32px;color: #222222;font-size: 16px;"
             ng-click="orderDetail(item)">
-            <img style="width: 32px;height: 32px;vertical-align: bottom" src="img/red-marker.png"/>
+            <img style="width: 18px;height: 27px;vertical-align: bottom" src="img/red-marker.png"/>
             <span>{{item.goods.sCity+item.goods.sStreet}}</span>
           </p>
-          <p style="height: 32px;color: #222222;font-size: 16px;margin-left: -10px;"
+          <p style="height: 32px;color: #222222;font-size: 16px;"
             ng-click="orderDetail(item)">
-            <img style="width: 32px;height: 32px;vertical-align: bottom" src="img/gray-marker.png"/>
+            <img style="width: 18px;height: 27px;vertical-align: bottom" src="img/gray-marker.png"/>
             <span>{{item.goods.eCity+item.goods.eStreet}}</span>
           </p>
           <ion-delete-button class="ion-minus-circled" ng-click="deleteOrder(item.goodsOrderId)"></ion-delete-button>
