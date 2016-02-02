@@ -25,7 +25,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     eCityCode: '',//目的地城市代码
     eStreet: '',//目的地街道
     eAddress: '',//目的地详细地址
-    publishType:'随机发货',// 发布方式
+    publishType: '随机发货',// 发布方式
     status: true,//状态
     remark: '',//备注说明
     user: user.userId//所属用户
@@ -457,7 +457,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     });
   }
 
-  $scope.carrierList=[];
+  $scope.carrierList = [];
 
   //触发指定发货选择弹出层事件
   $ionicModal.fromTemplateUrl('templates/goods/postionGoods.html ', {
@@ -471,7 +471,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   };
   //选择指定发货承运人信息
   $scope.selectPostionGoods = function (item) {
-
+    $scope.postionGoods(item.userId);
     $scope.postionGoodsModal.hide();
   };
   //隐藏指定发货选择页面
@@ -479,12 +479,54 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     $scope.postionGoodsModal.hide();
   };
 
-  $scope.getCarrier=function(){
-
+  $scope.getCarrier = function () {
+    if (!$scope.goodsInfo.consignor || !$scope.goodsInfo.sCity || !$scope.goodsInfo.sPhoneNumber) {
+      $scope.showMsg('请选择起始地发货信息！');
+      return;
+    }
+    if (!$scope.goodsInfo.consignee || !$scope.goodsInfo.eCity || !$scope.goodsInfo.ePhoneNumber) {
+      $scope.showMsg('请选择目的地收货信息！');
+      return;
+    }
+    if (!$scope.goodsInfo.goodsName || !$scope.goodsInfo.goodsNumber) {
+      $scope.showMsg('请填写货物信息！');
+      return;
+    }
+    io.socket.post('/user/getCarrier', function serverResponded(body, JWR) {
+      if (JWR.statusCode !== 200) {
+        $scope.showMsg('请求失败,网络不给力！');
+      }
+      else {
+        $scope.carrierList = body;
+        $scope.showPostionGoods();
+      }
+    });
   }
 
-  $scope.postionGoods = function () {
-
+  $scope.postionGoods = function (userId) {
+    $scope.goodsInfo.publishType = '指定发货';
+    $ionicLoading.show({
+      template: "正在发货中..."
+    });
+    io.socket.post('/goods/add', $scope.goodsInfo, function serverResponded(body, JWR) {
+      $ionicLoading.hide();
+      if (JWR.statusCode !== 200) {
+        $scope.showMsg('请求失败,网络不给力！');
+      }
+      else {
+        io.socket.post('/order/addOrder', {
+          orderId: body.goodsOrder.goodsOrderId,
+          userId: userId
+        }, function serverResponded(body, JWR) {
+          if (JWR.statusCode !== 200) {
+            $scope.showMsg('请求失败,网络不给力！');
+          }
+          else {
+            $scope.showMsg('发货成功！');
+            $state.go('tab.order');
+          }
+        });
+      }
+    });
   }
-
-})
+});
