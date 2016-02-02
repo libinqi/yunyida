@@ -80,6 +80,16 @@ module.exports.routes = {
     'post /goodsAddress/deleteGoodsAddress': 'GoodsAddressController.deleteGoodsAddress',
     'post /goodsAddress/defaultGoodsAddress': 'GoodsAddressController.defaultGoodsAddress',
 
+    /***************************************************************************
+     *                                                                          *
+     * 专线相关API...                                                            *
+     *                                                                          *
+     ***************************************************************************/
+    '/goodsLine/userGoodsLine': 'GoodsLineController.userGoodsLine',
+    'post /goodsLine/add': 'GoodsLineController.add',
+    'post /goodsLine/update': 'GoodsLineController.update',
+    'post /goodsLine/deleteGoodsLine': 'GoodsLineController.deleteGoodsLine',
+
 
     /***************************************************************************
      *                                                                          *

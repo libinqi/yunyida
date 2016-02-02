@@ -287,7 +287,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   $scope.isAdd = true;
 
   //触发发货地址弹出层事件
-  $ionicModal.fromTemplateUrl('templates/user/addGoodsAddress.html ', {
+  $ionicModal.fromTemplateUrl('templates/user/addGoodsLine.html ', {
     scope: $scope
   }).then(function (modal) {
     $scope.goodsAddressModal = modal;

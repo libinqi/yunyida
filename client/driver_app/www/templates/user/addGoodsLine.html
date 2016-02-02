@@ -1,0 +1,50 @@
+<ion-header-bar class="bar-positive" style="border:0px !important;background-color:#387ef5;color:#fff !important;">
+  <a class="button icon-left ion-ios-arrow-left button-clear button-light"
+  style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="hideGoodsLine()"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">{{isAdd?'新增专线信息':'修改专线信息'}}</div>
+</ion-header-bar>
+<ion-view>
+  <ion-content padding="true" class="has-header">
+    <div class="list padding">
+      <label class="item item-input">
+        <span class="input-label" style="width:35%">起始城市</span>
+        <ionic-city-picker placeholder="起始城市" backdrop=true backdrop-click-to-close=false css-class="text-align-l"
+                           okText="确定" citydata="goodsLine.sCity" citycode="goodsLine.sCityCode" style="width:60%;"></ionic-city-picker>
+        <i class="icon ion-chevron-right " style="color: #ACACAC;"></i>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">起始地街道</span>
+        <input ng-if="sStreetList.length<=0" type="text" ng-model="goodsLine.sStreet">
+        <ionic-dict-picker ng-if="sStreetList.length>0" backdrop=true backdrop-click-to-close=false
+                           css-class="text-align-l"
+                           dictmodel="goodsLine.sStreet" dictdata="s_street_data" okText="确定"
+                           style="width:55%"></ionic-dict-picker>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">起始地详细地址</span>
+        <input type="text" placeholder="选填" ng-model="goodsLine.sAddress">
+      </label>
+      <label class="item item-input">
+        <span class="input-label" style="width:35%">目的城市</span>
+        <ionic-city-picker placeholder="目的城市" backdrop=true backdrop-click-to-close=false css-class="text-align-l"
+                           okText="确定" citydata="goodsLine.eCity" citycode="goodsLine.eCityCode" style="width:60%;"></ionic-city-picker>
+        <i class="icon ion-chevron-right " style="color: #ACACAC;"></i>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">目的地街道</span>
+        <input ng-if="eStreetList.length<=0" type="text" ng-model="goodsLine.eStreet">
+        <ionic-dict-picker ng-if="eStreetList.length>0" backdrop=true backdrop-click-to-close=false
+                           css-class="text-align-l"
+                           dictmodel="goodsLine.eStreet" dictdata="e_street_data" okText="确定"
+                           style="width:55%"></ionic-dict-picker>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">目的地详细地址</span>
+        <input type="text" placeholder="选填" ng-model="goodsLine.eAddress">
+      </label>
+    </div>
+    <div class="button-bar">
+      <a class="button button-positive" ng-click="saveGoodsLine()" style="margin-right:10px;margin-left:10px;">保存</a>
+    </div>
+  </ion-content>
+</ion-view>

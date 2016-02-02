@@ -54,7 +54,7 @@ angular.module('starter.controllers').controller('UserCtrl', function ($scope, $
         $state.go('account');
         break;
       case 2:
-        $state.go('userGoodsAddress');
+        $state.go('userGoodsLine');
         break;
       case 3:
         $state.go('message');
