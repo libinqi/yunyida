@@ -45,46 +45,6 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
 
   $scope.isAdd = true;
 
-  $scope.$watch('goodsLine.sCityCode', function () {
-    $scope.goodsLine.sStreet = '';
-    if (!$scope.goodsLine.sCityCode) {
-      dictService.s_street_data = [];
-      return;
-    }
-    else {
-      $scope.sStreetList = [];
-    }
-
-    $timeout(function () {
-      $scope.sStreetList = CityPickerService.getStreetData($scope.goodsLine.sCityCode);
-      dictService.s_street_data = [];
-
-      for (var i = 0; i < $scope.sStreetList.length; i++) {
-        dictService.s_street_data.push({id: $scope.sStreetList[i].id, name: $scope.sStreetList[i].areaName});
-      }
-    });
-  });
-
-  $scope.$watch('goodsLine.eCityCode', function () {
-    $scope.goodsLine.eStreet = '';
-    if (!$scope.goodsLine.eCityCode) {
-      dictService.e_street_data = [];
-      return;
-    }
-    else {
-      $scope.eStreetList = [];
-    }
-
-    $timeout(function () {
-      $scope.eStreetList = CityPickerService.getStreetData($scope.goodsLine.eCityCode);
-      dictService.e_street_data = [];
-
-      for (var i = 0; i < $scope.eStreetList.length; i++) {
-        dictService.e_street_data.push({id: $scope.eStreetList[i].id, name: $scope.eStreetList[i].areaName});
-      }
-    });
-  });
-
   //触发发货地址弹出层事件
   $ionicModal.fromTemplateUrl('templates/user/addGoodsLine.html ', {
     scope: $scope
@@ -142,6 +102,46 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
           $scope.goodsLine.lat = data.latitude;
         });
       }, function (err) {
+      });
+
+      $scope.$watch('goodsLine.sCityCode', function () {
+        $scope.goodsLine.sStreet = '';
+        if (!$scope.goodsLine.sCityCode) {
+          dictService.s_street_data = [];
+          return;
+        }
+        else {
+          $scope.sStreetList = [];
+        }
+
+        $timeout(function () {
+          $scope.sStreetList = CityPickerService.getStreetData($scope.goodsLine.sCityCode);
+          dictService.s_street_data = [];
+
+          for (var i = 0; i < $scope.sStreetList.length; i++) {
+            dictService.s_street_data.push({id: $scope.sStreetList[i].id, name: $scope.sStreetList[i].areaName});
+          }
+        });
+      });
+
+      $scope.$watch('goodsLine.eCityCode', function () {
+        $scope.goodsLine.eStreet = '';
+        if (!$scope.goodsLine.eCityCode) {
+          dictService.e_street_data = [];
+          return;
+        }
+        else {
+          $scope.eStreetList = [];
+        }
+
+        $timeout(function () {
+          $scope.eStreetList = CityPickerService.getStreetData($scope.goodsLine.eCityCode);
+          dictService.e_street_data = [];
+
+          for (var i = 0; i < $scope.eStreetList.length; i++) {
+            dictService.e_street_data.push({id: $scope.eStreetList[i].id, name: $scope.eStreetList[i].areaName});
+          }
+        });
       });
     }
     $scope.goodsLineModal.show();

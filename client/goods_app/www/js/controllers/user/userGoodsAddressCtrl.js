@@ -45,26 +45,6 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
   $scope.isAdd = true;
   $scope.streetList = [];
 
-  $scope.$watch('goodsAddress.cityCode', function () {
-    $scope.goodsAddress.street = '';
-    if (!$scope.goodsAddress.cityCode) {
-      dictService.street_data = [];
-      return;
-    }
-    else {
-      $scope.streetList = [];
-    }
-
-    $timeout(function () {
-      $scope.streetList = CityPickerService.getStreetData($scope.goodsAddress.cityCode);
-      dictService.street_data = [];
-
-      for (var i = 0; i < $scope.streetList.length; i++) {
-        dictService.street_data.push({id: $scope.streetList[i].id, name: $scope.streetList[i].areaName});
-      }
-    });
-  });
-
   //触发发货地址弹出层事件
   $ionicModal.fromTemplateUrl('templates/user/addGoodsAddress.html ', {
     scope: $scope
@@ -121,6 +101,26 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
           $scope.goodsAddress.lat = data.latitude;
         });
       }, function (err) {
+      });
+
+      $scope.$watch('goodsAddress.cityCode', function () {
+        $scope.goodsAddress.street = '';
+        if (!$scope.goodsAddress.cityCode) {
+          dictService.street_data = [];
+          return;
+        }
+        else {
+          $scope.streetList = [];
+        }
+
+        $timeout(function () {
+          $scope.streetList = CityPickerService.getStreetData($scope.goodsAddress.cityCode);
+          dictService.street_data = [];
+
+          for (var i = 0; i < $scope.streetList.length; i++) {
+            dictService.street_data.push({id: $scope.streetList[i].id, name: $scope.streetList[i].areaName});
+          }
+        });
       });
     }
     $scope.goodsAddressModal.show();
