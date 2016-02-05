@@ -10,14 +10,14 @@ module.exports = {
         var data_from = req.params.all();
         User.create(data_from).exec(function (err, user) {
             if (err) res.badRequest(err);
-            else{
+            else {
                 data_from.user = user.userId;
                 Driver.create(data_from).exec(function (err, driver) {
                     if (err) res.badRequest(err);
-                    else{
+                    else {
                         user.driver = driver;
-                        data_from.driver=driver.driverId;
-                        Car.create(data_from).exec(function (err,car) {
+                        data_from.driver = driver.driverId;
+                        Car.create(data_from).exec(function (err, car) {
                             if (err) res.badRequest(err);
                             else {
                                 driver.cars.push(car);
@@ -28,6 +28,23 @@ module.exports = {
                 });
             }
         })
+    },
+    /**
+     * 通过Id获取企业信息
+     *
+     * (GET /driver/:id)
+     */
+    getDriver: function (req, res) {
+        var userId = req.param('id');
+        Driver.findOne({
+                where: {user: userId}
+            })
+            .populate('user')
+            .populate('cars')
+            .exec(function (err, users) {
+                if (err) res.badRequest(err);
+                res.ok(users);
+            });
     }
 };
 

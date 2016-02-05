@@ -471,6 +471,10 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   };
   //选择指定发货承运人信息
   $scope.selectPostionGoods = function (item) {
+    if($scope.driverInfoModal)
+    {
+      $scope.driverInfoModal.hide();
+    }
     $scope.postionGoods(item.userId);
     $scope.postionGoodsModal.hide();
   };
@@ -497,8 +501,53 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
         $scope.showMsg('请求失败,网络不给力！');
       }
       else {
-        $scope.carrierList = body;
-        $scope.showPostionGoods();
+        if (body && body.length > 0) {
+          for (var i = 0; i < body.length; i++) {
+            if (body[i].logo && body[i].logo != null) {
+              body[i].logo = io.sails.url + '/user/avatar/' + body[i].logo;
+            }
+            else {
+              body[i].logo = 'img/default-ava.png';
+            }
+          }
+        }
+        $timeout(function () {
+          $scope.carrierList = body;
+          $scope.showPostionGoods();
+        });
+      }
+    });
+  }
+
+
+  $scope.driverInfo;
+  $scope.driverItem;
+
+  //触发承运人详情选择弹出层事件
+  $ionicModal.fromTemplateUrl('templates/goods/driverInfo.html ', {
+    scope: $scope
+  }).then(function (modal) {
+    $scope.driverInfoModal = modal;
+  });
+  //弹出承运人详情选择页面
+  $scope.showDriverInfo = function () {
+    $scope.driverInfoModal.show();
+  };
+  //隐藏承运人详情选择页面
+  $scope.hideDriverInfo = function () {
+    $scope.driverInfoModal.hide();
+  };
+
+  $scope.getDriver = function (item) {
+    $scope.driverInfo = item;
+    var url = $scope.driverInfo.userType == '司机' ? '/driver/' + $scope.driverInfo.userId : '/enterprise/' + $scope.driverInfo.userId;
+    io.socket.post(url, function serverResponded(body, JWR) {
+      if (JWR.statusCode !== 200) {
+        $scope.showMsg('请求失败,网络不给力！');
+      }
+      else {
+        $scope.driverItem = body;
+        $scope.showDriverInfo();
       }
     });
   }

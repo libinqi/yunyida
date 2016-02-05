@@ -21,6 +21,22 @@ module.exports = {
                 });
             }
         })
+    },
+    /**
+     * 通过Id获取企业信息
+     *
+     * (GET /enterprise/:id)
+     */
+    getEnterprise: function (req, res) {
+        var userId=req.param('id');
+        Enterprise.findOne({
+                where: {user: userId}
+            })
+            .populate('user')
+            .exec(function (err, users) {
+                if (err) res.badRequest(err);
+                res.ok(users);
+            });
     }
 };
 

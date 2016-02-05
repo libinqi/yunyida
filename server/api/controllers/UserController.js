@@ -33,6 +33,7 @@ module.exports = {
         User.find({
                 where: {status: true, userType: {'not': '货主'}}
             })
+            .populate('goodsLines')
             .exec(function (err, users) {
                 if (err) res.badRequest(err);
                 res.ok(users);

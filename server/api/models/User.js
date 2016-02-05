@@ -26,7 +26,11 @@ module.exports = {
         cardNumber: {type: 'string'},//证件号码
         lng: {type: 'string'},//经度
         lat: {type: 'string'},//纬度
-        status: {type: 'boolean', defaultsTo: true}//状态
+        status: {type: 'boolean', defaultsTo: true},//状态
+        goodsLines: {
+            collection: 'goodsLine',//关联专线列表
+            via: 'user'
+        }
     },
     // Lifecycle Callbacks
     beforeCreate: function (values, cb) {

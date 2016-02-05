@@ -112,6 +112,7 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
     'post /enterprise/register': 'EnterpriseController.register',
+    '/enterprise/:id': 'EnterpriseController.getEnterprise',
 
     /***************************************************************************
      *                                                                          *
@@ -119,6 +120,7 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
     'post /driver/register': 'DriverController.register',
+    '/driver/:id': 'DriverController.getDriver',
 
     /***************************************************************************
      *                                                                          *

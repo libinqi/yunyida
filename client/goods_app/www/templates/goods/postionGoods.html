@@ -7,9 +7,9 @@
   <ion-content>
     <div class="list">
       <a class="item item-avatar item-button-right"  ng-repeat="item in carrierList">
-        <img ng-src="{{item.logo?item.logo:'img/default-ava.png'}}">
-        <h2>{{item.enterpriseName?item.enterpriseName:item.realName}}</h2>
-        <p>{{item.city+item.street+item.address}}</p>
+        <img ng-src="{{item.logo}}" ng-click="getDriver(item)">
+        <h2 ng-click="getDriver(item)">{{item.enterpriseName?item.enterpriseName:item.realName}}</h2>
+        <p ng-click="getDriver(item)">{{item.city+item.street+item.address}}</p>
         <button class="button button-assertive" style="top: 0;right: 0;height: 100%;" ng-click="selectPostionGoods(item)">下单</button>
       </a>
     </div>
