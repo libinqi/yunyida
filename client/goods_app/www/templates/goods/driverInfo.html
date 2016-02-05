@@ -1,0 +1,78 @@
+<ion-header-bar class="bar-stable" style="border:0px !important;background-color:#ef6600;color:#fff !important;">
+  <a class="button icon-left ion-ios-arrow-left button-clear button-light"
+     style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="hideDriverInfo()"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">{{driverInfo.userType}}</div>
+  <a class="button button-clear" style="width:40px;height:25px"></a>
+</ion-header-bar>
+<ion-view view-title="{{driverInfo.userType}}">
+  <ion-content class="padding">
+    <section id="user-bg" class="relative" style="height: auto;">
+      <div class="user-ava relative" style="height: auto;top:0px;">
+        <div>
+          <!-- <img ng-src="{{avaImg}}" alt="" class="ava"> -->
+          <img src="img/ava-block.png" alt="" class="ava" style="background-image:url('{{driverInfo.logo}}');margin-left: 40%">
+        </div>
+      </div>
+    </section>
+    <section>
+      <div style="width:100%;margin:10px auto;text-ailgn:center;">
+        <div class="card" style="margin:5px 0px !important;">
+          <div class="item item-divider">
+            {{driverInfo.userType}}信息
+          </div>
+          <div class="item item-text-wrap">
+            <!-- 承运人信息 -->
+            <label class="item-detail">
+              <div class="order-detail-label">承运人：</div>
+              <label>{{driverInfo.enterpriseName?driverInfo.enterpriseName:driverInfo.realName;}}</label>
+            </label>
+            <label class="item-detail">
+              <div class="order-detail-label">地址：</div>
+              <label>{{driverInfo.city+driverInfo.street+driverInfo.address}}</label>
+            </label>
+            <label class="item-detail">
+              <div class="order-detail-label">电话：</div>
+              <label>{{driverInfo.phoneNumber}}</label>
+            </label>
+            <!-- 司机信息 -->
+            <div ng-if="driverInfo.userType=='司机'">
+              <label class="item-detail">
+                <div class="order-detail-label">车辆信息：</div>
+                <label>{{driverItem.cars[0].carNumber+' '+driverItem.cars[0].carType}}</label>
+              </label>
+            </div>
+            <!-- 物流企业信息 -->
+            <div ng-if="driverInfo.userType=='物流企业'">
+              <label class="item-detail">
+                <div class="order-detail-label">业务类型：</div>
+                <label>{{driverItem.businessType}}</label>
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- 专线信息 -->
+        <div ng-if="driverInfo.goodsLines&&driverInfo.goodsLines.length>0" class="card"
+             style="margin:10px 0px !important;">
+          <div class="item item-divider">
+            {{driverInfo.userType=='司机'?'常跑线路':'经营专线'}}
+          </div>
+          <div class="item item-text-wrap">
+            <label class="item-detail" ng-repeat="line in driverInfo.goodsLines">
+              <div class="order-detail-label2" style="font-size: 16px;"></div>
+              <label>{{line.sCity+' → '+line.sCity}}</label>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="button-bar" style="margin-top:10px">
+      <a class="button button-positive" style="margin-right:10px;margin-left:10px;"
+         href="te:{{driverInfo.phoneNumber}}">马上联系
+      </a>
+      <button class="button button-assertive"
+              ng-click="selectPostionGoods(driverInfo)">下单
+      </button>
+    </div>
+    </div>
+  </ion-content>
+</ion-view>
