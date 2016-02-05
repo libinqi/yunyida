@@ -13,5 +13,8 @@
         <button class="button button-assertive" style="top: 0;right: 0;height: 100%;" ng-click="selectPostionGoods(item)">下单</button>
       </a>
     </div>
+    <div ng-if="carrierList.length==0" class="bar bar-stable">
+      <div class="no-content">没有符合条件的物流企业</div>
+    </div>
   </ion-content>
 </ion-view>

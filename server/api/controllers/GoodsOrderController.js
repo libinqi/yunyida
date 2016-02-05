@@ -17,14 +17,12 @@ module.exports = {
             status: true
         };
 
-        if(orderStatus)
-        {
-            if(orderStatus=='已删除')
-            {
-                option.status=false;
+        if (orderStatus) {
+            if (orderStatus == '已删除') {
+                option.status = false;
             }
             else {
-                option.goodsOrderStatus=orderStatus;
+                option.goodsOrderStatus = orderStatus;
             }
         }
 
@@ -48,14 +46,12 @@ module.exports = {
             status: true
         };
 
-        if(orderStatus)
-        {
-            if(orderStatus=='已删除')
-            {
-                option.status=false;
+        if (orderStatus) {
+            if (orderStatus == '已删除') {
+                option.status = false;
             }
             else {
-                option.goodsOrderStatus=orderStatus;
+                option.goodsOrderStatus = orderStatus;
             }
         }
 
@@ -73,8 +69,19 @@ module.exports = {
         GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
             if (err) res.badRequest(err);
             order.goodsOrderStatus = '接单';
-            order.carrier=userId;
-            order.goods.status=false;
+            order.carrier = userId;
+            order.goods.status = false;
+            order.save();
+            res.ok(order);
+        });
+    },
+    unAddOrder: function (req, res) {
+        var orderId = req.body.orderId;
+        GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
+            if (err) res.badRequest(err);
+            order.goodsOrderStatus = '未接单';
+            order.carrier = null;
+            order.goods.status = true;
             order.save();
             res.ok(order);
         });
@@ -95,7 +102,7 @@ module.exports = {
         GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
             if (err) res.badRequest(err);
             order.goodsOrderStatus = '确认承运';
-            order.pricing=pricing;
+            order.pricing = pricing;
             order.save();
             res.ok(order);
         });
@@ -105,6 +112,8 @@ module.exports = {
         GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
             if (err) res.badRequest(err);
             order.goodsOrderStatus = '已取消';
+            order.carrier = null;
+            order.goods.status = false;
             order.save();
             res.ok(order);
         });
@@ -115,6 +124,7 @@ module.exports = {
             if (err) res.badRequest(err);
             order.goodsOrderStatus = '未接单';
             order.status = true;
+            order.carrier = null;
             order.goods.publishType = '随机发货';
             order.save();
             res.ok(order);

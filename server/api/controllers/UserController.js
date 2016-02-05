@@ -30,13 +30,25 @@ module.exports = {
             });
     },
     getCarrier: function (req, res) {
-        User.find({
-                where: {status: true, userType: {'not': '货主'}}
-            })
-            .populate('goodsLines')
-            .exec(function (err, users) {
+        var sCity = req.body.sCity || req.query.sCity;
+        var eCity = req.body.eCity || req.query.eCity;
+        User.query("select u.userId from `user` as u inner join enterprise as e on e.`user`=u.userId inner join goodsline as l on l.`user`=u.userId where u.userType='物流企业' and e.businessType like '%零担%' and l.sCity like '%" + sCity + "%'and l.eCity like '%" + eCity + "%'"
+            , function (err, results) {
                 if (err) res.badRequest(err);
-                res.ok(users);
+                if (results && results.length > 0) {
+                    var userIds = [];
+                    for (var i = 0; i < results.length; i++) {
+                        userIds.push(results[i].userId);
+                    }
+                    User.find({userId: userIds})
+                        .populate('goodsLines')
+                        .exec(function (err, users) {
+                            if (err) res.badRequest(err);
+                            res.ok(users);
+                        });
+                } else {
+                    res.ok([]);
+                }
             });
     },
     update: function (req, res) {

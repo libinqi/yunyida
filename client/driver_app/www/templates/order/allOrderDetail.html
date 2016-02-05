@@ -72,6 +72,11 @@
             <div class="order-detail-label2" style="font-size: 16px;">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：</div>
             <label style="color: #ff0000">&nbsp;{{orderItem.pricing}}元</label>
           </label>
+          <!-- 备注说明 -->
+          <label class="item-detail" ng-if="orderItem.goods.remark">
+            <div class="order-detail-label2" style="font-size: 16px;">备注说明：</div>
+            <label>{{orderItem.goods.remark}}</label>
+          </label>
           <!-- 创建时间 -->
           <label class="item-detail">
             <div class="order-detail-label2" style="font-size: 16px;">创建时间：</div>

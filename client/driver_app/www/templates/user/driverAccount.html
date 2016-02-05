@@ -1,0 +1,61 @@
+<ion-header-bar class="bar-positive" style="border:0px !important;background-color:#387ef5;color:#fff !important;">
+  <a class="button icon-left ion-ios-arrow-left button-clear button-light" ng-click="backGo()"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">我的资料</div>
+  <a class="button button-clear" style="width:40px;height:25px"></a>
+</ion-header-bar>
+<ion-content>
+  <form ng-submit="saveDriverInfo()">
+    <div class="list padding">
+      <label class="item item-input">
+        <span class="input-label">姓名</span>
+        <input type="text" ng-model="userData.realName">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">证件号码</span>
+        <input type="text" placeholder="驾驶证或者身份证号码" ng-model="userData.cardNumber">
+      </label>
+      <label class="item item-input" style="border-bottom:1px solid #ccc">
+        <span class="input-label">车牌号</span>
+        <input type="text" ng-model="userData.carNumber">
+      </label>
+      <label class="item item-input">
+        <span class="input-label" style="width:35%">所在城市</span>
+        <ionic-city-picker placeholder="出发城市" backdrop=true backdrop-click-to-close=false css-class="text-align-l"
+                           okText="确定" citydata="userData.city" citycode="userData.cityCode" style="width:60%;"></ionic-city-picker>
+        <i class="icon ion-chevron-right " style="color: #ACACAC;"></i>
+      </label>
+      <label class="item item-input">
+        <div class="input-label" style="width:40%">车型</div>
+        <ionic-dict-picker backdrop=true backdrop-click-to-close=false css-class="text-align-r"
+                           dictmodel="userData.carType" dictdata="car_type" okText="确定"
+                           style="width:55%"></ionic-dict-picker>
+        <i class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;"></i>
+      </label>
+      <label ng-if="userData.carType" class="item item-input">
+        <div class="input-label" style="width:40%">需车长</div>
+        <ionic-dict-picker ng-if="carLengthList.length>0" backdrop=true backdrop-click-to-close=false
+                           css-class="text-align-r"
+                           dictmodel="userData.carLength" dictdata="car_length" okText="确定"
+                           style="width:55%"></ionic-dict-picker>
+        <i class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;"></i>
+      </label>
+      <div class="padding" style="text-align: center">
+        <div style="width: 33%;float: left; ">
+          <img src="{{userData.drivingLicenseImage?userData.drivingLicenseImage:'img/camera.png'}}" class="icon ion-chevron-right icon-accessory" ng-click="upLoadDrivingImg()" style="color: #ACACAC;width: 46px;height: 46px;"/>
+          <input type="text" value="上传行驶证" style="padding-left: 20px;padding-bottom: 20px;"  ng-click="upLoadDrivingImg()" readonly />
+        </div>
+        <div style="width: 33%;float: left;">
+          <img src="{{userData.driverLicenseImage?userData.driverLicenseImage:'img/camera.png'}}" class="icon ion-chevron-right icon-accessory" ng-click="upLoadDriverImg()" style="color: #ACACAC;width: 46px;height: 46px;"/>
+          <input type="text" value="上传驾驶证" style="padding-left: 20px;padding-bottom: 20px;" ng-click="upLoadDriverImg()" readonly />
+        </div>
+        <div style="width: 33%;float: left;">
+          <img src="{{userData.carImage?userData.carImage:'img/camera.png'}}" class="icon ion-chevron-right icon-accessory" ng-click="upLoadCarImg()" style="color: #ACACAC;width: 46px;height: 46px;"/>
+          <input type="text" value="上传车辆图片" style="padding-left: 20px;padding-bottom: 20px;color: #ACACAC" ng-click="upLoadCarImg()" readonly />
+        </div>
+      </div>
+      <div class="padding">
+        <button class="button button-block button-positive" type="submit">保存修改</button>
+      </div>
+    </div>
+  </form>
+</ion-content>

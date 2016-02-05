@@ -17,7 +17,7 @@
           <img style="width: 18px !important;height: 30px !important;top:64px !important;right:20px !important;"
                src="img/arrow-right.png" ng-click="orderDetail(item)">
           <p style="height: 28px;padding:5px 12px 2px 0px;" ng-click="orderDetail(item)">
-            <span style="margin-right: 45px;">{{item.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</span>
+            <span style="margin-right: 30px;">{{item.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</span>
             <span style="color: #387ef5;">{{item.goods.goodsType}}-{{item.goods.publishType}}</span>
             <span style="color: #387ef5;float: right;font-weight: bold;">{{item.goodsOrderStatus}}</span>
           </p>
@@ -47,11 +47,11 @@
     </ion-header-bar>
     <ion-content has-header="true">
       <ul class="list">
-        <a class="item" ng-click="orderFilter('')">默认</a>
+        <a class="item" ng-click="orderFilter('')">全部</a>
         <a class="item" ng-click="orderFilter('接单')">接单</a>
         <a class="item" ng-click="orderFilter('确认接单')">确认接单</a>
-        <a class="item" ng-click="orderFilter('取消接单')">取消接单</a>
         <a class="item" ng-click="orderFilter('确认承运')">确认承运</a>
+        <a class="item" ng-click="orderFilter('已取消')">已取消</a>
         <a class="item" ng-click="orderFilter('已完成')">已完成</a>
         <a class="item" ng-click="orderFilter('已删除')">已删除</a>
       </ul>

@@ -236,10 +236,17 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         controller: "ChangePWDCtrl"
       })
 
-      .state('account', {
-        url: '/account',
-        templateUrl: 'templates/user/account.html',
-        controller: 'AccountCtrl',
+      .state('driverAccount', {
+        url: '/driverAccount',
+        templateUrl: 'templates/user/driverAccount.html',
+        controller: 'DriverAccountCtrl',
+        cache: 'false'
+      })
+
+      .state('enterpriseAccount', {
+        url: '/enterpriseAccount',
+        templateUrl: 'templates/user/enterpriseAccount.html',
+        controller: 'EnterpriseAccountCtrl',
         cache: 'false'
       })
 

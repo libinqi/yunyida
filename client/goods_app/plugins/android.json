@@ -7,6 +7,15 @@
         "files": {}
     },
     "installed_plugins": {
+        "com.qtong.cordova.bdlocation": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "com.synconset.imagepicker": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "com.verso.cordova.clipboard": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
         "cordova-plugin-actionsheet": {
             "PACKAGE_NAME": "com.yunyida56.goodsapp"
         },
@@ -38,16 +47,7 @@
         "cordova-plugin-x-toast": {
             "PACKAGE_NAME": "com.yunyida56.goodsapp"
         },
-        "com.qtong.cordova.bdlocation": {
-            "PACKAGE_NAME": "com.yunyida56.goodsapp"
-        },
         "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.yunyida56.goodsapp"
-        },
-        "com.synconset.imagepicker": {
-            "PACKAGE_NAME": "com.yunyida56.goodsapp"
-        },
-        "com.verso.cordova.clipboard": {
             "PACKAGE_NAME": "com.yunyida56.goodsapp"
         }
     },

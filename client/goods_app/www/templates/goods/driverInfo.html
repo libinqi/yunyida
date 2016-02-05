@@ -34,15 +34,8 @@
               <div class="order-detail-label">电话：</div>
               <label>{{driverInfo.phoneNumber}}</label>
             </label>
-            <!-- 司机信息 -->
-            <div ng-if="driverInfo.userType=='司机'">
-              <label class="item-detail">
-                <div class="order-detail-label">车辆信息：</div>
-                <label>{{driverItem.cars[0].carNumber+' '+driverItem.cars[0].carType}}</label>
-              </label>
-            </div>
             <!-- 物流企业信息 -->
-            <div ng-if="driverInfo.userType=='物流企业'">
+            <div>
               <label class="item-detail">
                 <div class="order-detail-label">业务类型：</div>
                 <label>{{driverItem.businessType}}</label>
@@ -54,12 +47,12 @@
         <div ng-if="driverInfo.goodsLines&&driverInfo.goodsLines.length>0" class="card"
              style="margin:10px 0px !important;">
           <div class="item item-divider">
-            {{driverInfo.userType=='司机'?'常跑线路':'经营专线'}}
+            经营专线
           </div>
           <div class="item item-text-wrap">
             <label class="item-detail" ng-repeat="line in driverInfo.goodsLines">
-              <div class="order-detail-label2" style="font-size: 16px;"></div>
-              <label>{{line.sCity+' → '+line.sCity}}</label>
+              <!--<div class="order-detail-label2" style="font-size: 16px;"></div>-->
+              <label>{{line.sCity+' → '+line.eCity}}</label>
             </label>
           </div>
         </div>
@@ -67,7 +60,7 @@
     </section>
     <div class="button-bar" style="margin-top:10px">
       <a class="button button-positive" style="margin-right:10px;margin-left:10px;"
-         href="te:{{driverInfo.phoneNumber}}">马上联系
+         href="tel:{{driverInfo.phoneNumber}}">马上联系
       </a>
       <button class="button button-assertive"
               ng-click="selectPostionGoods(driverInfo)">下单

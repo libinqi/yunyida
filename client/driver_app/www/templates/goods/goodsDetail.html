@@ -24,7 +24,7 @@
           </label>
           <div class="item-detail" style="margin-left:27px;">
             <div class="order-detail-label">电话：</div>
-            <a href="tel:{{goodsItem.sPhoneNumber}}">{{goodsItem.sPhoneNumber}}</a>
+            <a href="#">{{goodsItem.sPhoneNumber| handlePhone}}</a>
           </div>
           <!-- 收货人信息 -->
           <label class="item-detail" style="margin-top:10px">
@@ -38,7 +38,7 @@
           </label>
           <div class="item-detail" style="margin-left:27px;">
             <div class="order-detail-label">电话：</div>
-            <a href="tel:{{goodsItem.ePhoneNumber}}">{{goodsItem.ePhoneNumber}}</a>
+            <a href="#">{{goodsItem.ePhoneNumber| handlePhone}}</a>
           </div>
         </div>
       </div>
@@ -62,6 +62,11 @@
             <div class="order-detail-label2" style="font-size: 16px;">需求车辆：</div>
             <label>{{goodsItem.carType}}</label>
           </label>
+          <!-- 备注说明 -->
+          <label class="item-detail" ng-if="goodsItem.remark">
+            <div class="order-detail-label2" style="font-size: 16px;">备注说明：</div>
+            <label>{{goodsItem.remark}}</label>
+          </label>
           <!-- 创建时间 -->
           <label class="item-detail">
             <div class="order-detail-label2" style="font-size: 16px;">创建时间：</div>
@@ -70,9 +75,10 @@
         </div>
       </div>
       <div class="button-bar" style="margin-top:10px">
-        <a class="button button-assertive" style="margin-right:10px;margin-left:10px;" href="tel:{{goodsItem.sPhoneNumber}}">马上联系
-        </a>
-        <a class="button button-positive" style="margin-right:10px;margin-left:10px;" ng-click="addOrder(goodsItem.goodsOrders[0].goodsOrderId)">立即接单
+        <!--<a class="button button-assertive" style="margin-right:10px;margin-left:10px;" href="tel:{{goodsItem.sPhoneNumber}}">马上联系-->
+        <!--</a>-->
+        <a class="button button-positive" style="margin-right:10px;margin-left:10px;"
+           ng-click="addOrder(goodsItem.goodsOrders[0].goodsOrderId)">立即接单
         </a>
       </div>
     </div>

@@ -13,6 +13,7 @@ module.exports = {
         carId: {type: 'integer', primaryKey: true, autoIncrement: true},//车辆Id
         carNumber: {type: 'string', unique: true},//车牌号码
         carType: {type: 'string'},//车型
+        carLength: {type: 'string'},//车长
         carImage: {type: 'string'},//车辆图片
         lng: {type: 'string'},//经度
         lat: {type: 'string'},//纬度

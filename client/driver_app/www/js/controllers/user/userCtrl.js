@@ -51,15 +51,18 @@ angular.module('starter.controllers').controller('UserCtrl', function ($scope, $
   $scope.goTo = function (id) {
     switch (id) {
       case 1:
-        $state.go('account');
+        $state.go('driverAccount');
         break;
       case 2:
-        $state.go('userGoodsLine');
+        $state.go('enterpriseAccount');
         break;
       case 3:
-        $state.go('message');
+        $state.go('userGoodsLine');
         break;
       case 4:
+        $state.go('message');
+        break;
+      case 5:
         $state.go('invitation');
         break;
       default:

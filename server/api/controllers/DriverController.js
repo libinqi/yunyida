@@ -15,12 +15,12 @@ module.exports = {
                 Driver.create(data_from).exec(function (err, driver) {
                     if (err) res.badRequest(err);
                     else {
-                        user.driver = driver;
                         data_from.driver = driver.driverId;
                         Car.create(data_from).exec(function (err, car) {
                             if (err) res.badRequest(err);
                             else {
-                                driver.cars.push(car);
+                                driver.car = car;
+                                user.driver = driver;
                                 res.ok(user);
                             }
                         });
@@ -45,6 +45,27 @@ module.exports = {
                 if (err) res.badRequest(err);
                 res.ok(users);
             });
-    }
+    },
+    update: function (req, res) {
+        var data_from = req.params.all();
+        User.update({userId: data_from.userId}, data_from).exec(function (err, user) {
+            if (err) res.badRequest(err);
+            else {
+                Driver.update({driverId: data_from.driverId}, data_from).exec(function (err, driver) {
+                    if (err) res.badRequest(err);
+                    else {
+                        Car.update({carId: data_from.carId}, data_from).exec(function (err, car) {
+                            if (err) res.badRequest(err);
+                            else {
+                                user[0].driver = driver[0];
+                                user[0].driver.car = car[0];
+                                res.ok(user[0]);
+                            }
+                        });
+                    }
+                });
+            }
+        })
+    },
 };
 

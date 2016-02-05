@@ -99,6 +99,7 @@ module.exports.routes = {
     '/order/userOrder': 'GoodsOrderController.userOrder',
     '/order/carrierOrder': 'GoodsOrderController.carrierOrder',
     'post /order/addOrder': 'GoodsOrderController.addOrder',
+    'post /order/unAddOrder': 'GoodsOrderController.unAddOrder',
     'post /order/updateOrder': 'GoodsOrderController.updateOrder',
     'post /order/confirmCarrier': 'GoodsOrderController.confirmCarrier',
     'post /order/cancelOrder': 'GoodsOrderController.cancelOrder',
@@ -112,6 +113,7 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
     'post /enterprise/register': 'EnterpriseController.register',
+    'post /enterprise/update': 'EnterpriseController.update',
     '/enterprise/:id': 'EnterpriseController.getEnterprise',
 
     /***************************************************************************
@@ -120,6 +122,7 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
     'post /driver/register': 'DriverController.register',
+    'post /driver/update': 'DriverController.update',
     '/driver/:id': 'DriverController.getDriver',
 
     /***************************************************************************

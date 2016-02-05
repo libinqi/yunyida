@@ -37,6 +37,21 @@ module.exports = {
                 if (err) res.badRequest(err);
                 res.ok(users);
             });
+    },
+    update: function (req, res) {
+        var data_from = req.params.all();
+        User.update({userId: data_from.userId}, data_from).exec(function (err, user) {
+            if (err) res.badRequest(err);
+            else{
+                Enterprise.update({enterpriseId: data_from.enterpriseId},data_from).exec(function (err, enterprise) {
+                    if (err) res.badRequest(err);
+                    else{
+                        user[0].enterprise = enterprise[0];
+                        res.ok(user[0]);
+                    }
+                });
+            }
+        })
     }
 };
 

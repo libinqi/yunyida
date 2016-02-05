@@ -18,7 +18,9 @@
   <ion-list>
     <ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()"
                    on-pulling="pulltext()" spinner="ripple" pulling-icon="ion-ios-refresh-empty"></ion-refresher>
-    <ion-item ng-repeat="item in goodsList" class="item item-button-right">
+    <ion-item ng-repeat="item in goodsList" class="item item-thumbnail-right">
+      <img style="width: 18px !important;height: 30px !important;top:64px !important;right:20px !important;"
+           src="img/arrow-right.png" ng-click="goodsDetail(item)">
         <p style="height: 28px;padding:5px 12px 2px 0px;" ng-click="goodsDetail(item)">
           <span style="margin-right: 45px;">{{item.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</span>
           <span style="color: #ef6600;font-weight: bold;">{{item.user.enterpriseName}}</span>
@@ -33,7 +35,7 @@
           <img style="width: 18px;height: 27px;vertical-align: bottom" src="img/gray-marker.png"/>
           <span>{{item.eCity+item.eStreet}}</span>
         </p>
-        <button class="button button-positive" style="top: 0;right: 0;height: 100%;width: 22%;padding-left: 20px;" ng-click="addOrder(item.goodsOrders[0].goodsOrderId)">接单</button>
+        <!--<button class="button button-positive" style="top: 0;right: 0;height: 100%;width: 22%;padding-left: 20px;" ng-click="addOrder(item.goodsOrders[0].goodsOrderId)">接单</button>-->
     </ion-item>
   </ion-list>
   <ion-infinite-scroll ng-if="load_over" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>

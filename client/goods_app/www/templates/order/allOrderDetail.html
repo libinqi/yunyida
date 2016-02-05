@@ -83,6 +83,11 @@
             </div>
             <label style="color: #ff0000">&nbsp;{{orderItem.pricing}}元</label>
           </label>
+          <!-- 备注说明 -->
+          <label class="item-detail" ng-if="orderItem.goods.remark">
+            <div class="order-detail-label2" style="font-size: 16px;">备注说明：</div>
+            <label>{{orderItem.goods.remark}}</label>
+          </label>
           <!-- 创建时间 -->
           <label class="item-detail">
             <div class="order-detail-label2" style="font-size: 16px;">创建时间：</div>
@@ -100,11 +105,11 @@
                 ng-click="deleteOrder(orderItem.goodsOrderId)">删除订单
         </button>
         <button class="button button-positive" style="margin-right:10px;margin-left:10px;"
-                ng-if="orderItem.goodsOrderStatus=='未评价'"
+                ng-if="orderItem.goodsOrderStatus=='确认承运'"
                 ng-click="orderEvaluate(orderItem.goodsOrderId)">马上评价
         </button>
         <button class="button button-assertive"
-                ng-if="orderItem.goodsOrderStatus=='未接单'||orderItem.goodsOrderStatus=='接单'||orderItem.goodsOrderStatus=='取消接单'||orderItem.goodsOrderStatus=='已取消'"
+                ng-if="orderItem.goodsOrderStatus=='未接单'||orderItem.goodsOrderStatus=='接单'"
                 ng-click="refreshOrder(orderItem.goodsOrderId)">重新发布
         </button>
       </div>

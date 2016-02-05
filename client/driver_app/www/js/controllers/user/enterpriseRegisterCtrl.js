@@ -25,8 +25,8 @@ angular.module('starter.controllers').controller('EnterpriseRegisterCtrl', funct
       {text: "整车", checked: false}
     ];
 
-    $scope.$watch('userData.cityCode', function () {
-      $scope.userData.street = '';
+    $scope.$watch('userData.cityCode', function (oldValue, newValue) {
+      if (oldValue && newValue) $scope.userData.street = '';
       if (!$scope.userData.cityCode) {
         dictService.street_data = [];
         return;
@@ -249,21 +249,20 @@ angular.module('starter.controllers').controller('EnterpriseRegisterCtrl', funct
       var businessType = '';
       for (var i = 0; i < $scope.businessTypeList.length; i++) {
         if ($scope.businessTypeList[i].checked) {
-          if(businessType=='')
-          {
+          if (businessType == '') {
             businessType += $scope.businessTypeList[i].text;
           }
-          else{
-            businessType += ','+$scope.businessTypeList[i].text;
+          else {
+            businessType += ',' + $scope.businessTypeList[i].text;
           }
         }
       }
-      if (businessType=='') {
+      if (businessType == '') {
         $scope.showMsg('业务类型必选一项');
         return false;
       }
 
-      $scope.userData.businessType=businessType;
+      $scope.userData.businessType = businessType;
       $scope.userData.userType = '物流企业';
 
       $ionicLoading.show({

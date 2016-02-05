@@ -118,9 +118,8 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     });
     confirmPopup.then(function (res) {
       if (res) {
-        io.socket.post('/order/updateOrder', {
-          orderId: orderId,
-          orderStatus: '取消接单'
+        io.socket.post('/order/unAddOrder', {
+          orderId: orderId
         }, function serverResponded(body, JWR) {
           if (JWR.statusCode !== 200) {
             $scope.showMsg('请求失败,网络不给力！');
