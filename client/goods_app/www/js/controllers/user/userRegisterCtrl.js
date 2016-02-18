@@ -194,6 +194,10 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
     }
 
     $scope.saveEnterpriseInfo = function () {
+      if (!$scope.userData.enterpriseName) {
+        $scope.showMsg('企业名称不能为空');
+        return false;
+      }
       if (!$scope.userData.realName) {
         $scope.showMsg('姓名不能为空');
         return false;
