@@ -151,6 +151,36 @@ module.exports = {
             order.save();
             res.ok(order);
         });
+    },
+    carrierOrderStatis: function (req, res) {
+        var userId = req.body.userId;
+        var sql = "SELECT COUNT(*) as count,'全部' as 'status' FROM goodsorder WHERE goodsOrderStatus!='已删除' AND  carrier=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'未接单' as 'status' FROM goodsorder WHERE goodsOrderStatus='未接单' AND  carrier=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'接单' as 'status' FROM goodsorder WHERE goodsOrderStatus='接单' AND  carrier=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'确认接单' as 'status' FROM goodsorder WHERE goodsOrderStatus='确认接单' AND  carrier=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'确认承运' as 'status' FROM goodsorder WHERE goodsOrderStatus='确认承运' AND  carrier=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'已取消' as 'status' FROM goodsorder WHERE goodsOrderStatus='已取消' AND  carrier=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'已完成' as 'status' FROM goodsorder WHERE goodsOrderStatus='已完成' AND  carrier=" + userId;
+
+        GoodsOrder.query(sql, function (err, results) {
+            if (err) res.badRequest(err);
+            res.ok(results);
+        });
+    },
+    shipperOrderStatis: function (req, res) {
+        var userId = req.body.userId;
+        var sql = "SELECT COUNT(*) as count,'全部' as 'status' FROM goodsorder WHERE goodsOrderStatus!='已删除' AND shipper=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'未接单' as 'status' FROM goodsorder WHERE goodsOrderStatus='未接单' AND shipper=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'接单' as 'status' FROM goodsorder WHERE goodsOrderStatus='接单' AND shipper=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'确认接单' as 'status' FROM goodsorder WHERE goodsOrderStatus='确认接单' AND shipper=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'确认承运' as 'status' FROM goodsorder WHERE goodsOrderStatus='确认承运' AND shipper=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'已取消' as 'status' FROM goodsorder WHERE goodsOrderStatus='已取消' AND shipper=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'已完成' as 'status' FROM goodsorder WHERE goodsOrderStatus='已完成' AND shipper=" + userId;
+
+        GoodsOrder.query(sql, function (err, results) {
+            if (err) res.badRequest(err);
+            res.ok(results);
+        });
     }
 };
 

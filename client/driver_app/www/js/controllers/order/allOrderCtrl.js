@@ -31,9 +31,33 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     userId: UserInfo.data.userId
   };
 
+  $scope.orderStatisList=[
+    {status:'全部',count:0},
+    {status:'接单',count:0},
+    {status:'确认接单',count:0},
+    {status:'确认承运',count:0},
+    {status:'已取消',count:0},
+    {status:'已完成',count:0}
+  ];
+
   $scope.toggleLeft = function () {
     $ionicSideMenuDelegate.toggleLeft();
   };
+
+  $scope.getOrderStatis=function(){
+    io.socket.get('/order/carrierOrderStatis', $scope.query, function serverResponded(body, JWR) {
+      if (JWR.statusCode !== 200) {
+        $scope.showMsg('请求失败,网络不给力！');
+      }
+      else {
+        if (body.length > 0) {
+          $scope.orderStatisList = body;
+        }
+      }
+    });
+  }
+
+  $scope.getOrderStatis();
 
   //下拉刷新
   $scope.doRefresh = function () {
@@ -76,6 +100,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   };
 
   $scope.orderFilter = function (orderStatus) {
+    if(orderStatus=='全部')orderStatus='';
     $scope.query.orderStatus = orderStatus;
     $scope.doRefresh();
     $scope.toggleLeft();
