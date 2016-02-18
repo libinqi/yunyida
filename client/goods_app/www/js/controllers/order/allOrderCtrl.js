@@ -65,7 +65,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   $scope.doRefresh = function () {
     $scope.orderList = [];
     $scope.query.page = 1;
-    $scope.load_over = true;
+    $scope.load_over = false;
     $scope.loadMore();
     // 停止广播ion-refresher
     $scope.$broadcast('scroll.refreshComplete');
@@ -79,6 +79,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   };
   //更多
   $scope.loadMore = function () {
+    $scope.load_over = false;
     //这里使用定时器是为了缓存一下加载过程，防止加载过快
     $timeout(function () {
       io.socket.get('/order/userOrder', $scope.query, function serverResponded(body, JWR) {
@@ -90,11 +91,12 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
             $scope.orderList = $scope.orderList.concat(body);
             $scope.query.page++;
             $scope.$broadcast("scroll.infiniteScrollComplete");
+            $scope.load_over = true;
           }
           else {
-            $scope.load_over = false;
             $scope.orderList = $scope.orderList.concat([]);
             $scope.$broadcast("scroll.infiniteScrollComplete");
+            $scope.load_over = false;
           }
         }
       });

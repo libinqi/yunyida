@@ -63,7 +63,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   $scope.doRefresh = function () {
     $scope.orderList = [];
     $scope.query.page = 1;
-    $scope.load_over = true;
+    $scope.load_over = false;
     $scope.loadMore();
     // 停止广播ion-refresher
     $scope.$broadcast('scroll.refreshComplete');
@@ -88,11 +88,12 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
             $scope.orderList = $scope.orderList.concat(body);
             $scope.query.page++;
             $scope.$broadcast("scroll.infiniteScrollComplete");
+            $scope.load_over = true;
           }
           else {
-            $scope.load_over = false;
             $scope.orderList = $scope.orderList.concat([]);
             $scope.$broadcast("scroll.infiniteScrollComplete");
+            $scope.load_over = false;
           }
         }
       });

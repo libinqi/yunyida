@@ -212,7 +212,7 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
   $scope.doRefresh = function () {
     $scope.items = [];
     $scope.query.page = 1;
-    $scope.load_over = true;
+    $scope.load_over = false;
     $scope.loadMore();
     // 停止广播ion-refresher
     $scope.$broadcast('scroll.refreshComplete');
@@ -220,6 +220,7 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
   };
 
   $scope.loadMore = function () {
+    $scope.load_over = false;
     //这里使用定时器是为了缓存一下加载过程，防止加载过快
     $timeout(function () {
       io.socket.get('/goodsLine/userGoodsLine', $scope.query, function serverResponded(body, JWR) {
@@ -231,11 +232,12 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
             $scope.items = $scope.items.concat(body);
             $scope.query.page++;
             $scope.$broadcast("scroll.infiniteScrollComplete");
+            $scope.load_over = true;
           }
           else {
-            $scope.load_over = false;
             $scope.items = $scope.items.concat([]);
             $scope.$broadcast("scroll.infiniteScrollComplete");
+            $scope.load_over = false;
           }
         }
       });
