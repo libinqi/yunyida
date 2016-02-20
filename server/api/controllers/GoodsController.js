@@ -30,13 +30,11 @@ module.exports = {
             status: true
         };
 
-        if(sCity)
-        {
-            option.sCity=sCity;
+        if (sCity) {
+            option.sCity = {'contains': sCity};
         }
-        if(eCity)
-        {
-            option.eCity=eCity;
+        if (eCity) {
+            option.eCity = {'contains': eCity};
         }
         Goods.find(option)
             .sort('updatedAt DESC')

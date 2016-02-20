@@ -105,8 +105,8 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
       }, function (err) {
       });
 
-      $scope.$watch('goodsAddress.cityCode', function () {
-        $scope.goodsAddress.street = '';
+      $scope.$watch('goodsAddress.cityCode', function (oldValue,newValue) {
+        if (oldValue && newValue) $scope.goodsAddress.street = '';
         if (!$scope.goodsAddress.cityCode) {
           dictService.street_data = [];
           return;

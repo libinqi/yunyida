@@ -77,28 +77,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
   };
 
   $scope.queryGoods = function () {
-    //$scope.load_over = false;
-    //这里使用定时器是为了缓存一下加载过程，防止加载过快
-    $timeout(function () {
-      io.socket.get('/goods/list', $scope.query, function serverResponded(body, JWR) {
-        if (JWR.statusCode !== 200) {
-          $scope.showMsg('请求失败,网络不给力！');
-        }
-        else {
-          if (body.length > 0) {
-            $scope.goodsList = $scope.goodsList.concat(body);
-            $scope.query.page=1;
-            $scope.$broadcast("scroll.infiniteScrollComplete");
-            $scope.load_over = true;
-          }
-          else {
-            $scope.goodsList = [];
-            $scope.$broadcast("scroll.infiniteScrollComplete");
-            $scope.load_over = false;
-          }
-        }
-      });
-    }, 200);
+    $scope.doRefresh();
   };
 
   //$timeout(function () {

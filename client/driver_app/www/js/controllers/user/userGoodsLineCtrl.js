@@ -45,8 +45,10 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
 
   $scope.isAdd = true;
 
-  $scope.$watch('goodsLine.sCityCode', function () {
-    $scope.goodsLine.sStreet = '';
+  $scope.sStreetList = [];
+
+  $scope.$watch('goodsLine.sCityCode', function (oldValue, newValue) {
+    if (oldValue && newValue)$scope.goodsLine.sStreet = '';
     if (!$scope.goodsLine.sCityCode) {
       dictService.s_street_data = [];
       return;
@@ -65,8 +67,10 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
     });
   });
 
-  $scope.$watch('goodsLine.eCityCode', function () {
-    $scope.goodsLine.eStreet = '';
+  $scope.eStreetList = [];
+
+  $scope.$watch('goodsLine.eCityCode', function (oldValue, newValue) {
+    if (oldValue && newValue)$scope.goodsLine.eStreet = '';
     if (!$scope.goodsLine.eCityCode) {
       dictService.e_street_data = [];
       return;
@@ -197,6 +201,7 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
   //隐藏发货地址页面
   $scope.hideGoodsLine = function () {
     $scope.goodsLineModal.hide();
+    $scope.doRefresh();
   };
 
   $scope.query = {
@@ -220,7 +225,6 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
   };
 
   $scope.loadMore = function () {
-    $scope.load_over = false;
     //这里使用定时器是为了缓存一下加载过程，防止加载过快
     $timeout(function () {
       io.socket.get('/goodsLine/userGoodsLine', $scope.query, function serverResponded(body, JWR) {
@@ -241,7 +245,7 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
           }
         }
       });
-    }, 800);
+    }, 200);
   };
 
   //删除发货地址
