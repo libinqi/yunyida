@@ -135,6 +135,7 @@ module.exports = {
         var orderId = req.body.orderId;
         GoodsOrder.findOne(orderId).exec(function (err, order) {
             if (err) res.badRequest(err);
+            order.goodsOrderStatus = '已删除';
             order.status = false;
             order.save();
             res.ok(order);
