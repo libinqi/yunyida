@@ -11,7 +11,7 @@ module.exports = {
     autoPK: true,
     attributes: {
         goodsOrderId: {type: 'integer', primaryKey: true, autoIncrement: true},//货物订单Id
-        goodsOrderStatus: {type: 'string', required: true, enum: ['未接单','接单','确认接单','已取消','确认承运','已完成'],defaultsTo: '未接单'},//订单状态
+        goodsOrderStatus: {type: 'string', required: true, enum: ['未接单','接单','确认接单','已取消','确认承运','已完成','已删除'],defaultsTo: '未接单'},//订单状态
         evaluationLevel: {type: 'integer'},//评价等级
         evaluationContent: {type: 'string'},//评价内容
         pricing: {type: 'float'},//运价
