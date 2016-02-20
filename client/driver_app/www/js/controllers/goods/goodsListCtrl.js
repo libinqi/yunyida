@@ -102,6 +102,14 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
     $scope.queryGoods();
   };
 
+  //重置货物查询
+  $scope.resetQuery = function () {
+    $scope.query.sCity='';
+    $scope.query.sCityCode='';
+    $scope.query.eCity='';
+    $scope.query.eCityCode='';
+  };
+
   //关闭货物查询
   $scope.closeQuery = function () {
     $scope.queryModal.hide();
