@@ -8,7 +8,7 @@
 module.exports = {
     add: function (req, res) {
         var data_from = req.params.all();
-        GoodsAddress.count({user: data_from.user}).exec(function countCB(error, found) {
+        GoodsAddress.count({user: data_from.user,type:data_from.type}).exec(function countCB(error, found) {
             if (!found) {
                 data_from.isDefault = true;
             }
@@ -27,9 +27,10 @@ module.exports = {
     },
     userGoodsAddress: function (req, res) {
         var userId = req.body.userId;
+        var type = req.body.type||'发货';
         var page = req.body.page;
         var rows = req.body.rows;
-        GoodsAddress.find({user: userId})
+        GoodsAddress.find({user: userId,type:type})
             .sort('isDefault DESC')
             .sort('updatedAt DESC')
             .paginate({page: page, limit: rows})
@@ -55,6 +56,6 @@ module.exports = {
                 res.ok(goodsAddress);
             });
         });
-    },
+    }
 };
 

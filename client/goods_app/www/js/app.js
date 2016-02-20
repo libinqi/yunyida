@@ -219,6 +219,11 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         templateUrl: 'templates/user/userGoodsAddress.html',
         controller: 'UserGoodsAddressCtrl'
       })
+      .state('receiveGoodsAddress', {
+      url: '/receiveGoodsAddress',
+      templateUrl: 'templates/user/receiveGoodsAddress.html',
+      controller: 'ReceiveGoodsAddressCtrl'
+     })
       .state('userSetting', {
         url: '/userSetting',
         templateUrl: 'templates/user/userSetting.html',

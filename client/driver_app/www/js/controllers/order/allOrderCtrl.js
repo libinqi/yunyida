@@ -41,6 +41,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   ];
 
   $scope.toggleLeft = function () {
+    $scope.getOrderStatis();
     $ionicSideMenuDelegate.toggleLeft();
   };
 
@@ -56,8 +57,6 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
       }
     });
   }
-
-  $scope.getOrderStatis();
 
   //下拉刷新
   $scope.doRefresh = function () {

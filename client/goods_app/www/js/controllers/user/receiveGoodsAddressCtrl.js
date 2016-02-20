@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('UserGoodsAddressCtrl', function ($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $ionicModal, $state, UserInfo,CityPickerService ,dictService) {
+angular.module('starter.controllers').controller('ReceiveGoodsAddressCtrl', function ($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $ionicModal, $state, UserInfo,CityPickerService ,dictService) {
   var user = UserInfo.data;
   $scope.pulltextchange = '下拉刷新';
 
@@ -25,12 +25,12 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
 
   $scope.pulltext = function () {
     $timeout(function () {
-      $scope.pulltextchange = '加载更多发货地址';
+      $scope.pulltextchange = '加载更多收货地址';
     })
   };
 
   $scope.goodsAddress = {
-    consignor: '',//发货人
+    consignor: '',//收货人
     phoneNumber: '',//手机号码
     city: '',//所在城市
     cityCode: '',//城市代码
@@ -38,21 +38,21 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
     address: '',//详细地址
     lng: '',//经度
     lat: '',//纬度
-    isDefault: false,//是否默认发货地址
-    type:'发货',
+    isDefault: false,//是否默认收货地址
+    type:'收货',
     user: user.userId//所属用户
   };
 
   $scope.isAdd = true;
   $scope.streetList = [];
 
-  //触发发货地址弹出层事件
-  $ionicModal.fromTemplateUrl('templates/user/addGoodsAddress.html ', {
+  //触发收货地址弹出层事件
+  $ionicModal.fromTemplateUrl('templates/user/addGoodsAddress2.html ', {
     scope: $scope
   }).then(function (modal) {
     $scope.goodsAddressModal = modal;
   });
-  //弹出发货地址页面
+  //弹出收货地址页面
   $scope.showGoodsAddress = function (item) {
     if (item) {
       $scope.goodsAddress = item;
@@ -60,7 +60,7 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
     }
     else {
       $scope.goodsAddress = {
-        consignor: '',//发货人
+        consignor: '',//收货人
         phoneNumber: '',//手机号码
         city: '',//所在城市
         cityCode: '',//所在城市编码
@@ -68,8 +68,8 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
         address: '',//详细地址
         lng: '',//经度
         lat: '',//纬度
-        isDefault: false,//是否默认发货地址
-        type:'发货',
+        isDefault: false,//是否默认收货地址
+        type:'收货',
         user: user.userId//所属用户
       };
       $scope.isAdd = true;
@@ -127,14 +127,14 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
     }
     $scope.goodsAddressModal.show();
   };
-  //保存发货地址
+  //保存收货地址
   $scope.saveGoodsAddress = function () {
     if (!$scope.goodsAddress.consignor) {
-      $scope.showMsg('请填写发货人姓名');
+      $scope.showMsg('请填写收货人姓名');
       return;
     }
     if (!$scope.goodsAddress.phoneNumber) {
-      $scope.showMsg('请填写发货人手机号码');
+      $scope.showMsg('请填写收货人手机号码');
       return;
     }
     if (!$scope.goodsAddress.city) {
@@ -146,7 +146,7 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
       return;
     }
     $ionicLoading.show({
-      template: "正在保存发货地址..."
+      template: "正在保存收货地址..."
     });
     if ($scope.isAdd) {
       io.socket.post('/goodsAddress/add', $scope.goodsAddress, function serverResponded(body, JWR) {
@@ -155,7 +155,7 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
           $scope.showMsg('请求失败,网络不给力！');
         }
         else {
-          $scope.showMsg('发货地址保存成功！');
+          $scope.showMsg('收货地址保存成功！');
           $scope.doRefresh();
           $scope.goodsAddressModal.hide();
         }
@@ -168,14 +168,14 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
           $scope.showMsg('请求失败,网络不给力！');
         }
         else {
-          $scope.showMsg('发货地址保存成功！');
+          $scope.showMsg('收货地址保存成功！');
           $scope.doRefresh();
           $scope.goodsAddressModal.hide();
         }
       });
     }
   };
-  //隐藏发货地址页面
+  //隐藏收货地址页面
   $scope.hideGoodsAddress = function () {
     $scope.goodsAddressModal.hide();
   };
@@ -183,7 +183,7 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
   $scope.query = {
     page: 1,
     rows: 8,
-    type:'发货',
+    type:'收货',
     userId: user.userId
   };
 
@@ -226,7 +226,7 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
     }, 200);
   };
 
-  //删除发货地址
+  //删除收货地址
   $scope.delGoodsAddress = function (goodsAddressId) {
     io.socket.post('/goodsAddress/deleteGoodsAddress', {goodsAddressId: goodsAddressId}, function serverResponded(body, JWR) {
       if (JWR.statusCode !== 200) {
@@ -238,7 +238,7 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
     });
   }
 
-  //设为默认发货地址
+  //设为默认收货地址
   $scope.defaultGoodsAddress = function (goodsAddressId) {
     io.socket.post('/goodsAddress/defaultGoodsAddress', {
       userId: user.userId,
@@ -249,7 +249,7 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
       }
       else {
         $scope.doRefresh();
-        $scope.showMsg('设为默认发货地址成功！');
+        $scope.showMsg('设为默认收货地址成功！');
       }
     });
   }
