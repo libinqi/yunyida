@@ -19,7 +19,6 @@
     "cordova-plugin-device",
     "cordova-plugin-console",
     "cordova-plugin-whitelist",
-    "cordova-plugin-splashscreen",
     "cordova-plugin-file",
     "cordova-plugin-file-transfer",
     "cordova-plugin-actionsheet",
@@ -35,7 +34,8 @@
       "locator": "cordova-plugin-wechat",
       "id": "cordova-plugin-wechat"
     },
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    "cordova-plugin-splashscreen"
   ],
   "cordovaPlatforms": [
     "ios",
