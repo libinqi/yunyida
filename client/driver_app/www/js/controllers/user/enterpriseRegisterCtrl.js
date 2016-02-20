@@ -25,6 +25,8 @@ angular.module('starter.controllers').controller('EnterpriseRegisterCtrl', funct
       {text: "整车", checked: false}
     ];
 
+    $scope.streetList = [];
+
     $scope.$watch('userData.cityCode', function (oldValue, newValue) {
       if (oldValue && newValue) $scope.userData.street = '';
       if (!$scope.userData.cityCode) {

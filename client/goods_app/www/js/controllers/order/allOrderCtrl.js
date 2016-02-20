@@ -31,7 +31,6 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     userId: UserInfo.data.userId
   };
 
-
   $scope.orderStatisList=[
     {status:'全部',count:0},
     {status:'未接单',count:0},
@@ -79,7 +78,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   };
   //更多
   $scope.loadMore = function () {
-    $scope.load_over = false;
+    //$scope.load_over = false;
     //这里使用定时器是为了缓存一下加载过程，防止加载过快
     $timeout(function () {
       io.socket.get('/order/userOrder', $scope.query, function serverResponded(body, JWR) {
@@ -102,6 +101,10 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
       });
     }, 800);
   };
+
+  //$timeout(function () {
+  //  $scope.loadMore();
+  //});
 
   $scope.orderFilter=function(orderStatus){
     if(orderStatus=='全部')orderStatus='';
@@ -347,6 +350,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
             if (body.status) {
               $scope.orderList[i] = body;
               $scope.showMsg('感谢您的评价!');
+              $scope.closeDetail();
               $scope.closeEvaluate();
             }
           }
@@ -355,7 +359,5 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     });
   }
 
-
   //$scope.doRefresh();
-
 });

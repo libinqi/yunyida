@@ -77,6 +77,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   };
   //更多
   $scope.loadMore = function () {
+    //$scope.load_over = false;
     //这里使用定时器是为了缓存一下加载过程，防止加载过快
     $timeout(function () {
       io.socket.get('/order/carrierOrder', $scope.query, function serverResponded(body, JWR) {
@@ -99,6 +100,10 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
       });
     }, 800);
   };
+
+  //$timeout(function () {
+  //  $scope.loadMore();
+  //});
 
   $scope.orderFilter = function (orderStatus) {
     if(orderStatus=='全部')orderStatus='';
@@ -208,7 +213,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     $scope.confirmCarrierOrder.hide();
   };
 
-  //评价
+  //运费
   $scope.carrierSubmit = function () {
     if (!$scope.carrierOrder.pricing && $scope.carrierOrder.pricing <= 0) {
       $scope.showMsg("请输入运费");
@@ -239,5 +244,16 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
         }
       }
     });
+  }
+
+  $scope.evaluatePeopleClass = function (num) {
+    var rtnClass = "";
+      if ($scope.orderItem.evaluationLevel>= num) {
+        rtnClass = "stared";
+      }
+      else {
+        rtnClass = "star";
+      }
+    return rtnClass;
   }
 });

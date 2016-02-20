@@ -50,7 +50,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
   $scope.loadMore = function () {
     $scope.load_over = false;
     //这里使用定时器是为了缓存一下加载过程，防止加载过快
-    $timeout(function () {
+    //$timeout(function () {
       io.socket.get('/goods/list', $scope.query, function serverResponded(body, JWR) {
         if (JWR.statusCode !== 200) {
           $scope.showMsg('请求失败,网络不给力！');
@@ -69,8 +69,12 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
           }
         }
       });
-    }, 200);
+    //}, 200);
   };
+
+  $timeout(function () {
+    $scope.loadMore();
+  });
 
   //查看货物详情
   $scope.goodsDetail = function (item) {
@@ -119,6 +123,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
           });
           confirmPopup.then(function (res) {
             if (res) {
+              $scope.closeDetail();
               $state.go('tab.order');
             }
           });
@@ -167,6 +172,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
                   }
                   else {
                     $scope.showMsg('接单成功！');
+                    $scope.closeDetail();
                     $state.go('tab.order');
                   }
                 });

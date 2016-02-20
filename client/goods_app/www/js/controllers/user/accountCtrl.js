@@ -5,7 +5,7 @@ angular.module('starter.controllers').controller('AccountCtrl', function ($scope
     userId: '', //用户id
     cardNumber: '', //证件号码
     realName: '', //姓名
-    email: '', //电子邮箱
+    //email: '', //电子邮箱
     enterpriseName: '', //企业名称
     city: '',//市
     cityCode:'',//城市代码

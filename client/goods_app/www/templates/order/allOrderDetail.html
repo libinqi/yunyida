@@ -96,15 +96,15 @@
         </div>
       </div>
       <div class="button-bar" style="margin-top:10px">
-        <button class="button button-positive" style="margin-right:10px;margin-left:10px;"
+        <button class="button button-assertive" style="margin-right:10px;margin-left:10px;"
                 ng-if="orderItem.goodsOrderStatus=='未接单'||orderItem.goodsOrderStatus=='接单'"
                 ng-click="cancelOrder(orderItem.goodsOrderId)">取消订单
         </button>
-        <button class="button button-positive" style="margin-right:10px;margin-left:10px;"
+        <button class="button button-assertive" style="margin-right:10px;margin-left:10px;"
                 ng-if="orderItem.goodsOrderStatus=='已取消'||orderItem.goodsOrderStatus=='已完成'"
                 ng-click="deleteOrder(orderItem.goodsOrderId)">删除订单
         </button>
-        <button class="button button-positive" style="margin-right:10px;margin-left:10px;"
+        <button class="button button-assertive" style="margin-right:10px;margin-left:10px;"
                 ng-if="orderItem.goodsOrderStatus=='确认承运'"
                 ng-click="orderEvaluate(orderItem.goodsOrderId)">马上评价
         </button>

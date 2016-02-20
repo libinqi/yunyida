@@ -30,7 +30,8 @@ module.exports = {
             .sort('updatedAt DESC')
             .paginate({page: page, limit: rows})
             .populate('carrier')
-            .populate('goods').exec(function (err, data) {
+            .populate('goods')
+            .exec(function (err, data) {
             if (err) res.badRequest(err);
             res.ok(data);
         });
@@ -143,7 +144,10 @@ module.exports = {
         var orderId = req.body.orderId;
         var evaluationLevel = req.body.evaluationLevel;
         var evaluationContent = req.body.evaluationContent;
-        GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
+        GoodsOrder.findOne(orderId)
+            .populate('carrier')
+            .populate('goods')
+            .exec(function (err, order) {
             if (err) res.badRequest(err);
             order.goodsOrderStatus = '已完成';
             order.evaluationLevel = evaluationLevel;
