@@ -17,6 +17,8 @@ angular.module('starter.controllers').controller('EnterpriseAccountCtrl', functi
       lat: ''//纬度
     };
 
+    $scope.streetList = [];
+
     $scope.$watch('userData.cityCode', function (oldValue, newValue) {
       if (oldValue && newValue) $scope.userData.street = '';
       if (!$scope.userData.cityCode) {

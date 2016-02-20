@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('UserRegisterCtrl', function ($scope, $http, $timeout, $ionicHistory, $ionicLoading, $ionicPopover, $state, UserInfo, loginService, geolocationService) {
+angular.module('starter.controllers').controller('UserRegisterCtrl', function ($scope, $http, $timeout, $ionicHistory, $ionicLoading, $ionicPopover, $state, UserInfo, loginService, CityPickerService,dictService) {
     $scope.userData = {
       phoneNumber: '', //手机
       userName: '', //用户名
@@ -16,6 +16,28 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
       lng: '',//经度
       lat: ''//纬度
     };
+
+    $scope.streetList = [];
+
+    $scope.$watch('userData.cityCode', function (oldValue, newValue) {
+      if (oldValue && newValue) $scope.userData.street = '';
+      if (!$scope.userData.cityCode) {
+        dictService.street_data = [];
+        return;
+      }
+      else {
+        $scope.streetList = [];
+      }
+
+      $timeout(function () {
+        $scope.streetList = CityPickerService.getStreetData($scope.userData.cityCode);
+        dictService.street_data = [];
+
+        for (var i = 0; i < $scope.streetList.length; i++) {
+          dictService.street_data.push({id: $scope.streetList[i].id, name: $scope.streetList[i].areaName});
+        }
+      });
+    });
 
     //geolocationService.getCurrentPosition(function (result) {
     //  $scope.userData.city = result.addressComponents.province.replace(/省/g, "")+result.addressComponents.city.replace(/市/g, "")+result.addressComponents.district;

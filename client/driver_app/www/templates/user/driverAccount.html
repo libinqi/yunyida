@@ -20,13 +20,13 @@
       </label>
       <label class="item item-input">
         <span class="input-label" style="width:35%">所在城市</span>
-        <ionic-city-picker placeholder="出发城市" backdrop=true backdrop-click-to-close=false css-class="text-align-l"
+        <ionic-city-picker placeholder="出发城市" backdrop=false backdrop-click-to-close=true css-class="text-align-l"
                            okText="确定" citydata="userData.city" citycode="userData.cityCode" style="width:60%;"></ionic-city-picker>
         <i class="icon ion-chevron-right " style="color: #ACACAC;"></i>
       </label>
       <label class="item item-input">
         <div class="input-label" style="width:40%">车型</div>
-        <ionic-dict-picker backdrop=true backdrop-click-to-close=false css-class="text-align-r"
+        <ionic-dict-picker backdrop=false backdrop-click-to-close=true css-class="text-align-r"
                            dictmodel="userData.carType" dictdata="car_type" okText="确定"
                            style="width:55%"></ionic-dict-picker>
         <i class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;"></i>

@@ -19,6 +19,28 @@ angular.module('starter.controllers').controller('AccountCtrl', function ($scope
     newpassword: '' //新密码
   }
 
+  $scope.streetList = [];
+
+  $scope.$watch('userData.cityCode', function (oldValue, newValue) {
+    if (oldValue && newValue) $scope.userData.street = '';
+    if (!$scope.userData.cityCode) {
+      dictService.street_data = [];
+      return;
+    }
+    else {
+      $scope.streetList = [];
+    }
+
+    $timeout(function () {
+      $scope.streetList = CityPickerService.getStreetData($scope.userData.cityCode);
+      dictService.street_data = [];
+
+      for (var i = 0; i < $scope.streetList.length; i++) {
+        dictService.street_data.push({id: $scope.streetList[i].id, name: $scope.streetList[i].areaName});
+      }
+    });
+  });
+
   $scope.backGo = function () {
     $ionicHistory.goBack();
   };
