@@ -41,8 +41,10 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   ];
 
   $scope.toggleLeft = function () {
-    $scope.getOrderStatis();
     $ionicSideMenuDelegate.toggleLeft();
+    $timeout(function () {
+      $scope.getOrderStatis();
+    });
   };
 
   $scope.getOrderStatis=function(){

@@ -20,6 +20,8 @@ module.exports = {
     list: function (req, res) {
         var page = req.body.page;
         var rows = req.body.rows;
+        var sCity = req.body.sCity;
+        var eCity = req.body.eCity;
         var goodsType = req.body.goodsType;
 
         var option = {
@@ -27,6 +29,15 @@ module.exports = {
             publishType: '随机发货',
             status: true
         };
+
+        if(sCity)
+        {
+            option.sCity=sCity;
+        }
+        if(eCity)
+        {
+            option.eCity=eCity;
+        }
         Goods.find(option)
             .sort('updatedAt DESC')
             .paginate({page: page, limit: rows})

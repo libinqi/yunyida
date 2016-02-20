@@ -1,10 +1,14 @@
-angular.module('starter.controllers').controller('GoodsListCtrl', function ($scope, $state, loginService, UserInfo, $ionicListDelegate, $timeout, $ionicPopover, $ionicHistory, $ionicModal,$ionicPopup) {
+angular.module('starter.controllers').controller('GoodsListCtrl', function ($scope, $state, loginService, UserInfo, $ionicListDelegate, $timeout, $ionicPopover, $ionicHistory, $ionicModal, $ionicPopup) {
   $scope.user = UserInfo.data;
   $scope.pulltextchange = '下拉刷新';
 
   $scope.query = {
     page: 1,
     rows: 8,
+    sCity: '',//起始城市
+    sCityCode: '',
+    eCity: '',//目的城市
+    eCityCode: '',
     goodsType: '零担'//货物类型:零担, 整车, 城市配送
   };
 
@@ -48,9 +52,9 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
   $scope.goodsList = [];
   $scope.load_over = true;
   $scope.loadMore = function () {
-    $scope.load_over = false;
+    //$scope.load_over = false;
     //这里使用定时器是为了缓存一下加载过程，防止加载过快
-    //$timeout(function () {
+    $timeout(function () {
       io.socket.get('/goods/list', $scope.query, function serverResponded(body, JWR) {
         if (JWR.statusCode !== 200) {
           $scope.showMsg('请求失败,网络不给力！');
@@ -69,12 +73,61 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
           }
         }
       });
-    //}, 200);
+    }, 200);
   };
 
-  $timeout(function () {
-    $scope.loadMore();
+  $scope.queryGoods = function () {
+    //$scope.load_over = false;
+    //这里使用定时器是为了缓存一下加载过程，防止加载过快
+    $timeout(function () {
+      io.socket.get('/goods/list', $scope.query, function serverResponded(body, JWR) {
+        if (JWR.statusCode !== 200) {
+          $scope.showMsg('请求失败,网络不给力！');
+        }
+        else {
+          if (body.length > 0) {
+            $scope.goodsList = $scope.goodsList.concat(body);
+            $scope.query.page=1;
+            $scope.$broadcast("scroll.infiniteScrollComplete");
+            $scope.load_over = true;
+          }
+          else {
+            $scope.goodsList = [];
+            $scope.$broadcast("scroll.infiniteScrollComplete");
+            $scope.load_over = false;
+          }
+        }
+      });
+    }, 200);
+  };
+
+  //$timeout(function () {
+  //  $scope.loadMore();
+  //});
+
+  //货物查询
+  $scope.goodsQuery = function () {
+    $scope.queryModal.show();
+  }
+
+  //触发弹出层事件
+  $ionicModal.fromTemplateUrl('templates/goods/goodsQuery.html ', {
+    scope: $scope
+  }).then(function (detail) {
+    $scope.queryModal = detail;
   });
+
+  //确认货物查询
+  $scope.enterQuery = function () {
+    $scope.queryModal.hide();
+    $scope.queryGoods();
+  };
+
+  //关闭货物查询
+  $scope.closeQuery = function () {
+    $scope.queryModal.hide();
+  };
+
 
   //查看货物详情
   $scope.goodsDetail = function (item) {
@@ -128,7 +181,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
             }
           });
         }
-        else{
+        else {
           io.socket.post('/order/carrierOrder', {
             orderStatus: '确认接单',
             userId: $scope.user.userId,
@@ -162,7 +215,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
                   }
                 });
               }
-              else{
+              else {
                 io.socket.post('/order/addOrder', {
                   orderId: goodsOrderId,
                   userId: $scope.user.userId

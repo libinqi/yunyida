@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('AddGoodsCtrl', function ($rootScope, $scope, $location, $ionicLoading, CityPickerService, dictService, UserInfo, $state, $ionicPopover, $ionicHistory, $ionicModal, $timeout, geolocationService) {
+angular.module('starter.controllers').controller('AddGoodsCtrl', function ($rootScope, $scope, $location, $ionicLoading, CityPickerService, dictService, UserInfo, $state, $ionicPopover, $ionicHistory, $ionicModal,$ionicPopup, $timeout, geolocationService) {
   if (!UserInfo.data.userId) {
     $state.go('login');
   }
@@ -165,7 +165,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       $scope.showMsg('请选择目的城市');
       return;
     }
-    if (!$scope.goodsInfo.sStreet) {
+    if (!$scope.goodsInfo.eStreet) {
       $scope.showMsg('请选择目的地街道');
       return;
     }
@@ -173,10 +173,56 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       $scope.showMsg('请填写收货人姓名');
       return;
     }
-    if (!$scope.goodsInfo.sPhoneNumber) {
+    var reg = /^1\d{10}$/;
+    if (!$scope.goodsInfo.ePhoneNumber) {
       $scope.showMsg('请填写收货人手机号码');
-      return;
+      return false;
+    } else if (!reg.test($scope.goodsInfo.ePhoneNumber)) {
+      $scope.showMsg('手机号格式错误');
+      return false;
     }
+
+    //var confirmPopup = $ionicPopup.confirm({
+    //  title: '保存收货人信息',
+    //  template: '是否将此收货人信息保存为常用收货地址?',
+    //  buttons: [
+    //    { text: '暂不保存',onTap: function(e) {return false;}},
+    //    { text: '保存',type: 'button-assertive',onTap: function(e) {return true;}}
+    //  ]
+    //});
+    //confirmPopup.then(function(res) {
+    //  if (res) {
+    //    var goodsAddress = {
+    //      consignor:  $scope.goodsInfo.consignee,//收货人
+    //      phoneNumber:$scope.goodsInfo.ePhoneNumber,//手机号码
+    //      city: $scope.goodsInfo.eCity,//所在城市
+    //      cityCode: $scope.goodsInfo.eCityCode,//所在城市编码
+    //      street: $scope.goodsInfo.eStreet,//街道
+    //      address:$scope.goodsInfo.eAddress,//详细地址
+    //      isDefault: false,//是否默认收货地址
+    //      type:'收货',
+    //      user: user.userId//所属用户
+    //    };
+    //
+    //    $ionicLoading.show({
+    //      template: "正在保存收货人信息..."
+    //    });
+    //      io.socket.post('/goodsAddress/add', goodsAddress, function serverResponded(body, JWR) {
+    //        $ionicLoading.hide();
+    //        if (JWR.statusCode !== 200) {
+    //          $scope.showMsg('请求失败,网络不给力！');
+    //        }
+    //        else {
+    //          $scope.showMsg('收货人信息保存成功！');
+    //          $scope.endInfoModal.hide();
+    //        }
+    //      });
+    //  }
+    //  else
+    //  {
+    //    $scope.endInfoModal.hide();
+    //  }
+    //});
     $scope.endInfoModal.hide();
   };
 
@@ -281,6 +327,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     lng: '',//经度
     lat: '',//纬度
     isDefault: false,//是否默认发货地址
+    type:'发货',
     user: user.userId//所属用户
   };
 
@@ -309,6 +356,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
         lng: '',//经度
         lat: '',//纬度
         isDefault: false,//是否默认发货地址
+        type:'发货',
         user: user.userId//所属用户
       };
       $scope.isAdd = true;
@@ -351,9 +399,13 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       $scope.showMsg('请填写发货人姓名');
       return;
     }
+    var reg = /^1\d{10}$/;
     if (!$scope.goodsAddress.phoneNumber) {
       $scope.showMsg('请填写发货人手机号码');
-      return;
+      return false;
+    } else if (!reg.test($scope.goodsAddress.phoneNumber)) {
+      $scope.showMsg('手机号格式错误');
+      return false;
     }
     if (!$scope.goodsAddress.city) {
       $scope.showMsg('请选择起始城市');
@@ -401,6 +453,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   $scope.query = {
     page: 1,
     rows: 8,
+    type:'发货',
     userId: user.userId
   };
 
@@ -496,7 +549,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       $scope.showMsg('请填写货物信息！');
       return;
     }
-    io.socket.post('/user/getCarrier', function serverResponded(body, JWR) {
+    io.socket.post('/user/getCarrier',{sCity:$scope.goodsInfo.sCity,eCity:$scope.goodsInfo.eCity}, function serverResponded(body, JWR) {
       if (JWR.statusCode !== 200) {
         $scope.showMsg('请求失败,网络不给力！');
       }
@@ -572,7 +625,22 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
           }
           else {
             $scope.showMsg('发货成功！');
-            $state.go('tab.order');
+            var confirmPopup = $ionicPopup.confirm({
+              title: '城市配送',
+              template: '是否需要城市配送司机送至指定物流公司?',
+              buttons: [
+                { text: '暂不需要',onTap: function(e) {return false;}},
+                { text: '需要',type: 'button-assertive',onTap: function(e) {return true;}}
+              ]
+            });
+            confirmPopup.then(function(res) {
+              if (res) {
+                $scope.changeGoodsType('城市配送');
+              }
+              else{
+                $state.go('tab.order');
+              }
+            });
           }
         });
       }

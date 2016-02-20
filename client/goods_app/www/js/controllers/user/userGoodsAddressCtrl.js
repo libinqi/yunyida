@@ -133,9 +133,13 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
       $scope.showMsg('请填写发货人姓名');
       return;
     }
+    var reg = /^1\d{10}$/;
     if (!$scope.goodsAddress.phoneNumber) {
       $scope.showMsg('请填写发货人手机号码');
-      return;
+      return false;
+    } else if (!reg.test($scope.goodsAddress.phoneNumber)) {
+      $scope.showMsg('手机号格式错误');
+      return false;
     }
     if (!$scope.goodsAddress.city) {
       $scope.showMsg('请选择起始城市');
@@ -202,7 +206,7 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
   };
 
   $scope.loadMore = function () {
-    $scope.load_over = false;
+    //$scope.load_over = false;
     //这里使用定时器是为了缓存一下加载过程，防止加载过快
     $timeout(function () {
       io.socket.get('/goodsAddress/userGoodsAddress', $scope.query, function serverResponded(body, JWR) {

@@ -268,11 +268,6 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         templateUrl: 'templates/order/allOrderDetail.html',
         controller: 'AllOrderDetailCtrl'
       })
-      .state('choosegoods', {
-        url: '/choosegoods/:data',
-        templateUrl: 'templates/goods/chooseGoods.html',
-        controller: 'chooseGoodsCtrl'
-      })
 
 
     // if none of the above states are matched, use this as the fallback

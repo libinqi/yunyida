@@ -57,8 +57,8 @@ app.directive('ionicCityPicker', ['$ionicPopup', '$timeout', 'CityPickerService'
         if (top === index * 36) {
           vm.dataing = $timeout(function () {
             province && (vm.province = vm.cityData[index], vm.city = vm.province.sub[0], vm.country = {}, (vm.city && vm.city.sub && (vm.country = vm.city.sub[0])));//处理省市乡联动数据
-            city && (vm.city = vm.province.sub[index], vm.country = {}, (vm.city && vm.city.sub && (vm.country = vm.city.sub[0])));//处理市乡联动数据
-            country && (vm.country = vm.city.sub[index]);//处理乡数据
+            city && (vm.city=vm.province.sub[index], vm.country = {}, (vm.city && vm.city.sub && (vm.country = vm.city.sub[0])));//处理市乡联动数据
+            country && (vm.country=vm.city.sub[index]);//处理乡数据
             HandleChild && $ionicScrollDelegate.$getByHandle(HandleChild).scrollTop();//初始化子scroll top位
 
             //数据同步

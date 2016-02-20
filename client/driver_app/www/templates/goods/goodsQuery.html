@@ -1,0 +1,29 @@
+<ion-header-bar class="bar-positive" style="border:0px !important;background-color:#387ef5;color:#fff !important;">
+  <a class="button icon-left ion-ios-arrow-left button-clear button-light"
+     style="width:40px;padding:3px 2px 3px 8px;margin-top: 3px;" ng-click="closeQuery()"></a>
+  <div class="title title-center header-item" style="color:#fff !important;">货源查询</div>
+  <a class="button button-clear" style="width:40px;height:25px"></a>
+</ion-header-bar>
+<ion-view view-title="货物详情">
+  <ion-content padding="true" class="has-header">
+    <div class="list padding">
+      <label class="item item-input">
+        <span class="input-label" style="width:35%">起始地</span>
+        <ionic-city-picker placeholder="起始城市" backdrop=true backdrop-click-to-close=false css-class="text-align-l"
+                           okText="确定" citydata="query.sCity" citycode="query.sCityCode"
+                           style="width:60%;"></ionic-city-picker>
+        <i class="icon ion-chevron-right " style="color: #ACACAC;"></i>
+      </label>
+      <label class="item item-input">
+        <span class="input-label" style="width:35%">目的地</span>
+        <ionic-city-picker placeholder="目的城市" backdrop=true backdrop-click-to-close=false css-class="text-align-l"
+                           okText="确定" citydata="query.eCity" citycode="query.eCityCode"
+                           style="width:60%;"></ionic-city-picker>
+        <i class="icon ion-chevron-right " style="color: #ACACAC;"></i>
+      </label>
+    </div>
+    <div class="button-bar">
+      <a class="button button-positive" ng-click="enterQuery()" style="margin-right:10px;margin-left:10px;">查询</a>
+    </div>
+  </ion-content>
+</ion-view>
