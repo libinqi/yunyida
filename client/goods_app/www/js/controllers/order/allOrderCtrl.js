@@ -42,10 +42,10 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   ];
 
   $scope.toggleLeft = function () {
-    $ionicSideMenuDelegate.toggleLeft();
-    $timeout(function () {
+    //$ionicSideMenuDelegate.toggleLeft();
+    //$timeout(function () {
       $scope.getOrderStatis();
-    });
+    //});
   };
 
   $scope.getOrderStatis=function(){
@@ -57,6 +57,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
         if (body.length > 0) {
           $scope.orderStatisList = body;
         }
+        $ionicSideMenuDelegate.toggleLeft();
       }
     });
   }
