@@ -166,6 +166,9 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
                 }
               }
             }
+            $scope.showMsg('取消接单成功！');
+            $scope.closeDetail();
+            $scope.doRefresh();
           }
         });
       }
@@ -241,6 +244,8 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
               }
               $scope.closeCarrier();
               $scope.showMsg('承运成功，幸苦啦!');
+              $scope.closeDetail();
+              $scope.doRefresh();
             }
           }
         }
