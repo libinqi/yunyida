@@ -30,6 +30,10 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       window.plugins.jPushPlugin.init();
       //调试模式
       //window.plugins.jPushPlugin.setDebugMode(true);
+
+      window.plugins.jPushPlugin.openNotificationInAndroidCallback = function (data) {
+        $location.path('/order');
+      }
     });
 
     //双击退出
@@ -284,5 +288,4 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
     //}
     //
     $urlRouterProvider.otherwise('/tab/index');
-
   });
