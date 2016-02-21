@@ -78,7 +78,7 @@ module.exports = {
             order.save();
 
             push_goods_client.push().setPlatform('ios', 'android')
-                .setAudience(JPush.tag(order.shipper+''))
+                .setAudience(JPush.tag(order.shipper + ''))
                 .setNotification('您有一票货被接单，快去看看', JPush.ios('您有一票货被接单，快去看看'), JPush.android('您有一票货被接单，快去看看', null, 1))
                 .send(function (err, res) {
                     if (err) {
@@ -103,7 +103,7 @@ module.exports = {
             order.save();
 
             push_driver_client.push().setPlatform('ios', 'android')
-                .setAudience(JPush.tag(userId+''))
+                .setAudience(JPush.tag(userId + ''))
                 .setNotification('货主企业给您指派了一条新的订单', JPush.ios('货主企业给您指派了一条新的订单'), JPush.android('货主企业给您指派了一条新的订单', null, 1))
                 //.setMessage('msg content')
                 //.setOptions(null, 60)
@@ -125,11 +125,12 @@ module.exports = {
             if (err) res.badRequest(err);
             order.goodsOrderStatus = '未接单';
             order.carrier = null;
+            order.goods.publishType = '随机发货';
             order.goods.status = true;
             order.save();
 
             push_goods_client.push().setPlatform('ios', 'android')
-                .setAudience(JPush.tag(order.shipper+''))
+                .setAudience(JPush.tag(order.shipper + ''))
                 .setNotification('您有一个订单被取消接单', JPush.ios('您有一个订单被取消接单'), JPush.android('您有一个订单被取消接单', null, 1))
                 .send(function (err, res) {
                     if (err) {
