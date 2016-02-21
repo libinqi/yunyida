@@ -25,6 +25,11 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       // 所在地定位
       //geolocationService.getCurrentPosition();
       $rootScope.dictService = dictService;
+
+      //启动极光推送服务
+      window.plugins.jPushPlugin.init();
+      //调试模式
+      //window.plugins.jPushPlugin.setDebugMode(true);
     });
 
     //双击退出

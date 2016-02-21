@@ -49,6 +49,10 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.yunyida56.driverapp"
+        },
+        "cn.jpush.phonegap.JPushPlugin": {
+            "API_KEY": "e87d3afa58fb4f6b0bae714f",
+            "PACKAGE_NAME": "com.yunyida56.driverapp"
         }
     },
     "dependent_plugins": {}

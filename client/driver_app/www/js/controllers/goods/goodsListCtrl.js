@@ -1,4 +1,11 @@
 angular.module('starter.controllers').controller('GoodsListCtrl', function ($scope, $state, loginService, UserInfo, $ionicListDelegate, $timeout, $ionicPopover, $ionicHistory, $ionicModal, $ionicPopup) {
+  if (!UserInfo.data.userId) {
+    $state.go('login');
+    return;
+  }
+
+  window.plugins.jPushPlugin.setTagsWithAlias([UserInfo.data.userId, UserInfo.data.phoneNumber], UserInfo.data.userType);
+
   $scope.user = UserInfo.data;
   $scope.pulltextchange = '下拉刷新';
 

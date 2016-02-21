@@ -1,7 +1,10 @@
-angular.module('starter.controllers').controller('AddGoodsCtrl', function ($rootScope, $scope, $location, $ionicLoading, CityPickerService, dictService, UserInfo, $state, $ionicPopover, $ionicHistory, $ionicModal,$ionicPopup, $timeout, geolocationService) {
+angular.module('starter.controllers').controller('AddGoodsCtrl', function ($rootScope, $scope, $location, $ionicLoading, CityPickerService, dictService, UserInfo, $state, $ionicPopover, $ionicHistory, $ionicModal, $ionicPopup, $timeout, geolocationService) {
   if (!UserInfo.data.userId) {
     $state.go('login');
+    return;
   }
+
+  window.plugins.jPushPlugin.setTagsWithAlias([UserInfo.data.userId, UserInfo.data.phoneNumber], UserInfo.data.userType);
 
   var user = UserInfo.data;
   // var $scope = this;
@@ -327,7 +330,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     lng: '',//经度
     lat: '',//纬度
     isDefault: false,//是否默认发货地址
-    type:'发货',
+    type: '发货',
     user: user.userId//所属用户
   };
 
@@ -356,7 +359,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
         lng: '',//经度
         lat: '',//纬度
         isDefault: false,//是否默认发货地址
-        type:'发货',
+        type: '发货',
         user: user.userId//所属用户
       };
       $scope.isAdd = true;
@@ -453,7 +456,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   $scope.query = {
     page: 1,
     rows: 8,
-    type:'发货',
+    type: '发货',
     userId: user.userId
   };
 
@@ -524,8 +527,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   };
   //选择指定发货承运人信息
   $scope.selectPostionGoods = function (item) {
-    if($scope.driverInfoModal)
-    {
+    if ($scope.driverInfoModal) {
       $scope.driverInfoModal.hide();
     }
     $scope.postionGoods(item.userId);
@@ -549,7 +551,10 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       $scope.showMsg('请填写货物信息！');
       return;
     }
-    io.socket.post('/user/getCarrier',{sCity:$scope.goodsInfo.sCity,eCity:$scope.goodsInfo.eCity}, function serverResponded(body, JWR) {
+    io.socket.post('/user/getCarrier', {
+      sCity: $scope.goodsInfo.sCity,
+      eCity: $scope.goodsInfo.eCity
+    }, function serverResponded(body, JWR) {
       if (JWR.statusCode !== 200) {
         $scope.showMsg('请求失败,网络不给力！');
       }
@@ -616,7 +621,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
         $scope.showMsg('请求失败,网络不给力！');
       }
       else {
-        io.socket.post('/order/addOrder', {
+        io.socket.post('/order/postionOrder', {
           orderId: body.goodsOrder.goodsOrderId,
           userId: userId
         }, function serverResponded(body, JWR) {
@@ -629,15 +634,23 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
               title: '城市配送',
               template: '是否需要城市配送司机送至指定物流公司?',
               buttons: [
-                { text: '暂不需要',onTap: function(e) {return false;}},
-                { text: '需要',type: 'button-assertive',onTap: function(e) {return true;}}
+                {
+                  text: '暂不需要', onTap: function (e) {
+                  return false;
+                }
+                },
+                {
+                  text: '需要', type: 'button-assertive', onTap: function (e) {
+                  return true;
+                }
+                }
               ]
             });
-            confirmPopup.then(function(res) {
+            confirmPopup.then(function (res) {
               if (res) {
                 $scope.changeGoodsType('城市配送');
               }
-              else{
+              else {
                 $state.go('tab.order');
               }
             });

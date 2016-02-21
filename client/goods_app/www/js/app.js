@@ -25,6 +25,11 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       // 所在地定位
       //geolocationService.getCurrentPosition();
       $rootScope.dictService = dictService;
+
+      //启动极光推送服务
+      window.plugins.jPushPlugin.init();
+      //调试模式
+      //window.plugins.jPushPlugin.setDebugMode(true);
     });
 
     //双击退出
@@ -220,10 +225,10 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         controller: 'UserGoodsAddressCtrl'
       })
       .state('receiveGoodsAddress', {
-      url: '/receiveGoodsAddress',
-      templateUrl: 'templates/user/receiveGoodsAddress.html',
-      controller: 'ReceiveGoodsAddressCtrl'
-     })
+        url: '/receiveGoodsAddress',
+        templateUrl: 'templates/user/receiveGoodsAddress.html',
+        controller: 'ReceiveGoodsAddressCtrl'
+      })
       .state('userSetting', {
         url: '/userSetting',
         templateUrl: 'templates/user/userSetting.html',
@@ -259,7 +264,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
           'tab-order': {
             templateUrl: 'templates/order/allOrder.html',
             controller: 'AllOrderCtrl',
-            abstract : true
+            abstract: true
           }
         }
       })

@@ -4,6 +4,9 @@
  * @description :: Server-side logic for managing goodsorders
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var JPush = require("jpush-sdk");
+var push_goods_client = JPush.buildClient(sails.config.jpush_goods.apiKey, sails.config.jpush_goods.apiSecret);
+var push_driver_client = JPush.buildClient(sails.config.jpush_driver.apiKey, sails.config.jpush_driver.apiSecret);
 
 module.exports = {
     userOrder: function (req, res) {
@@ -32,9 +35,9 @@ module.exports = {
             .populate('carrier')
             .populate('goods')
             .exec(function (err, data) {
-            if (err) res.badRequest(err);
-            res.ok(data);
-        });
+                if (err) res.badRequest(err);
+                res.ok(data);
+            });
     },
     carrierOrder: function (req, res) {
         var userId = req.body.userId;
@@ -73,6 +76,46 @@ module.exports = {
             order.carrier = userId;
             order.goods.status = false;
             order.save();
+
+            push_goods_client.push().setPlatform('ios', 'android')
+                .setAudience(JPush.tag(order.shipper+''))
+                .setNotification('您有一票货被接单，快去看看', JPush.ios('您有一票货被接单，快去看看'), JPush.android('您有一票货被接单，快去看看', null, 1))
+                .send(function (err, res) {
+                    if (err) {
+                        console.log(err.message);
+                    } else {
+                        console.log('发送编号: ' + res.sendno);
+                        console.log('消息Id: ' + res.msg_id);
+                    }
+                });
+
+            res.ok(order);
+        });
+    },
+    postionOrder: function (req, res) {
+        var orderId = req.body.orderId;
+        var userId = req.body.userId;
+        GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
+            if (err) res.badRequest(err);
+            order.goodsOrderStatus = '接单';
+            order.carrier = userId;
+            order.goods.status = false;
+            order.save();
+
+            push_driver_client.push().setPlatform('ios', 'android')
+                .setAudience(JPush.tag(userId+''))
+                .setNotification('货主企业给您指派了一条新的订单', JPush.ios('货主企业给您指派了一条新的订单'), JPush.android('货主企业给您指派了一条新的订单', null, 1))
+                //.setMessage('msg content')
+                //.setOptions(null, 60)
+                .send(function (err, res) {
+                    if (err) {
+                        console.log(err.message);
+                    } else {
+                        console.log('发送编号: ' + res.sendno);
+                        console.log('消息Id: ' + res.msg_id);
+                    }
+                });
+
             res.ok(order);
         });
     },
@@ -84,6 +127,19 @@ module.exports = {
             order.carrier = null;
             order.goods.status = true;
             order.save();
+
+            push_goods_client.push().setPlatform('ios', 'android')
+                .setAudience(JPush.tag(order.shipper+''))
+                .setNotification('您有一个订单被取消接单', JPush.ios('您有一个订单被取消接单'), JPush.android('您有一个订单被取消接单', null, 1))
+                .send(function (err, res) {
+                    if (err) {
+                        console.log(err.message);
+                    } else {
+                        console.log('发送编号: ' + res.sendno);
+                        console.log('消息Id: ' + res.msg_id);
+                    }
+                });
+
             res.ok(order);
         });
     },
@@ -149,13 +205,13 @@ module.exports = {
             .populate('carrier')
             .populate('goods')
             .exec(function (err, order) {
-            if (err) res.badRequest(err);
-            order.goodsOrderStatus = '已完成';
-            order.evaluationLevel = evaluationLevel;
-            order.evaluationContent = evaluationContent;
-            order.save();
-            res.ok(order);
-        });
+                if (err) res.badRequest(err);
+                order.goodsOrderStatus = '已完成';
+                order.evaluationLevel = evaluationLevel;
+                order.evaluationContent = evaluationContent;
+                order.save();
+                res.ok(order);
+            });
     },
     carrierOrderStatis: function (req, res) {
         var userId = req.body.userId;

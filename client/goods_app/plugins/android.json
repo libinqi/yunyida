@@ -49,6 +49,10 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "cn.jpush.phonegap.JPushPlugin": {
+            "API_KEY": "7bfbc33cb317a32368f72584",
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
         }
     },
     "dependent_plugins": {}
