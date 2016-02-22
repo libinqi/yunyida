@@ -27,15 +27,15 @@
       "id": "cordova-plugin-x-toast"
     },
     "cordova-plugin-camera",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-splashscreen",
     {
       "variables": {
-        "wechatappid": "wx4a525790c75c494f"
+        "wechatappid": "wx17eb12e02148d1ba"
       },
       "locator": "cordova-plugin-wechat",
       "id": "cordova-plugin-wechat"
-    },
-    "ionic-plugin-keyboard",
-    "cordova-plugin-splashscreen"
+    }
   ],
   "cordovaPlatforms": [
     "ios",

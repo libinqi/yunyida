@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 
 angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngCordova', 'ionic-citydata', 'ionic-citypicker', 'ionic-dictpicker', 'angularMoment'])
-  .run(function ($ionicPlatform, $ionicPopup, $location, $rootScope, $ionicHistory, $cordovaToast, $timeout, amMoment, dictService, geolocationService) {
+  .run(function ($ionicPlatform, $ionicPopup, $location, $rootScope, $ionicHistory, $cordovaToast, $timeout, amMoment, dictService) {
     $ionicPlatform.ready(function () {
       // set moment locale
       amMoment.changeLocale('zh-cn');
@@ -16,12 +16,17 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         cordova.plugins.Keyboard.disableScroll(true);
-
       }
       if (window.StatusBar) {
         // org.apache.cordova.statusbar required
         StatusBar.styleLightContent();
       }
+
+      //隐藏启动画面
+      setTimeout(function () {
+        navigator.splashscreen.hide();
+      }, 500);
+
       // 所在地定位
       //geolocationService.getCurrentPosition();
       $rootScope.dictService = dictService;

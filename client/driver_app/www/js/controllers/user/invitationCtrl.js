@@ -26,8 +26,8 @@ angular.module('starter.controllers').controller('InvitationCtrl', function ($sc
     });
     Wechat.share({
       message: {
-        title: '用这个APP可以实现快速发货，快速找到运力资源，你也试试吧~',
-        description: '云驿达货主版',
+        title: '用这个APP可以实现快速找货，快速找到货主企业，你也试试吧~',
+        description: '云驿达运力版',
         thumb: "www/img/icon.png",
         media: {
           type: Wechat.Type.LINK,
@@ -53,8 +53,8 @@ angular.module('starter.controllers').controller('InvitationCtrl', function ($sc
     });
     Wechat.share({
       message: {
-        title: '用这个APP可以实现快速发货，快速找到运力资源，你也试试吧~',
-        description: '云驿达货主版',
+        title: '用这个APP可以实现快速找货，快速找到货主企业，你也试试吧~',
+        description: '云驿达运力版',
         thumb: "www/img/icon.png",
         media: {
           type: Wechat.Type.LINK,

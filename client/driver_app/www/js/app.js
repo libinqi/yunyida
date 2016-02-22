@@ -22,6 +22,12 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         // org.apache.cordova.statusbar required
         StatusBar.styleLightContent();
       }
+
+      //隐藏启动画面
+      setTimeout(function () {
+        navigator.splashscreen.hide();
+      }, 500);
+
       // 所在地定位
       //geolocationService.getCurrentPosition();
       $rootScope.dictService = dictService;

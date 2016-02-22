@@ -37,10 +37,6 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.yunyida56.driverapp"
         },
-        "cordova-plugin-wechat": {
-            "WECHATAPPID": "wx4a525790c75c494f",
-            "PACKAGE_NAME": "com.yunyida56.driverapp"
-        },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.yunyida56.driverapp"
         },
@@ -52,6 +48,10 @@
         },
         "cn.jpush.phonegap.JPushPlugin": {
             "API_KEY": "e87d3afa58fb4f6b0bae714f",
+            "PACKAGE_NAME": "com.yunyida56.driverapp"
+        },
+        "cordova-plugin-wechat": {
+            "WECHATAPPID": "wxcbea716f2bd465c2",
             "PACKAGE_NAME": "com.yunyida56.driverapp"
         }
     },

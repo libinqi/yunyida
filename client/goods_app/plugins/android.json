@@ -37,10 +37,6 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.yunyida56.goodsapp"
         },
-        "cordova-plugin-wechat": {
-            "WECHATAPPID": "wx4a525790c75c494f",
-            "PACKAGE_NAME": "com.yunyida56.goodsapp"
-        },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.yunyida56.goodsapp"
         },
@@ -52,6 +48,10 @@
         },
         "cn.jpush.phonegap.JPushPlugin": {
             "API_KEY": "7bfbc33cb317a32368f72584",
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "cordova-plugin-wechat": {
+            "WECHATAPPID": "wx17eb12e02148d1ba",
             "PACKAGE_NAME": "com.yunyida56.goodsapp"
         }
     },
