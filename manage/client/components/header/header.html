@@ -1,0 +1,62 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 index-head" id="client-header" ng-controller="headerCtrl">
+  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+    <div class="pull-left index-l  margin-2">
+      <div class="margin-10">
+        <div class="pull-left media-middle">
+          <a href="#">
+            <img alt="..." class="media-object img-responsive" src="assets/images/manager.png">
+          </a>
+        </div>
+        <div class="index-login pull-left">
+          <div class="head-l">
+            <span class="manager-name pull-left">{{user.realname}}</span>
+          </div>
+        </div>
+        <button class="head-btn-user" ng-click="userSettingClick()">
+            <span aria-hidden="true" class="fa fa-angle-down"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 com-logo">
+    <div class="head-title">
+      <span><img alt="..." class="media-object img-responsive" src="assets/images/company_name.png"></span>      
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+    <div class="head-btns row">
+<!-- Single button -->
+      <div class="btn-group" dropdown is-open="status.isopen">
+        <button aria-expanded="false" aria-haspopup="true" ng-class="{'btn-message':message.count>0,'btn-message2':message.count<=0}" class="dropdown-toggle" data-toggle="dropdown" data-toggle="dropdown" ng-click="toggled(status.isopen)" type="button">
+          <i class="fa fa-comment comment-font"></i><span ng-show="message.count>0" class="btn-message-txt">
+            {{message.count}}</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li ng-repeat="item in message.items">
+            <a ng-if="item.msgtype!=0" href="#" ng-click="changeMessageStatus(item.msgtype,item.url)">{{item.msgtitle}}<span class="span">{{item.count}}</span>条</a>
+            <a ng-if="item.msgtype==0" href="#">{{item.msgtitle}}</a>
+          </li>
+        </ul>
+      </div>
+      <button class="head-btn" onclick="Minimize()">
+          <img alt="..." src="assets/images/head-btn-min.png">
+      </button>
+      <button class="head-btn" onclick="if(Maximize()){changeMaxClass(true)}else{changeMaxClass(false)}">
+          <img id="max_img" alt="..." src="assets/images/head-btn-max.png">
+      </button>
+      <button class="head-btn head-btn-close" onclick="winClose()">
+          <img alt="..." src="assets/images/head-btn-close.png">
+      </button>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+function changeMaxClass(isMax) {
+  if (isMax) {
+    $("#max_img").attr('src','assets/images/head-btn-default.png');
+  } else {
+    $("#max_img").attr('src','assets/images/head-btn-max.png');
+  }
+}
+</script>

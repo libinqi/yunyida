@@ -1,0 +1,60 @@
+<div class="content-box" ng-controller="ticketManageCtrl as vm">
+    <div class="search-box">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label for="tel" class="sr-only">手机号码</label>
+                <input type="text" class="form-control width-154" id="tel" ng-model="vm.ticketList.query.tel"
+                       placeholder="手机号码">
+            </div>
+            <div class="form-group">
+                <label for="vehicle_number" class="sr-only">车牌号码</label>
+                <input type="text" class="form-control width-154" id="vehicle_number"
+                       ng-model="vm.ticketList.query.vehicle_number" placeholder="车牌号码">
+            </div>
+            <button type="button" class="btn btn-sky width-94" ng-click="queryClick()"><span
+                    class="glyphicon glyphicon-search margin-4"></span>搜索
+            </button>
+            <button type="button" class="btn btn-reset" ng-click="ResetQuery()"><span
+                    class="glyphicon glyphicon-repeat margin-4"></span>重置
+            </button>
+        </form>
+    </div>
+    <div class="control-box">
+                <button type="button" class="btn btn-sky width-94" ng-click="addTicketClick()"><span
+                        class="glyphicon glyphicon-plus margin-4"></span>新增
+                </button>
+    </div>
+    <div class="table-responsive-2-1">
+        <table class="table table-striped table-hover table-bordered table01 ">
+            <thead>
+            <tr>
+                <td>操作</td>
+                <td>姓名</td>
+                <td>手机号码</td>
+                <td>车牌号码</td>
+                <td>申请月票开始时间</td>
+                <td>申请月票结束时间</td>
+                <td>付款方式</td>
+                <td>付款金额</td>
+                <td>购买时间</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in vm.ticketList.items">
+                <td><a href="" class="glyphicon glyphicon-zoom-in margin-h10" title="详情"
+                       ng-click="viewTicketClick(item.id)"></a></td>
+                <td>{{item.name}}</td>
+                <td>{{item.tel}}</td>
+                <td>{{item.vehicle_number}}</td>
+                <td>{{item.applystartdate}}</td>
+                <td>{{item.applyenddate}}</td>
+                <td>{{item.paytypename}}</td>
+                <td>{{item.monthamt}}</td>
+                <td>{{item.buytime}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <tm-pagination conf="vm.ticketList" class="page-fix"></tm-pagination>
+</div>
+</div>

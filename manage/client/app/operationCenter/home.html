@@ -1,0 +1,56 @@
+<!--<div ng-include="'components/header/header.html'"></div>-->
+<div ng-controller="opCenterIndexCtrl">
+	<div class="op-home-box" ng-show="isMain">
+		<div class="left-notice-box pull-left col-sm-6">
+			<!--<div class="notice-content-box">
+				<dl>
+					<dt><span class="index-notice"><img alt="..." src="assets/images/index-notice.png"></span> 公告</dt>
+					<dd>
+						<div class="content-indent">{{messageList.items[0].content}}</div>
+						<p class="pull-right"><small>{{messageList.items[0].updatetime}}</small></p>
+					</dd>
+					<div class="index-leave">
+						<ul class="col-sm-6">
+							<li class="col-sm-8">· 国庆放假通知</li>
+							<li class="col-sm-3 text-right"><span class="text-primary"><span class="text-gray">09-30</span></li>
+						</ul>
+						<ul class="col-sm-6">
+							<li class="col-sm-8">· 国庆放假通知测试长度测试长度</li>
+							<li class="col-sm-3 text-right"><span class="text-primary"><span class="text-gray">09-30</span></li>
+						</ul>
+					</div>
+				</dl>
+			</div> -->
+			<!--<div class="v15"></div>-->
+			<div class="notice-content-box">
+				<dl>
+					<dt><span class="index-notice"><img alt="..." src="assets/images/index-message.png"></span> 待办事项</dt>
+					<dd class="notice-content-msg">
+						<ul class="col-sm-12" ng-show="real_count > 0">
+							<li class="col-sm-12" style="text-align:left;font-size: 20px;"><a href="/opCenter/infoAudit/enterprise" class="span">待审批<span></span>　当前有{{real_count}}家企业信息待审核</a><li>
+						</ul>
+						<ul class="col-sm-12" ng-show="customer_count > 0">
+							<li class="col-sm-12" style="text-align:left;font-size: 20px;"><a href="/opCenter/clientCenter/platformMessage" class="span">待回复<span></span>　当前有{{customer_count}}条客户消息待回复</a><li>
+						</ul>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="right-menu-list-box pull-right col-sm-6">
+			<div class="row">
+				<!--<div class="col-sm-4 menu-lists"><a href="/property" class="op-home-btn"><span class="btn-round"><i class="fa fa-building"></i></span> 物业管理</a></div>-->
+				<!--<div class="col-sm-4 menu-lists"><a class="op-home-btn"><span class="btn-round"><i class="fa fa-user"></i></span> 人力资源</a><span class="op-new-messenge"></span></div>-->
+				<!--<div class="col-sm-4 menu-lists"><a class="op-home-btn"><span class="btn-round"><i class="fa fa-legal"></i></span> 审核管理</a></div>-->
+				<!--<div class="col-sm-4 menu-lists"><a href="/customersServe" class="op-home-btn"><span class="btn-round"><i class="fa fa-headphones"></i></span> 客服管理</a></div>-->
+				<!--<div class="col-sm-4 menu-lists"><a class="op-home-btn"><span class="btn-round"><i class="fa fa-group"></i></span> 客户管理</a></div>-->
+				<!--<div class="col-sm-4 menu-lists"><a class="op-home-btn"><span class="btn-round"><i class="fa fa-comment"></i></span> 消息管理</a><span class="op-new-messenge"></span></div>-->
+				<!--<div class="col-sm-4 menu-lists"><a class="op-home-btn"><span class="btn-round"><i class="fa fa-money"></i></span> 财务管理</a></div>-->
+				<!--<div class="col-sm-4 menu-lists"><a href="/setting" class="op-home-btn"><span class="btn-round"><i class="fa fa-cog"></i></span> 系统管理</a></div>-->
+				<div class="col-sm-4 menu-lists" ng-repeat="menu in parentMenus"><a href="" ui-sref="{{menu.name}}" class="op-home-btn"><div class="btn-round"><i style="border-radius:0.2em" class="fa {{menu.icon}}"></i></div> <div class="text-center margin-9" >{{menu.menu}}</div></a></div>
+			</div>
+		</div>
+	</div>
+
+	<div ui-view></div>
+</div>
+<!--<div ng-include="'components/navbar/navbar.html'"></div>-->

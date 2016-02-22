@@ -1,0 +1,60 @@
+<div ng-controller="departmentAddCtrl as vm">
+  <div class="light-box-title"><span class="text-white">{{deptModalTitle}}</span></div>
+  <form class="form-horizontal clearfix text-normal" name="deptForm" autocomplete="off" ng-submit="deptUpdate()">
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':deptForm.submitted && deptForm.deptname.$invalid}">
+      <label class="col-sm-5 control-label">
+        <code>*</code>
+        部门名称</label>
+
+      <div class="col-sm-7">
+        <input type="text" name="deptname" class="form-control width-154" ng-model="dept.deptname" placeholder="必填项" dept-remote-check required/>
+        <span class="help-block" ng-show="deptForm.submitted && deptForm.deptname.$error.required">请输入部门名称</span>
+        <span class="help-block" ng-show="!dept.deptid && deptForm.deptname.$error.deptname">部门名称已存在</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':deptForm.submitted && deptForm.pdeptid.$invalid}">
+      <label class="col-sm-5 control-label">
+        <code>*</code>
+        上级部门</label>
+
+      <div class="col-sm-7">
+        <select class="form-control width-154" name="pdeptid" ng-model="dept.pdeptid"
+                ng-options="dept.deptid as dept.deptname for dept in deptList.items"
+                ng-init="dept.pdeptid=selectedItem.deptid" required>
+          <option value="">--请选择--</option>
+        </select>
+        <span class="help-block" ng-show="deptForm.submitted && deptForm.pdeptid.$error.required">请选择上级部门</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">联系电话</label>
+
+      <div class="col-sm-7">
+        <input name="deptphone" type="text" class="form-control width-154" ng-model="dept.deptphone"  phone-check/>
+        <span class="help-block" ng-show="deptForm.deptphone.$error.phoneEx">电话号码格式不正确</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">联系人</label>
+
+      <div class="col-sm-7">
+        <input name="deptcontact" type="text" class="form-control width-154" ng-model="dept.deptcontact"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 row handle-row control-label">备注</label>
+
+      <div class="col-sm-9 ticket-beihzhu">
+        <textarea name="deptdesc" class="form-control" ng-model="dept.deptdesc"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="text-center">
+        <button type="submit" class="btn navbar-btn btn-sky width-94" ng-disabled="deptForm.$invalid"><span class="glyphicon glyphicon-ok margin-4"></span>确定</button>
+        <button type="button" class="btn navbar-btn btn-default width-94" ng-click="deptCancel()"><span
+          class="glyphicon glyphicon-remove margin-4"></span>取消
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

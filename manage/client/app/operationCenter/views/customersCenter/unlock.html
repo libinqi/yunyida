@@ -1,0 +1,120 @@
+<div class="room-box" ng-controller="clientUnlockEditCtrl as vm">
+    <div class="light-box-title"><span class="text-white">解锁详情</span></div>
+    <form class="form-horizontal text-normal" name="myForm" autocomplete="off" novalidate>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">用户账号</label>
+
+            <div class="col-sm-7">
+                <input type="text" name="username" class="form-control width-154" ng-model="vm.enterpriseClient.username"
+                       placeholder="" readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">企业名称</label>
+
+            <div class="col-sm-7">
+                <input type="text" name="enterprisename" class="form-control width-154"
+                       ng-model="vm.enterpriseClient.enterprisename" placeholder="" readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">机构代码</label>
+
+            <div class="col-sm-7">
+                <input type="text" name="cuscard" class="form-control width-154" ng-model="vm.enterpriseClient.organizationcode"
+                       placeholder="" readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">法人</label>
+
+            <div class="col-sm-7">
+                <input type="text" name="legalrepresentative" class="form-control width-154"
+                       ng-model="vm.enterpriseClient.legalrepresentative" placeholder="" readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">联系人</label>
+
+            <div class="col-sm-7">
+                <input type="text" name="contactname" class="form-control width-154" ng-model="vm.enterpriseClient.contactname"
+                       placeholder="" readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">联系电话</label>
+
+            <div class="col-sm-7">
+                <input type="text" name="telephonenumber" class="form-control width-154"
+                       ng-model="vm.enterpriseClient.telephonenumber" placeholder="" readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 row handle-row control-label">地址</label>
+
+            <div class="col-sm-9">
+                <input name="location" type="text" class="form-control width-154 handle-input"
+                       ng-model="vm.enterpriseClient.location" readonly="readonly"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 row handle-row control-label">客户端MAC地址</label>
+
+            <div class="col-sm-9">
+                <input name="mac" type="text" class="form-control width-154 handle-input" ng-model="vm.enterpriseClient.mac"
+                       readonly="readonly"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">组织机构代码</label>
+
+            <div class="col-sm-7">
+                <span class="license-img pull-left margin-11"><img class="media-object img-responsive"
+                                                                   src="assets/images/license.jpg" alt="..."></span>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">企业LOGO</label>
+
+            <div class="col-sm-7">
+                <span class="license-img pull-left margin-11"><img class="media-object img-responsive"
+                                                                   src="assets/images/license.jpg" alt="..."></span>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">税务登记</label>
+
+            <div class="col-sm-7">
+                <span class="license-img pull-left margin-11"><img class="media-object img-responsive"
+                                                                   src="assets/images/license.jpg" alt="..."></span>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">工商营业执照</label>
+
+            <div class="col-sm-7">
+                <span class="license-img pull-left margin-11"><img class="media-object img-responsive"
+                                                                   src="assets/images/license.jpg" alt="..."></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 row handle-row control-label">备注</label>
+
+            <div class="col-sm-9">
+                <input name="deptphone" type="text" class="form-control width-154 handle-input"
+                       ng-model="vm.enterpriseClient.remark"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="text-center">
+                <button type="button" class="btn navbar-btn btn-sky width-94"
+                        ng-click="unlock(vm.enterpriseClient.cid,vm.enterpriseClient.status)"><span
+                        class="fa fa-unlock margin-4"></span>{{vm.enterpriseClient.status=='1'?'锁定':'解锁'}}
+                </button>
+                <button type="button" class="btn navbar-btn btn-default width-94" ng-click="cancel()"><span
+                        class="glyphicon glyphicon-remove margin-4"></span>取消
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

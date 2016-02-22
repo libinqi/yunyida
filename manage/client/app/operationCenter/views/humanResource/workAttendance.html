@@ -1,0 +1,85 @@
+<div class="content-box" ng-controller="workAttendanceCtrl as vm">
+    <div class="search-box">
+    <form class="form-inline" role="form">
+        <div class="form-group">
+          <label  for="postName"><!-- 考勤组织 --></label>
+          <select class="form-control width-154" ng-model="vm.attendanceorg" ng-options="it.deptname as it.deptname for it in vm.sysDeptList" ng-change="vm.clickToAdd()">
+            <option value="">--考勤组织--</option>
+          </select>
+        </div>
+        <div class="form-group">
+	        <label  for="postName" class="sr-only">员工姓名</label>
+	        <input type="text" class="form-control width-94" id="postName" ng-model="vm.realname" placeholder="员工姓名">
+        </div>
+        <div class="form-group">
+	         <div class="dropdown pull-left ">
+                <a class="dropdown-toggle" id="startDate" role="button" data-toggle="dropdown" data-target="#"
+                   href="#">
+                    <div class="form-group">
+                        <input type="text" class="form-control width-154" data-ng-model="vm.myDate | date:'yyyy-MM-dd'" placeholder="开始日期">
+                        <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="vm.myDate"
+                                    data-datetimepicker-config="{ dropdownSelector: '#startDate',startView:'day', minView:'day' }"></datetimepicker>
+                </ul>
+            </div>
+            <div class="pull-left data-label">至</div>
+            <!-- <input type="text" class="form-control width-154" ng-model="vm.query.endDate" placeholder="结束时间(例:2015-01-01)"> -->
+            <div class="dropdown pull-left ">
+                <a class="dropdown-toggle" id="endDate" role="button" data-toggle="dropdown" data-target="#"
+                   href="#">
+                    <div class="form-group">
+                        <input type="text" class="form-control width-154" data-ng-model="vm.myEDate | date:'yyyy-MM-dd'" placeholder="截止日期">
+                        <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="vm.myEDate"
+                                    data-datetimepicker-config="{ dropdownSelector: '#endDate',startView:'day', minView:'day' }"></datetimepicker>
+                </ul>
+            </div>
+        </div>
+        <button type="button" class="btn btn-sky width-94" ng-click="vm.clickToAdd()"><span class="glyphicon glyphicon-search margin-4"></span>搜索</button>
+        <button type="reset" class="btn btn-reset" ng-click="ResetQuery()"><span
+                    class="glyphicon glyphicon-repeat margin-4"></span>重置
+            </button>
+        <!-- <button type="button" class="btn btn-sky width-94" ng-click="vm.clickToAdd()"><span class="glyphicon glyphicon-file"></span>EXCEL导入</button>      -->
+    </form>
+    </div>
+    <div class="table-responsive-1-1">
+        <table class="table table-striped table-hover table-bordered table01 ">
+          <thead>
+          <tr>
+            <td>员工编码</td>
+            <td>员工姓名</td>
+            <td>考勤编号</td>
+            <td>考勤组织</td>
+            <td>打卡日期</td>
+            <td>打卡时间</td>
+            <td>考勤状态</td>
+            <td>打卡来源</td>
+            <td>打卡位置</td>
+          </tr>
+          </thead>
+          <tbody >
+          <tr ng-repeat="work in vm.workatts">
+            <td>{{work.username}}</td>
+            <td>{{work.realname}}</td>
+            <td>{{work.attendancecode}}</td>
+            <td>{{work.attendanceorg}}</td>
+            <td>{{work.punchdate.substring(0,work.punchdate.indexOf(" "))}}</td>
+            <td>{{work.punchperiod}}</td>
+            <td>{{work.attendancestatus}}</td>
+            <td>{{work.punchorigin}}</td>
+            <td>{{work.punchlocation}}</td>
+          </tr>
+          </tbody>
+        </table>
+    </div>
+    <!-- <button type="button" class="btn btn-sky width-94" ng-click="vm.clickToUpdatemodel()"><span class="glyphicon glyphicon-plus"></span>添加请假</button> -->
+    <!-- <div class="pull-left page-margin">共<span class="text-orange">{{vm.enterpriseClientList.totalItems}}</span>条</div> -->
+    <tm-pagination conf="paginationConf" class="page-fix"></tm-pagination>
+  </div>
+</div>

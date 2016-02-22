@@ -1,0 +1,9 @@
+.left-nav-box{list-style: none; width:156px; height:100%; background: #f6f6f6 !important; text-align: center; font-size:14px; font-family:Microsoft YaHei; float: left; padding: 0px; margin:0px;box-shadow: -3px 0px 3px #ebebeb inset ; z-index:4;}
+.left-nav-box li{list-style:none; padding: 0px; color:#2772c6;line-height:42px;}
+.left-nav-box li a{text-decoration: none; width:100%; height:42px;line-height:42px; text-align: center; color:#2c3846;display: block; background:none; transition:background 0.5s;font-family:Microsoft YaHei;font-size: 16px;}
+.left-nav-box li a:hover{text-decoration: none; color:#2c3846; background: #fdbab9;}
+.left-nav-active{background:#de4945 url("/assets/images/leftNavActiveArrow.png") no-repeat right center; color:#fff !important; cursor: pointer;font-family:Microsoft YaHei;}
+.left-nav-active a{color: #fff !important;}
+.left-nav-active a:hover{color: #fff !important; background: transparent !important;}
+.left-nav-menu-title{list-style:none; background:#b83b39; padding: 0px; color:#fff !important; font-size:16px; line-height:42px; font-family: Microsoft YaHei;}
+/*引用需要删除同名-op文件，并在html中全局替换*/

@@ -1,0 +1,121 @@
+<div class="content-box" ng-controller="roomChartDataCtrl as vm">	
+	<div class="search-box clearfix">
+		<form class="form-inline" role="form">
+			<div class="data-btn1">
+				<button class="data-time" ng-class="{'data-time-active' : '1' == vm.datetype && vm.queryRoom.type != ''}" ng-click="vm.selectData('2','1')">今天</button>
+				<button class="data-time" ng-class="{'data-time-active' : '2' == vm.datetype && vm.queryRoom.type != ''}" ng-click="vm.selectData('3','2')">本月</button>
+				<button class="data-time" ng-class="{'data-time-active' : '3' == vm.datetype && vm.queryRoom.type != ''}" ng-click="vm.selectData('5','3')">今年</button>
+			</div>
+			<div class="dropdown pull-left data-input">
+	            <a class="dropdown-toggle" id="startDate" role="button" data-toggle="dropdown" data-target="#"
+	               href="#">
+	                <div class="input-group margin-4">
+	                	<label for="postName" class="sr-only">开始时间</label>
+	                    <input type="text" class="form-control time-kai width-94" placeholder="开始时间" data-ng-model="vm.startdate | date:'yyyy-MM-dd'">
+	                    <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+	                </div>
+	            </a>
+	            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+	                <datetimepicker data-ng-model="vm.startdate"
+	                                data-datetimepicker-config="{ dropdownSelector: '#startDate',startView:'day', minView:'day' }"></datetimepicker>
+	            </ul>
+	        </div>
+	        <div class="dropdown pull-left data-input">
+	            <a class="dropdown-toggle" id="enddate" role="button" data-toggle="dropdown" data-target="#"
+	               href="#">
+	                <div class="input-group">
+	                	<label for="postName" class="sr-only">结束时间</label>
+	                    <input type="text" class="form-control time-kai width-94 " placeholder="结束时间" data-ng-model="vm.enddate | date:'yyyy-MM-dd'">
+	                    <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+	                </div>
+	            </a>
+	            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+	                <datetimepicker data-ng-model="vm.enddate"
+	                                data-datetimepicker-config="{ dropdownSelector: '#enddate',startView:'day', minView:'day' }"></datetimepicker>
+	            </ul>
+	        </div>
+		        <button type="submit" class="btn btn-sky width-94 pull-left" ng-click="vm.selectData('','')">查询</button>
+		        <button type="reset" class="btn btn-reset pull-left" ng-click="queryClick()"><span
+                    class="glyphicon glyphicon-repeat margin-4"></span>重置
+                </button>
+		    <div class="data-btn2">
+		        <button class="data-search border-right" ng-class="{'data-search-active' : '1' == vm.queryRoom.step}" ng-click="vm.selectStep('1')" ng-if="vm.datetype == '1'">按时</button>
+				<button class="data-search border-right" ng-class="{'data-search-active' : '2' == vm.queryRoom.step}" ng-click="vm.selectStep('2')" ng-if="vm.datetype == '1' || vm.datetype == '2'">按日</button>
+				<button class="data-search border-right" ng-class="{'data-search-active' : '3' == vm.queryRoom.step}" ng-click="vm.selectStep('3')" ng-if="vm.datetype == '2' || vm.datetype == '3'">按月</button>
+				<button class="data-search" ng-class="{'data-search-active' : '4' == vm.queryRoom.step}" ng-click="vm.selectStep('4')" ng-if="vm.datetype == '3'">按季度</button>
+			</div>
+			<!-- <div class="form-group">
+		        <label class="pull-left data-label" for="postName">每日收入</label>
+		        <div class="dropdown pull-left data-input">
+		            <a class="dropdown-toggle" id="queryMonth" role="button" data-toggle="dropdown" data-target="#"
+		               href="#">
+		                <div class="input-group">
+		                    <input type="text" class="form-control width-154" placeholder="每日收入" data-ng-model="queryMonth | date:'yyyy-MM'">
+		                    <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+		                </div>
+		            </a>
+		            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+		                <datetimepicker data-ng-model="queryMonth"
+		                                data-datetimepicker-config="{ dropdownSelector: '#queryMonth',startView:'month', minView:'month' }"></datetimepicker>
+		            </ul>
+		        </div>
+		        <button type="submit" class="btn btn-sky width-94 pull-left margin-21" ng-click="vm.roomMonthIncome()">查询</button>
+        	</div> -->
+        	
+			<!-- <div class="form-group">
+		        <label class="pull-left data-label" for="postName">每季度收入</label>
+		        <div class="dropdown pull-left data-input">
+		            <a class="dropdown-toggle" id="queryQuater" role="button" data-toggle="dropdown" data-target="#"
+		               href="#">
+		                <div class="input-group">
+		                    <input type="text" class="form-control width-154" placeholder="每季度收入" data-ng-model="queryQuater | date:'yyyy'">
+		                    <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+		                </div>
+		            </a>
+		            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+		                <datetimepicker data-ng-model="queryQuater"
+		                                data-datetimepicker-config="{ dropdownSelector: '#queryQuater',startView:'year', minView:'year' }"></datetimepicker>
+		            </ul>
+		        </div>
+		        <button type="submit" class="btn btn-sky width-94 pull-left margin-21" ng-click="vm.roomQuaterIncome()">查询</button>
+        	</div> -->
+        	
+        	<!-- <div class="form-group">
+		        <label class="pull-left data-label" for="postName">每月收入</label>
+		        <div class="dropdown pull-left data-input">
+		            <a class="dropdown-toggle" id="queryYear" role="button" data-toggle="dropdown" data-target="#"
+		               href="#">
+		                <div class="input-group">
+		                    <input type="text" class="form-control width-154" placeholder="每月收入" data-ng-model="queryYear | date:'yyyy'">
+		                    <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+		                </div>
+		            </a>
+		            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+		                <datetimepicker data-ng-model="queryYear"
+		                                data-datetimepicker-config="{ dropdownSelector: '#queryYear',startView:'year', minView:'year' }"></datetimepicker>
+		            </ul>
+		        </div>
+		        <button type="submit" class="btn btn-sky width-94 pull-left margin-21" ng-click="vm.roomYearIncome()">查询</button>
+        	</div> -->
+			
+		</form>
+	</div>
+	<div class="table-responsive-1-0">
+		<div>
+			<canvas id="bar" class="chart chart-bar" data="data" series="series" labels="labels" colours="colours" options="options" width="750" height="300"></canvas>
+		</div>
+		<table class="table table-striped table-hover table-bordered table01">
+			<thead>
+				<tr>
+					<td>时间</td>
+					<td>收入</td>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(key, value) in vm.roomData">
+					<td>{{key}}</td>
+					<td>{{value}}元</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

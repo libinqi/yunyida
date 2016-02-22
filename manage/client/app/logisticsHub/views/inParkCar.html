@@ -1,0 +1,63 @@
+<div style="height:100%" ng-controller="inOutParkCarController as vm">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 yard-car" >
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+			<span class="yard-car-img"><img src="assets/images/car1.png"></span><span class="yard-car-txt">今日入园<a class="yard-car-num" href="#">{{sumInCarCount}}</a>辆</span>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+			<span class="yard-car-img"><img src="assets/images/car2.png"></span><span class="yard-car-txt">今日出园<a class="yard-car-num" href="#">{{sumOutCarCount}}</a>辆</span>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+			<span class="yard-car-img"><img src="assets/images/car3.png"></span><span class="yard-car-txt">报警<a class="yard-car-num2" ng-click="toggleInParkAbnormalCar()">{{sumAbnormalCarCount}}</a>辆</span>
+		</div>
+	</div>
+	<div class="yard-main">
+		<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+			<div class="car-main1">园区名称</div>
+			<div class="car-main2">入园</div>
+			<div class="car-main2">出园</div>
+			<div class="car-main2">报警</div>
+		</div>
+		<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 no-padding">
+			<div class="car-main3">时间</div>
+			<div class="car-main4">车牌</div>
+			<div class="car-main3">事件</div>
+			<div class="car-main3">状态</div>
+		</div>
+	</div>
+	<div class="yard-main1">
+		<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 car-border">
+			<div ng-repeat="item in vm.arrayPark">
+				<div class="car-main1"><a class="car-company" >{{item.parkname}}</a></div>
+				<div class="car-main2 car-blue">{{item.carInCount}}</div>
+				<div class="car-main2 car-blue">{{item.carOutCount}}</div>
+				<div class="car-main2 car-red">{{item.abnormalCarCount}}</div>
+			</div>
+		</div>
+
+		<div id="demo"  class="" style="overflow:hidden;height:600px">
+		<ul id="demo1" class="no-padding">
+
+			<li>
+				<a class="car-a" ng-click="toggleInParkDetail(data.id)" ng-repeat="data in vm.abnormalCarList">
+					<div class="car-main3">{{data.outtime || data.entrytime}}</div>
+					<div class="car-main4">{{data.vehiclenumber}}</div>
+					<div class="car-main3">{{data.parkstatename}}</div>
+					<div class="car-main3">{{data.status}}</div>
+				</a>
+			</li>
+		</ul>
+		<div id="demo2"></div>
+		</div>
+		<!-- <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 car-padding">
+			<marquee direction="up" behavior="scroll" scrollamount="3" scrolldelay="0" loop="-1" width="520" height="600" hspace="0" vspace="0" onmouseover="this.stop()" onmouseout="this.start()">
+			<a class="car-a" ng-click="toggleInParkDetail(data.id)" ng-repeat="data in vm.abnormalCarList">
+				<div class="car-main3">{{data.outtime || data.entrytime}}</div>
+				<div class="car-main3">{{data.vehiclenumber}}</div>
+				<div class="car-main3">{{data.parkstatename}}</div>
+				<div class="car-main3">{{data.status}}</div>
+			</a>
+		</div> -->
+		<pageslide ps-open="showInParkDetail" template-url="app/logisticsHub/views/inParkCarDetail.html"></pageslide>
+		<pageslide ps-open="showInParkAbnormalCar" template-url="app/logisticsHub/views/inParkAbnormalCar.html"></pageslide>
+	</div>
+</div>

@@ -1,0 +1,93 @@
+<div class="content-box" ng-controller="leaveAuditListCtrl as vm">
+    <div class="search-box">
+    <form class="form-inline" role="form">
+        <div class="form-group">
+	        <label  for="postName" class="sr-only">部门</label>
+	        <select class="form-control width-154" ng-model="vm.querydata.deptid" ng-options="it.deptid as it.deptname for it in vm.sysDeptList" ng-change="vm.query()">
+            <option value="">--请选择--</option>
+        </select>
+        </div>
+        <div class="form-group">
+	        <label  for="postName" class="sr-only">员工姓名</label>
+	        <input type="text" class="form-control width-154" ng-model="vm.querydata.realname" placeholder="员工姓名">
+        </div>
+        <div class="form-group">
+	        <label  for="postName" class="sr-only">开始时间</label>
+	        <!-- <quick-datepicker ng-model='vm.SDate' date-format='yyyy-MM-dd' time-format='HH:mm:ss' disable-timepicker="true" placeholder='开始时间'></quick-datepicker> -->
+            <div class="dropdown">
+                <a class="dropdown-toggle" id="startdate" role="button" data-toggle="dropdown" data-target="#">
+                    <div class="no-margin">
+                        <input type="text" class="form-control width-154" data-ng-model="vm.SDate | date:'yyyy-MM-dd'" placeholder="开始时间">
+                        <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="vm.SDate"
+                                    data-datetimepicker-config="{ dropdownSelector: '#startdate',startView:'day', minView:'day' }"></datetimepicker>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+	        <label  for="postName" class="sr-only">结束时间</label>
+	        <!-- <quick-datepicker ng-model='vm.EDate' date-format='yyyy-MM-dd' time-format='HH:mm:ss' disable-timepicker="true" placeholder='结束时间'></quick-datepicker> -->
+            <div class="dropdown">
+                <a class="dropdown-toggle" id="enddate" role="button" data-toggle="dropdown" data-target="#">
+                    <div class="no-margin">
+                        <input type="text" class="form-control width-154" data-ng-model="vm.EDate | date:'yyyy-MM-dd'" placeholder="结束时间">
+                        <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="vm.EDate"
+                                    data-datetimepicker-config="{ dropdownSelector: '#enddate',startView:'day', minView:'day' }"></datetimepicker>
+                </ul>
+            </div>
+        </div>
+        <button type="button" class="btn btn-sky width-94" ng-click="vm.query()"><span class="glyphicon glyphicon-search margin-4"></span>搜索</button>
+        <button type="button" class="btn btn-reset" ng-click="vm.ResetQuery()"><span
+                class="glyphicon glyphicon-repeat margin-4"></span>重置
+        </button>
+    </form>
+    </div>
+    <!-- <div class="control-box">
+        <button type="button" class="btn btn-sky width-94" ng-click="vm.addLeaveAppClick()"><span class="glyphicon glyphicon-plus margin-4"></span>添加请假</button>
+    </div> -->
+    <div class="table-responsive-1-1">
+        <table class="table table-striped table-hover table-bordered table01 ">
+          <thead>
+          <tr>
+            <td>操作</td>
+            <td>员工编码</td>
+            <td>员工姓名</td>
+            <td>部门</td>
+            <td>请假类型</td>
+            <td>请假事由</td>
+            <td>请假开始时间</td>
+            <td>请假结束时间</td>
+            <td>请假天数</td>
+            <td>请假状态</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="item in vm.leaveAppList">
+            <td>
+                <a class="glyphicon glyphicon-zoom-in margin-h10" title="查看" ng-click="vm.viewLeaveAppClick(item.id)"></a>
+                <a class="glyphicon glyphicon-user margin-h10" title="审核" ng-click="vm.auditLeaveAppClick(item.id)"></a>
+                <a class="glyphicon glyphicon-trash margin-h10" title="删除" ng-click="vm.delteLeaveApp(item)"></a>
+            </td>
+            <td>{{item.username}}</td>
+            <td>{{item.realname}}</td>
+            <td>{{item.deptname}}</td>
+            <td>{{item.typename}}</td>
+            <td>{{item.cause}}</td>
+            <td>{{item.starttime}}</td>
+            <td>{{item.endtime}}</td>
+            <td>{{item.day}}</td>
+            <td>{{item.statusname}}</td>
+          </tr>
+          </tbody>
+        </table>
+    </div>
+    <tm-pagination conf="paginationConf" class="page-fix"></tm-pagination>
+  </div>
+</div>

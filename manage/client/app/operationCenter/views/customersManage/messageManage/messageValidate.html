@@ -1,0 +1,24 @@
+<div ng-controller="messageValidateCtrl as vm">
+  <div class="light-box-title2"><span class="text-white">验证消息</span></div>
+    <div class="box-manage-main" ng-repeat="item in vm.applicationList">
+          <div class="box-manage-img"></div>
+          <div class="box-manage-r">
+                <div class="box-manage-name">企业名称：{{item.enterprisename}}</div>
+                <div class="box-manage-name"><span class="box-manage-person">联系人：{{item.contactname}}</span>联系电话：{{item.telephonenumber}}</div>
+                <div class="box-manage-name">附加信息：{{item.remark}}</div>
+          </div>
+          <div class="box-manage-btn">
+                <!-- <select class="btn-approval">
+                    <option value="">同意</option>
+                </select> -->
+                <button class="btn-jujue" ng-click="vm.chooseCustomer(item)">同意</button>
+                <button class="btn-jujue" ng-click="vm.auditApplication(item)">拒绝</button>
+          </div>
+    </div>
+    <div class="form-group">
+      <div class="text-center">
+        <!-- <button type="button" class="btn navbar-btn btn-sky width-94">好友验证方式设置</button> -->
+        <button type="button" class="btn navbar-btn btn-sky width-94" ng-click="vm.batchClearApplication()">清空列表</button>
+      </div>
+    </div>
+</div>

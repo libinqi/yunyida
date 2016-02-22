@@ -1,0 +1,90 @@
+<div>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 car-detail" >
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 car-border2">
+			<div class="car-name">车辆</div>
+			<div class="car-number">{{parkCarDetail.vehiclenumber}}</div>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 car-border2">
+			<div class="car-name">{{parkCarDetail.parkstatename}}</div>
+			<div class="car-number">{{parkCarDetail.parkname}}<span class="in-time">{{parkCarDetail.outtime || parkCarDetail.entrytime}}</span></div>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+			<div class="car-name">诚信等级</div>
+			<div class="car-level2">{{parkCarDetail.status}}
+				<button  ng-click="toggleInParkDetail()" type="button" style="float:right;font-size: 20px; ">
+	          返回</button>
+			</div>
+
+		</div>
+	</div>
+	<div class="yard-main2">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 car-border2">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<dl class="car-detail-main">
+							<dt class="car-detail-img"><img src="assets/images/car-detail1.png"></dt>
+							<dd class="car-detail-txt">
+								<div class="car-kind">车型</div>
+								<div class="car-kind car-detail-red">{{parkCarDetail.cartype}}</div>
+							</dd>
+						</dl>
+						<dl class="car-detail-main">
+							<dt class="car-detail-img"><img src="assets/images/car-detail3.png"></dt>
+							<dd class="car-detail-txt">
+								<div class="car-kind">车长</div>
+								<div class="car-kind car-detail-red">{{parkCarDetail.vehiclelength}}<span class="car-unit">米</span></div>
+							</dd>
+						</dl>
+						<dl class="car-detail-main">
+							<dt class="car-detail-img"><img src="assets/images/car-detail5.png"></dt>
+							<dd class="car-detail-txt">
+								<div class="car-kind">载重</div>
+								<div class="car-kind car-detail-red">{{parkCarDetail.vehicletonnage}}<span class="car-unit">吨</span></div>
+							</dd>
+						</dl>
+						<dl class="car-detail-main">
+							<dt class="car-detail-img"><img src="assets/images/car-detail7.png"></dt>
+							<dd class="car-detail-txt">
+								<div class="car-kind">运输许可证</div>
+								<div class="car-kind car-detail-red">2015-2-2</div>
+							</dd>
+						</dl>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<dl class="car-detail-main">
+							<dt class="car-detail-img"><img src="assets/images/car-detail2.png"></dt>
+							<dd class="car-detail-txt">
+								<div class="car-kind">司机</div>
+								<div class="car-kind car-detail-blue">{{parkCarDetail.contactname}}</div>
+							</dd>
+						</dl>
+						<dl class="car-detail-main">
+							<dt class="car-detail-img"><img src="assets/images/car-detail4.png"></dt>
+							<dd class="car-detail-txt">
+								<div class="car-kind">电话</div>
+								<div class="car-kind car-detail-blue">{{parkCarDetail.telephonenumber}}</div>
+							</dd>
+						</dl>
+						<dl class="car-detail-main">
+							<dt class="car-detail-img"><img src="assets/images/car-detail6.png"></dt>
+							<dd class="car-detail-txt">
+								<div class="car-kind">在园</div>
+								<div class="car-kind car-detail-blue">{{parkCarDetail.hours}}<span class="car-unit">小时</span></div>
+							</dd>
+						</dl>
+						<dl class="car-detail-main">
+							<dt class="car-detail-img"><img src="assets/images/car-detail8.png"></dt>
+							<dd class="car-detail-txt">
+								<div class="car-kind">从业资格证</div>
+								<div class="car-kind car-detail-red">2015-2-2</div>
+							</dd>
+						</dl>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div class="honest">诚信记录</div>
+					<div class="honest-txt">{{parkCarDetail.publicCause}}</div>
+				</div>
+		</div>
+	</div>
+</div>

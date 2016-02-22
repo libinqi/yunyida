@@ -1,0 +1,37 @@
+<div class="content-box" ng-controller="oilPriceCtrl as vm">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:10px;">
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 goods-size" style="height:450px">
+    <line-chart config="newUserByTimeConfig" data="newUserByTimeData"></line-chart>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" >
+    <table class="table table-striped table-hover table-bordered table01 " style="margin-top:65px">
+      <thead >
+        <tr style="background-color:#E5E0D5">
+          <td >类别</td>
+          <td >今日油价(元/L)</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr >
+          <td>0号柴油</td>
+          <td>{{gas0}}</td>
+        </tr>
+        <tr >
+          <td>90号汽油</td>
+          <td>{{gas90}}</td>
+        </tr>
+        <tr >
+          <td>93号汽油</td>
+          <td>{{gas93}}</td>
+        </tr>
+        <tr >
+          <td>97号汽油</td>
+          <td>{{gas97}}</td>
+        </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>

@@ -1,0 +1,66 @@
+<div class="content-box" ng-controller="infoAuditDriverListCtrl as vm">
+    <div class="search-box">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label for="postName" class="sr-only">姓名</label>
+                <input type="text" class="form-control width-154 " placeholder="姓名" ng-model="vm.querydata.realname">
+            </div>
+            <div class="form-group">
+                <label for="postName" class="sr-only">手机</label>
+                <input type="text" class="form-control width-154 " placeholder="手机" ng-model="vm.querydata.phone">
+            </div>
+            <div class="form-group">
+                <label for="postName" class="sr-only">身份证号</label>
+                <input type="text" class="form-control width-154 " placeholder="身份证号"
+                       ng-model="vm.querydata.useridsn">
+            </div>
+            <button type="button" class="btn btn-sky width-94" ng-click="vm.query()"><span
+                    class="glyphicon glyphicon-search margin-4"></span>搜索
+            </button>
+            <button type="button" class="btn btn-reset" ng-click="vm.ResetQuery()"><span
+                            class="glyphicon glyphicon-repeat margin-4"></span>重置
+            </button>
+        </form>
+    </div>
+    <div class="control-box">
+        <!-- <button type="button" class="btn btn-sky width-94" ng-click="vm.addDriverClick()"><span
+            class="glyphicon glyphicon-plus margin-4"></span>新增
+        </button> -->
+        <button type="button" class="btn btn-sky width-94" ng-click="vm.batchDeleteDriverClick()"><span
+                class="glyphicon glyphicon-plus margin-4"></span>刪除
+        </button>
+    </div>
+    <div class="table-responsive-2-1">
+        <table class="table table-striped table-hover table-bordered table01 ">
+            <thead>
+            <tr>
+            <td><input type="checkbox" ng-model="vm.allSelected" ng-click="vm.selectAllItems()"></td>
+            <td>操作</td>
+            <td>姓名</td>
+            <td>手机号</td>
+            <td>身份证号</td>
+            <td>驾驶证号</td>
+            <td>从业资格号</td>
+            <td>注册日期</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in vm.driverList">
+            <td><input type="checkbox" ng-model="item.selected" ng-click="vm.selectItem(item)"></td>
+            <td class="btn-shipper">
+                <!-- <a class="glyphicon glyphicon-edit margin-h10" title="编辑" ng-click="vm.editDriverClick(item.userid)"></a> -->
+                <a class="glyphicon glyphicon-zoom-in margin-h10" title="查看详情" ng-click="vm.viewDriverClick(item.userid)"></a>
+            </td>
+            <td>{{item.realname}}</td>
+            <td>{{item.phone}}</td>
+            <td>{{item.useridsn}}</td>
+            <td>{{item.drivinglicense}}</td>
+            <td>{{item.certificatenumber}}</td>
+            <td>{{item.createtime}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <tm-pagination conf="paginationConf" class="page-fix"></tm-pagination>
+</div>
+</div>

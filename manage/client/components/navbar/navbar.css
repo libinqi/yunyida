@@ -1,0 +1,10 @@
+.index-footer{background:#b83b39;overflow:hidden;height: 64px;list-style: none; font-family: Microsoft YaHei; font-size:18px;position: fixed;left:0px;bottom:0px;z-index:6;margin:0px;}
+.nav-img{display:inline-block !important;height: 30px;width: 50px;margin:2px -5px 0 0;}
+.nav-btn-box{display:inline-block; width:142px; height:56px;text-align: center;transition:background 0.5s;}
+.nav-btn-box:hover{background:#e05d5a; cursor: pointer;border-bottom-left-radius:6px; border-bottom-right-radius:6px;}
+.nav-btn-box.active{background:#fff;border-bottom-left-radius:6px; border-bottom-right-radius:6px;color: #b83b39 !important; box-shadow:5px 5px 5px #95302e;}
+.nav-btn-box a{display:inline-block !important;color: #fff !important;height:62px;line-height: 34px;padding-top: 15px;}
+.nav-btn-box.active a{color:#b83b39 !important;}
+.nav-btn-add{display:inline-block;text-align: center; font-size:28px;}
+.nav-btn-add a{color:#fff; padding-top:24px; margin-right:20px; transition:color 0.3s;}
+.nav-btn-add a:hover{text-decoration: none; color:#b7d4f3;}

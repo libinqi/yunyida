@@ -1,0 +1,135 @@
+<div class="room-box" ng-controller="infoAuditDriverInfoCtrl as vm">
+  <div class="light-box-title"><span class="text-white">详情</span></div>
+  <form class="form-horizontal text-normal" name="myForm" autocomplete="off" ng-submit="vm.update()" novalidate>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row room-box-row">
+      <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <label for="csex1" class="col-sm-5 control-label">头像</label>
+        <div class="col-sm-7">
+          <span class="head-img pull-left">
+            <img  class="media-object img-responsive" ng-model="vm.jsondata.image" ngf-src="files[0]" src="{{!vm.jsondata.image?'assets/images/license.jpg':vm.jsondata.image}}" ngf-default-src="assets/images/license.jpg" ngf-accept="'image/*'">
+          </span>
+          <span class="pull-left margin-28 margin-7">
+          <button type="button" ngf-select ng-model="files" class="btn btn-sky width-37" accept="image/*" ng-show="!isView">上传</button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.realname.$invalid}">
+      <label for="realname" class="col-sm-5 control-label">姓名</label>
+      <div class="col-sm-7">
+        <input type="text" name="realname" class="form-control width-154" ng-model="vm.jsondata.realname" placeholder="" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.realname.$error.required">请输姓名！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.useridsn.$invalid}">
+      <label for="useridsn" class="col-sm-5 control-label">身份证号</label>
+      <div class="col-sm-7">
+        <input type="text" name="useridsn" class="form-control width-154" ng-model="vm.jsondata.useridsn" placeholder="" ng-readonly="isView">
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.phone.$invalid}">
+      <label for="phone" class="col-sm-5 control-label">手机号</label>
+      <div class="col-sm-7">
+        <input type="text" name="phone" class="form-control width-154" ng-model="vm.jsondata.phone" pattern="^1[3|4|5|7|8][0-9]{9}$" placeholder="" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.phone.$error.required">请输入手机号！</span>
+        <span class="help-block" ng-show="myForm.submitted && myForm.phone.$error.pattern">输入的号码有误！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.drivinglicense.$invalid}">
+      <label for="drivinglicense" class="col-sm-5 control-label">驾驶证号</label>
+      <div class="col-sm-7">
+        <input type="text" name="drivinglicense" ng-model="vm.jsondata.drivinglicense" class="form-control width-154" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.drivinglicense.$error.required">请输入驾驶证号！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.certificatenumber.$invalid}">
+      <label for="certificatenumber" class="col-sm-5 control-label">从业资格证号</label>
+      <div class="col-sm-7">
+        <input type="text" name="certificatenumber" class="form-control width-154" ng-model="vm.jsondata.certificatenumber" placeholder="" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.certificatenumber.$error.required">请输入从业资格证号！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.createtime.$invalid}">
+      <label for="createtime" class="col-sm-5 control-label">注册日期</label>
+      <div class="col-sm-7">
+        <input type="text" name="createtime" class="form-control width-154" ng-model="vm.jsondata.createtime" placeholder="" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.createtime.$error.required">请输入注册日期！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.vehiclenumber.$invalid}">
+      <label for="vehiclenumber" class="col-sm-5 control-label">车牌号</label>
+      <div class="col-sm-7">
+        <input type="text" name="vehiclenumber" class="form-control width-154" ng-model="vm.jsondata.vehiclenumber" placeholder="" required>
+        <span class="help-block" ng-show="myForm.submitted && myForm.vehiclenumber.$error.required">请输入车牌号！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.travellicense.$invalid}">
+      <label for="travellicense" class="col-sm-5 control-label">行驶证号</label>
+      <div class="col-sm-7">
+        <input type="text" name="travellicense" class="form-control width-154" ng-model="vm.jsondata.travellicense" placeholder="" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.travellicense.$error.required">请输入行驶证号！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.vehicleclassification.$invalid}">
+      <label for="vehicleclassification" class="col-sm-5 control-label">车型</label>
+      <div class="col-sm-7">
+        <input type="text" name="vehicleclassification" class="form-control width-154" ng-model="vm.jsondata.vehicleclassification" placeholder="" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.vehicleclassification.$error.required">请输入车型！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.vehiclelength.$invalid}">
+      <label for="vehiclelength" class="col-sm-5 control-label">车长</label>
+      <div class="col-sm-7">
+        <input type="text" name="vehiclelength" class="form-control width-154" ng-model="vm.jsondata.vehiclelength" placeholder="" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.vehiclelength.$error.required">请输入车长！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.vehicletonnage.$invalid}">
+      <label for="vehicletonnage" class="col-sm-5 control-label">载重</label>
+      <div class="col-sm-7">
+        <input type="text" name="vehicletonnage" class="form-control width-154" ng-model="vm.jsondata.vehicletonnage" placeholder="" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.vehicletonnage.$error.required">请输入载重！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">身份证</label>
+      <div class="col-sm-7">
+        <span class="license-img pull-left margin-11">
+        <img class="media-object img-responsive" ng-model="vm.jsondata.useridsnurl" ngf-src="useridsnurl[0]" src="{{!vm.jsondata.useridsnurl?'assets/images/license.jpg':vm.jsondata.useridsnurl}}" ngf-default-src="assets/images/license.jpg" ngf-accept="'image/*'" alt="...">
+        </span>
+        <span class="pull-left margin-28">
+        <button type="button" class="btn btn-sky width-37" ngf-select ng-model="useridsnurl" accept="image/*" ng-show="!isView">上传</button></span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">驾驶证</label>
+      <div class="col-sm-7">
+        <span class="license-img pull-left margin-11">
+        <img class="media-object img-responsive" ng-model="vm.jsondata.licenseurl" ngf-src="licenseurl[0]" src="{{!vm.jsondata.licenseurl?'assets/images/license.jpg':vm.jsondata.licenseurl}}" ngf-default-src="assets/images/license.jpg" ngf-accept="'image/*'"  alt="..."></span>
+        <span class="pull-left margin-28"><button type="button" class="btn btn-sky width-37" accept="image/*" ngf-select ng-model="licenseurl" ng-show="!isView">上传</button></span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">行驶证</label>
+      <div class="col-sm-7">
+        <span class="license-img pull-left margin-11">
+        <img class="media-object img-responsive" ng-model="vm.jsondata.travellicenseurl" ngf-src="travellicenseurl[0]" src="{{!vm.jsondata.travellicenseurl?'assets/images/license.jpg':vm.jsondata.travellicenseurl}}" ngf-default-src="assets/images/license.jpg" ngf-accept="'image/*'"  alt="..."></span>
+        <span class="pull-left margin-28"><button type="button" class="btn btn-sky width-37" accept="image/*" ngf-select ng-model="travellicenseurl" ng-show="!isView">上传</button></span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">从业资格证</label>
+      <div class="col-sm-7">
+        <span class="license-img pull-left margin-11">
+        <img class="media-object img-responsive" ng-model="vm.jsondata.bizlicurl" ngf-src="filesbiz[0]" src="{{!vm.jsondata.bizlicurl?'assets/images/license.jpg':vm.jsondata.bizlicurl}}" ngf-default-src="assets/images/license.jpg" ngf-accept="'image/*'"  alt="..."></span>
+        <span class="pull-left margin-28"><button type="button" class="btn btn-sky width-37" accept="image/*"  ngf-select ng-model="filesbiz" ng-show="!isView">上传</button></span>
+      </div>
+    </div>
+    <div class="form-group clear">
+      <div class="text-center">
+        <button type="submit" class="btn navbar-btn btn-sky width-94" ng-show="!isView"><span class="glyphicon glyphicon-ok margin-4"></span>保存</button>
+        <button type="button" class="btn navbar-btn btn-default width-94" ng-click="vm.cancel()"><span class="glyphicon glyphicon-remove margin-4"></span>取消</button>
+      </div>
+    </div>
+  </form>
+</div>

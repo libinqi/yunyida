@@ -1,0 +1,18 @@
+<div class="room-box" ng-controller="chooseCustomerTypeCtrl as vm">
+  <div class="light-box-title"><span class="text-white">验证消息</span></div>
+  <form class="form-horizontal text-normal" name="myForm" autocomplete="off" ng-submit="vm.auditApplication()" novalidate>
+    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 box-yanzheng">
+      <label class="col-sm-4 control-label">选择客户分类</label>
+      <div class="col-sm-6">
+        <select class="form-control width-154" ng-model="vm.jsondata.dctype" ng-options="dic.dictcode as dic.dictname for dic in dictList['KHLX']" ng-disabled="true">
+            <option value="">--请选择--</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group clear btn-yanzheng">
+      <div class="text-center">
+          <button type="submit" class="btn navbar-btn btn-sky width-94"><span class="glyphicon glyphicon-user margin-4"></span>确认</button>
+      </div>
+    </div>
+  </form>
+</div>

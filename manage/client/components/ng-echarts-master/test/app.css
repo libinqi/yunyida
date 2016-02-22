@@ -1,0 +1,9 @@
+.echarts{
+    height: 400px;
+    width: 800px;
+}
+
+.themes{
+    padding: 0px;
+    border: dashed 1px darkblue;
+}

@@ -1,0 +1,345 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <base href="/">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <script type="text/javascript">
+    if (process!=undefined&&process!=null) {
+      var doc = document;
+      var body = doc.getElementsByTagName("body");
+      var div = doc.createElement("div");
+      div.setAttribute("id", "loading_blank");
+      div.setAttribute("width", 224);
+      div.setAttribute("height", 168);
+      div.setAttribute("z-index", "9999999999");
+      div.setAttribute("style", "position:absolute;top:50%;left:50%;margin:-84px 0 0 -112px");
+      var img = doc.createElement("img");
+      img.setAttribute("src", "file://"+process.cwd() + "/loading.gif");
+      img.setAttribute("width", 224);
+      img.setAttribute("height", 168);
+      div.appendChild(img);
+
+      if (body.length)
+        body[0].appendChild(div);
+      else
+        doc.documentElement.appendChild(div);
+    }
+  </script>
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(client) app/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog.css" />
+  <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog-theme-default.css" />
+  <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css({.tmp,client}) app/app.css -->
+  <link rel="stylesheet" href="app/app.css">
+  <!-- injector:css -->
+  <link rel="stylesheet" href="app/app.css">
+  <link rel="stylesheet" href="app/common/views/userSetting/userCenter.css">
+  <link rel="stylesheet" href="app/logisticsHub/views/parkDtail.css">
+  <link rel="stylesheet" href="app/operationCenter/home.css">
+  <link rel="stylesheet" href="app/operationCenter/views/auditManage/leaveAudit.css">
+  <link rel="stylesheet" href="app/operationCenter/views/customersCenter/customerCenter.css">
+  <link rel="stylesheet" href="app/operationCenter/views/customersCenter/customersServe/customersServe.css">
+  <link rel="stylesheet" href="app/operationCenter/views/customersManage/customersManage.css">
+  <link rel="stylesheet" href="app/operationCenter/views/dataCenter/data.css">
+  <link rel="stylesheet" href="app/operationCenter/views/humanResource/humanResource.css">
+  <link rel="stylesheet" href="app/operationCenter/views/propertyManage/facadeSet/facadeSet.css">
+  <link rel="stylesheet" href="app/operationCenter/views/propertyManage/hydropowerData/hydropowerData.css">
+  <link rel="stylesheet" href="app/operationCenter/views/propertyManage/leaseManage/leaseManage.css">
+  <link rel="stylesheet" href="app/operationCenter/views/propertyManage/meterReading/meterReading.css">
+  <link rel="stylesheet" href="app/operationCenter/views/propertyManage/paymentManage/paymentManage.css">
+  <link rel="stylesheet" href="app/operationCenter/views/systemSetting/department.css">
+  <link rel="stylesheet" href="components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css">
+  <link rel="stylesheet" href="components/angular-city-select/angular-city-select.css">
+  <link rel="stylesheet" href="components/citypicker/ngCityPicker.css">
+  <link rel="stylesheet" href="components/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="components/header/header.css">
+  <link rel="stylesheet" href="components/leftnav/leftnav.css">
+  <link rel="stylesheet" href="components/modal/modal.css">
+  <link rel="stylesheet" href="components/navbar/navbar.css">
+  <link rel="stylesheet" href="components/ng-echarts-master/test/app.css">
+  <link rel="stylesheet" href="components/ng-notify/ng-notify.css">
+  <link rel="stylesheet" href="components/pagination/tm.pagination.css">
+  <link rel="stylesheet" href="components/vehicleNum/ngVehicleNum.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/main.css">
+  <!-- endinjector -->
+  <!-- endbuild -->
+</head>
+
+<body ng-app="yydApp" flow-prevent-drop>
+  <div class="win_box_right_border"></div>
+  <!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+  <!-- Add your site or application content here -->
+  <div ng-include="'components/header/header.html'"></div>
+  <div data-ui-view>
+  </div>
+  <div ng-include="'components/navbar/navbar.html'"></div>
+
+  <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+  <!-- build:js({client,node_modules}) app/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/modernizr/modernizr.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/mockjs/dist/mock.js"></script>
+  <script src="bower_components/ngDialog/js/ngDialog.js"></script>
+  <script src="bower_components/flow.js/dist/flow.js"></script>
+  <script src="bower_components/ng-flow/dist/ng-flow.js"></script>
+  <script src="bower_components/angular-w5c-validator/w5cValidator.js"></script>
+  <script src="bower_components/fusty-flow.js/src/fusty-flow.js"></script>
+  <script src="bower_components/fusty-flow.js/src/fusty-flow-factory.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
+  <script src="bower_components/angular-ui-tree/dist/angular-ui-tree.min.js"></script>
+  <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+  <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+  <script src="bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
+  <script src="bower_components/echarts/build/dist/echarts-all.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <script src="bower_components/moment/locale/zh-cn.js"></script>
+
+  <!-- build:js({.tmp,client}) app/app.js -->
+  <script src="app/app.js"></script>
+  <!-- injector:js -->
+  <script src="js/config.js"></script>
+  <script src="js/mock.angular.js"></script>
+  <script src="js/nw.js"></script>
+  <script src="js/user.js"></script>
+  <script src="components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
+  <script src="components/angular-city-select/angular-city-select.js"></script>
+  <script src="components/angular-echarts/angular-echarts.js"></script>
+  <script src="components/angular-pageslide-directive/angular-pageslide-directive.js"></script>
+  <script src="components/citypicker/ngCityPicker.js"></script>
+  <script src="components/dialog/dialog.service.js"></script>
+  <script src="components/header/header.controller.js"></script>
+  <script src="components/modal/modal.service.js"></script>
+  <script src="components/navbar/navbar.controller.js"></script>
+  <script src="components/ng-echarts-master/dist/ng-echarts.js"></script>
+  <script src="components/ng-echarts-master/dist/ng-echarts.min.js"></script>
+  <script src="components/ng-echarts-master/gulpfile.js"></script>
+  <script src="components/ng-echarts-master/src/ngecharts.js"></script>
+  <script src="components/ng-echarts-master/src/theme.js"></script>
+  <script src="components/ng-echarts-master/src/theme/blue.js"></script>
+  <script src="components/ng-echarts-master/src/theme/dark.js"></script>
+  <script src="components/ng-echarts-master/src/theme/default.js"></script>
+  <script src="components/ng-echarts-master/src/theme/gray.js"></script>
+  <script src="components/ng-echarts-master/src/theme/green.js"></script>
+  <script src="components/ng-echarts-master/src/theme/helianthus.js"></script>
+  <script src="components/ng-echarts-master/src/theme/infographic.js"></script>
+  <script src="components/ng-echarts-master/src/theme/macarons.js"></script>
+  <script src="components/ng-echarts-master/src/theme/red.js"></script>
+  <script src="components/ng-echarts-master/src/theme/shine.js"></script>
+  <script src="components/ng-echarts-master/test/app.js"></script>
+  <script src="components/ng-notify/ng-notify.js"></script>
+  <script src="components/pagination/tm.pagination.js"></script>
+  <script src="components/vehicleNum/ngVehicleNum.js"></script>
+  <script src="app/common/index.js"></script>
+  <script src="app/indexCenter/index.js"></script>
+  <script src="app/logisSite/index.js"></script>
+  <script src="app/logisticsHub/index.js"></script>
+  <script src="app/operationCenter/index.js"></script>
+  <script src="app/operationData/index.js"></script>
+  <script src="app/priceMonitor/index.js"></script>
+  <script src="app/throughputMonitor/index.js"></script>
+  <script src="app/transportMonitor/index.js"></script>
+  <script src="app/common/controllers/login.js"></script>
+  <script src="app/common/controllers/userSetting/changePassword.js"></script>
+  <script src="app/common/controllers/userSetting/historyLeave.js"></script>
+  <script src="app/common/controllers/userSetting/userData.js"></script>
+  <script src="app/common/controllers/userSettingCtrl.js"></script>
+  <script src="app/common/filters/moment_filters.js"></script>
+  <script src="app/common/services/systemAppService.js"></script>
+  <script src="app/common/services/userSettingService.js"></script>
+  <script src="app/indexCenter/controllers/indexCenter.js"></script>
+  <script src="app/indexCenter/services/indexCenterServices.js"></script>
+  <script src="app/logisticsHub/controllers/inOutParkCar.js"></script>
+  <script src="app/logisticsHub/controllers/nationalplatform.js"></script>
+  <script src="app/logisticsHub/controllers/parkMonitor.js"></script>
+  <script src="app/logisticsHub/controllers/ranking.js"></script>
+  <script src="app/logisticsHub/services/inOutParkCarServices.js"></script>
+  <script src="app/logisticsHub/services/indexRankService.js"></script>
+  <script src="app/logisticsHub/services/monitorServices.js"></script>
+  <script src="app/operationCenter/controllers/accountManage/accountEdit.js"></script>
+  <script src="app/operationCenter/controllers/accountManage/manage.js"></script>
+  <script src="app/operationCenter/controllers/accountManage/resetPassword.js"></script>
+  <script src="app/operationCenter/controllers/applicationManage/addApplication.js"></script>
+  <script src="app/operationCenter/controllers/applicationManage/applicationManage.js"></script>
+  <script src="app/operationCenter/controllers/applicationManage/editApplication.js"></script>
+  <script src="app/operationCenter/controllers/applicationManage/menuAdd.js"></script>
+  <script src="app/operationCenter/controllers/applicationManage/menuManage.js"></script>
+  <script src="app/operationCenter/controllers/auditManage/auditLeaveApp.js"></script>
+  <script src="app/operationCenter/controllers/auditManage/leaveAudit.js"></script>
+  <script src="app/operationCenter/controllers/auditManage/viewAudit.js"></script>
+  <script src="app/operationCenter/controllers/clientCenter/platformMessage/info.js"></script>
+  <script src="app/operationCenter/controllers/clientCenter/platformMessage/list.js"></script>
+  <script src="app/operationCenter/controllers/customersCenter/clientUnlock.js"></script>
+  <script src="app/operationCenter/controllers/customersCenter/clientUnlockEdit.js"></script>
+  <script src="app/operationCenter/controllers/customersCenter/customersServe/customersServe.js"></script>
+  <script src="app/operationCenter/controllers/customersCenter/customersServe/customersServeAdd.js"></script>
+  <script src="app/operationCenter/controllers/customersCenter/customersServe/customersVisit.js"></script>
+  <script src="app/operationCenter/controllers/customersCenter/message.js"></script>
+  <script src="app/operationCenter/controllers/customersCenter/messageAdd.js"></script>
+  <script src="app/operationCenter/controllers/customersCenter/ticketAdd.js"></script>
+  <script src="app/operationCenter/controllers/customersCenter/ticketManage.js"></script>
+  <script src="app/operationCenter/controllers/customersCenter/userAudit.js"></script>
+  <script src="app/operationCenter/controllers/customersCenter/userAuditEdit.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/driver/addDriver.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/driver/driverList.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/driver/driverManage.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/driver/viewDriver.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/driverManage.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/enterprise/addEnterprise.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/enterprise/editEnterprise.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/enterprise/enterpriseList.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/enterprise/enterpriseManage.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/enterprise/viewEnterprise.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/enterprise/viewEnterpriselmp.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/goodsOwner/addShipper.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/goodsOwner/editShipper.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/goodsOwner/shipperList.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/goodsOwner/shipperManage.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/goodsOwner/viewShipper.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/goodsOwner/viewShipperlmp.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/messageManage/addCustomer.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/messageManage/chooseCustomerType.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/messageManage/messageValidate.js"></script>
+  <script src="app/operationCenter/controllers/customersManage/messageManage/searchEnterprise.js"></script>
+  <script src="app/operationCenter/controllers/dataCenter/parkingData.js"></script>
+  <script src="app/operationCenter/controllers/dataCenter/propertyData.js"></script>
+  <script src="app/operationCenter/controllers/dataCenter/roomData.js"></script>
+  <script src="app/operationCenter/controllers/dataCenter/workAttendanceData.js"></script>
+  <script src="app/operationCenter/controllers/honesty/addDriverHonesty.js"></script>
+  <script src="app/operationCenter/controllers/honesty/addEnterpriseHonesty.js"></script>
+  <script src="app/operationCenter/controllers/honesty/driverHonesty.js"></script>
+  <script src="app/operationCenter/controllers/honesty/driverHonestyInfo.js"></script>
+  <script src="app/operationCenter/controllers/honesty/enterpriseHonesty.js"></script>
+  <script src="app/operationCenter/controllers/honesty/enterpriseHonestyInfo.js"></script>
+  <script src="app/operationCenter/controllers/humanResource/jobManageCtrl.js"></script>
+  <script src="app/operationCenter/controllers/humanResource/workAttendanceCtrl.js"></script>
+  <script src="app/operationCenter/controllers/infoAudit/driver/info.js"></script>
+  <script src="app/operationCenter/controllers/infoAudit/driver/list.js"></script>
+  <script src="app/operationCenter/controllers/infoAudit/enterprise/appDistribution.js"></script>
+  <script src="app/operationCenter/controllers/infoAudit/enterprise/auditInfo.js"></script>
+  <script src="app/operationCenter/controllers/infoAudit/enterprise/info.js"></script>
+  <script src="app/operationCenter/controllers/infoAudit/enterprise/list.js"></script>
+  <script src="app/operationCenter/controllers/infoAudit/park/info.js"></script>
+  <script src="app/operationCenter/controllers/infoAudit/park/list.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/facadeManage/list.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/facadeSet/facadeAdd.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/facadeSet/facadeEdit.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/facadeSet/facadeSet.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/facadeSet/facadeView.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/leaseManage/chooseDoor.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/leaseManage/leaseAdd.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/leaseManage/leaseChecking.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/leaseManage/leaseEdit.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/leaseManage/leaseManage.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/leaseManage/leaseView.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/list.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/meterReading/meterAdd.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/meterReading/meterEdit.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/meterReading/meterReading.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/meterReading/meterReview.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/paymentManage/payment.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/paymentManage/paymentManage.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/rentManage/list.js"></script>
+  <script src="app/operationCenter/controllers/propertyManage/utilitiesManage/list.js"></script>
+  <script src="app/operationCenter/controllers/systemSetting/department.js"></script>
+  <script src="app/operationCenter/controllers/systemSetting/departmentAdd.js"></script>
+  <script src="app/operationCenter/controllers/systemSetting/dictAdd.js"></script>
+  <script src="app/operationCenter/controllers/systemSetting/dictionaryCtrl.js"></script>
+  <script src="app/operationCenter/controllers/systemSetting/menuAdd.js"></script>
+  <script src="app/operationCenter/controllers/systemSetting/menuSetting.js"></script>
+  <script src="app/operationCenter/controllers/systemSetting/roleAdd.js"></script>
+  <script src="app/operationCenter/controllers/systemSetting/roleSetting.js"></script>
+  <script src="app/operationCenter/controllers/systemSetting/staffAdd.js"></script>
+  <script src="app/operationCenter/controllers/systemSetting/staffChangePwd.js"></script>
+  <script src="app/operationCenter/directives/deptRemoteCheck.js"></script>
+  <script src="app/operationCenter/directives/menuRemoteCheck.js"></script>
+  <script src="app/operationCenter/directives/multipleEmail.js"></script>
+  <script src="app/operationCenter/directives/phoneCheck.js"></script>
+  <script src="app/operationCenter/directives/roleRemoteCheck.js"></script>
+  <script src="app/operationCenter/directives/staffPhoneCheck.js"></script>
+  <script src="app/operationCenter/directives/staffRemoteCheck.js"></script>
+  <script src="app/operationCenter/filters/angular-ui-tree-filter.js"></script>
+  <script src="app/operationCenter/services/accountManageService.js"></script>
+  <script src="app/operationCenter/services/applicationManageService.js"></script>
+  <script src="app/operationCenter/services/auditManageService.js"></script>
+  <script src="app/operationCenter/services/clientCenterService.js"></script>
+  <script src="app/operationCenter/services/customersCenterService.js"></script>
+  <script src="app/operationCenter/services/customersManageService.js"></script>
+  <script src="app/operationCenter/services/dataCenterService.js"></script>
+  <script src="app/operationCenter/services/homeManageService.js"></script>
+  <script src="app/operationCenter/services/honestyService.js"></script>
+  <script src="app/operationCenter/services/humanService.js"></script>
+  <script src="app/operationCenter/services/infoAuditService.js"></script>
+  <script src="app/operationCenter/services/mockData/systemSettingData.js"></script>
+  <script src="app/operationCenter/services/propertyService.js"></script>
+  <script src="app/operationCenter/services/systemSettingService.js"></script>
+  <script src="app/operationData/controllers/changeDataMonitor.js"></script>
+  <script src="app/operationData/controllers/nationalplatform.js"></script>
+  <script src="app/operationData/controllers/userFB.js"></script>
+  <script src="app/operationData/controllers/userMonitor.js"></script>
+  <script src="app/operationData/services/infoMonitorService.js"></script>
+  <script src="app/operationData/services/monitorServices.js"></script>
+  <script src="app/priceMonitor/controllers/oilPriceCtrl.js"></script>
+  <script src="app/priceMonitor/controllers/transportPriceCtrl.js"></script>
+  <script src="app/priceMonitor/services/PriceSerice.js"></script>
+  <script src="app/throughputMonitor/controllers/throughputMonitor.js"></script>
+  <script src="app/throughputMonitor/services/infoMonitorService.js"></script>
+  <script src="app/throughputMonitor/services/monitorServices.js"></script>
+  <script src="app/transportMonitor/controllers/orderMonitor.js"></script>
+  <script src="app/transportMonitor/controllers/timeTransportMonitor.js"></script>
+  <script src="app/transportMonitor/controllers/transportMonitor.js"></script>
+  <script src="app/transportMonitor/controllers/vehicleMonitor.js"></script>
+  <script src="app/transportMonitor/services/infoMonitorService.js"></script>
+  <script src="app/transportMonitor/services/monitorServices.js"></script>
+  <!-- endinjector -->
+  <!-- endbuild -->
+</body>
+<script type="text/javascript">
+  if (process) {
+    $(document).ready(function() {
+      var loading_blank = document.getElementById("loading_blank");
+      if (loading_blank) {
+        document.documentElement.removeChild(loading_blank);
+      }
+    });
+  }
+</script>
+</html>

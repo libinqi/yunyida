@@ -1,0 +1,67 @@
+<div class="content-box" ng-controller="applicationManageCtrl as vm">
+  <div class="search-box" id="grid-search">
+    <form class="form-inline" role="form" autocomplete="off">
+      <div class="form-group">
+        <label class="sr-only" for="tel">应用名称</label>
+        <input class="form-control width-154" ng-model="vm.jsondata.query.applicationname" placeholder="应用名称" type="text">
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="status">启用状态</label>
+        <select class="form-control width-154" ng-change="queryClick()" ng-model='vm.jsondata.query.status'>
+          <option value="">--选择是否启用--</option>
+          <option value="1">启用</option>
+          <option value="0">禁用</option>
+        </select>
+      </div>
+      <button class="btn btn-sky width-94" ng-click="vm.clickToSearch()" type="button">
+        <span class="glyphicon glyphicon-search margin-4"></span>搜索</button>
+
+      <button class="btn btn-sky width-94" ng-click="vm.addApplication()" style="float:right;" type="button">
+        <span class="glyphicon glyphicon-circle-arrow-right margin-4"></span>新增
+      </button>
+    </form>
+  </div>
+  <div class="nav-yyd-box">
+    <div class="nav_car">
+      <ul class="nav nav-tabs nav-yyd" ng-init="vm.jsondata.query.productcode='WPT'">
+        <li ng-class="{active: vm.jsondata.query.productcode == 'WPT'}">
+          <a class="order-a" href="javascript:;" ng-click="vm.selectTab('WPT')">微平台</a>
+        </li>
+        <li ng-class="{active: vm.jsondata.query.productcode == 'WLGJ'}">
+          <a class="order-a" href="javascript:;" ng-click="vm.selectTab('WLGJ')">物流管家</a>
+        </li>
+      </ul>
+    </div>
+    <div class="table-responsive-2-1">
+      <table class="table table-striped table-hover table-bordered table01 ">
+        <thead>
+          <tr>
+            <td>操作</td>
+            <td>应用名称</td>
+            <td>应用描述</td>
+            <td>当前状态</td>
+            <td>创建时间</td>
+            <td>更新时间</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in vm.applicationLists">
+            <td>
+              <a class="glyphicon glyphicon glyphicon-edit margin-h10" ng-click="vm.editApplication(item)" title="编辑"></a>
+              <a class="glyphicon glyphicon-trash margin-h10" ng-click="vm.deleteApplication(item.applicationid)" title="删除"></a>
+              <a class="glyphicon glyphicon-ban-circle margin-h10" ng-click="vm.updataApplication(item,item.status==1?0:1)" title="{{item.status==1?'禁用':'启用'}}"></a>
+            </td>
+            <td>{{item.applicationname}}</td>
+            <td>{{item.descn}}</td>
+            <td>{{item.statusname}}</td>
+            <td>{{item.createtime}}</td>
+            <td>{{item.updatetime}}</td>
+            <!-- <td ng-if="vm.activeTab != 'HMD'">{{item.companyIntroduction}}</td>
+                    <td ng-if="vm.activeTab == 'HMD'">{{item.publicCause}}</td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <tm-pagination class="page-fix" conf="vm.jsondata"></tm-pagination>
+  </div>
+</div>

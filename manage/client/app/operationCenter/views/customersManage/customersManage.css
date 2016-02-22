@@ -1,0 +1,28 @@
+
+.license-img{width:94px;height: 63px;border: 1px solid #e0dcdc !important;overflow: hidden;display:inline-block;}
+.margin-28{margin-top: 28px;}
+.margin-8{margin-top: 8px;}
+.view-answer{overflow: hidden;padding:10px 20px;border-bottom: 1px solid #CFCFCF;}
+.answer-main{overflow: hidden;padding:10px 30px 0;}
+.reply{overflow: hidden;margin:10px 30px 0 50px;color: #008000;}
+.reply-main{overflow: hidden;width: 460px;margin: 10px auto;}
+.reply-txt{float: left;font-weight: bold;margin:10px 10px 0 0;}
+.reply-box{width: 400px;float: left;display: inline-block;height: 144px;}
+@media screen and (max-width:1400px){
+  table{font-size: 12px;}
+  table td{vertical-align:middle !important;}
+  table td a{margin: 0 !important;}
+}
+
+.textarea1{width:90%;height:300px;}
+.textarea2{width:100%;height:200px;}
+.margin-lt1{margin-left:20px;margin-top:5px;}
+.search-result{width: 50%;float: left;overflow: hidden;border-bottom: 1px solid #d2e6e9;}
+.margin-lt2{margin-left:110px;}
+.margin-t1{margin-top:5px;}
+.float-l{float: left;}
+.box_logo{overflow:hidden;height: 62px;margin:10px 0 30px 28px;}
+.box_logo_img{display: inline-block;width: 79px;height: 62px;float: left;}
+.box_logo_txt{overflow: hidden;color:#060606;font-size: 30px;font-family: "微软雅黑";float: left;line-height: 62px;display:inline-block;margin-left: 10px;}
+.box_add_content{overflow: hidden;margin-left:43px;width: 243px;}
+.box_add_img{width: 94px;height: 62px;float: left;margin:0 18px 10px 0;border:1px solid #cecece;}

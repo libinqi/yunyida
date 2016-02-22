@@ -1,0 +1,74 @@
+<div class="content-box" ng-controller="shipperListCtrl as vm">
+    <div class="search-box">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label for="postName" class="sr-only">企业名称</label>
+                <input type="text" class="form-control width-154" placeholder="企业名称" ng-model="vm.querydata.enterprisename">
+            </div>
+            <div class="form-group">
+                <label for="postName" class="sr-only">联系人</label>
+                <input type="text" class="form-control width-154" placeholder="联系人" ng-model="vm.querydata.contactname">
+            </div>
+            <div class="form-group">
+                <label for="postName" class="sr-only">联系电话</label>
+                <input type="text" class="form-control width-154" placeholder="联系电话"
+                       ng-model="vm.querydata.telephonenumber">
+            </div>
+            <button type="button" class="btn btn-sky width-94" ng-click="vm.query()"><span
+                    class="glyphicon glyphicon-search margin-4"></span>搜索
+            </button>
+            <button type="button" class="btn btn-reset" ng-click="vm.ResetQuery()"><span
+                    class="glyphicon glyphicon-repeat margin-4"></span>重置
+            </button>
+        </form>
+    </div>
+    <div class="control-box">
+        <button type="button" class="btn btn-sky width-94" ng-click="vm.selEnterpriseClick()"><span
+                class="glyphicon glyphicon-plus margin-4"></span>查找
+        </button>
+        <button type="button" class="btn btn-sky width-94" ng-click="vm.batchDeleteEnterpriseClick()"><span
+                class="glyphicon glyphicon-plus margin-4"></span>刪除
+        </button>
+    </div>
+    <div class="table-responsive-2-1">
+        <table class="table table-striped table-hover table-bordered table01 ">
+            <thead>
+            <tr>
+                <td><input type="checkbox" ng-model="vm.allSelected" ng-click="vm.selectAllItems()"></td>
+                <!-- <td>序号</td> -->
+                <td>操作</td>
+                <td>类别</td>
+                <td>企业名称</td>
+                <td>机构代码</td>
+                <td>法人</td>
+                <td>联系人</td>
+                <td>联系电话</td>
+                <td>地址</td>
+                <td>证件上传数目</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in vm.enterpriseList">
+                <!-- <td>{{$index}}</td> -->
+                <td><input type="checkbox" ng-model="item.selected" ng-click="vm.selectItem(item)"></td>
+                <td class="btn-shipper">
+
+                    <a class="glyphicon glyphicon-zoom-in margin-h10" title="查看详情"
+                       ng-click="vm.viewEnterpriseClick(item.enterpriseid)"></a>
+                    <!-- <a class="glyphicon glyphicon glyphicon-edit margin-h10" title="编辑"
+                       ng-click="vm.editEnterpriseClick(item.enterpriseid)" ng-if="item.status != '1'"></a> -->
+                </td>
+                <td>{{item.ctypename}}</td>
+                <td>{{item.enterprisename}}</td>
+                <td>{{item.organizationcode}}</td>
+                <td>{{item.legalrepresentative}}</td>
+                <td>{{item.contactname}}</td>
+                <td>{{item.telephonenumber}}</td>
+                <td>{{item.location}}</td>
+                <td>{{item.licNumbers}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <tm-pagination conf="paginationConf" class="page-fix"></tm-pagination>
+</div>

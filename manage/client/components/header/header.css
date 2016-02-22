@@ -1,0 +1,33 @@
+.index-head{height: 64px;border-bottom: 1px solid #bdbdbd;background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#f9f9f8), to(#e9eae9)); position:fixed;z-index:5; -webkit-user-select: none; -webkit-app-region: drag;}
+.head-img1{width:19px;height: 20px;display: inline-block;overflow: hidden;margin:21px 0 0 6px;}
+.head-l{overflow: hidden;padding-left: 3px;}
+.manager-name{font-size: 14px;font-family: Microsoft YaHei;color: #424242;margin: 0 9px 0 0;}
+.manager-att{padding-left:3px;width:93px;height: 21px;display: inline-block;font-family: SimSun !important;font-size: 12px !important;color: #fff !important;line-height: 21px !important;}
+.com-logo{overflow:hidden;}
+.index-title{color: #7d7d7d;font-size: 17px;font-family: Microsoft YaHei;margin:5px 0 0 14px;}
+.index-l{height:64px; overflow:hidden;}
+.index-l .media-middle{vertical-align: middle; padding-top:11px;}
+.index-login{white-space:nowrap; overflow:hidde; text-overflow:ellipsis;margin:12px 0 0 7px;font-size: 14px;}
+.head-title{margin:8px auto 0; overflow:hidden; text-align:center; width:260px;}
+.head-title span{display:inline-block; vertical-align:middle; }
+.head-btn{border:none; display:inline-block; width:40px; height:40px; list-style: none; background: none; transition:background 0.3s;-webkit-app-region: no-drag;}
+.head-btn:hover{color:#2279d9; background:#fff;border:1px solid #e7e7e7;}
+.head-btn-user{border:none; display:inline-block; width:20px; height:20px; list-style: none; background: none; transition:background 0.3s;-webkit-app-region: no-drag;margin-top: 11px;}
+.head-btn-close:hover{color:#2279d9 !important;}
+.head-btns{float: right;}
+.index-exit{margin:2px 0 0 12px;-webkit-app-region: no-drag;font-size: 12px;}
+.index-exit:hover{margin:2px 0 0 12px;-webkit-app-region: no-drag;font-size: 12px;color: #2772c6;text-decoration: underline;}
+.index-time{font-size: 12px;}
+.btn-message{width: 80px;height: 40px;padding: 0 !important;position: relative; background:none; -webkit-app-region: no-drag; transition:all 0.3;}
+.btn-message .comment-font{font-size:18px; margin-left:6px; color:#f46618;}
+.btn-message:hover{background:#fff;border:1px solid #e7e7e7; color:#f46618;}
+.btn-message2{width: 80px;height: 40px;padding: 0 !important;position: relative; background:none; -webkit-app-region: no-drag; transition:all 0.3;}
+.btn-message2:hover{background:#fff;border:1px solid #e7e7e7; color:#f46618;}
+.btn-message{width: 80px;height: 40px;padding: 0 !important;position: relative; background:none; -webkit-app-region: no-drag; transition:all 0.3;}
+.btn-message2 .comment-font{font-size:18px; margin-left:6px; color:#666;}
+/*.btn-message{background:url(/assets/images/btn-message.png) center 0px no-repeat;width: 40px;height: 40px;padding: 0 !important;position: relative;-webkit-app-region: no-drag;}
+.btn-message:hover{background:url(/assets/images/btn-messageed.png) center 0px no-repeat #fff;width: 40px;height: 40px;padding: 0 !important;position: relative;}
+.btn-message2{background:url(/assets/images/btn-message2.png) center center no-repeat;width: 40px;height: 40px;padding: 0 !important;border:1px solid #f7f7f6;-webkit-app-region: no-drag;}
+.btn-message2:hover{background:url(/assets/images/btn-messageed2.png) center center no-repeat #fff;width: 40px;height: 40px;padding: 0 !important;border:1px solid #e7e7e7; position: relative;}*/
+.btn-message-txt{font-size: 9px;color:#fff;position:absolute;top: 10px;right: 30px;display: inline-block;width: 14px;text-align: center;-webkit-app-region: no-drag;}
+.dropdown-menu{-webkit-app-region: no-drag;}

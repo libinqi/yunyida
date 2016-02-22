@@ -1,0 +1,233 @@
+<div class="room-box" ng-controller="leaseEditCtrl as vm">
+    <div class="light-box-title"><span class="text-white">修改</span></div>
+    <form class="form-horizontal text-normal" name="myForm" autocomplete="off" ng-submit="vm.edit()" novalidate>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6"
+             ng-class="{'has-error':myForm.submitted && myForm.contractno.$invalid}">
+            <label class="col-sm-5 control-label">合同编号</label>
+
+            <div class="col-sm-7">
+                <input type="text" name="contractno" class="form-control width-154" ng-model="vm.leaseList.contractno" required>
+                <span class="help-block" ng-show="myForm.submitted && myForm.contractno.$error.required">请输入合同编号！</span>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6"
+             ng-class="{'has-error':myForm.submitted && myForm.status.$invalid}">
+            <label for="cuscard" class="col-sm-5 control-label">合同状态</label>
+
+            <div class="col-sm-7">
+                <select class="form-control width-154" name="status" ng-model="vm.leaseList.status" ng-disabled="true" required>
+                    <option value="0">未执行</option>
+                    <option value="1">执行中</option>
+                    <option value="2">已完成</option>
+                </select>
+                <span class="help-block" ng-show="myForm.submitted && myForm.status.$error.required">请选择合同状态！</span>
+            </div>
+        </div>
+        <!-- <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.customerno.$invalid}">
+          <label class="col-sm-5 control-label">客户编号</label>
+          <div class="col-sm-7">
+            <input type="text" name="customerno" class="form-control width-154" ng-model="vm.leaseList.customerno" required>
+            <span class="help-block" ng-show="myForm.submitted && myForm.customerno.$error.required">请输入客户编号！</span>
+          </div>
+        </div> -->
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6"
+             ng-class="{'has-error':myForm.submitted && myForm.customername.$invalid}">
+            <label for="cuscard" class="col-sm-5 control-label">客户</label>
+
+            <div class="col-sm-7">
+                <select class="form-control width-154" name="customername" ng-model="vm.leaseList.customer.enterpriseid"
+                        ng-options="it.enterpriseid as it.contactname for it in vm.enterpriseList" required>
+                    <option value="">--请选择--</option>
+                </select>
+                <span class="help-block" ng-show="myForm.submitted && myForm.customername.$error.required">请选择客户！</span>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6"
+             ng-class="{'has-error':myForm.submitted && myForm.doornames.$invalid}">
+            <label for="cuscard" class="col-sm-5 control-label">门面编号</label>
+
+            <div class="col-sm-7">
+                <input type="text" name="doornames" class="pull-left form-control width-154 menmian"
+                       ng-model="vm.leaseList.doornos" readonly="readonly" required>
+                <button type="button" class="btn btn-sky　pull-left add-btn" ng-click="vm.chooseDoor()"><span
+                        class="glyphicon glyphicon-plus"></span></button>
+                <span class="help-block" ng-show="myForm.submitted && myForm.doornames.$error.required">请选择门面编号！</span>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6"
+             ng-class="{'has-error':myForm.submitted && myForm.deposit.$invalid}">
+            <label class="col-sm-5 control-label">押金</label>
+
+            <div class="col-sm-7">
+                <input type="text" name="deposit" class="form-control width-154" ng-model="vm.leaseList.deposit"
+                       onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="ime-mode:Disabled"
+                       required>
+                <span class="help-block" ng-show="myForm.submitted && myForm.deposit.$error.required">请输入押金！</span>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6"
+             ng-class="{'has-error':myForm.submitted && myForm.contactphone.$invalid}">
+            <label for="birthplace" class="col-sm-5 control-label">联系电话</label>
+
+            <div class="col-sm-7">
+                <input type="text" name="contactphone" class="form-control width-154" ng-model="vm.leaseList.contactphone"
+                       pattern="^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$|(^(13[0-9]|15[0|3|6|7|8|9]|18[8|9])\d{8}$)"
+                       required>
+                <span class="help-block"
+                      ng-show="myForm.submitted && myForm.contactphone.$error.required">请输入联系电话！</span>
+                <span class="help-block"
+                      ng-show="myForm.submitted && myForm.contactphone.$error.pattern">输入的号码有误！</span>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">签约日期</label>
+
+            <div class="col-sm-7">
+                <!-- <quick-datepicker name="outime" ng-model="vm.leaseList.signdate" date-format="yyyy-MM-dd" on-change="vm.leaseList.signdate = vm.dateToString(vm.leaseList.signdate)" disable-timepicker="true" disable-clear-button="true" placeholder='选择时间'></quick-datepicker> -->
+                <div class="dropdown pull-left data-input">
+                    <a class="dropdown-toggle" id="signdate" role="button" data-toggle="dropdown" data-target="#"
+                       href="#">
+                        <div>
+                            <input type="text" class="form-control width-154"
+                                   data-ng-model="vm.signdate | date:'yyyy-MM-dd'" placeholder="">
+                            <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="vm.signdate"
+                                        data-datetimepicker-config="{ dropdownSelector: '#signdate',startView:'day', minView:'day' }"></datetimepicker>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <label for="birthplace" class="col-sm-5 control-label">合同有效期</label>
+          <div class="col-sm-7">
+            <input type="text"  class="form-control width-154" ng-model="vm.leaseList.validitydate">
+          </div>
+        </div> -->
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">开始日期</label>
+
+            <div class="col-sm-7">
+                <!-- <quick-datepicker name="outime" ng-model="vm.leaseList.startdate" date-format="yyyy-MM-dd" on-change="vm.leaseList.startdate = vm.dateToString(vm.leaseList.startdate)" disable-timepicker="true" disable-clear-button="true" placeholder='选择时间'></quick-datepicker> -->
+                <!-- <quick-datepicker name="outime" ng-model="vm.leaseList.startdate" date-format="yyyy-MM-dd" on-change="vm.leaseList.startdate = vm.dateToString(vm.leaseList.startdate)" disable-timepicker="true" disable-clear-button="true" placeholder='选择时间'></quick-datepicker> -->
+                <div class="dropdown pull-left data-input">
+                    <a class="dropdown-toggle" id="startdate" role="button" data-toggle="dropdown" data-target="#"
+                       href="#">
+                        <div>
+                            <input type="text" class="form-control width-154"
+                                   data-ng-model="vm.startdate | date:'yyyy-MM-dd'" placeholder="">
+                            <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="vm.startdate"
+                                        data-datetimepicker-config="{ dropdownSelector: '#startdate',startView:'day', minView:'day' }"></datetimepicker>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label for="cuscard" class="col-sm-5 control-label">截止日期</label>
+
+            <div class="col-sm-7">
+                <!-- <quick-datepicker name="outime" ng-model="vm.leaseList.enddate" date-format="yyyy-MM-dd" on-change="vm.leaseList.enddate = vm.dateToString(vm.leaseList.enddate)" disable-timepicker="true" disable-clear-button="true" placeholder='选择时间'></quick-datepicker> -->
+                <div class="dropdown pull-left data-input">
+                    <a class="dropdown-toggle" id="enddate" role="button" data-toggle="dropdown" data-target="#"
+                       href="#">
+                        <div>
+                            <input type="text" class="form-control width-154" data-ng-model="vm.enddate | date:'yyyy-MM-dd'"
+                                   placeholder="">
+                            <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="vm.enddate"
+                                        data-datetimepicker-config="{ dropdownSelector: '#enddate',startView:'day', minView:'day' }"></datetimepicker>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            收费项目：
+        </div>
+        <table class="table table-striped table-hover table-bordered table01 ">
+            <thead>
+            <tr>
+                <td>门面号</td>
+                <td>收费项目</td>
+                <td>收费周期</td>
+                <td>收费标准</td>
+                <td>收费开始时间</td>
+                <td>开始度数</td>
+                <td>单价</td>
+                <td>单位</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="cl in vm.leaseList.detailList">
+                <td>
+                    {{cl.doorno}}
+                </td>
+                <td>
+                    <select class="form-control" ng-model="cl.service.dictid"
+                            ng-options="it.dictid as it.dictname for it in vm.ybzl" ng-disabled="true">
+                        <option value="">--请选择--</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" ng-model="cl.cycle.dictid"
+                            ng-options="it.dictid as it.dictname for it in vm.sfzq">
+                        <option value="">--请选择--</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" ng-model="cl.standard.dictid"
+                            ng-options="it.dictid as it.dictname for it in vm.sfbz">
+                        <option value="">--请选择--</option>
+                    </select>
+                </td>
+                <td>
+                    <!-- <quick-datepicker name="outime" ng-model='cl.startdate' ng-model="vm.leaseList.enddate" date-format="yyyy-MM-dd" on-change="cl.startdate = vm.dateToString(cl.startdate)" disable-timepicker="true" disable-clear-button="true" placeholder='选择时间'></quick-datepicker> -->
+                    <div class="dropdown pull-left">
+                        <a class="dropdown-toggle" id="startdate" role="button" data-toggle="dropdown" data-target="#"
+                           href="#">
+                            <div>
+                                <input type="text" class="form-control"
+                                       data-ng-model="cl.startdate | date:'yyyy-MM-dd'" placeholder="">
+                                <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="cl.startdate"
+                                            data-datetimepicker-config="{ dropdownSelector: '#startdate',startView:'day', minView:'day' }"></datetimepicker>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <input type="text" class="form-control lease-input" ng-model="cl.degrees"/>
+                </td>
+                <td>
+                    <input type="text" class="form-control lease-input" ng-model="cl.price"/>
+                </td>
+                <td>
+                    <select class="form-control" ng-model="cl.unit.dictid"
+                            ng-options="it.dictid as it.dictname for it in vm.sfdw">
+                        <option value="">--请选择--</option>
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="form-group">
+            <div class="text-center">
+                <button type="submit" class="btn navbar-btn btn-sky width-94"><span class="glyphicon glyphicon-ok margin-4"></span>保存
+                </button>
+                <button type="button" class="btn navbar-btn btn-default width-94" ng-click="vm.cancel()"><span
+                        class="glyphicon glyphicon-remove margin-4"></span>取消
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

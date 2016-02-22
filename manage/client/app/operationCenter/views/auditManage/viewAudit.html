@@ -1,0 +1,67 @@
+<div class="room-box" ng-controller="viewAuditCtrl as vm">
+  <div class="light-box-title"><span class="text-white">请假申请</span></div>
+  <form class="form-horizontal text-normal" name="myForm" autocomplete="off" ng-submit="vm.update()" novalidate>
+    <div class="form-group clearfix" ng-class="{'has-error':myForm.submitted && myForm.cause.$invalid}">
+        <textarea name="cause" class="audit-input form-control" placeholder="请输入请假内容" ng-model="vm.jsondata.cause" ng-disabled="viewState == '0'" required></textarea>
+        <span class="help-block prompt1" ng-show="myForm.submitted && myForm.cause.$error.required">请输入请假内容！</span>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.type.$invalid}">
+      <label class="col-sm-5 control-label">请假类型</label>
+      <div class="col-sm-7">
+        <select class="form-control width-154" name="type" ng-model="vm.jsondata.type" ng-options="it.dictid as it.dictname for it in dictList['QJLX']" ng-disabled="viewState == '0'" required>
+            <option value="">--请选择--</option>
+        </select>
+        <span class="help-block prompt" ng-show="myForm.submitted && myForm.type.$error.required">请选择请假类型！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.day.$invalid}" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="ime-mode:Disabled" required>
+      <label class="col-sm-5 control-label">请假天数</label>
+      <div class="col-sm-7">
+        <input type="text" name="day" class="form-control width-154" ng-model="vm.jsondata.day"  ng-disabled="viewState == '0'" required>
+        <span class="help-block prompt" ng-show="myForm.submitted && myForm.day.$error.required">请输入请假天数！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label for="birthplace" class="col-sm-5 control-label">起始时间</label>
+      <div class="col-sm-7">
+         <!-- <quick-datepicker ng-model='vm.SDate' date-format='yyyy-MM-dd' time-format='HH:mm:ss' default-time="00:00:00" placeholder='起始时间'></quick-datepicker> -->
+        <div class="dropdown">
+          <a class="dropdown-toggle" id="startdate" role="button" data-toggle="dropdown" data-target="#">
+              <div class="input-group no-margin">
+                  <input type="text" class="form-control width-154" data-ng-model="vm.SDate | date:'yyyy-MM-dd HH:mm:ss'" ng-disabled="viewState == '0'">
+                  <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <datetimepicker data-ng-model="vm.SDate"
+                              data-datetimepicker-config="{ dropdownSelector: '#startdate',startView:'minute', minView:'minute' }"></datetimepicker>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">终止时间</label>
+      <div class="col-sm-7">
+        <!-- <quick-datepicker ng-model='vm.EDate' date-format='yyyy-MM-dd' time-format='HH:mm:ss' default-time="23:59:59" placeholder='终止时间'></quick-datepicker> -->
+        <div class="dropdown">
+            <a class="dropdown-toggle" id="enddate" role="button" data-toggle="dropdown" data-target="#">
+                <div class="input-group no-margin">
+                    <input type="text" class="form-control width-154" data-ng-model="vm.EDate | date:'yyyy-MM-dd HH:mm:ss'" ng-disabled="viewState == 0">
+                    <span class="sr-only" ng-if="viewState != 0"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+            </a>
+            <ul ng-if="viewState != 0"  class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="vm.EDate"
+                                data-datetimepicker-config="{ dropdownSelector: '#enddate',startView:'minute', minView:'minute' }"></datetimepicker>
+            </ul>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="text-center">
+          <button type="submit" class="btn navbar-btn btn-sky width-94" ng-if="viewState != '0'"><span class="glyphicon glyphicon-ok margin-4"></span>保存</button>
+          <button type="button" class="btn navbar-btn btn-default width-94" ng-click="vm.cancel()"><span class="glyphicon glyphicon-remove margin-4"></span>取消</button>
+      </div>
+    </div>
+  </form>
+</div>

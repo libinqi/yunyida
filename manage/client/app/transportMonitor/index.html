@@ -1,0 +1,7 @@
+<div class="left-nav">
+  <ul class="left-nav-box" ng-controller="supplyMonitorCtrl">
+  <li class="left-nav-menu-title"><i class="fa fa-list"></i> 菜单列表</li>
+   <li ng-repeat="nav in navs" ng-class="{'left-nav-active': isActive(nav.href)}"><a href="" ui-sref=".{{nav.name}}"><i class="icon-chevron-right"></i>{{nav.menu}}</a></li>
+  </ul>
+</div>
+<div id="right-content" class="right-content" ui-view></div>

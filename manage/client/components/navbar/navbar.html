@@ -1,0 +1,6 @@
+<ul id="client-navbar" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 index-footer" ng-controller="navbarCtrl">
+  <li class="nav-btn-box" ng-repeat="item in menus" ng-class="{active: isActive(item.link)}">
+    <a ng-href="{{item.link}}"><span class="nav-img pull-left"><img class="media-object img-responsive" ng-src="{{getIcon(item.link,item.icon)}}" alt="..."></span><span class="pull-left">{{item.title}}</span></a>
+  </li>
+  <!--<li class="nav-btn-add pull-right"><a class="glyphicon glyphicon-plus-sign" aria-hidden="true"></a></li>-->
+</ul>

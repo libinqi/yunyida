@@ -1,0 +1,77 @@
+<div class="room-box" ng-controller="driverHonestyInfoCtrl as vm">
+  <div class="light-box-title"><span class="text-white">详情</span></div>
+  <form class="form-horizontal text-normal" name="myForm" autocomplete="off" novalidate>
+    <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <label class="col-sm-5 control-label">司机图像</label>
+      <div class="col-sm-7">
+        <span class="license-img pull-left margin-siji margin-11">
+        <img class="media-object img-responsive" onerror="errorImg(this)" src="{{!vm.jsondata.imageUrl?'assets/images/license.jpg':vm.jsondata.imageUrl}}"  alt="...">
+        </span>
+        <!-- <span class="pull-left margin-5">
+        <button type="button" class="btn btn-sky width-94" ngf-select ng-model="imageUrl" accept="image/*">上传</button></span> -->
+      </div>
+    </div>
+    <div class="form-group col-lg-8 col-md-8 col-sm-8 col-xs-8">
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <label for="realName" class="col-sm-5 control-label">姓名</label>
+          <div class="col-sm-7">
+            <input type="text" name="realName" class="form-control width-154" ng-model="vm.jsondata.realName" placeholder="" readonly="true"/>
+          </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <label for="vehicleNumber" class="col-sm-5 control-label">车牌</label>
+          <div class="col-sm-7">
+            <input type="text" name="vehicleNumber" class="form-control width-154" ng-model="vm.jsondata.vehicleNumber" placeholder="" readonly="true"/>
+          </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <label for="userIdsn" class="col-sm-5 control-label">身份证地址</label>
+          <div class="col-sm-7">
+            <input type="text" name="userIdsn" class="form-control width-154" ng-model="vm.jsondata.userIdsn" placeholder="" readonly="true" />
+          </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <label for="phone" class="col-sm-5 control-label">联系方式</label>
+          <div class="col-sm-7">
+            <input name="phone" type="text" class="form-control width-154" ng-model="vm.jsondata.phone" readonly="true"/>
+          </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <label for="sex" class="col-sm-5 control-label">性别</label>
+          <div class="col-sm-7">
+            <select class="form-control width-154 width-94 width-154" name="sex" ng-model="vm.jsondata.sex" readonly="true">
+              <option value="">--请选择--</option>
+              <option value="1">男</option>
+              <option value="0">女</option>
+            </select>
+          </div>
+        </div>
+        <!-- <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <label for="mainLine" class="col-sm-5 control-label">主营线路</label>
+          <div class="col-sm-7">
+            <input name="mainLine" type="text" class="form-control width-154" ng-model="vm.jsondata.mainLine"/>
+          </div>
+        </div> -->
+    </div>
+    <div class="form-group clear">
+            <label for="mainLine" class="col-sm-4 row handle-row control-label">主营线路</label>
+            <div class="col-sm-8 ticket-beihzhu2">
+                <textarea id="mainLine" name="mainLine" class="form-control driver-height" readonly="true"
+                          ng-model="vm.jsondata.mainLine"></textarea>
+            </div>
+    </div>
+    <div class="form-group clear" ng-if="flag == 'HMD'">
+            <label for="publicCause" class="col-sm-4 row handle-row control-label">公示原因</label>
+            <div class="col-sm-8 ticket-beihzhu2">
+                <textarea id="publicCause" name="publicCause" class="form-control driver-height" readonly="true"
+                          ng-model="vm.jsondata.publicCause"></textarea>
+            </div>
+    </div>
+    <div class="form-group">
+          <div class="text-center">
+            <!-- <button type="submit" class="btn navbar-btn btn-sky width-94"><span class="glyphicon glyphicon-ok margin-4"></span>保存</button> -->
+            <button type="button" class="btn navbar-btn btn-default width-94" ng-click="vm.cancel()"><span class="glyphicon glyphicon-remove margin-4"></span>返回</button>
+          </div>
+    </div>
+  </form>
+</div>

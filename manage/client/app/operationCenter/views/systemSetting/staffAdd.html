@@ -1,0 +1,116 @@
+<div ng-controller="staffAddCtrl as vm">
+    <div class="light-box-title"><span class="text-white">{{staffModalTitle}}</span></div>
+    <form class="form-horizontal clearfix text-normal" name="staffForm" autocomplete="off" ng-submit="staffUpdate()">
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':staffForm.submitted && staffForm.username.$invalid}">
+            <label class="col-sm-5 control-label">
+                <code>*</code>
+                账号</label>
+
+            <div class="col-sm-7">
+                <input type="text" name="username" class="form-control width-154" ng-model="staff.username" placeholder="必填项"
+                       staff-remote-check required readonly="readonly" ng-readonly="staff.userid" />
+                <span class="help-block"
+                      ng-show="staffForm.submitted && staffForm.username.$error.required">请输入账号</span>
+                <span class="help-block" ng-show="!staff.userid && staffForm.username.$error.username">输入的账号已存在</span>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':staffForm.submitted && staffForm.realname.$invalid}">
+            <label class="col-sm-5 control-label">
+                <code>*</code>
+                姓名</label>
+
+            <div class="col-sm-7">
+                <input type="text" name="realname" class="form-control width-154" ng-model="staff.realname" placeholder="必填项"
+                       required/>
+                <span class="help-block"
+                      ng-show="staffForm.submitted && staffForm.realname.$error.required">请输入姓名</span>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">性别</label>
+
+            <div class="col-sm-3">
+                <input name="sex" type="radio" ng-model="staff.sex" value="0"/>男
+            </div>
+            <div class="col-sm-3">
+                <input name="sex" type="radio" ng-model="staff.sex" value="1"/>女
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-show="!staff.userid">
+            <label class="col-sm-5 control-label">密码</label>
+
+            <div class="col-sm-7">
+                <input name="password" type="text" class="form-control width-154" ng-model="staff.password"
+                       placeholder="不填写默认为123456"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':staffForm.submitted && staffForm.deptid.$invalid}">
+            <label class="col-sm-5 control-label">
+                <code>*</code>
+                所在部门</label>
+
+            <div class="col-sm-7">
+                <select class="form-control width-154" name="deptid" ng-model="staff.deptid"
+                        ng-options="dept.deptid as dept.deptname for dept in deptList.items"
+                        ng-init="staff.deptid=selectedItem.deptid" required>
+                    <option value="">--请选择--</option>
+                </select>
+                <span class="help-block"
+                      ng-show="staffForm.submitted && staffForm.deptid.$error.required">请选择所在部门</span>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">职务</label>
+
+            <div class="col-sm-7">
+                <input name="duties" type="text" class="form-control width-154" ng-model="staff.duties"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">
+                岗位</label>
+
+            <div class="col-sm-7">
+                <select class="form-control width-154" name="roleid" ng-model="staff.roleid"
+                        ng-options="role.roleid as role.rolename for role in roleList"
+                        ng-init="role.roleid=staff.roleid">
+                    <option value="">--请选择--</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">联系电话</label>
+
+            <div class="col-sm-7">
+                <input name="phone" type="text" class="form-control width-154" ng-model="staff.phone" staff-phone-check/>
+                <span class="help-block" ng-show="!staff.userid && staffForm.phone.$error.phone">联系电话已存在</span>
+                <span class="help-block" ng-show="staffForm.phone.$error.phoneEx">电话号码格式不正确</span>
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="col-sm-5 control-label">电子邮箱</label>
+
+            <div class="col-sm-7">
+                <input name="email" type="email" class="form-control width-154" ng-model="staff.email" multiple-email/>
+                <span class="help-block" ng-show="staffForm.email.$error.email">电子邮箱格式不正确</span>
+            </div>
+        </div>
+        <div class="form-group clear">
+            <label class="col-sm-2 row handle-row control-label">备注</label>
+
+            <div class="col-sm-9 ticket-beihzhu">
+                <textarea name="description" class="form-control" ng-model="staff.description"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="text-center clear">
+                <button type="submit" class="btn navbar-btn btn-sky width-94" ng-disabled="staffForm.$invalid"><span
+                        class="glyphicon glyphicon-ok margin-4"></span>确定
+                </button>
+                <button type="button" class="btn navbar-btn btn-default width-94" ng-click="staffCancel()"><span
+                        class="glyphicon glyphicon-remove margin-4"></span>取消
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

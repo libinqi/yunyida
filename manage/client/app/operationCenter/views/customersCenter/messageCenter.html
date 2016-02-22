@@ -1,0 +1,72 @@
+<div class="content-box" ng-controller="messageCtrl as vm">
+    <div class="search-box">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label for="msgtype" class="sr-only">消息类别</label>
+                <select id="msgtype" class="form-control width-154" ng-model="vm.messageList.query.msgtype"
+                        ng-options="msgtype.dictid as msgtype.dictname for msgtype in dictList['XXLB']"
+                        ng-change="queryClick()">
+                    <option value="">消息类别</option>
+                </select>
+            </div>
+            <!--<div class="form-group">-->
+            <!--<label  for="postName" class="sr-only">发布日期</label>-->
+            <!--<input type="text" class="form-control width-154" id="postName" placeholder="发布日期">-->
+            <!--</div>-->
+            <div class="form-group">
+                <label for="content" class="sr-only">发布内容</label>
+                <input type="text" class="form-control width-154" id="content" placeholder="发布内容"
+                       ng-model="vm.messageList.query.content">
+            </div>
+            <button type="button" class="btn btn-sky width-94" ng-click="queryClick()"><span
+                    class="glyphicon glyphicon-search margin-4"></span>搜索
+            </button>
+            <button type="button" class="btn btn-reset" ng-click="ResetQuery()"><span
+                    class="glyphicon glyphicon-repeat margin-4"></span>重置
+            </button>     
+        </form>
+    </div>
+    <div class="control-box">
+                <button type="button" class="btn btn-sky width-94" ng-click="messageAddClick()"><span
+                        class="glyphicon glyphicon-plus margin-4"></span>新增
+                </button>
+    </div>
+    <div class="table-responsive-2-1">
+    <table class="table table-striped table-hover table-bordered table01 ">
+        <thead>
+        <tr>
+            <td>操作</td>
+            <td>消息类别</td>
+            <td>发布日期</td>
+            <td>消息内容</td>
+            <td>发布人</td>
+            <td>更新日期</td>
+            <td>发布周期</td>
+            <td>发布状态</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in vm.messageList.items">
+            <td>
+                <a href="" class="glyphicon  glyphicon-edit margin-h10" ng-show="item.status!='YFS'" 
+                   ng-click="messageEditClick(item.mid)" title="编辑"></a>
+                <a href="" class="glyphicon glyphicon-share margin-h10" ng-show="item.status=='CG'"
+                   ng-click="sendMessageClick(item.mid)" title="发送"></a>
+                <a href="" class="glyphicon glyphicon-share margin-h10" ng-show="item.status=='YFS'"
+                   ng-click="sendMessageClick(item.mid)" title="再次发送"></a>
+                <a href="" class="glyphicon glyphicon-zoom-in margin-h10" ng-show="item.status=='YFS'"
+                   ng-click="messageViewClick(item.mid)" title="查看回复"></a></td>
+            <td>{{item.msgtypename}}</td>
+            <td>{{item.createtime}}</td>
+            <td>{{item.content}}</td>
+            <td>{{item.realname}}</td>
+            <td>{{item.updatetime}}</td>
+            <td>{{item.periodname}}</td>
+            <td>{{item.statusname}}</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    <tm-pagination conf="vm.messageList" class="page-fix"></tm-pagination>
+</div>
+</div>

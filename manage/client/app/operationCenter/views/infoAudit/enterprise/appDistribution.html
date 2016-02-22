@@ -1,0 +1,35 @@
+<div class="room-box" ng-controller="infoAuditAppDistributionCtrl as vm">
+  <div class="light-box-title"><span class="text-white">应用分配</span></div>
+  <form class="form-horizontal text-normal" name="myForm" autocomplete="off" novalidate>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" ng-class="{'has-error':myForm.submitted && myForm.enterprisename.$invalid}">
+      <div class="col-sm-12">
+        <input type="text" placeholder="企业名称" name="enterprisename" class="form-control width-154">
+        <span class="help-block" ng-show="myForm.submitted && myForm.enterprisename.$error.required">请输入企业名称！</span>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" ng-class="{'has-error':myForm.submitted && myForm.locationCityName.$invalid}">
+      <div class="col-sm-12">
+      <input type="text" placeholder="企业类型" name="locationCityName" class="form-control width-154" >
+        <!-- <city-select id="startCity" postionClass="city-select-drop-center" ng-model="search.startCity"></city-select> -->
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" ng-class="{'has-error':myForm.submitted && myForm.legalrepresentative.$invalid}">
+      <div class="col-sm-12">
+        <input type="text" placeholder="注册日期" name="legalrepresentative" class="form-control width-154">
+        <span class="help-block" ng-show="myForm.submitted && myForm.legalrepresentative.$error.required">请输入企业法人！</span>
+      </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fenpei">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-9 text-center" ng-repeat="item in vm.appList">
+            <div><img src="assets/images/license.jpg"></div>
+            <div class="text-center margin-5"><input type="checkbox" class="margin-4" ng-model="item.flag">{{item.applicationname}}</div>
+        </div>
+    </div>
+    <div class="form-group clear">
+      <div class="text-center">
+        <button type="button" class="btn navbar-btn btn-sky width-94" ng-click="vm.appDistribution()"><span class="glyphicon glyphicon-ok margin-4"></span>保存</button>
+        <button type="button" class="btn navbar-btn btn-default width-94" ng-click="vm.cancel()"><span class="glyphicon glyphicon-remove margin-4"></span>取消</button>
+      </div>
+    </div>
+  </form>
+</div>

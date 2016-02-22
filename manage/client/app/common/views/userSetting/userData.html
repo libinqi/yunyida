@@ -1,0 +1,73 @@
+<div class="center-main" ng-controller="userDataCtrl as vm" ng-init="vm.activeTab = 0">
+          <div class="ziliao">个人资料<button type="button" class="btn navbar-btn btn-sky width-94 pull-right" ng-click="vm.activeBtn()"><span class="glyphicon  glyphicon-edit"></span>编辑</button></div>
+          <form class="form-horizontal text-normal" name="myForm" autocomplete="off" ng-submit="vm.save()" novalidate>
+            <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row room-box-row">
+              <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label for="csex1" class="col-sm-5 control-label">个人头像</label>
+                <div class="col-sm-7 row user-head">
+                  <span class="head-img pull-left">
+                    <img  class="media-object img-responsive" ng-model="vm.jsondata.image" ngf-src="files[0]" src="{{vm.jsondata.image}}" ngf-default-src="assets/images/license.jpg" ngf-accept="'image/*'">
+                  </span>
+                  <span class="pull-left margin-t-8 margin-12">
+                  <button type="button" ngf-select ng-model="files" class="read-room btn btn-sky width-94" accept="image/*" ng-disabled="vm.activeTab == 0">上传</button>
+                  </span>
+                </div>
+              </div>
+            </div> -->
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.realname.$invalid}">
+                <label for="realname" class="beizhu2 control-label">姓名</label>
+                <div class="center-name">
+                  <input type="text" name="realname" class="form-control width-154 box-input" ng-model="vm.jsondata.realname" placeholder="" ng-readonly="vm.activeTab == 0" required>
+                  <span class="help-block" ng-show="myForm.submitted && myForm.realname.$error.required">请输入姓名！</span>
+                </div>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.sex.$invalid}">
+              <label for="sex" class="col-sm-5 control-label">性别</label>
+              <div class="col-sm-7">
+                <select class="form-control width-154" name="sex" ng-model="vm.jsondata.sex" ng-disabled="vm.activeTab == 0" required>
+                  <option value="1">男</option>
+                  <option value="2">女</option>
+                </select>
+                <span class="help-block" ng-show="myForm.submitted && myForm.sex.$error.required">请选择性别！</span>
+              </div>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.duties.$invalid}">
+              <label for="duties" class="col-sm-5 control-label">职务</label>
+              <div class="col-sm-7">
+                <input type="text" name="duties" class="form-control width-154" ng-model="vm.jsondata.duties" ng-readonly="vm.activeTab == 0" placeholder="" required>
+                <span class="help-block" ng-show="myForm.submitted && myForm.duties.$error.required">请输入职务！</span>
+              </div>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.phone.$invalid}">
+              <label for="phone" class="col-sm-5 control-label">手机</label>
+              <div class="col-sm-7">
+                <input type="text" name="phone" class="form-control width-154" ng-model="vm.jsondata.phone" ng-readonly="vm.activeTab == 0" pattern="^1[3|4|5|7|8][0-9]{9}$" placeholder="" required>
+                <span class="help-block" ng-show="myForm.submitted && myForm.phone.$error.required">请输入手机！</span>
+                <span class="help-block" ng-show="myForm.submitted && myForm.phone.$error.pattern">输入的手机号码有误！</span>
+              </div>
+            </div>
+            <!-- <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.organizationcode.$invalid}">
+              <label for="organizationcode" class="col-sm-5 control-label">办公电话</label>
+              <div class="col-sm-7">
+                <input type="text" name="organizationcode" class="form-control width-154" ng-model="vm.jsondata.organizationcode" placeholder="" required>
+                <span class="help-block" ng-show="myForm.submitted && myForm.organizationcode.$error.required">请输入办公电话！</span>
+              </div>
+            </div> -->
+            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <label for="description" class="control-label beizhu2">备注</label>
+              <div class="beizhu-txt2">
+                <textarea name="description" class="form-control" ng-model="vm.jsondata.description" ng-readonly="vm.activeTab == 0"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-9">
+                  <button type="submit" class="btn navbar-btn btn-sky width-94" ng-disabled="vm.activeTab == 0"><span
+                          class="glyphicon glyphicon-ok"></span>保存
+                  </button>
+                  <button type="button" class="btn navbar-btn btn-sky width-94" ng-click="vm.getUserById()" ng-disabled="vm.activeTab == 0"><span
+                          class="glyphicon glyphicon-refresh"></span>重置
+                  </button>
+              </div>
+            </div>
+          </form>
+</div>

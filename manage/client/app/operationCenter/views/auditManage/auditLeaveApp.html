@@ -1,0 +1,45 @@
+<div class="room-box" ng-controller="auditLeaveAppCtrl as vm">
+  <div class="light-box-title"><span class="text-white">请假申请</span></div>
+  <form class="form-horizontal text-normal" name="myForm" autocomplete="off" ng-submit="vm.update()" novalidate>
+    <div class="form-group clearfix">
+        <textarea class="audit-input form-control" placeholder="请输入请假内容" ng-model="vm.jsondata.cause" readonly="readonly"></textarea>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">请假类型</label>
+      <div class="col-sm-7">
+        <select class="form-control width-154 width-94 width-154" ng-model="vm.jsondata.type" ng-options="it.dictid as it.dictname for it in dictList['QJLX']" ng-disabled="true">
+            <option value="">--请选择--</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">请假天数</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control width-154 width-94 width-154" ng-model="vm.jsondata.day" readonly="readonly">
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label for="birthplace" class="col-sm-5 control-label">起始时间</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control width-154 width-94 width-154" ng-model="vm.jsondata.starttime" readonly="readonly">
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">终止时间</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control width-154 width-94 width-154" ng-model="vm.jsondata.endtime" readonly="readonly">
+      </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error':myForm.submitted && myForm.refusecause.$invalid}">
+        <textarea name="refusecause" class="audit-input form-control" placeholder="请输入审核意见" ng-model="vm.jsondata.refusecause" required></textarea>
+        <span class="help-block prompt2" ng-show="myForm.submitted && myForm.refusecause.$error.required">请输入审核意见!</span>
+    </div>
+    <div class="form-group">
+      <div class="text-center">
+          <button type="submit" class="btn navbar-btn btn-sky width-94" ng-click="vm.pass()"><span class="glyphicon glyphicon-user margin-4"></span>同意</button>
+          <button type="submit" class="btn navbar-btn btn-sky width-94" ng-click="vm.rejected()"><span class="glyphicon glyphicon-share-alt margin-4"></span>驳回</button>
+          <button type="button" class="btn navbar-btn btn-default width-94" ng-click="vm.cancel()"><span class="glyphicon glyphicon-remove margin-4"></span>取消</button>
+      </div>
+    </div>
+  </form>
+</div>

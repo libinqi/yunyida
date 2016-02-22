@@ -1,0 +1,52 @@
+<div class="content-box" ng-controller="facadeSetCtrl as vm">
+	<div class="search-box">
+		<form class="form-inline" role="form">
+			<div class="form-group">
+				<label  for="vehicleNum" class="sr-only">区域：</label>
+				<select class="form-control width-154"  ng-model="vm.querydata.regionid" ng-options="it.dictid as it.dictname for it in vm.szqy" ng-change="vm.search()">
+					<option value="">所在区域</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label  for="mobliePhone" class="sr-only">房型：</label>
+				<select class="form-control width-154" ng-model="vm.querydata.fangxingid" ng-options="it.dictid as it.dictname for it in vm.fx" ng-change="vm.search()">
+					<option value="">房型</option>
+				</select>	
+			</div>　
+			<!-- <button type="button" class="btn btn-sky width-94" ng-click="vm.search()"><span class="glyphicon glyphicon-search margin-4"></span>搜索</button> -->
+		</form>
+	</div>
+	<div class="control-box">
+        <button type="button" class="btn btn-sky width-94" ng-click="vm.clickToAdd()"><span class="glyphicon glyphicon-plus-sign margin-4"></span>新建</button>
+    </div>
+    <div class="table-responsive-2-1">
+		<table class="table table-striped table-hover table-bordered table01">
+			<thead>
+				<tr>
+					<td>操作</td>
+					<td>门面编号（门牌号）</td>
+					<td>所在区域</td>
+					<td>位置</td>
+					<td>房型</td>
+					<td>面积大小</td>
+					<td>状态</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="dp in vm.doorplateList">
+					<td>
+						<a class="glyphicon glyphicon-zoom-in margin-h10" ng-if="dp.status != '0'" title="查看" ng-click="vm.clickToView(dp)"></a>
+						<a class="glyphicon glyphicon glyphicon-edit margin-h10" ng-if="dp.status == '0'" title="编辑" ng-click="vm.clickToEdit(dp)"></a>
+						<a class="glyphicon glyphicon-trash margin-h10" ng-if="dp.status == '0'" ng-click="vm.clickToDelete(dp)" title="删除"></a></td>
+					<td>{{dp.doorno}}</td>
+					<td>{{dp.region.dictname}}</td>
+					<td>{{dp.place}}</td>
+					<td>{{dp.fangxing.dictname}}</td>
+					<td>{{dp.acreage}}</td>
+					<td>{{vm.statusToCN(dp.status)}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<tm-pagination conf="paginationConf" class="page-fix"></tm-pagination>
+</div>

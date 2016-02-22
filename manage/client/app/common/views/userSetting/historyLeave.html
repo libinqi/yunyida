@@ -1,0 +1,90 @@
+<div class="center-main" ng-init="vm.activeTab = 1" ng-controller="historyLeaveCtrl as vm">
+  <ul class="clearfix">
+    <li class="pull-left" ng-class="{active: vm.activeTab == 1 || vm.activeTab == 3}">
+      <a href="javascript:;" ng-click="vm.activeNew()" class="edit-a" ng-show="vm.activeTab == 1 || vm.activeTab == 2" ng-class="{'edit-active': vm.activeTab == 1}">新增请假</a>
+      <a href="javascript:;" ng-click="vm.activeNew()" class="edit-a" ng-show="vm.activeTab == 3" ng-class="{'edit-active': vm.activeTab == 3}">修改请假</a>
+    </li>
+    <li class="pull-left" ng-class="{active: vm.activeTab == 2}"><a href="javascript:;" ng-click="vm.activeList()" class="edit-a" ng-class="{'edit-active': vm.activeTab == 2}">历史请假</a></li>
+  </ul>
+  <div class="clearfix"></div>
+  <div ng-show="vm.activeTab == 2">
+    <div class="view-leave" ng-repeat="item in vm.leaveAppList">
+      <div class="view-main">
+        <div class="leave-name">{{item.realname}}</div>
+        <div class="leave-name"><span class="leave-type">{{item.typename}}:</span>{{item.cause}}</div>
+        <div class="leave-name"><small>从{{item.starttime}}~{{item.endtime}}； 请假 <span class="text-danger">{{item.day}}</span> 天</small></div>
+      </div>
+
+      <div class="pull-right center-blue">
+        {{item.statusname}}
+        <button type="button" class="btn navbar-btn btn-sky width-94 pull-right" ng-show="item.status != '1'" ng-click="vm.getLeaveAppInfo(item.id)">编辑</button>
+        <button type="button" class="btn navbar-btn btn-sky width-94 pull-right" ng-show="item.status != '1'" ng-click="vm.delteLeaveApp(item)">删除</button>
+      </div>
+    </div>
+    <div class="margin-20 margin-24"><tm-pagination conf="paginationConf"></tm-pagination></div>
+  </div>
+  <div ng-show="vm.activeTab == 1 || vm.activeTab == 3">
+    <form class="form-horizontal text-normal" name="myForm" autocomplete="off" ng-submit="vm.update()" novalidate>
+    <div class="form-group" ng-class="{'has-error':myForm.submitted && myForm.cause.$invalid}">
+      <textarea name="cause" class="qingjia-input form-control" placeholder="请输入请假事由" ng-model="vm.jsondata.cause" required></textarea>
+      <span class="help-block margin-56 prompt" ng-show="myForm.submitted && myForm.cause.$error.required">请输入请假内容！</span>
+    </div>
+    <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-5">
+      <label class="col-sm-5 control-label">请假类型</label>
+      <div class="col-sm-7">
+        <select class="form-control width-154" name="type" ng-model="vm.jsondata.type" ng-options="it.dictid as it.dictname for it in vm.qjlx" required>
+          <option value="">--请选择--</option>
+        </select>
+        <span class="help-block prompt" ng-show="myForm.submitted && myForm.type.$error.required">请选择请假类型！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">请假天数</label>
+      <div class="col-sm-7">
+        <input type="text" name="day" class="form-control width-154" ng-model="vm.jsondata.day" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="ime-mode:Disabled" required>
+        <span class="help-block prompt" ng-show="myForm.submitted && myForm.day.$error.required">请输入请假天数！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-5">
+      <label for="birthplace" class="col-sm-5 control-label">起始时间</label>
+      <div class="col-sm-7">
+        <div class="dropdown">
+          <a class="dropdown-toggle" id="startdate" role="button" data-toggle="dropdown" data-target="#">
+            <div class="input-group">
+              <input type="text" class="form-control width-154 w-200" data-ng-model="vm.SDate | date:'yyyy-MM-dd HH:mm:ss'" required>
+              <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+          </a>
+          <ul class="dropdown-menu time-center" role="menu" aria-labelledby="dLabel">
+            <datetimepicker data-ng-model="vm.SDate"
+                        data-datetimepicker-config="{ dropdownSelector: '#startdate',startView:'minute', minView:'minute' }"></datetimepicker>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">终止时间</label>
+      <div class="col-sm-7">
+      <div class="dropdown">
+        <a class="dropdown-toggle" id="enddate" role="button" data-toggle="dropdown" data-target="#">
+        <div class="input-group">
+          <input type="text" class="form-control width-154 w-200" data-ng-model="vm.EDate | date:'yyyy-MM-dd HH:mm:ss'" required>
+          <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+        </a>
+        <ul class="dropdown-menu time-center" role="menu" aria-labelledby="dLabel">
+          <datetimepicker data-ng-model="vm.EDate"
+                        data-datetimepicker-config="{ dropdownSelector: '#enddate',startView:'minute', minView:'minute' }"></datetimepicker>
+        </ul>
+      </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <button type="submit" class="btn navbar-btn btn-sky width-94"><span class="glyphicon glyphicon-ok"></span>确定</button>
+        <button type="button" class="btn navbar-btn btn-default width-94" ng-click="vm.cancel()"><span class="glyphicon glyphicon-remove"></span>取消</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>

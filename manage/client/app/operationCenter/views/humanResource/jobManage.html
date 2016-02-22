@@ -1,0 +1,50 @@
+<div class="content-box" ng-controller="jobmanageCtrl as vm">
+      <div class="search-box">
+          <form class="form-inline" role="myForm" name="myForm" autocomplete="off" ng-submit="vm.clickToAdd()" novalidate>
+              <div class="form-group">
+                  <label  for="postName" >招聘名称：</label>
+                  <input type="text" class="form-control width-154 " name="postName" ng-model="vm.jsondata.name" placeholder="名称" required>
+                  <span class="help-block prompt" ng-show="myForm.submitted && myForm.postName.$error.required">请输入招聘名称！</span>
+              </div>
+              <div class="form-group">
+                  <label  for="posturl">招聘网址：</label>
+                  <input type="url" class="form-control width-154 " name="posturl" ng-model="vm.jsondata.url" pattern="^[a-zA-z]+://(\w+(-\w+)*)(\.(\w+(-\w+)*))*(\?\S*)?$" placeholder="http://www.baidu.com"  required>
+                   <span class="help-block prompt" ng-show="myForm.submitted && myForm.posturl.$error.required">请输入招聘地址！</span>
+                   <span class="help-block prompt" ng-show="myForm.submitted && myForm.posturl.$error.pattern">请输入正确的招聘地址！</span>
+              </div>
+              <button type="submit" class="btn btn-sky width-94" >保存</button>
+              <button type="reset" class="btn btn-reset" ng-click="queryClick()"><span
+                    class="glyphicon glyphicon-repeat margin-4"></span>重置
+            </button>
+           </form>
+        </div>
+        <div class="table-responsive-1-1">
+        <table class="table table-striped table-hover table-bordered table01 ">
+            <thead>
+            <tr>
+              <td>操作</td>
+              <td>招聘名称</td>
+              <td>招聘地址</td>
+              <td>前往</td>
+            </tr>
+            </thead>
+            <tbody >
+            <tr ng-repeat="job in vm.joblist">
+                 <td style="vertical-align:middle"><a href="" class="glyphicon glyphicon glyphicon-edit margin-h10" title="编辑" ng-click="vm.clickToUpdatemodel(job)"></a>                       <a href="" class="glyphicon glyphicon-trash margin-h10" title="删除" ng-click="vm.clickToDeletemodel(job.id)"></a></td>
+              <td style="vertical-align:middle">{{job.name}}</td>
+              <td style="vertical-align:middle">{{job.url}}</td>
+              <td style="vertical-align:middle"><button ng-click="vm.openUrl(job.url)" class="btn btn-sky width-94" target="_blank" >前往</button></td>
+
+            </tr>
+            </tbody>
+        </table>
+        </div>
+         <!--
+        <form class="form-inline margin-20" role="form">
+            <div class="form-group">
+                <label  for="postName">设置招聘网址：</label>
+                <input type="text" class="form-control width-154" id="postName" placeholder="www.baidu.com">
+            </div>
+            <button type="button" class="btn btn-sky width-94" ng-click="vm.clickToAdd()">前往</button>
+        </form> -->
+</div>

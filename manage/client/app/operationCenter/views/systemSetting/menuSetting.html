@@ -1,0 +1,79 @@
+<div class="content-box" ng-controller="menuSettingCtrl as vm">
+    <div class="search-box">
+        <form class="form-inline" role="form">
+            <div class="form-group form-inline">
+                <label for="menuName" class="sr-only">菜单名称</label>
+                <input type="text" class="form-control width-154 input-inline" id="menuName" ng-model='vm.menuList.query.menuName'
+                       placeholder="菜单名称">
+            </div>
+            　
+            <div class="form-group">
+                <label for="appId" class="sr-only">所属模块</label>
+                <select class="form-control width-154" id="appId"
+                        ng-model="vm.menuList.query.appId"
+                        ng-options="app.applicationid as app.applicationname for app in vm.appList"
+                        ng-change="queryClick()">
+                    <option value="">--选择所属模块--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="status" class="sr-only">是否有效</label>
+                <select class="form-control width-154" id="status" ng-model='vm.menuList.query.status' ng-change="queryClick()">
+                    <option value="">--选择是否有效--</option>
+                    <option value="1">有效</option>
+                    <option value="0">无效</option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-sky width-94" ng-click="queryClick()"><span
+                    class="glyphicon glyphicon-search margin-4"></span>搜索
+            </button>
+            <button type="button" class="btn btn-reset" ng-click="ResetQuery()"><span
+                    class="glyphicon glyphicon-repeat margin-4"></span>重置
+            </button>
+        </form>
+    </div>
+    <div class="control-box">
+        <button type="button" class="btn btn-sky width-94" ng-click="addMenuClick()"><span
+                class="glyphicon glyphicon-plus-sign margin-4"></span>新增
+        </button>
+        <button type="button" class="btn btn-sky width-94" ng-click="batchDelClick()"><span
+                class="glyphicon glyphicon-remove margin-4"></span>批量删除
+        </button>
+    </div>
+    <div class="table-responsive-2-1">
+        <table class="table table-striped table-hover table-bordered table01">
+            <thead>
+            <tr>
+                <td><input type="checkbox" ng-model="vm.allSelected" ng-click="selectAllItems()"></td>
+                </td>
+                <td>操作</td>
+                <td>名称</td>
+                <td>所属模块</td>
+                <td>页面链接</td>
+                <td>页面参数</td>
+                <td>是否有效</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in vm.menuList.items">
+                <td><input type="checkbox" ng-model="item.selected" ng-click="selectItem(item)"></td>
+                </td>
+                <td>
+                    <a class="glyphicon glyphicon glyphicon-edit margin-h10" ng-click="editMenuClick(item.menuid)"
+                       title="编辑"></a>
+                    <a class="glyphicon glyphicon-trash margin-h10" ng-click="delClick(item.menuid)"
+                       title="删除"></a>
+                    <a class="glyphicon glyphicon-ban-circle margin-h10"
+                       ng-click="disableMenuClick(item.menuid,item.status==1?0:1)" title="{{item.status==1?'禁用':'启用'}}"></a>
+                </td>
+                <td>{{item.menuname}}</td>
+                <td>{{item.applicationname}}</td>
+                <td>{{item.menuurl}}</td>
+                <td>{{item.menuparam}}</td>
+                <td>{{item.status==1?'有效':'无效'}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <tm-pagination conf="vm.menuList" class="page-fix"></tm-pagination>
+</div>

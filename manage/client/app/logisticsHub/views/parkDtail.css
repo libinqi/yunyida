@@ -1,0 +1,137 @@
+.share-info-l{width: 100% !important;float: left;}
+.info-num{color:#828282;font-size: 12px;float: right !important;margin:15px 10px 0 0;}
+.share-title{overflow: hidden;height: 39px;line-height: 39px;border-bottom: 1px solid #dfdfdf;}
+.share-goods1{width: 49%;display: inline-block;padding-left: 15%;}
+.share-goods2{width: 18.5%;display: inline-block;text-align: center;}
+.share-goods3{width: 12.5%;display: inline-block;text-align: center;}
+.share-goods4{width: 17%;display: inline-block;text-align: center;}
+.share-goods5{width: 19.5%;display: inline-block;text-align: center;}
+.share-goods6{width: 16%;display: inline-block;text-align: center;}
+.share-content{overflow: hidden; padding:0 10px;}
+.share-content1{overflow: hidden;height: 42px;border-bottom: 1px solid #dfdfdf;font-family: 微软雅黑;transition:all 0.3s;}
+.share-content1:hover{background:#fafafa;}
+.share-content2{overflow: hidden;height: 64px;border-bottom: 1px solid #dfdfdf;font-family: 微软雅黑;transition:all 0.3s;}
+.share-content2:hover{background:#fafafa;}
+.share-goods-txt{color:#525251;font-size: 14px;}
+.share-main1{padding-left: 3%;width: 49%;display: inline-block;float: left;line-height: 42px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.share-main2{width: 18.5%;display: inline-block;text-align: center;float: left;line-height: 42px;}
+.share-main3{width: 16.5%;display: inline-block;text-align: center;float: left;line-height: 42px;}
+.share-main4{width: 15%;display: inline-block;text-align: center;float: left;line-height: 42px;}
+.share-main5{width: 19.8%;display: inline-block;text-align: center;float: left;line-height: 42px;}
+.share-main6{width: 16.4%;display: inline-block;text-align: center;float: left;line-height: 42px;}
+.share-main7{width: 18.5%;display: inline-block;text-align: left;float: left;line-height: 64px;}
+.share-main15{text-align:center !important;width: 13.5%;display: inline-block;text-align: left;float: left;line-height: 64px;}
+.share-main8{width: 11.5%;display: inline-block;text-align: center;float: left;line-height: 64px; font-size: 12px;}
+.certificate4{width: 34px;height: 25px;display: inline-block;}
+.plat-hunan{color: #ef6601;line-height: normal;font-size: 12px;margin-left: 10px;}
+.share-con-time{line-height: normal;font-family: 微软雅黑;font-size: 12px; margin:11px 0 3px !important;}
+.share-con-plat{line-height: normal;font-family: 微软雅黑;font-size: 14px;margin:0 !important;}
+.share-blue{color:#fc7a1a;font-weight: bold;}
+.share-info-r{width:24%;float: right;overflow: hidden;}
+.goods-manage{margin: 7px 10px 0;color:#707070;font-size: 16px;font-family: 微软雅黑;font-weight: bold;background: url(/assets/images/share-manager-btn.png) no-repeat;padding-left: 34px;height: 26px;line-height: 24px;float: right;}
+.goods-manage:hover{margin: 7px 10px 0;color:#fc7a1a;font-size: 16px;font-family: 微软雅黑;font-weight: bold;background: url(/assets/images/share-manager-btn.png) no-repeat;padding-left: 34px;height: 26px;line-height: 24px;float: right;}
+.share-r-main{overflow: hidden;border-top:1px solid #d5d5d5;min-height: 168px;padding-top: 12px;}
+.tuijian{border-bottom: 1px solid #d2e6e9;color: #0cabc1;font-size: 18px;font-family: 微软雅黑;height: 38px;line-height: 38px;padding-left: 4%;}
+.share-recommend{width: 50%;float: left;overflow: hidden;border-bottom: 1px solid #d2e6e9;}
+.share-company{width: 162px;height: 92px;border:1px solid #e5e5e5;display:block;position: relative;overflow: hidden;margin:30px auto 0; }
+.share-company:hover{width: 162px;height: 92px;border:1px solid #fc7a1a;display:block;position: relative;overflow: hidden;margin:30px auto 0;}
+.share-adrr{position:absolute;height: 27px;background: #74b547;bottom: 0px;width: 100%;}
+.share-adrr-con{color: #314246;font-size: 12px;diaplay:inline-block;width: 100%;text-align: center;display: inline-block;line-height: 27px;}
+.share-com-a{font-size: 14px;font-family: 微软雅黑;color: #636363;margin:5px 0 0 10% !important;display: inline-block;}
+.share-com-a2{font-size: 12px;color: #636363; margin:5px 0 0 10% !important;display: inline-block;}
+.share-dianping{height: 22px;line-height: 22px;border-top: 1px dashed #b6c9cc;overflow: hidden;margin:5px 0;text-align: center;}
+.person-num{color: #999;font-size: 12px;font-family: 微软雅黑;margin-left: 7%;}
+.goods-return{display: inline-block;height: 42px;line-height: 42px;margin-left:10px;padding-left: 7px;color: #ef6601;font-size: 18px;font-family: 微软雅黑;float: left;}
+.guanli{color:#FC7A1A;font-size: 24px;font-family: 微软雅黑;font-weight: bold;}
+.guanli-span{overflow: hidden;display: inline-block;border-left: 1px solid #d4d4d4;padding-left: 20px;margin-left:40px;float: left; opacity:0;}
+.guanli-return{overflow: hidden; background:#efefef;}
+
+.ng-pageslide {background: #fbfbfb;overflow-y: scroll;overflow-x: hidden;border: 1px solid #ccc; border-top-left-radius: 8px; box-shadow:-2px 0px 2px rgba(0,0,0,0.1);}
+.span{color: #ef6601;display: inline-block;text-align: left;}
+.share-time{display: inline-block;width: 72px;text-align: right; font-size:12px;}
+.order-index{width: 4%;color: #2c2c2c;}
+.order-table2{margin:0px 10px 20px;}
+.order-time2{width: 11%;height: 42px;line-height: 42px;color: #2c2c2c;}
+.order-time4{width: 30%;height: 42px;line-height: 42px;color: #2c2c2c;}
+.order-addr3{height: 42px;width: 33%;text-align: left;line-height: 42px;color: #2c2c2c;}
+.order-main2{overflow: hidden;border-bottom: 1px solid #dedede;height: 42px;line-height: 42px;color: #2c2c2c;}
+.order-txt-content{color: #000;font-size: 14px;font-family: 微软雅黑;}
+.order-txt-content:hover{color: #ef6601;font-size: 14px;font-family: 微软雅黑;}
+.intention{margin-right: 10px;display: inline-block;width: 70px;height: 24px;border:1px solid #FC7A1A;border-radius: 30px;line-height: 24px;text-align: center;}
+.intention-title{height: 37px;line-height: 37px;background: #dddddd;color: #2c2c2c;padding-left: 30px;}
+.car_intention2{width: 50%;}
+.order-tel{display: inline-block;overflow: hidden;width: 107px;float: left;background: url(/assets/images/order-phone.png) left 2px no-repeat;padding-left: 7px;margin-left: 4px;}
+.order-phone{display: inline-block;}
+.order-intention-all{overflow: hidden;border-right: 1px solid #dddddd;margin-bottom: 3px;padding-top: 3px;}
+.btn-red{color: #ff0000;}
+.width-76{height: 26px !important;width: 76px !important;}
+.order-addr-txt1{text-align: right;margin-right: 20px;}
+.order-addr-txt2{text-overflow:ellipsis;white-space:nowrap;width: 100%;overflow: hidden;}
+.share-goods15{width: 13.5%;text-align: center;display: inline-block;}
+.share-goods7{width: 18.5%;text-align: center;display: inline-block;}
+.share-goods8{width: 6.5%;text-align: center;display: inline-block;}
+.share-goods9{width: 11.5%;text-align: center;display: inline-block;}
+.ng-pageslide .order-table{border:0px none !important;}
+/*信息监测*/
+.information-num{height: 84px;border-bottom: 1px solid #d4d2d2;width: 100%;overflow: hidden;background:#f9f9f9;}
+.information-num2{width: 25%;border-right: 1px solid #eeeeee;float: left;height: 84px;}
+.information-num3{width: 20%;border-right: 1px solid #eeeeee;float: left;height: 84px;}
+.information-num6{width: 16.65%;border-right: 1px solid #eeeeee;float: left;height: 84px;}
+.infor-num-txt{color: #b0b4b8;font-size: 14px;font-family: Microsoft YaHei;margin:13px 0 8px 30%}
+.infor-num-txt2{color: #b0b4b8;font-size: 14px;font-family: Microsoft YaHei;margin-left: 5px;}
+.infor-num-data{color: #2c3846;font-size: 18px;font-family: Microsoft YaHei;margin-left: 30%}
+.user-all{color: #58666e;font-size: 18px;font-family: Microsoft YaHei;margin:8px 0 28px;}
+.goods-size{height: 280px;}
+/*园区车辆*/
+.yard-car{overflow: hidden;padding-top: 24px;height: 97px;}
+.yard-car-img{width: 56px;height: 48px;margin-right: 15px;}
+.yard-car-txt{color: #505050;font-size: 16px;font-family: 微软雅黑;}
+.yard-car-num{color: #058fe6;font-size: 30px;font-family: 微软雅黑;margin:0 5px 0 17px;}
+.yard-car-num2{color: #b83b39;font-size: 30px;font-family: 微软雅黑;margin:0 5px 0 17px;}
+.yard-main{height: 47px;overflow:hidden;border-top: 1px solid #d4d2d2;border-bottom: 1px solid #d1d0d0;background: #fafafa;box-shadow: 0px 10px 9px -4px #EBEBEB inset;width: 100%;}
+.yard-main1{height:100%;background: #fafafa;overflow: hidden;width: 100%;}
+.car-main1{width: 49%;float: left;color: #505050;font-size: 16px;font-family: 微软雅黑;line-height: 47px;text-align: center;}
+.car-main2{width: 17%;float: left;color: #505050;font-size: 16px;font-family: 微软雅黑;line-height: 47px;text-align: center;}
+.car-main3{width: 22%;float: left;color: #505050;font-size: 16px;font-family: 微软雅黑;line-height: 47px;text-align: center;}
+.car-main4{width: 34%;float: left;color: #505050;font-size: 16px;font-family: 微软雅黑;line-height: 47px;text-align: center;}
+.car-border{padding-top:10px;border-right: 1px solid #d1d0d0;height: 100%;}
+.car-padding{height: 1005;padding-top: 10px;padding-left:0;padding-right: 0;}
+.car-company{color: #6c6c6c;font-size: 18px;font-family: 微软雅黑;}
+.car-company:hover{color: #0271b7;}
+.car-blue{color: #0271b7;font-size: 18px;font-family: 微软雅黑;}
+.car-red{color: #b83b39;font-size: 18px;font-family: 微软雅黑;}
+.car-a{display: block;height: 47px;}
+.car-a:hover{background-color: #ededed;}
+/*车辆详情8*/
+.car-detail{height:97px;}
+.car-name{color: #505050;padding-top: 15px;font-size: 16px;font-family: 微软雅黑;margin-left: 11%;}
+.car-number{color:#058fe6;font-size: 25px;font-family: 微软雅黑;margin-left: 11%;margin-top: 5px;}
+.car-level{color: #06bf01;font-size: 30px;font-family: 微软雅黑;margin-left: 11%;margin-top: 5px;}
+.car-level2{color: #ff6161;font-size: 25px;font-family: 微软雅黑;margin-left: 11%;margin-top: 5px;}
+.yard-main2{height: 100%;overflow:hidden;border-top: 1px solid #d4d2d2;background: #fafafa;box-shadow: 0px 10px 9px -4px #EBEBEB inset;width: 100%;}
+.in-time{color: #505050;font-size: 12px;font-family: 微软雅黑;margin-left: 15%;}
+.car-border2{border-right: 1px solid #d1d0d0;height: 100%;}
+.car-detail-main{width: 232px;margin:48px auto 0;overflow: hidden;}
+.car-detail-img{width: 73px;height: 62px;float: left;}
+.car-detail-txt{overflow: hidden;float: left;margin:5px 0 0 11px;}
+.car-kind{color:#484848;font-size: 20px;font-family: 微软雅黑;}
+.car-detail-red{color: #e34646;}
+.car-detail-blue{color: #396fa1;}
+.car-unit{color:#4c4c4c;font-size: 14px;font-family: 微软雅黑;}
+.honest{color: #505050;font-size: 14px;font-family: 微软雅黑;background:url(/assets/images/integrity.png) left top no-repeat;padding-left: 25px;margin:21px 0 10px 23px;height: 27px;line-height: 27px;}
+.honest-txt{color: #656565;font-size: 14px;font-family: 微软雅黑;line-height: 25px;margin-left: 35px;}
+.car-main10{width: 10%;float: left;color: #505050;font-size: 16px;font-family: 微软雅黑;line-height: 47px;text-align: center;}
+/*实时监控*/
+.real-time{width:10%;}
+.real-time2{width:6%;}
+.real-time3{width:19%;}
+.real-time4{width:8%;}
+.real-time5{width:12%;}
+@media screen and (height:700px) and (width:1024px){
+  .goods-size{height: 250px;}
+}
+.car-gridhead{float: left;color: #505050;font-size: 16px;font-family: 微软雅黑;line-height: 47px;text-align: center;}
+.car-grid{float: left;color: #505050;font-size: 14px;font-family: 微软雅黑;line-height: 40px;text-align: center;}
+.up{color: red}
+.down{color: green}
+.no{color:black}

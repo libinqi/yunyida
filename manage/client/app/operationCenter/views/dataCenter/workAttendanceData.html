@@ -1,0 +1,53 @@
+<div class="content-box" ng-controller="searchcarctrl">
+    <div class="search-box">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label for="postName" class="sr-only">考勤组织</label>
+                <input type="text" class="form-control width-154" id="postName" ng-model="vm.realname" placeholder="考勤组织">
+            </div>
+            <div class="form-group">
+                <label for="postName" class="sr-only">开始日期</label>
+                <input type="text" class="form-control width-154" id="postName" ng-model="vm.realname" placeholder="开始日期">
+            </div>
+            <div class="form-group">
+                <label for="postName" class="sr-only">结束日期</label>
+                <input type="text" class="form-control width-154" id="postName" ng-model="vm.realname" placeholder="结束日期">
+            </div>
+            <button type="submit" class="btn btn-sky width-94" ng-click="searchcar()"><span
+                    class="glyphicon glyphicon-search margin-4"></span>查询
+            </button>
+            <button type="reset" class="btn btn-reset" ng-click="queryClick()"><span
+                    class="glyphicon glyphicon-repeat margin-4"></span>重置
+            </button>
+        </form>
+    </div>
+    <table class="table table-striped table-hover table-bordered table01">
+        <thead>
+        <tr>
+            <td>员工编码</td>
+            <td>员工姓名</td>
+            <td>考勤编号</td>
+            <td>考勤组织</td>
+            <td>打卡日期</td>
+            <td>打卡时间</td>
+            <td>考勤状态</td>
+            <td>打卡来源</td>
+            <td>打卡位置</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>2014-07-12</td>
+            <td></td>
+            <td>002</td>
+            <td>商户1</td>
+            <td>123.00</td>
+            <td>123.00</td>
+            <td>123.00</td>
+            <td>123.00</td>
+            <td>123.00</td>
+        </tr>
+        </tbody>
+    </table>
+    <tm-pagination conf="paginationConf"></tm-pagination>
+</div>

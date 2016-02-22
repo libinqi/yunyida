@@ -1,0 +1,113 @@
+<div class="room-box" ng-controller="infoAuditParkInfoCtrl as vm">
+  <div class="light-box-title"><span class="text-white">详情</span></div>
+  <form class="form-horizontal text-normal" name="myForm" autocomplete="off" ng-submit="vm.update()" novalidate>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.parkname.$invalid}">
+      <label for="parkname" class="col-sm-5 control-label">园区名称</label>
+      <div class="col-sm-7">
+        <input type="text" name="parkname" class="form-control width-154" ng-model="vm.jsondata.parkname" placeholder="" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.parkname.$error.required">请输园区名称！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.locationCityName.$invalid}">
+      <label for="locationCityName" class="col-sm-5 control-label">所在城市</label>
+      <div class="col-sm-7">
+        <select id="locationCityName" class="form-control width-154" ng-model="vm.jsondata.locationCityName"
+                ng-options="locationCityName.dictcode as locationCityName.dictname for locationCityName in dictList['SZCS']"
+                ng-disabled="isView">
+            <option value="">所在城市</option>
+        </select>
+        <span class="help-block" ng-show="myForm.submitted && myForm.locationCityName.$error.required">请选择所在城市！</span>
+      <!-- <input type="text" name="locationCityName" class="form-control width-154" ng-model="vm.jsondata.locationCityName" placeholder="" ng-readonly="isView"> -->
+        <!-- <city-select id="startCity" postionClass="city-select-drop-center" ng-model="search.startCity"></city-select> -->
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.legalRepresentAtive.$invalid}">
+      <label for="legalRepresentAtive" class="col-sm-5 control-label">园区法人</label>
+      <div class="col-sm-7">
+        <input type="text" name="legalRepresentAtive" class="form-control width-154" ng-model="vm.jsondata.legalRepresentAtive" placeholder="" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.legalRepresentAtive.$error.required">请输入机构代码！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.address.$invalid}">
+      <label for="address" class="col-sm-5 control-label">园区地址</label>
+      <div class="col-sm-7">
+        <input type="text" name="address" ng-model="vm.jsondata.address" class="form-control width-154" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.address.$error.required">请输入园区地址！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.contactname.$invalid}">
+      <label for="contactname" class="col-sm-5 control-label">联系人</label>
+      <div class="col-sm-7">
+        <input type="text" name="contactname" class="form-control width-154" ng-model="vm.jsondata.contactname" placeholder="" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.contactname.$error.required">请输入联系人！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.phone.$invalid}">
+      <label for="phone" class="col-sm-5 control-label">联系电话</label>
+      <div class="col-sm-7">
+        <input type="text" name="phone" class="form-control width-154" ng-model="vm.jsondata.phone"  placeholder="" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.phone.$error.required">请输入联系电话！</span>
+        <span class="help-block"  ng-show="myForm.phone.$error.phoneEx">输入的号码有误！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.connectStatus.$invalid}">
+      <label for="connectStatus" class="col-sm-5 control-label">互联网状态</label>
+      <div class="col-sm-7">
+        <!-- <input type="text" name="connectStatus" class="form-control width-154" ng-model="vm.jsondata.connectStatus" placeholder="" required> -->
+        <select id="connectStatus" class="form-control width-154" ng-model="vm.jsondata.connectStatus"
+                ng-options="connectStatus.dictcode as connectStatus.dictname for connectStatus in dictList['HLZT']"
+                ng-disabled="isView">
+            <option value="">互联状态</option>
+        </select>
+        <span class="help-block" ng-show="myForm.submitted && myForm.connectStatus.$error.required">请输入互联状态！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-class="{'has-error':myForm.submitted && myForm.parkcode.$invalid}">
+      <label for="parkcode" class="col-sm-5 control-label">园区编码</label>
+      <div class="col-sm-7">
+        <input type="text" name="parkcode" class="form-control width-154" ng-model="vm.jsondata.parkcode" placeholder="" required ng-readonly="isView">
+        <span class="help-block" ng-show="myForm.submitted && myForm.parkcode.$error.required">请输入园区编码！</span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">组织机构代码</label>
+      <div class="col-sm-7">
+        <span class="license-img pull-left margin-11">
+        <img class="media-object img-responsive" ng-model="vm.jsondata.orgcodelicurl" ngf-src="filesorg[0]" src="{{!vm.jsondata.orgcodelicurl?'assets/images/license.jpg':vm.jsondata.orgcodelicurl}}" ngf-default-src="assets/images/license.jpg" ngf-accept="'image/*'" alt="...">
+        </span>
+        <span class="pull-left margin-28">
+        <button type="button" class="btn btn-sky width-37" ngf-select ng-model="filesorg" accept="image/*" ng-show="!isView">上传</button></span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">企业LOGO</label>
+      <div class="col-sm-7">
+        <span class="license-img pull-left margin-11">
+        <img class="media-object img-responsive" ng-model="vm.jsondata.logourl" ngf-src="fileslog[0]" src="{{!vm.jsondata.logourl?'assets/images/license.jpg':vm.jsondata.logourl}}" ngf-default-src="assets/images/license.jpg" ngf-accept="'image/*'"  alt="..."></span>
+        <span class="pull-left margin-28"><button type="button" class="btn btn-sky width-37" accept="image/*" ngf-select ng-model="fileslog" ng-show="!isView">上传</button></span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">税务登记</label>
+      <div class="col-sm-7">
+        <span class="license-img pull-left margin-11">
+        <img class="media-object img-responsive" ng-model="vm.jsondata.taxlicurl" ngf-src="filestax[0]" src="{{!vm.jsondata.taxlicurl?'assets/images/license.jpg':vm.jsondata.taxlicurl}}" ngf-default-src="assets/images/license.jpg" ngf-accept="'image/*'"  alt="..."></span>
+        <span class="pull-left margin-28"><button type="button" class="btn btn-sky width-37" accept="image/*" ngf-select ng-model="filestax" ng-show="!isView">上传</button></span>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="col-sm-5 control-label">工商营业执照</label>
+      <div class="col-sm-7">
+        <span class="license-img pull-left margin-11">
+        <img class="media-object img-responsive" ng-model="vm.jsondata.bizlicurl" ngf-src="filesbiz[0]" src="{{!vm.jsondata.bizlicurl?'assets/images/license.jpg':vm.jsondata.bizlicurl}}" ngf-default-src="assets/images/license.jpg" ngf-accept="'image/*'"  alt="..."></span>
+        <span class="pull-left margin-28"><button type="button" class="btn btn-sky width-37" accept="image/*"  ngf-select ng-model="filesbiz" ng-show="!isView">上传</button></span>
+      </div>
+    </div>
+    <div class="form-group clear">
+      <div class="text-center">
+        <button type="submit" class="btn navbar-btn btn-sky width-94" ng-show="!isView"><span class="glyphicon glyphicon-ok margin-4"></span>保存</button>
+        <button type="button" class="btn navbar-btn btn-default width-94" ng-click="vm.cancel()"><span class="glyphicon glyphicon-remove margin-4"></span>取消</button>
+      </div>
+    </div>
+  </form>
+</div>

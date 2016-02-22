@@ -1,0 +1,56 @@
+<div class="room-box user-center" ng-controller="userSettingCtrl as vm">
+    <div class="light-box-title"><span class="text-white">个人中心</span></div>
+    <div class="center-content">
+        <ul class="set-nav">
+            <li><a ng-click="vm.activeMenu = 1" ng-class="{'set-nav-active': vm.activeMenu == 1}" class="set-nav-a">密码修改</a></li>
+            <!-- <li><a ng-click="vm.activeMenu = 2" ng-class="{'set-nav-active': vm.activeMenu == 2}" class="set-nav-a">请假申请</a></li> -->
+            <li><a ng-click="vm.activeMenu = 3" ng-class="{'set-nav-active': vm.activeMenu == 3}" class="set-nav-a">个人资料</a></li>
+            <li class="margin-20 text-center"><button id="save" class="btn navbar-btn btn-sky width-94" onclick="javascript:window.location.href='/app/common/views/logout.html'" ng-disabled='lineInfoForm.$invalid' type="submit">退出系统</button></li>
+        </ul>
+        <div ng-if="vm.activeMenu == 1" ng-include="'app/common/views/userSetting/changePassword.html'"></div>
+        <div ng-if="vm.activeMenu == 2" ng-include="'app/common/views/userSetting/historyLeave.html'"></div>
+        <div ng-if="vm.activeMenu == 3" ng-include="'app/common/views/userSetting/userData.html'"></div>
+        <!--<div class="center-main">-->
+        <!--<ul class="clearfix">-->
+        <!--<li class="pull-left" ng-class="{active: vm.activeTab == 1}"><a href="javascript:;" ng-click="vm.activeTab = 1" class="edit-a" ng-class="{'edit-active': vm.activeTab == 1}">新增请假</a></li>-->
+        <!--<li class="pull-left" ng-class="{active: vm.activeTab == 2}"><a href="javascript:;" ng-click="vm.activeTab = 2" class="edit-a" ng-class="{'edit-active': vm.activeTab == 2}">历史请假</a></li>-->
+        <!--</ul>-->
+        <!--<div class="view-leave">-->
+        <!--<div class="view-main">-->
+        <!--<div class="leave-name">张三</div>-->
+        <!--<div class="leave-name"><span class="leave-type">事假:</span>同学结婚，去当伴郎</div>-->
+        <!--<div class="leave-name">从2013-07-12~2014-09-11； 请假20天</div>-->
+        <!--</div>-->
+        <!--<div class="pull-left center-blue">未审核</div>-->
+        <!--<div class="pull-left">-->
+        <!--<button type="button" class="btn navbar-btn btn-sky width-94 pull-right" ng-click="cancel()">编辑</button>-->
+        <!--<button type="button" class="btn navbar-btn btn-sky width-94 pull-right" ng-click="cancel()">删除</button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="view-leave">-->
+        <!--<div class="view-main">-->
+        <!--<div class="leave-name">张三</div>-->
+        <!--<div class="leave-name"><span class="leave-type">事假:</span>同学结婚，去当伴郎</div>-->
+        <!--<div class="leave-name">从2013-07-12~2014-09-11； 请假20天</div>-->
+        <!--</div>-->
+        <!--<div class="pull-left center-blue">未审核</div>-->
+        <!--<div class="pull-left">-->
+        <!--<button type="button" class="btn navbar-btn btn-sky width-94 pull-right" ng-click="cancel()">编辑</button>-->
+        <!--<button type="button" class="btn navbar-btn btn-sky width-94 pull-right" ng-click="cancel()">删除</button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="view-leave">-->
+        <!--<div class="view-main">-->
+        <!--<div class="leave-name">张三</div>-->
+        <!--<div class="leave-name"><span class="leave-type">事假:</span>同学结婚，去当伴郎</div>-->
+        <!--<div class="leave-name">从2013-07-12~2014-09-11； 请假20天</div>-->
+        <!--</div>-->
+        <!--<div class="pull-left center-blue">未审核</div>-->
+        <!--<div class="pull-left">-->
+        <!--<button type="button" class="btn navbar-btn btn-sky width-94 pull-right" ng-click="cancel()">编辑</button>-->
+        <!--<button type="button" class="btn navbar-btn btn-sky width-94 pull-right" ng-click="cancel()">删除</button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+</div>

@@ -1,0 +1,77 @@
+<div class="content-box" ng-controller="meterReadingCtrl as vm">
+    <div class="search-box">
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <label  for="state" class="sr-only">抄表月份</label>
+            <!-- <input type="text" class="form-control width-154" ng-model="vm.querydata.metermonth" placeholder="抄表月份" /> -->
+            <div class="dropdown">
+            <a class="dropdown-toggle" id="metermonth" role="button" data-toggle="dropdown" data-target="#"
+               href="#">
+                <div class="">
+                    <input type="text" class="form-control width-154" data-ng-model="metermonth | date:'yyyy-MM'" placeholder="抄表月份">
+                    <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="metermonth"
+                                data-datetimepicker-config="{ dropdownSelector: '#metermonth',startView:'month', minView:'month' }"></datetimepicker>
+            </ul>
+        </div>
+        </div>  
+        <!-- <div class="form-group">
+            <label  for="state">仪表</label>
+            <select class="form-control width-154">
+                <option>水表</option>
+                <option>电表</option>
+            </select>
+        </div>   -->
+        <button type="button" class="btn btn-sky width-94" ng-click="vm.query()"><span class="glyphicon glyphicon-search margin-4"></span>搜索</button>
+    </form>
+    </div>
+    <div class="control-box">
+        <button type="button" class="btn btn-sky width-94" ng-click="vm.addMeterClick()"><span class="glyphicon glyphicon-plus margin-4"></span>新增</button>
+    </div>
+    <div class="table-responsive-2-1">
+        <table class="table table-striped table-hover table-bordered table01 ">
+          <thead>
+          <tr>
+            <td>操作</td>
+            <td>门面编号</td>
+            <td>客户名称</td>
+            <td>客户手机</td>
+            <td>本次读表数</td>
+            <td>本次读表日期</td>
+            <td>上次读表数</td>
+            <td>上次读表日期</td>
+            <td>表数</td>
+            <td>公摊表数</td>
+            <td>状态</td>
+          </tr>
+          </thead>
+          <tbody >
+          <tr ng-repeat="mr in vm.mRentList">
+            <td>
+                <a class="glyphicon glyphicon glyphicon-edit margin-h10" title="编辑" ng-click="vm.editMeterClick(mr.id)" ng-if="mr.staus == '0'"></a>
+                <a class="glyphicon glyphicon-user margin-h10" title="审核" ng-click="vm.reviewMeterClick(mr.id)" ng-if="mr.staus == '0'"></a>
+                <a class="glyphicon glyphicon-trash margin-h10" title="删除" ng-click="vm.clickToDelete(mr)" ng-if="mr.staus == '0'"></a>
+            </td>
+            <td>{{mr.door.doorno}}</td>
+            <td>{{mr.customername}}</td>
+            <td>{{mr.contactphone}}</td>
+            <td>{{mr.currentread}}</td>
+            <td>{{vm.dateToString(mr.currentreaddate)}}</td>
+            <td>{{mr.lastread}}</td>
+            <td>{{vm.dateToString(mr.lastreaddate)}}</td>
+            <td>{{mr.tablenumber}}</td>
+            <td>{{mr.pooltabnumber}}</td>
+            <td>{{vm.stausToCN(mr.staus)}}</td>
+          </tr>
+          </tbody>
+        </table>
+    </div>
+    <!-- <div class="pull-right">共<span class="text-orange">{{staffList.total}}</span>条</div> -->
+    <!-- <div class="text-center margin-36"><button type="button" class="btn btn-sky width-94"></span>提交</button></div> -->
+    <tm-pagination conf="paginationConf" class="page-fix"></tm-pagination>   
+    <!--<div class="pull-right"><tm-pagination conf="paginationConf"></tm-pagination></div>-->
+  </div>
+</div>

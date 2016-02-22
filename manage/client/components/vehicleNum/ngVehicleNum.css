@@ -1,0 +1,141 @@
+.vc-main.opened{
+    box-shadow: 1px 1px 2px #888;
+    position: relative;
+    /*font-family:Microsoft YaHei;*/
+}
+
+.vc-selector{
+    width: 57px;
+    line-height: 22px;
+    background: #FFF;
+    text-align: center;
+    color:#333;
+    border: 1px solid transparent;
+    border-color:#CCC;
+    cursor: pointer;
+    padding: 2px 12px;
+    outline: 0;
+    font-weight: bold;
+    height: 27px;
+    float: left;
+}
+.vc-sel-input{
+    width: 97px;
+    line-height: 27px;
+    background: #FFF;
+    text-align: center;
+    color:#333;
+    border: 1px solid transparent;
+    border-color:#CCC;
+    /*cursor: pointer;*/
+    padding: 2px 12px;
+    outline: 0;
+    font-weight: bold;
+    height: 27px;
+    float: left;
+}
+.vc-selector.opened{
+    border-right: 0;
+}
+
+.vc-selector:hover{
+    background: #E0E0E0;
+}
+
+.vc-selector:active{
+    outline:thin dotted;
+    outline:5px auto -webkit-focus-ring-color;
+    outline-offset:-2px;
+}
+
+.vc-drop {
+    z-index: 1000;
+    position: absolute;
+    width: 300px;
+    border:1px solid #a0cdff;
+}
+
+.vc-tab>dl {
+    margin: 0;
+}
+
+.vc-tab>dl>dd {
+    background: #FFF;
+    float: left;
+    cursor: pointer;
+    margin: -1px 0 0 0;
+    text-align: center;
+    padding: 3% 0;
+    width: 50%;
+    border-top: 1px solid #ccc;
+}
+
+.vc-tab>dl>dd:hover {
+    text-decoration: underline;
+}
+
+.vc-tab>dl>dd.active {
+    background: #edf6ff;
+    color: #666;
+    font-weight:bold;
+    border-right:1px solid #a0cdff;
+    border-left:1px solid #a0cdff;
+}
+
+.vc-panel {
+    color: #666;
+    padding: 10px 5px;    
+    overflow: hidden;
+    background: #edf6ff;
+    border-top:1px solid #a0cdff;
+}
+
+.vc-panel>dl {
+    margin: 0;
+    line-height: 2;
+}
+
+.vc-panel .vc-col-title {
+    float: left;
+    width: 20%;
+    padding-top: 6px;
+}
+
+.vc-panel .vc-col-content {
+    float: left;
+    width: 80%;
+}
+
+.vc-panel>dl>div {
+    float: left;
+}
+
+.vc-col-title>dt {
+    font-weight: bolder;
+}
+
+.vc-col-content>dd,
+.vc-panel>dl>div>dd {
+    margin: 0;
+}
+
+.vc-col-content>dd>a,
+.vc-panel>dl>div>dd>a {
+    padding: 0 8px;
+    line-height: 2;
+    text-align: left;
+    float: left;
+}
+
+.vc-col-content>dd>a:hover,
+.vc-panel>dl>div>dd>a:hover {
+    cursor: pointer;
+    color: #f60;
+}
+
+.vc-col-content>dd>a.active,
+.vc-panel>dl>div>dd>a.active {
+    background: #f60;
+    border-radius: 3px;
+    color: #fff;
+}

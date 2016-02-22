@@ -1,0 +1,62 @@
+<div class="content-box" ng-controller="enterpriseHonestyCtrl as vm">
+    <div id="grid-search" class="search-box">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label for="tel" class="sr-only">输入公司名/联系人/手机号/车牌号搜索</label>
+                <input type="text" class="form-control width-154" id="tel" ng-model="vm.querydata.searchCondition" placeholder="输入公司名/联系人/手机号/车牌号搜索">
+            </div>
+            <button type="button" class="btn btn-sky width-94" ng-click="vm.query()"><span class="glyphicon glyphicon-search margin-4"></span>搜索</button>
+            <button type="button" class="btn btn-reset" ng-click="vm.resetQuery()"><span
+                    class="glyphicon glyphicon-repeat margin-4"></span>重置
+            </button>
+            <button class="btn btn-sky width-94" ng-click="vm.addEnterpriseHonesty()" type="button" style="float:right;">
+                <span class="glyphicon glyphicon-circle-arrow-right margin-4"></span>新增
+            </button>
+        </form>
+    </div>
+    <div class="nav-yyd-box">
+        <div class="nav_car">
+            <ul class="nav nav-tabs nav-yyd" ng-init="vm.activeTab='BMD'">
+                <li ng-class="{active: vm.activeTab == 'BMD'}"><a class="order-a" href="javascript:;" ng-click="vm.selectTab('BMD')">白名单</a></li>
+                <li ng-class="{active: vm.activeTab == 'HMD'}"><a class="order-a" href="javascript:;" ng-click="vm.selectTab('HMD')">黑名单</a></li>
+                <li ng-class="{active: vm.activeTab == 'CXTJ'}"><a class="order-a" href="javascript:;" ng-click="vm.selectTab('CXTJ')">诚信推荐</a></li>
+            </ul>
+        </div>
+        <div class="table-responsive-2-1">
+            <table class="table table-striped table-hover table-bordered table01 ">
+              <thead>
+                <tr>
+                    <td>操作</td>
+                    <td>公司名称</td>
+                    <td>联系人</td>
+                    <td>联系方式</td>
+                    <td>地址</td>
+                    <td>主营线路</td>
+                    <!-- <td>资质验证</td> -->
+                    <td>公示日期</td>
+                    <!-- <td ng-if="vm.activeTab != 'HMD'">企业简介</td>
+                    <td ng-if="vm.activeTab == 'HMD'">公示原因</td> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in vm.dataList">
+                    <td>
+                        <a class="glyphicon glyphicon-zoom-in margin-h10" title="详情" ng-click="vm.enterpriseHonestyInfo(item.enterpriseId)"></a>
+                        <a class="glyphicon glyphicon-trash margin-h10" title="删除" ng-click="vm.delteEnterpriseHonesty(item)"></a>
+                    </td>
+                    <td>{{item.enterpriseName}}</td>
+                    <td>{{item.contactName}}</td>
+                    <td>{{item.telephoneNumber}}</td>
+                    <td>{{item.address}}</td>
+                    <td>{{item.mainLine}}</td>
+                    <!-- <td>{{item.qvStatusName}}</td> -->
+                    <td>{{item.publicDate}}</td>
+                    <!-- <td ng-if="vm.activeTab != 'HMD'">{{item.companyIntroduction}}</td>
+                    <td ng-if="vm.activeTab == 'HMD'">{{item.publicCause}}</td> -->
+                </tr>
+              </tbody>
+            </table>
+        </div>
+        <tm-pagination conf="paginationConf" class="page-fix"></tm-pagination>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+.set-nav{overflow: hidden;background: #dbddde;width: 152px;padding: 20px 0 20px 5px;float:left;position: absolute;top: 46px;bottom:-33px;left: -15px; box-shadow: inset -3px 0px 8px rgba(0,0,0,0.1); border-bottom-left-radius: 6px;  font-family: Microsoft YaHei;}
+a:focus{outline: none;}
+.user-center{position: relative;min-height: 470px;}
+.center-content{}
+.set-nav-a{display: inline-block;height: 41px;line-height: 41px;color: #333333 !important;width: 152px !important;text-align: center;font-size: 14px;}
+.set-nav-a:hover{display: inline-block;height: 41px;line-height: 41px;color: #333333;width: 152px !important;text-align: center;font-size: 14px;background: #f0f0f0;text-decoration: none;}
+.set-nav-active{display: inline-block;height: 41px;line-height: 41px;color: #333333;width: 152px !important;text-align: center;font-size: 14px;background: #f0f0f0;text-decoration: none !important;}
+.center-main{width: 840px;float: right; font-family: Microsoft YaHei;}
+.forget-password{width: 500px;margin:0 auto;overflow: hidden;}
+.control-label{padding-top: 5px !important;text-align: right;}
+.user-head{margin-left: 2px;}
+.beizhu{width: 145px;text-align: right;float: left;padding-right: 16px;}
+.beizhu-txt{width: 534px;float: left;padding-left: 14px;}
+.beizhu-txt2{width: 557px;float: left;padding-left: 14px;}
+.center-name{width: 188px;float: left;padding-left: 13px;}
+.ziliao{height: 41px;line-height: 41px;color: #333333;text-align: center;font-size: 20px;font-weight: bold;margin-bottom: 20px;font-family: Microsoft YaHei;border-bottom: 1px solid #DAD5D5 !important;padding-bottom: 48px;overflow: hidden;}
+.qingjia-input{width: 668px !important;height: 94px !important;margin-left: 55px !important;}
+.view-leave{overflow: hidden;border-bottom: 1px solid #d3d1d1;padding: 0 0 10px 21px;margin: 20px 0 0 20px;}
+.view-main{overflow: hidden;width:431px;float:left;}
+.center-blue{color: #b83b39;margin: 6px 0 0 0;font-family: Microsoft YaHei; font-size:12px; line-height:30px;}
+.leave-name{font-family: Microsoft YaHei;}
+.leave-type{color: #FFFFFF; background: #666666; width: 80px; display: inline-block; border-radius: 4px; text-align: center; margin: 0 10px 0 0; font-family: Microsoft YaHei;}
+.time-center{left: -100px !important;}
+.beizhu2{width: 164px;float: left;padding-right: 16px;}
+.box-input{width: 197px;}

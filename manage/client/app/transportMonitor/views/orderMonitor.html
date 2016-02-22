@@ -1,0 +1,68 @@
+<div class="content-box" ng-controller="orderMonitorDataCtrl as vm">
+    <div class="search-box clearfix">
+        <form class="form-inline" role="form">
+            <div class="data-btn1">
+                <button class="data-time" ng-class="{'data-time-active' : 'D' == vm.query.type}" ng-click="vm.selectData('D')">今天</button>
+                <button class="data-time" ng-class="{'data-time-active' : 'W' == vm.query.type}" ng-click="vm.selectData('W')">7天内</button>
+                <button class="data-time" ng-class="{'data-time-active' : 'M' == vm.query.type}" ng-click="vm.selectData('M')">30天内</button>
+                <button class="data-time" ng-class="{'data-time-active' : 'Q' == vm.query.type}" ng-click="vm.selectData('Q')">3月内</button>
+                <button class="data-time" ng-class="{'data-time-active' : 'H' == vm.query.type}" ng-click="vm.selectData('H')">半年内</button>
+                <button class="data-time" ng-class="{'data-time-active' : 'Y' == vm.query.type}" ng-click="vm.selectData('Y')">近一年</button>
+            </div>
+            <div class="dropdown pull-left data-input">
+                <a class="dropdown-toggle" id="startDate" role="button" data-toggle="dropdown" data-target="#"
+                   href="#">
+                    <div class="input-group margin-4">
+                        <input type="text" class="form-control time-kai width-94" placeholder="开始时间" data-ng-model="vm.startdate | date:'yyyy-MM-dd'">
+                        <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="vm.startdate"
+                                    data-datetimepicker-config="{ dropdownSelector: '#startDate',startView:'day', minView:'day' }"></datetimepicker>
+                </ul>
+            </div>
+            <div class="dropdown pull-left data-input">
+                <a class="dropdown-toggle" id="enddate" role="button" data-toggle="dropdown" data-target="#"
+                   href="#">
+                    <div class="input-group">
+                        <input type="text" class="form-control time-kai width-94" placeholder="结束时间" data-ng-model="vm.enddate | date:'yyyy-MM-dd'">
+                        <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="vm.enddate"
+                                    data-datetimepicker-config="{ dropdownSelector: '#enddate',startView:'day', minView:'day' }"></datetimepicker>
+                </ul>
+            </div>
+            <button type="submit" class="btn btn-sky width-94 pull-left data-input" ng-click="vm.selectData('')">查询</button>
+            <button type="reset" class="btn btn-reset pull-left" ng-click="vm.ResetQuery()">
+                <span class="glyphicon glyphicon-repeat margin-4"></span>重置
+            </button>
+            <!-- <div class="data-btn2">
+                <button class="data-search border-right" ng-class="{'data-search-active' : '1' == vm.queryPark.step}" ng-click="vm.selectStep('1')" ng-if="vm.datetype == '1'">按时</button>
+                <button class="data-search border-right" ng-class="{'data-search-active' : '2' == vm.queryPark.step}" ng-click="vm.selectStep('2')" ng-if="vm.datetype == '1' || vm.datetype == '2'">按日</button>
+                <button class="data-search border-right" ng-class="{'data-search-active' : '3' == vm.queryPark.step}" ng-click="vm.selectStep('3')" ng-if="vm.datetype == '2' || vm.datetype == '3'">按月</button>
+                <button class="data-search" ng-class="{'data-search-active' : '4' == vm.queryPark.step}" ng-click="vm.selectStep('4')" ng-if="vm.datetype == '3'">按季度</button>
+            </div> -->
+        </form>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:10px">
+      <div class="col-md-12 goods-size">
+        <line-chart config="orderByTimeConfig" data="orderByTimeData"></line-chart>
+      </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:30px">
+
+      <div class="col-md-6 goods-size">
+        <area-chart config="moneyByTimeConfig" data="moneyByTimeData"></area-chart>
+      </div>
+      <div class="col-md-6 goods-size">
+        <donut-chart config="moneyByPeriodConfig" data="moneyByPeriodData"></donut-chart>
+      </div>
+    </div>
+
+
+</div>

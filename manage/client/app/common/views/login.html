@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="author" content="JT56.org UI Team">
+  <meta name="description" content="运营监测中心客户端">
+
+
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
+  <style type="text/css">
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      -webkit-user-select: none;
+    }
+
+    .login {
+      width: 460px;
+      overflow: hidden;
+      border-radius: 6px;
+      margin: 0px auto;
+    }
+
+    .login-body {
+      -webkit-user-select: none;
+      -webkit-app-region: drag;
+    }
+
+    .login-logo {
+      clear: both;
+      width: 400px;
+      margin: 166px auto 58px auto !important;
+      padding-top: 126px;
+      text-align: center;
+    }
+
+    .login-input-user {
+      width: 276px;
+      margin: 290px 645px 0;
+      font-family: Microsoft Yahei;
+      border: 1px solid #E04549;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      height: 46px;
+      -webkit-app-region: no-drag;
+    }
+
+    .login-input-user input {
+      float: left;
+      width: 233px;
+      border: none;
+      height: 43px;
+    }
+
+    .login-img {
+      overflow: hidden;
+      float: left;
+      border-right: 1px solid #c9c2bc;
+      display: inline-block;
+      width: 41px;
+      height: 26px;
+      margin-top: 9px;
+      text-align: center;
+    }
+
+    .login-input-pw {
+      width: 276px;
+      margin: 20px 645px 0;
+      font-family: Microsoft Yahei;
+      border: 1px solid #E04549;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      height: 46px;
+      -webkit-app-region: no-drag;
+    }
+
+    .login-input-pw input {
+      float: left;
+      width: 233px;
+      border: none;
+      height: 43px;
+    }
+
+    .login-check {
+      width: 276px;
+      margin: 0px 645px;
+      font-family: Microsoft Yahei;
+      color: #a6a6a6;
+      padding-top: 10px;
+      -webkit-app-region: no-drag;
+    }
+
+    .login-submit {
+      width: 276px;
+      margin: 0px 645px;
+      font-family: Microsoft Yahei;
+      padding-top: 10px;
+      -webkit-app-region: no-drag;
+    }
+
+    .identify {
+      height: 44px;
+      width: 121px;
+    }
+
+    .change {
+      color: #0576f4;
+      font-size: 12px;
+      font-family: Microsoft YaHei;
+      margin-top: 15px;
+    }
+
+    .login-btn {
+      width: 276px;
+      height: 42px !important;
+      margin-top: 30px;
+      font-size: 14px;
+      text-align: center;
+      font-family: Microsoft YaHei;
+      background: #E04549;
+      border: 1px solid #E04549 !important;
+      -webkit-app-region: no-drag;
+      color: #fff;
+      transition: all 0.3s;
+    }
+
+    .login-btn:hover {
+      background: #E04549;
+      color: #fff;
+    }
+
+    .login-close {
+      border: none;
+      display: block;
+      width: 25px;
+      height: 25px;
+      list-style: none;
+      background: none;
+      transition: all 0.3s;
+      margin-top: -282px;
+      margin-right: 8px;
+      padding: 0 !important;
+      -webkit-app-region: no-drag;
+      color: #838383;
+      outline: none;
+    }
+
+    .login-close:hover {
+      color: #000;
+    }
+
+    .head-btn-close:hover {
+      color: #000 !important;
+    }
+
+    .login-color {
+      color: #e40101;
+    }
+
+    .login-copyright {
+      width: 278px;
+      font-size: 12px;
+      font-family: Arial;
+      color: #737373;
+      position: fixed;
+      bottom: -56px;
+      right: 85px;
+      position: absolute;
+      font-family: 微软雅黑;
+    }
+
+    .login-all {
+      width: 1024px;
+      margin: 0 auto;
+    }
+
+    .login-content {
+      width: 100%;
+      height: 575px;
+      background: #E04549;
+    }
+
+    .login-kind {
+      width: 1024px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .login-bg {
+      background: url(/assets/images/login-background.jpg) center top no-repeat;
+      height: 575px;
+      overflow: hidden;
+    }
+
+    @media screen and (height:700px) and (width:1024px) {
+      .login-body {
+        width: 1024px;
+        height: 700px;
+        border: 1px solid #b83b39;
+        box-sizding: border-box;
+        overflow: hidden;
+        margin-left: 0px;
+      }
+    }
+  </style>
+</head>
+
+<body id="login-body" class="login-body">
+  <div class="login-content">
+    <div class="login-kind">
+      <div class="login-bg">
+        <div class="login-all">
+          <button class="pull-right login-close head-btn-close" onclick="winClose()">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+
+          <div class="form-group login-input-user">
+            <span class="login-img">
+              <img src="/assets/images/user_img.png">
+            </span>
+            <input type="text" class="form-control login-input" id="username" placeholder="用户名/手机号码">
+          </div>
+          <div class="form-group login-input-pw">
+            <span class="login-img">
+              <img src="/assets/images/passwords_img.png">
+            </span>
+            <input type="password" class="form-control login-input" id="password" placeholder="6-16位数字和字符">
+          </div>
+          <div class="form-group login-check checkbox">
+            <label class="pull-left margin-12">
+              <input id="jz" class="pull-left" type="checkbox"> 记住密码
+            </label>
+            <span id="error" class="pull-right login-color"></span>
+            <!--<a href="#" class="pull-left margin-24">忘记密码</a>-->
+          </div>
+          <div class="login-submit">
+            <button type="button" class="btn login-btn" onclick="login()">登　　录</button>
+          </div>
+        </div>
+        <div class="login-copyright">湖南交通物流信息共享平台 copyright © 2015
+          <br />湖南交通物流信息服务有限公司 <a style="color:#b83b39" href="http://wwww.jt56.org" target="_blank">提供技术支持</a> </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/user.js"></script>
+  <script src="/js/nw.js"></script>
+
+  <script type="text/javascript">
+    if (window.require) {
+      window.gui = require('nw.gui');
+      var win = gui.Window.get();
+      if (win.width > 1024) {
+        win.unmaximize();
+      }
+    }
+
+    function login() {
+      var username = $('#username').val();
+      var password = $('#password').val();
+
+      if (!username) {
+        $('#username').focus();
+        return;
+      }
+      if (!password) {
+        $('#password').focus();
+        return;
+      }
+
+      if ($('#jz')[0].checked) {
+        localStorage.setItem('uu', username + '_' + password);
+      } else {
+        localStorage.removeItem('uu');
+      }
+
+      userService.userLogin(username, password, function(data, error) {
+        if (data) {
+          user = data;
+          userService.getUserPermissions(function(data) {
+            userService.setUser(data);
+            window.location.href = '/';
+            //                    if (win) {
+            //                        win.width = 1024;
+            //                        win.height = 768;
+            //                        win.setPosition("center");
+            //                    }
+          });
+        } else {
+          $('#error').text(error);
+        }
+      });
+    }
+
+    function logout() {
+      userService.removeUser();
+      window.location.href = '/';
+    }
+
+    $(document).ready(function() {
+      var userInfo = localStorage.getItem("uu");
+
+      if (userInfo && userInfo.indexOf('_') > 0) {
+        $('#username').val(userInfo.split('_')[0]);
+        $('#password').val(userInfo.split('_')[1]);
+        $('#jz')[0].checked = true;
+      }
+
+      document.onkeydown = function(e) {
+        // 兼容FF和IE和Opera
+        var theEvent = e || window.event;
+        var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+        if (code == 13) {
+          login();
+          return false;
+        }
+        return true;
+      }
+    });
+  </script>
+</body>
+
+</html>

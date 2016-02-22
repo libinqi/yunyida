@@ -1,0 +1,12 @@
+<div class="nav-goHome">
+	<div class="col-sm-2">
+		<a href="/opCenterIndex" class="nav-goHome-btn"><span class="glyphicon glyphicon-circle-arrow-left big-icon-font"></span> 运营中心</a>
+	</div>
+	<div class="col-sm-10 nav-title">物业管理</div>
+</div>
+<div class="left-nav">
+  <ul class="left-nav-box" ng-controller="opCenterIndexCtrl">
+   <li ng-repeat="nav in navs" ng-class="{'left-nav-active': isActive(nav.href)}"><a href="" ui-sref=".{{nav.name}}"><i class="icon-chevron-right"></i>{{nav.menu}}</a></li>
+  </ul>
+</div>
+<div  class="right-content" ui-view></div>
