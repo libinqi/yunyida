@@ -22,71 +22,73 @@ var opCenterApp = angular.module('opCenterApp', [
         url: '/opCenter',
         templateUrl: '/app/operationCenter/home.html',
         menu: '运营中心',
-        childMenus: [{
-            menuid: '2',
-            name: 'opCenter.setting',
-            url: '/setting',
-            templateUrl: '/app/operationCenter/index.html',
-            menu: '系统设置',
-            icon: 'fa-cog',
-            childMenus: [{
-                menuid: '21',
-                name: 'opCenter.setting.department',
-                url: '/department',
-                templateUrl: '/app/operationCenter/views/systemSetting/department.html',
-                menu: '部门设置'
-            }, {
-                menuid: '22',
-                name: 'opCenter.setting.role',
-                url: '/role',
-                templateUrl: '/app/operationCenter/views/systemSetting/roleSetting.html',
-                menu: '岗位设置'
-            }, {
-                menuid: '23',
-                name: 'opCenter.setting.menu',
-                url: '/menu',
-                templateUrl: '/app/operationCenter/views/systemSetting/menuSetting.html',
-                menu: '菜单设置'
-            }, {
-                menuid: '24',
-                name: 'opCenter.setting.dictionary',
-                url: '/dictionary',
-                templateUrl: '/app/operationCenter/views/systemSetting/dictionary.html',
-                menu: '字典设置'
-            }]
-        }, {
-            menuid: '3',
-            name: 'opCenter.honesty',
-            url: '/honesty',
-            templateUrl: '/app/operationCenter/index.html',
-            menu: '诚信公示',
-            icon: 'fa-comment',
-            childMenus: [{
-                menuid: '31',
-                name: 'opCenter.honesty.enterpriseHonesty',
-                url: '/enterpriseHonesty',
-                templateUrl: '/app/operationCenter/views/honesty/enterpriseHonesty.html',
-                menu: '企业公示'
-            }, {
-                menuid: '32',
-                name: 'opCenter.honesty.driverHonesty',
-                url: '/driverHonesty',
-                templateUrl: '/app/operationCenter/views/honesty/driverHonesty.html',
-                menu: '司机公示'
-            }]
-        }, {
+        childMenus: [
+        //    {
+        //    menuid: '2',
+        //    name: 'opCenter.setting',
+        //    url: '/setting',
+        //    templateUrl: '/app/operationCenter/index.html',
+        //    menu: '系统设置',
+        //    icon: 'fa-cog',
+        //    childMenus: [{
+        //        menuid: '21',
+        //        name: 'opCenter.setting.department',
+        //        url: '/department',
+        //        templateUrl: '/app/operationCenter/views/systemSetting/department.html',
+        //        menu: '部门设置'
+        //    }, {
+        //        menuid: '22',
+        //        name: 'opCenter.setting.role',
+        //        url: '/role',
+        //        templateUrl: '/app/operationCenter/views/systemSetting/roleSetting.html',
+        //        menu: '岗位设置'
+        //    }, {
+        //        menuid: '23',
+        //        name: 'opCenter.setting.menu',
+        //        url: '/menu',
+        //        templateUrl: '/app/operationCenter/views/systemSetting/menuSetting.html',
+        //        menu: '菜单设置'
+        //    }, {
+        //        menuid: '24',
+        //        name: 'opCenter.setting.dictionary',
+        //        url: '/dictionary',
+        //        templateUrl: '/app/operationCenter/views/systemSetting/dictionary.html',
+        //        menu: '字典设置'
+        //    }]
+        //}, {
+        //    menuid: '3',
+        //    name: 'opCenter.honesty',
+        //    url: '/honesty',
+        //    templateUrl: '/app/operationCenter/index.html',
+        //    menu: '诚信公示',
+        //    icon: 'fa-comment',
+        //    childMenus: [{
+        //        menuid: '31',
+        //        name: 'opCenter.honesty.enterpriseHonesty',
+        //        url: '/enterpriseHonesty',
+        //        templateUrl: '/app/operationCenter/views/honesty/enterpriseHonesty.html',
+        //        menu: '企业公示'
+        //    }, {
+        //        menuid: '32',
+        //        name: 'opCenter.honesty.driverHonesty',
+        //        url: '/driverHonesty',
+        //        templateUrl: '/app/operationCenter/views/honesty/driverHonesty.html',
+        //        menu: '司机公示'
+        //    }]
+        //},
+            {
             menuid: '4',
             name: 'opCenter.infoAudit',
             url: '/infoAudit',
             templateUrl: '/app/operationCenter/index.html',
-            menu: '信息审核',
-            icon: 'fa-comment',
+            menu: '客户管理',
+            icon: 'fa-user',
             childMenus: [{
                 menuid: '41',
                 name: 'opCenter.infoAudit.park',
                 url: '/park',
                 templateUrl: '/app/operationCenter/views/infoAudit/park/list.html',
-                menu: '园区信息'
+                menu: '货主信息'
             }, {
                 menuid: '42',
                 name: 'opCenter.infoAudit.enterprise',
@@ -100,55 +102,56 @@ var opCenterApp = angular.module('opCenterApp', [
                 templateUrl: '/app/operationCenter/views/infoAudit/driver/list.html',
                 menu: '司机信息'
             }]
-        }, {
-            menuid: '5',
-            name: 'opCenter.account',
-            url: '/account',
-            templateUrl: '/app/operationCenter/index.html',
-            menu: '账号设置',
-            icon: 'fa-comment',
-            childMenus: [{
-                menuid: '51',
-                name: 'opCenter.account.manage',
-                url: '/manage',
-                templateUrl: '/app/operationCenter/views/accountManage/manage.html',
-                menu: '账号管理'
-            }]
-        }, {
-            menuid: '6',
-            name: 'opCenter.application',
-            url: '/application',
-            templateUrl: '/app/operationCenter/index.html',
-            menu: '应用设置',
-            icon: 'fa-comment',
-            childMenus: [{
-                menuid: '61',
-                name: 'opCenter.application.applicationManage',
-                url: '/applicationManage',
-                templateUrl: '/app/operationCenter/views/applicationManage/applicationManage.html',
-                menu: '应用管理'
-            }, {
-                menuid: '62',
-                name: 'opCenter.application.menuManage',
-                url: '/menuManage',
-                templateUrl: '/app/operationCenter/views/applicationManage/menuManage.html',
-                menu: '菜单管理'
-            }]
-        }, {
-            menuid: '7',
-            name: 'opCenter.clientCenter',
-            url: '/clientCenter',
-            templateUrl: '/app/operationCenter/index.html',
-            menu: '客服中心',
-            icon: 'fa-comment',
-            childMenus: [{
-                menuid: '71',
-                name: 'opCenter.clientCenter.platformMessage',
-                url: '/platformMessage',
-                templateUrl: '/app/operationCenter/views/clientCenter/platformMessage/list.html',
-                menu: '平台消息'
-            }]
         }
+        //    , {
+        //    menuid: '5',
+        //    name: 'opCenter.account',
+        //    url: '/account',
+        //    templateUrl: '/app/operationCenter/index.html',
+        //    menu: '账号设置',
+        //    icon: 'fa-comment',
+        //    childMenus: [{
+        //        menuid: '51',
+        //        name: 'opCenter.account.manage',
+        //        url: '/manage',
+        //        templateUrl: '/app/operationCenter/views/accountManage/manage.html',
+        //        menu: '账号管理'
+        //    }]
+        //}, {
+        //    menuid: '6',
+        //    name: 'opCenter.application',
+        //    url: '/application',
+        //    templateUrl: '/app/operationCenter/index.html',
+        //    menu: '应用设置',
+        //    icon: 'fa-comment',
+        //    childMenus: [{
+        //        menuid: '61',
+        //        name: 'opCenter.application.applicationManage',
+        //        url: '/applicationManage',
+        //        templateUrl: '/app/operationCenter/views/applicationManage/applicationManage.html',
+        //        menu: '应用管理'
+        //    }, {
+        //        menuid: '62',
+        //        name: 'opCenter.application.menuManage',
+        //        url: '/menuManage',
+        //        templateUrl: '/app/operationCenter/views/applicationManage/menuManage.html',
+        //        menu: '菜单管理'
+        //    }]
+        //}, {
+        //    menuid: '7',
+        //    name: 'opCenter.clientCenter',
+        //    url: '/clientCenter',
+        //    templateUrl: '/app/operationCenter/index.html',
+        //    menu: '客服中心',
+        //    icon: 'fa-comment',
+        //    childMenus: [{
+        //        menuid: '71',
+        //        name: 'opCenter.clientCenter.platformMessage',
+        //        url: '/platformMessage',
+        //        templateUrl: '/app/operationCenter/views/clientCenter/platformMessage/list.html',
+        //        menu: '平台消息'
+        //    }]
+        //}
         ]
     }])
     .config(['$stateProvider', '$urlRouterProvider', 'opCenterRoutes', function ($stateProvider, $urlRouterProvider, opCenterRoutes) {

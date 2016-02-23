@@ -12,9 +12,9 @@
             <span class="manager-name pull-left">{{user.realname}}</span>
           </div>
         </div>
-        <button class="head-btn-user" ng-click="userSettingClick()">
-            <span aria-hidden="true" class="fa fa-angle-down"></span>
-        </button>
+        <!--<button class="head-btn-user" ng-click="userSettingClick()">-->
+            <!--<span aria-hidden="true" class="fa fa-angle-down"></span>-->
+        <!--</button>-->
       </div>
     </div>
   </div>
@@ -27,10 +27,10 @@
     <div class="head-btns row">
 <!-- Single button -->
       <div class="btn-group" dropdown is-open="status.isopen">
-        <button aria-expanded="false" aria-haspopup="true" ng-class="{'btn-message':message.count>0,'btn-message2':message.count<=0}" class="dropdown-toggle" data-toggle="dropdown" data-toggle="dropdown" ng-click="toggled(status.isopen)" type="button">
-          <i class="fa fa-comment comment-font"></i><span ng-show="message.count>0" class="btn-message-txt">
-            {{message.count}}</span>
-        </button>
+        <!--<button aria-expanded="false" aria-haspopup="true" ng-class="{'btn-message':message.count>0,'btn-message2':message.count<=0}" class="dropdown-toggle" data-toggle="dropdown" data-toggle="dropdown" ng-click="toggled(status.isopen)" type="button">-->
+          <!--<i class="fa fa-comment comment-font"></i><span ng-show="message.count>0" class="btn-message-txt">-->
+            <!--{{message.count}}</span>-->
+        <!--</button>-->
         <ul class="dropdown-menu">
           <li ng-repeat="item in message.items">
             <a ng-if="item.msgtype!=0" href="#" ng-click="changeMessageStatus(item.msgtype,item.url)">{{item.msgtitle}}<span class="span">{{item.count}}</span>条</a>
