@@ -19,19 +19,19 @@ angular.module('yydApp')
       count: 0,
       items: []
     };
-
-    $scope.newMessage = function() {
-      systemAppService.messageService.getMessageCount(user.permissions.parkid).then(function(response) {
-        if (response.data && response.data.code == "200") {
-          $scope.message.count = response.data.body;
-        }
-      });
-    }
-    $scope.newMessage();
-
-    $rootScope.$on('baseService.message.new', function() {
-      $scope.newMessage();
-    });
+    //
+    //$scope.newMessage = function() {
+    //  systemAppService.messageService.getMessageCount(user.permissions.parkid).then(function(response) {
+    //    if (response.data && response.data.code == "200") {
+    //      $scope.message.count = response.data.body;
+    //    }
+    //  });
+    //}
+    //$scope.newMessage();
+    //
+    //$rootScope.$on('baseService.message.new', function() {
+    //  $scope.newMessage();
+    //});
 
     $scope.changeMessageStatus = function(msgtype, url) {
       systemAppService.messageService.changeMessageStatus(user.permissions.parkid, msgtype).then(function(response) {

@@ -16,28 +16,6 @@
   <title></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
-  <script type="text/javascript">
-    if (process!=undefined&&process!=null) {
-      var doc = document;
-      var body = doc.getElementsByTagName("body");
-      var div = doc.createElement("div");
-      div.setAttribute("id", "loading_blank");
-      div.setAttribute("width", 224);
-      div.setAttribute("height", 168);
-      div.setAttribute("z-index", "9999999999");
-      div.setAttribute("style", "position:absolute;top:50%;left:50%;margin:-84px 0 0 -112px");
-      var img = doc.createElement("img");
-      img.setAttribute("src", "file://"+process.cwd() + "/loading.gif");
-      img.setAttribute("width", 224);
-      img.setAttribute("height", 168);
-      div.appendChild(img);
-
-      if (body.length)
-        body[0].appendChild(div);
-      else
-        doc.documentElement.appendChild(div);
-    }
-  </script>
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(client) app/vendor.css -->
   <!-- bower:css -->
@@ -128,6 +106,7 @@
   <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
   <script src="bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
   <script src="bower_components/echarts/build/dist/echarts-all.js"></script>
+  <script src="bower_components/sails.io.js/dist/sails.io.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -333,13 +312,9 @@
   <!-- endbuild -->
 </body>
 <script type="text/javascript">
-  if (process) {
-    $(document).ready(function() {
-      var loading_blank = document.getElementById("loading_blank");
-      if (loading_blank) {
-        document.documentElement.removeChild(loading_blank);
-      }
-    });
-  }
+  io.sails.url = 'http://120.27.146.62:1337';
+  //    io.sails.url = 'http://localhost:1337';
+  io.sails.transports = ['websocket'];
+  //io.sails.useCORSRouteToGetCookie = false;
 </script>
 </html>

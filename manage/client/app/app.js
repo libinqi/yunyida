@@ -14,13 +14,13 @@ angular.module('yydApp', [
   'w5c.validator',
   'commonApp',
   'opCenterApp',
-  'logisSiteApp',
-  'platMonitorApp',
-  'parkMonitorApp',
-  'indexCenterApp',
-  'transportMonitorApp',
-  'supplyMonitorApp',
-  'priceMonitorApp'
+  //'logisSiteApp',
+  //'platMonitorApp',
+  //'parkMonitorApp',
+  //'indexCenterApp',
+  //'transportMonitorApp',
+  //'supplyMonitorApp',
+  //'priceMonitorApp'
 ])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider,$tooltipProvider, ngDialogProvider) {
     //        $urlRouterProvider
@@ -77,16 +77,3 @@ angular.module('yydApp', [
       });
     };
   });
-// .run(function($rootScope, $location, systemAppService) {
-//   //        $rootScope.user = window.user;
-//   //        systemAppService.userService.userInfo = window.user;
-// });
-// //    .element(document).ready(function () {
-// //        if (!user) {
-// //            window.location.href = '/';
-// //        }
-// ////        $.get('/api/UserPermission', function(data) {
-// ////            permissionList = data;
-// ////            angular.bootstrap(document, ['App']);
-// ////        });
-// //    });
