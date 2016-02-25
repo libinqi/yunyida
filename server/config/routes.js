@@ -51,6 +51,7 @@ module.exports.routes = {
      ***************************************************************************/
     '/user/login': 'UserController.login',
     '/user/checkIsExist': 'UserController.checkIsExist',
+    '/user/list': 'UserController.list',
     '/user/getCarrier': 'UserController.getCarrier',
     'post /user/register': 'UserController.register',
     'post /user/restPwd': 'UserController.restPwd',

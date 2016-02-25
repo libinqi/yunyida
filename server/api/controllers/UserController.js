@@ -29,6 +29,45 @@ module.exports = {
                 }
             });
     },
+    list: function (req, res) {
+        var page = req.body.page;
+        var rows = req.body.rows;
+        var enterpriseName = req.body.enterpriseName;
+        var phoneNumber = req.body.phoneNumber;
+        var status = req.body.status;
+
+        var option = {
+            userType: '货主'
+        };
+
+        if (enterpriseName) {
+            option.enterpriseName = {'contains': enterpriseName};
+        }
+
+        if (phoneNumber) {
+            option.phoneNumber = {'contains': phoneNumber};
+        }
+
+        if (status) {
+            option.status = status;
+        }
+
+        User.count(option).exec(function countCB(err, count) {
+            if (err) res.badRequest(err);
+            if (count && count > 0) {
+                User.find(option)
+                    .sort('updatedAt DESC')
+                    .paginate({page: page, limit: rows})
+                    .exec(function (err, data) {
+                        if (err) res.badRequest(err);
+                        res.ok({body: data, count: count});
+                    });
+            }
+            else {
+                res.ok({body: [], count: 0});
+            }
+        });
+    },
     getCarrier: function (req, res) {
         var sCity = req.body.sCity || req.query.sCity;
         var eCity = req.body.eCity || req.query.eCity;
