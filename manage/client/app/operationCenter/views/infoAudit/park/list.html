@@ -17,7 +17,7 @@
             </div>
             <div class="form-group">
                 <label  class="sr-only">账号状态</label>
-                <select class="form-control width-154" id="status" ng-model="vm.queryData.status" ng-change="query">
+                <select class="form-control width-154" id="status" ng-model="vm.queryData.status" ng-change="query()">
                 <option value="">--选择账号状态--</option>
                 <option value="1">正常</option>
                 <option value="0">停用</option>
@@ -46,7 +46,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="item in vm.enterpriseList">
+            <tr ng-repeat="item in enterpriseList">
                 <td class="btn-shipper">
                     <a class="glyphicon glyphicon-zoom-in margin-h10" title="查看详情"
                        ng-click="detail(item.userId)"></a>

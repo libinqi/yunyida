@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module('opCenterApp');
-app.controller('infoAuditParkListCtrl', ['$scope', '$http', 'dialog', function ($scope, $http, dialog) {
+app.controller('infoAuditParkListCtrl', ['$scope', '$http', 'dialog','$sails', function ($scope, $http, dialog,$sails) {
     var vm = this;
 
     // 配置分页基本参数
@@ -21,24 +21,32 @@ app.controller('infoAuditParkListCtrl', ['$scope', '$http', 'dialog', function (
         status: ""
     };
 
+    $scope.enterpriseList=[];
+
     //企业查询
     $scope.getEnterpriseList = function () {
         vm.queryData.page = $scope.paginationConf.currentPage;
         if (vm.queryData.page <= 0) {
             vm.queryData.page = 1;
         }
-        io.socket.get('/user/list', vm.queryData, function serverResponded(data, JWR) {
-            if (JWR.statusCode == 200) {
-                vm.enterpriseList = data.body;
+
+        $sails.get("/user/list",vm.queryData)
+            .success(function (data, status, headers, jwr) {
+                $scope.enterpriseList = data.body;
                 // 变更分页的总数
                 $scope.paginationConf.totalItems = data.count;
-            }
-        });
+            })
+            .error(function (data, status, headers, jwr) {
+            });
     }
 
     $scope.query = function () {
-        $scope.paginationConf.currentPage = 1;
-        $scope.getEnterpriseList();
+        if($scope.paginationConf.currentPage!=1){
+            $scope.paginationConf.currentPage = 1;
+        }
+        else{
+            $scope.getEnterpriseList();
+        }
     }
 
     $scope.resetQuery = function () {
@@ -62,6 +70,9 @@ app.controller('infoAuditParkListCtrl', ['$scope', '$http', 'dialog', function (
                 dialog.notify((status ? '启用' : '停用') + '异常！', 'error');
             }
         });
+    }
+    $scope.detail = function () {
+
     }
 
     //查看企业明细

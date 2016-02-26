@@ -107,9 +107,10 @@
   <script src="bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
   <script src="bower_components/echarts/build/dist/echarts-all.js"></script>
   <script src="bower_components/sails.io.js/dist/sails.io.js"></script>
+  <script src="bower_components/angular-sails/dist/angular-sails.js"></script>
   <!-- endbower -->
-  <!-- endbuild -->
 
+  <!-- endbuild -->
   <script src="bower_components/moment/locale/zh-cn.js"></script>
 
   <!-- build:js({.tmp,client}) app/app.js -->
@@ -311,10 +312,4 @@
   <!-- endinjector -->
   <!-- endbuild -->
 </body>
-<script type="text/javascript">
-//  io.sails.url = 'http://120.27.146.62:1337';
-      io.sails.url = 'http://localhost:1337';
-  io.sails.transports = ['websocket'];
-  //io.sails.useCORSRouteToGetCookie = false;
-</script>
 </html>
