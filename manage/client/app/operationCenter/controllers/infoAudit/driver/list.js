@@ -60,7 +60,7 @@ app.controller('infoAuditDriverListCtrl', ['$scope', '$http', 'dialog', 'infoAud
         $scope.pid = "";
         $scope.isView = false;
         dialog.open({
-            template: 'app/operationCenter/views/infoAudit/park/info.html',
+            template: 'app/operationCenter/views/infoAudit/shipper/info.html',
             className: 'ngdialog-theme-default custom-box',
             scope: $scope,
             preCloseCallback: function (data) {

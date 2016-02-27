@@ -33,6 +33,7 @@ module.exports = {
         var page = req.body.page;
         var rows = req.body.rows;
         var enterpriseName = req.body.enterpriseName;
+        var realName = req.body.realName;
         var phoneNumber = req.body.phoneNumber;
         var status = req.body.status;
 
@@ -42,6 +43,10 @@ module.exports = {
 
         if (enterpriseName) {
             option.enterpriseName = {'contains': enterpriseName};
+        }
+
+        if (realName) {
+            option.realName = {'contains': realName};
         }
 
         if (phoneNumber) {
@@ -187,7 +192,10 @@ module.exports = {
                 return res.badRequest('文件上传失败');
             }
 
-            var avatarId = uploadedFiles[0].fd.replace(sails.config.appPath + '/assets/images/', '').replace('.jpg', '');
+            var avatarId = uploadedFiles[0].fd;
+            avatarId = avatarId.replace(sails.config.appPath + '\\assets\\images\\', '');
+            avatarId = avatarId.replace(sails.config.appPath + '/assets/images/', '');
+            avatarId = avatarId.toLowerCase().replace('.jpg', '');
 
             return res.send(avatarId);
         });

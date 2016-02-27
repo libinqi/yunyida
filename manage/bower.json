@@ -24,11 +24,10 @@
     "moment": "~2.10.3",
     "angular-ui-tree": "~2.5.0",
     "angular-ui-utils": "~0.2.3",
-    "ng-file-upload": "~5.0.7",
-    "ng-file-upload-shim": "~5.0.7",
     "echarts": "~2.2.7",
     "sails.io.js": "~0.13.5",
-    "angular-sails": "~1.1.4"
+    "angular-sails": "~1.1.4",
+    "ng-file-upload": "~12.0.1"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
