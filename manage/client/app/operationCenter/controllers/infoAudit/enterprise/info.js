@@ -1,133 +1,93 @@
 'use strict';
 
 var app = angular.module('opCenterApp');
-app.controller('infoAuditInfoCtrl', ['$scope', '$http', 'dialog', 'infoAuditService','Upload', function ($scope, $http, dialog, infoAuditService,Upload) {
+app.controller('infoAuditInfoCtrl', ['$scope', '$http', 'dialog', '$sails', 'Upload', 'CityPickerService', function ($scope, $http, dialog, $sails, Upload, CityPickerService) {
     var vm = this;
-    
-    $scope.search = {
-      startCity: []
-    };
 
-    vm.jsondata = {
+    vm.selectCity = {};
+    vm.jsondata = {};
+    $scope.sails = $sails;
+    $scope.street_data = [];
+    $scope.streetList = [];
 
-    }
-
-    vm.auditInfo ={
-
-    }
-
-    //查询企业明细
-    vm.getEnterpriseInfo = function(){
-      infoAuditService.getEnterpriseInfo($scope.enterpriseInfo.enterpriseid).then(function (response) {
-        if(response.data.code == "200"){
-          vm.jsondata = response.data.body;
+    $scope.$on('onCitySelected', function (event, item) {
+        if (item.id) {
+            $scope.getStreetList(item.id);
+            vm.jsondata.user.cityCode = item.id;
         }
-      });
+        if (item.cn && item.cn.length > 0) {
+            vm.jsondata.user.city = item.cn.join('');
+        }
+    });
+
+    $scope.getStreetList = function (cityCode) {
+        if (!cityCode) {
+            $scope.street_data = [];
+            return;
+        }
+        else {
+            $scope.streetList = [];
+        }
+
+        $scope.streetList = CityPickerService.getStreetData(cityCode);
+        $scope.street_data = [];
+
+        for (var i = 0; i < $scope.streetList.length; i++) {
+            $scope.street_data.push({id: $scope.streetList[i].id, name: $scope.streetList[i].areaName});
+        }
     }
 
-    //应用查询
-    vm.getAppInfo = function(){
-      infoAuditService.getAppInfo($scope.enterpriseInfo.enterpriseid).then(function (response) {
-          if(response.data.code == "200"){
-              vm.appList = response.data.body;
-          }
-      });
+
+    //查询货主明细
+    $scope.getEnterpriseInfo = function () {
+        $sails.get('/enterprise/' + $scope.uid)
+            .success(function (data, status, headers, jwr) {
+                vm.jsondata = data;
+                vm.selectCity = data.user.cityCode;
+                $scope.getStreetList(data.user.cityCode);
+            })
+            .error(function (data, status, headers, jwr) {
+            });
     }
 
-    //审核
-    vm.auditInfo = function(status){
-        if($scope.myForm.$valid){
-          vm.auditJson.enterpriseid = $scope.enterpriseInfo.enterpriseid;
-          vm.auditJson.status = status;
-          vm.auditJson.auditUserId = user.userid;
-          infoAuditService.auditInfo(vm.auditJson).then(function (response) {
-              if(response.data.code == "200"){
-                  $scope.closeThisDialog(response.data);
-              }
-          });
+    //新增OR修改
+    $scope.update = function () {
+        if ($scope.myForm.$valid) {
+            var data = angular.extend({}, vm.jsondata.user, vm.jsondata);
+            $sails.post('/enterprise/update', data)
+                .success(function (data) {
+                    $scope.closeThisDialog(data);
+                    dialog.notify('编辑成功！', 'success');
+                })
+                .error(function (data) {
+                    $scope.closeThisDialog(null);
+                    dialog.notify('编辑失败！', 'error');
+                });
         }
         $scope.myForm.submitted = true;
     }
 
-    vm.cancel = function(){
-      $scope.closeThisDialog(null);
+    $scope.cancel = function () {
+        $scope.closeThisDialog(null);
     }
 
-    $scope.upload = function (files,callback) {
-      if (files && files.length) {
-        for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          Upload.upload({
-            url: loc_host + '/ws/system/fastdfs/upload',
-            fields: {'username': $scope.username},
-            file: file
-          }).progress(function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            //  console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-          }).success(function (data, status, headers, config) {
-            if (status==200) {
-              if(callback)
-              {
-                callback(data.body);
-              }
-              // return data.body;
-            };
-            console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-          });
+    $scope.upload = function (file, errFiles) {
+        if (file) {
+            Upload.upload({
+                url: $scope.sails.url + '/user/uploadAvatar',
+                data: {avatar: file}
+            }).progress(function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.avatar.name);
+            }).success(function (data, status, headers, config) {
+                if (status == 200) {
+                    vm.jsondata.user.logo = data;
+                }
+            });
         }
-      }
     }
 
-    // $scope.$watch('files', function () {
-    //    $scope.upload($scope.files,function(data){
-    //          vm.jsondata.image=data;
-    //    });
-    // });
-
-    //组织机构代码
-    $scope.$watch('filesorg', function () {
-      $scope.upload($scope.filesorg,function(data){
-        vm.jsondata.orgcodelicurl=data;
-      });
-    });
-
-    //企业LOGO
-    $scope.$watch('fileslog', function () {
-      $scope.upload($scope.fileslog,function(data){
-        vm.jsondata.logourl=data;
-      });
-    });
-    
-    //税务登记
-    $scope.$watch('filestax', function () {
-      $scope.upload($scope.filestax,function(data){
-        vm.jsondata.taxlicurl=data;
-      });
-    });
-    
-    //工商营业执照
-    $scope.$watch('filesbiz', function () {
-      $scope.upload($scope.filesbiz,function(data){
-        vm.jsondata.bizlicurl=data;
-      });
-    });
-
-    vm.isShowImage = false;
-    vm.imageSrc = "";
-    //显示图片
-    vm.showImage = function(isShow,imageSrc){
-      if(isShow){
-        vm.isShowImage = true;
-        vm.imageSrc = imageSrc;
-      }
-      else{
-        vm.isShowImage = false;
-        vm.imageSrc = "";
-      }
-    }
-
-    if($scope.enterpriseInfo.enterpriseid){
-      vm.getEnterpriseInfo();
-      vm.getAppInfo();
+    if ($scope.uid) {
+        $scope.getEnterpriseInfo();
     }
 }]);

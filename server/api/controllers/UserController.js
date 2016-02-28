@@ -35,10 +35,11 @@ module.exports = {
         var enterpriseName = req.body.enterpriseName;
         var realName = req.body.realName;
         var phoneNumber = req.body.phoneNumber;
+        var userType = req.body.userType || '货主';
         var status = req.body.status;
 
         var option = {
-            userType: '货主'
+            userType: userType
         };
 
         if (enterpriseName) {
