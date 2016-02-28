@@ -20,8 +20,8 @@ angular.module('yydApp', [
         //        $urlRouterProvider
         //            .otherwise('/opCenter');
 
-        //$sailsProvider.url ='http://120.27.146.62:1337';
-        $sailsProvider.url = 'http://localhost:1337';
+        $sailsProvider.url ='http://120.27.146.62:1337';
+        //$sailsProvider.url = 'http://localhost:1337';
 
         $locationProvider.html5Mode(true);
 
