@@ -10,7 +10,6 @@
 'use strict';
 
 var _ = require('lodash');
-var
 
 // Get list of things
 exports.index = function(req, res) {

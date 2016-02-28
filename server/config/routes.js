@@ -139,4 +139,13 @@ module.exports.routes = {
      ***************************************************************************/
     'post /car/upload': 'CarController.upload',
     '/car/avatar/:id': 'CarController.avatar',
+
+    /***************************************************************************
+     *                                                                          *
+     * 消息相关API...                                                            *
+     *                                                                          *
+     ***************************************************************************/
+    'post /message/send': 'MessageController.send',
+    '/message/list': 'MessageController.list',
+    'delete /message/:id': 'MessageController.delete',
 };

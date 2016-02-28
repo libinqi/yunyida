@@ -6,11 +6,11 @@
 
   var userService = {
     userLogin: function(username, password, callback) {
-      $.get(loc_host + '/ws/system/sysLogin/login', {
-        username: username,
+      $.get('/api/user/login', {
+        userName: username,
         password: password
       }, function(data) {
-        if (data.body) {
+        if (data&&data.userid) {
           var year = new Date().getFullYear();
           var month = (new Date().getMonth() + 1).toString();
           var day = new Date().getDate().toString();
@@ -21,23 +21,15 @@
           if (day.length == 1) {
             day = '0' + day;
           }
-          data.body.loginDate = year + '-' + month + '-' + day + dateTime;
-          user = data.body;
+          data.loginDate = year + '-' + month + '-' + day + dateTime;
+          user = data;
           if (callback) {
-            callback(data.body, data.msg);
+            callback(data, "登录成功");
           }
         } else {
           if (callback) {
-            callback(null, data.msg);
+            callback(null, "用户或密码输入不正确");
           }
-        }
-      });
-    },
-    getUserPermissions: function(callback) {
-      $.get(loc_host + '/ws/system/sysLogin/accessIndex/' + user.userid, function(data) {
-        user.permissions = data.body;
-        if (callback) {
-          callback(user);
         }
       });
     },

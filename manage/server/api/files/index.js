@@ -5,6 +5,6 @@ var controller = require('./upload.controller');
 
 var router = express.Router();
 
-router.get('/', controller.index);
+router.get('/files', controller.index);
 
 module.exports = router;
