@@ -1,0 +1,103 @@
+<div class="content-box" ng-controller="orderMangeListCtrl as vm">
+    <div class="search-box">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label class="sr-only">下单人</label>
+                <input type="text" class="form-control width-200 " placeholder="下单人(手机号码/联系人/企业名称)"
+                       ng-model="vm.queryData.shipper">
+            </div>
+            <div class="form-group">
+                <label class="sr-only">承运人</label>
+                <input type="text" class="form-control width-200 " placeholder="承运人(手机号码/联系人/企业名称)"
+                       ng-model="vm.queryData.carrier">
+            </div>
+            <div class="form-group dropdown data-input">
+                <a class="dropdown-toggle" id="startDate" role="button" data-toggle="dropdown" data-target="#"
+                   href="#">
+                    <div class="input-group margin-4">
+                        <input type="text" class="form-control time-kai width-94" placeholder="下单开始时间"
+                               data-ng-model="vm.queryData.startDate | date:'yyyy-MM-dd'">
+                        <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="vm.queryData.startDate"
+                                    data-datetimepicker-config="{ dropdownSelector: '#startDate',startView:'day', minView:'day' }"></datetimepicker>
+                </ul>
+            </div>
+            <div class="form-group dropdown data-input">
+                <a class="dropdown-toggle" id="enddate" role="button" data-toggle="dropdown" data-target="#"
+                   href="#">
+                    <div class="input-group">
+                        <input type="text" class="form-control time-kai width-94" placeholder="下单结束时间"
+                               data-ng-model="vm.queryData.endDate | date:'yyyy-MM-dd'">
+                        <span class="sr-only"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="vm.queryData.endDate"
+                                    data-datetimepicker-config="{ dropdownSelector: '#enddate',startView:'day', minView:'day' }"></datetimepicker>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label class="sr-only">订单状态</label>
+                <select class="form-control width-154" id="status" ng-model="vm.queryData.status" ng-change="query()">
+                    <option value="">全部订单</option>
+                    <option value="未接单">未接单</option>
+                    <option value="接单">接单</option>
+                    <option value="确认接单">确认接单</option>
+                    <option value="已取消">已取消</option>
+                    <option value="确认承运">确认承运</option>
+                    <option value="已完成">已完成</option>
+                    <option value="已删除">已删除</option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-sky width-94" ng-click="query()"><span
+                    class="glyphicon glyphicon-search margin-4"></span>搜索
+            </button>
+            <button type="button" class="btn btn-reset" ng-click="resetQuery()"><span
+                    class="glyphicon glyphicon-repeat margin-4"></span>重置
+            </button>
+        </form>
+    </div>
+    <div class="table-responsive-1-1">
+        <table class="table table-striped table-hover table-bordered table01 ">
+            <thead>
+            <tr>
+                <td>操作</td>
+                <td>下单人</td>
+                <td>承运人</td>
+                <td>运价</td>
+                <td>起始地</td>
+                <td>目的地</td>
+                <td>货物信息</td>
+                <td>货物类型</td>
+                <td>下单时间</td>
+                <td>订单状态</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in orderList">
+                <td class="btn-shipper">
+                    <a class="glyphicon glyphicon-zoom-in margin-h10" title="查看详情"
+                       ng-click="toggleOrderDetail(item)"></a>
+                </td>
+                <td>{{item.shipper.enterpriseName}}</td>
+                <td ng-if="item.carrier">
+                    {{item.carrier.enterpriseName||item.carrier.realName}}({{item.carrier.userType}})
+                </td>
+                <td ng-if="!item.carrier"></td>
+                <td>{{item.pricing}}</td>
+                <td>{{item.goods.sCity}}</td>
+                <td>{{item.goods.eCity}}</td>
+                <td>{{item.goods.goodsName+item.goods.goodsNumber+item.goods.goodsUnit}}</td>
+                <td>{{item.goods.goodsType}}</td>
+                <td>{{item.createdAt|formatDate}}</td>
+                <td>{{item.goodsOrderStatus}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <tm-pagination conf="paginationConf" class="page-fix"></tm-pagination>
+    <pageslide ps-open="showOrderDetail" template-url="app/operationCenter/views/orderManage/info.html"></pageslide>
+</div>

@@ -13,6 +13,7 @@ var opCenterApp = angular.module('opCenterApp', [
         'ui.tree-filter',
         'ui.highlight',
         'commonApp',
+        'pageslide-directive',
         'tm.pagination',
         'ngFileUpload',
         'angular.city.select'
@@ -78,30 +79,45 @@ var opCenterApp = angular.module('opCenterApp', [
             //    }]
             //},
             {
-                menuid: '4',
+                menuid: '2',
                 name: 'opCenter.infoAudit',
                 url: '/infoAudit',
                 templateUrl: '/app/operationCenter/index.html',
                 menu: '客户管理',
                 icon: 'fa-user',
                 childMenus: [{
-                    menuid: '41',
+                    menuid: '21',
                     name: 'opCenter.infoAudit.shipper',
                     url: '/shipper',
                     templateUrl: '/app/operationCenter/views/infoAudit/shipper/list.html',
                     menu: '货主信息'
                 }, {
-                    menuid: '42',
+                    menuid: '22',
                     name: 'opCenter.infoAudit.enterprise',
                     url: '/enterprise',
                     templateUrl: '/app/operationCenter/views/infoAudit/enterprise/list.html',
                     menu: '企业信息'
                 }, {
-                    menuid: '43',
+                    menuid: '23',
                     name: 'opCenter.infoAudit.driver',
                     url: '/driver',
                     templateUrl: '/app/operationCenter/views/infoAudit/driver/list.html',
                     menu: '司机信息'
+                }]
+            },
+            {
+                menuid: '3',
+                name: 'opCenter.orderManage',
+                url: '/orderManage',
+                templateUrl: '/app/operationCenter/index.html',
+                menu: '订单管理',
+                icon: 'fa-file-text',
+                childMenus: [{
+                    menuid: '31',
+                    name: 'opCenter.orderManage.list',
+                    url: '/list',
+                    templateUrl: '/app/operationCenter/views/orderManage/list.html',
+                    menu: '订单管理'
                 }]
             }
             //    , {
@@ -138,21 +154,22 @@ var opCenterApp = angular.module('opCenterApp', [
             //        templateUrl: '/app/operationCenter/views/applicationManage/menuManage.html',
             //        menu: '菜单管理'
             //    }]
-            //}, {
-            //    menuid: '7',
-            //    name: 'opCenter.clientCenter',
-            //    url: '/clientCenter',
-            //    templateUrl: '/app/operationCenter/index.html',
-            //    menu: '客服中心',
-            //    icon: 'fa-comment',
-            //    childMenus: [{
-            //        menuid: '71',
-            //        name: 'opCenter.clientCenter.platformMessage',
-            //        url: '/platformMessage',
-            //        templateUrl: '/app/operationCenter/views/clientCenter/platformMessage/list.html',
-            //        menu: '平台消息'
-            //    }]
             //}
+             , {
+                menuid: '7',
+                name: 'opCenter.clientCenter',
+                url: '/clientCenter',
+                templateUrl: '/app/operationCenter/index.html',
+                menu: '消息中心',
+                icon: 'fa-comment',
+                childMenus: [{
+                    menuid: '71',
+                    name: 'opCenter.clientCenter.platformMessage',
+                    url: '/platformMessage',
+                    templateUrl: '/app/operationCenter/views/clientCenter/platformMessage/list.html',
+                    menu: '消息管理'
+                }]
+            }
         ]
     }])
     .config(['$stateProvider', '$urlRouterProvider', 'opCenterRoutes', function ($stateProvider, $urlRouterProvider, opCenterRoutes) {

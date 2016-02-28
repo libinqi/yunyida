@@ -39,6 +39,59 @@ module.exports = {
                 res.ok(data);
             });
     },
+    list: function (req, res) {
+        var page = req.body.page;
+        var rows = req.body.rows;
+        var shipper = req.body.shipper;
+        var carrier = req.body.carrier;
+        var startDate = req.body.startDate;
+        var endDate = req.body.endDate;
+        var status = req.body.status;
+
+        var sql = "SELECT COUNT(*) as count,GROUP_CONCAT(o.goodsOrderId) as goodsOrderIds FROM goodsorder as o LEFT JOIN `user` as s on o.shipper=s.userId LEFT JOIN `user` as c on o.carrier=c.userId where 1=1";
+
+        if (startDate && endDate) {
+            sql += " and o.createdAt >= '" + startDate + "' and o.createdAt<= '" + endDate + ' 23:59:59' + "'";
+        }
+        else if (startDate) {
+            sql += " and o.createdAt >= '" + startDate + "'";
+        }
+        else if (endDate) {
+            sql += " and o.createdAt<= '" + endDate + ' 23:59:59' + "'";
+        }
+
+        if (status) {
+            sql += " and o.goodsOrderStatus='" + status + "'";
+        }
+
+        if (shipper) {
+            sql += " and (s.phoneNumber like '%" + shipper + "%' or s.enterpriseName like '%" + shipper + "%' or s.realName like '%" + shipper + "%')";
+        }
+
+        if (carrier) {
+            sql += " and (c.phoneNumber like '%" + carrier + "%' or c.enterpriseName like '%" + carrier + "%' or c.realName like '%" + carrier + "%')";
+        }
+
+
+        GoodsOrder.query(sql, function (err, count) {
+            if (err) res.badRequest(err);
+            if (count && count.length > 0) {
+                GoodsOrder.find(count[0].goodsOrderIds.split(','))
+                    .populate('shipper')
+                    .populate('carrier')
+                    .populate('goods')
+                    .sort('createdAt DESC')
+                    .paginate({page: page, limit: rows})
+                    .exec(function (err, data) {
+                        if (err) res.badRequest(err);
+                        res.ok({body: data, count: count[0].count});
+                    });
+            }
+            else {
+                res.ok({body: [], count: 0});
+            }
+        });
+    },
     carrierOrder: function (req, res) {
         var userId = req.body.userId;
         var page = req.body.page;

@@ -1,0 +1,97 @@
+<div class="content-box">
+    <div class="search-box clearfix">
+        <a class="goods-return" ng-click="toggleOrderDetail()">
+            <span class="glyphicon glyphicon-arrow-right margin-4"></span>返回
+        </a>
+        <span class="guanli-span">
+            <span class="guanli">订单详情</span>
+        </span>
+    </div>
+    <div class="order-table">
+        <div class="goods-detail">
+            <dl class="clearfix">
+                <dt class="detail-goods">{{goodsOrder.goods.goodsType}}</dt>
+                <dd class="detail-goods-main">
+                    <div class="detail-goods-adrr ng-binding">
+                        {{goodsOrder.goods.goodsName+goodsOrder.goods.goodsNumber+goodsOrder.goods.goodsUnit}}(订单状态--{{goodsOrder.goodsOrderStatus}})
+                    </div>
+                    <div><span class="publish-time ng-binding">创建时间：{{goodsOrder.createdAt|formatDate}}</span><span
+                            class="publish-time margin-68"></span></div>
+                </dd>
+            </dl>
+            <div class="clearfix">
+                <div class="clearfix pull-left">
+                    <p class="clearfix">
+                        <span class="goods-kind">发货人：<span class="span ng-binding">{{goodsOrder.goods.consignor}}</span></span>
+                        <span class="goods-kind">收货人：<span class="span">{{goodsOrder.goods.consignee}}</span></span>
+                    </p>
+                    <p class="clearfix">
+                    <span class="goods-kind">地址：
+                        <span class="span ng-binding">{{goodsOrder.goods.sCity+goodsOrder.goods.sStreet+goodsOrder.goods.sAddress}}</span>
+                    </span>
+                    <span class="goods-kind">地址：
+                        <span  class="span ng-binding">{{goodsOrder.goods.eCity+goodsOrder.goods.eStreet+goodsOrder.goods.eAddress}}</span>
+                    </span>
+                    </p>
+                    <p class="clearfix">
+                        <span class="goods-kind">电话：<span class="span ng-binding">{{goodsOrder.goods.sPhoneNumber}}</span></span>
+                        <span class="goods-kind">电话：<span class="span">{{goodsOrder.goods.ePhoneNumber}}</span></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="goods-detail2">
+            <div class="detail-content">
+                <div class="detail-content-l">
+                    <div class="clearfix margin-10"><span class="com-name">货物属性</span><span
+                            class="share-phone ng-binding">{{goodsOrder.goods.goodsType}} {{goodsOrder.goods.goodsAttribute}}</span></div>
+                    <div class="clearfix margin-10"><span class="com-name">需求车辆</span><span
+                            class="share-phone ng-binding">{{goodsOrder.goods.carType}} {{goodsOrder.goods.carLength}}</span></div>
+                    <div ng-if="goodsOrder.goods.remark" class="clearfix margin-10"><span class="com-name">备注</span><span class="share-phone">{{goodsOrder.goods.remark}}</span></div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="goodsOrder.carrier" class="goods-detail2">
+            <div class="detail-content">
+                <div class="detail-content-l">
+                    <div class="clearfix margin-10"><span class="com-name">承运人</span><span
+                            class="share-phone ng-binding">{{goodsOrder.carrier.enterpriseName||goodsOrder.carrier.realName}}({{goodsOrder.carrier.userType}})</span></div>
+                    <div class="clearfix margin-10"><span class="com-name">电话</span><span
+                            class="share-phone ng-binding">{{goodsOrder.carrier.phoneNumber}}</span></div>
+                    <div ng-if="goodsOrder.pricing" class="clearfix margin-10"><span class="com-name">运价</span><span class="share-phone">{{goodsOrder.pricing}}元</span></div>
+                    <div ng-if="goodsOrder.evaluationLevel" class="clearfix margin-10"><span class="com-name">评价</span><span class="share-phone">{{goodsOrder.evaluationLevel}}星({{goodsOrder.evaluationContent}}) </span></div>
+                    <!--<div class="clearfix margin-10"><span class="com-name">证照资质</span>-->
+                        <!--<div class="detail-zuzhi">-->
+                            <!--<div class="goods-detail-certificate"><p class="goods-detail-img"><img class="img-mid"-->
+                                                                                                   <!--onerror="errorImg(this)"-->
+                                                                                                   <!--src="http://files.jt56.org/group1/M00/00/02/CssCKFZVb5aAfV3-AAbis4gHck8463.jpg">-->
+                            <!--</p>-->
+                                <!--<p class="detail-img-txt">经营许可证</p></div>-->
+                        <!--</div>-->
+                        <!--<div class="detail-zuzhi">-->
+                            <!--<div class="goods-detail-certificate"><p class="goods-detail-img"><img class="img-mid"-->
+                                                                                                   <!--onerror="errorImg(this)"-->
+                                                                                                   <!--src="http://files.jt56.org/group1/M00/00/02/CssCKFZVb6CAPbnUAAdqVdd8w0w999.jpg">-->
+                            <!--</p>-->
+                                <!--<p class="detail-img-txt">税务登记证</p></div>-->
+                        <!--</div>-->
+                        <!--<div class="detail-zuzhi">-->
+                            <!--<div class="goods-detail-certificate"><p class="goods-detail-img"><img class="img-mid"-->
+                                                                                                   <!--onerror="errorImg(this)"-->
+                                                                                                   <!--src="http://files.jt56.org/group1/M00/00/02/CssCKFZVb6WAMkjHAAhyg_Xjf-o041.jpg">-->
+                            <!--</p>-->
+                                <!--<p class="detail-img-txt">组织机构代码证</p></div>-->
+                        <!--</div>-->
+                        <!--<div class="detail-zuzhi">-->
+                            <!--<div class="goods-detail-certificate"><p class="goods-detail-img"><img class="img-mid"-->
+                                                                                                   <!--onerror="errorImg(this)"-->
+                                                                                                   <!--src="http://files.jt56.org/group1/M00/00/02/CssCKFZVb76AV8eiAAgUSp9kFC8112.jpg">-->
+                            <!--</p>-->
+                                <!--<p class="detail-img-txt">道路运输许可证</p></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

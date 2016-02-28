@@ -98,6 +98,7 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
     '/order/userOrder': 'GoodsOrderController.userOrder',
+    '/order/list': 'GoodsOrderController.list',
     '/order/carrierOrder': 'GoodsOrderController.carrierOrder',
     '/order/carrierOrderStatis': 'GoodsOrderController.carrierOrderStatis',
     '/order/shipperOrderStatis': 'GoodsOrderController.shipperOrderStatis',

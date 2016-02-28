@@ -74,6 +74,7 @@ button:focus{outline:none !important;}
 .width-default{height: 30px !important;}
 .width-94{width: 94px !important;height: 30px;}
 .width-154{width: 154px !important;height: 30px !important;}
+.width-200{width: 200px !important;height: 30px !important;}
 .width-37{width: 33px !important;height: 30px;min-width: 33px;}
 .h-30{height: 30px;}
 .form-control{padding:0 0 0 12px; margin:0 0; font-size:12px;}
@@ -260,4 +261,116 @@ input::-webkit-outer-spin-button {
   background:url() no-repeat left center;
   text-align:left;
   /*text-indent:15px;*/
+}
+
+.goods-detail {
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    padding: 27px 4% 10px;
+}
+
+.detail-goods {
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    font-family: Microsoft YaHei;
+    font-size: 16px;
+    font-weight: 700;
+    background: #b83b39;
+    float: left;
+    margin-top: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.detail-goods-main {
+    overflow: hidden;
+    float: left;
+    margin-left: 8px;
+}
+
+.detail-goods-adrr {
+    color: #ef6601;
+    font-size: 18px;
+    font-family: 微软雅黑;
+    font-weight: 700;
+}
+
+.publish-time {
+    color: #525251;
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+}
+
+.goods-kind {
+    overflow: hidden;
+    width: 336px;
+    float: left;
+    color: #000;
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.span {
+    color: #ef6601;
+    display: inline-block;
+    text-align: left;
+}
+
+.detail-content {
+    overflow: hidden;
+    float: left;
+    padding: 20px 0px 70px 40px;
+}
+
+.detail-content-l {
+    float: left;
+    width: 100%;
+}
+
+.com-name {
+    color: #8e8e8e;
+    display: inline-block;
+    width: 80px;
+    text-align: right;
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    float: left;
+}
+
+.share-phone {
+    color: #000000;
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    margin-left: 20px;
+    float: left;
+}
+
+.detail-zuzhi {
+    overflow: hidden;
+    float: left;
+    margin-left: 20px;
+}
+
+.goods-detail-certificate {
+    width: 110px;
+    overflow: hidden;
+    float: left;
+    margin-right: 20px;
+}
+
+.goods-detail-img {
+    width: 94px;
+    height: 62px;
+    overflow: hidden;
+    margin: 0 auto 5px;
+}
+
+.detail-img-txt {
+    color: #000;
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    text-align: center;
 }
