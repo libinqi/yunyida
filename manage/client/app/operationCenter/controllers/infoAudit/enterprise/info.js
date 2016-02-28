@@ -6,6 +6,7 @@ app.controller('infoAuditInfoCtrl', ['$scope', '$http', 'dialog', '$sails', 'Upl
 
     vm.selectCity = {};
     vm.jsondata = {};
+    vm.businessTypes = [];
     $scope.sails = $sails;
     $scope.street_data = [];
     $scope.streetList = [];
@@ -38,21 +39,40 @@ app.controller('infoAuditInfoCtrl', ['$scope', '$http', 'dialog', '$sails', 'Upl
     }
 
 
-    //查询货主明细
+    //查询物流企业明细
     $scope.getEnterpriseInfo = function () {
         $sails.get('/enterprise/' + $scope.uid)
             .success(function (data, status, headers, jwr) {
                 vm.jsondata = data;
                 vm.selectCity = data.user.cityCode;
+                vm.businessTypes = vm.jsondata.businessType.split(',');
                 $scope.getStreetList(data.user.cityCode);
             })
             .error(function (data, status, headers, jwr) {
             });
     }
 
+    $scope.businessTypeChange = function (value) {
+        var index = vm.businessTypes.indexOf(value);
+        if (index < 0) {
+            vm.businessTypes.push(value);
+        }
+        else {
+            vm.businessTypes.splice(index, 1);
+        }
+
+        if (vm.businessTypes.length > 0) {
+            vm.jsondata.businessType = vm.businessTypes.join(',');
+        }
+        else {
+            vm.jsondata.businessType = '';
+        }
+    }
+
     //新增OR修改
     $scope.update = function () {
         if ($scope.myForm.$valid) {
+            vm.jsondata.user.status = vm.jsondata.user.status == '1' ? true : false;
             var data = angular.extend({}, vm.jsondata.user, vm.jsondata);
             $sails.post('/enterprise/update', data)
                 .success(function (data) {

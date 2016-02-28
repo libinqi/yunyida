@@ -72,8 +72,8 @@ app.controller('infoAuditDriverListCtrl', ['$scope', '$http', 'dialog', '$sails'
             });
     }
 
-    $scope.detail = function (did) {
-        $scope.did = did;
+    $scope.detail = function (uid) {
+        $scope.uid = uid;
         $scope.isView = true;
         dialog.open({
             template: 'app/operationCenter/views/infoAudit/driver/info.html',
@@ -85,8 +85,8 @@ app.controller('infoAuditDriverListCtrl', ['$scope', '$http', 'dialog', '$sails'
     }
 
     //编辑企业信息
-    $scope.edit = function (did) {
-        $scope.did = did;
+    $scope.edit = function (uid) {
+        $scope.uid = uid;
         $scope.isView = false;
         dialog.open({
             template: 'app/operationCenter/views/infoAudit/driver/info.html',

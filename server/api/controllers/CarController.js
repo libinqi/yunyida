@@ -4,6 +4,8 @@
  * @description :: Server-side logic for managing cars
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var uuid = require('node-uuid'),
+    path = require('path');
 
 module.exports = {
     /**
@@ -25,9 +27,10 @@ module.exports = {
                 return res.badRequest('文件上传失败');
             }
 
-            var avatarId = uploadedFiles[0].fd.replace(sails.config.appPath + '/assets/images/car/', '').replace('.jpg', '');
-
-            return res.send(avatarId);
+            var avatarId = uploadedFiles[0].fd;
+            avatarId = avatarId.replace(sails.config.appPath + '\\assets\\images\\car\\', '');
+            avatarId = avatarId.replace(sails.config.appPath + '/assets/images/car/', '');
+            return res.send(avatarId.toLowerCase());
         });
     },
     /**
@@ -40,7 +43,7 @@ module.exports = {
             id: 'string'
         });
 
-        var avatarFd = sails.config.appPath + '/assets/images/car/' + req.param('id') + '.jpg';
+        var avatarFd = sails.config.appPath + '/assets/images/car/' + req.param('id');
         var skipperDisk = require('skipper-disk');
         var fileAdapter = skipperDisk(/* optional opts */);
 

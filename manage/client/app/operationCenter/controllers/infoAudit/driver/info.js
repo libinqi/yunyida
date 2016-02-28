@@ -1,106 +1,159 @@
 'use strict';
 
 var app = angular.module('opCenterApp');
-app.controller('infoAuditDriverInfoCtrl', ['$scope', '$http', 'dialog', 'infoAuditService','Upload', function ($scope, $http, dialog, infoAuditService,Upload) {
+app.controller('infoAuditDriverInfoCtrl', ['$scope', '$http', 'dialog', '$sails', 'Upload', 'CityPickerService', 'dictService', function ($scope, $http, dialog, $sails, Upload, CityPickerService, dictService) {
     var vm = this;
-    
-    $scope.search = {
-      startCity: []
-    };
 
-    vm.jsondata = {
+    vm.selectCity = {};
+    vm.jsondata = {};
+    $scope.sails = $sails;
+    $scope.street_data = [];
+    $scope.streetList = [];
 
+    $scope.carLengthList = [];
+    $scope.carTypeList = dictService.car_type;
+
+    $scope.$watch('vm.jsondata.cars[0].carType', function (oldValue, newValue) {
+        //if (oldValue && newValue)vm.jsondata.cars[0].carLength = '';
+        if (!vm.jsondata.cars[0].carType) {
+            dictService.car_length = [];
+            return;
+        }
+        else {
+            $scope.carLengthList = [];
+        }
+
+        $scope.carLengthList = dictService.getDictItem('car_type', vm.jsondata.cars[0].carType).car_length;
+        dictService.car_length = $scope.carLengthList;
+    });
+
+    $scope.$on('onCitySelected', function (event, item) {
+        if (item.id) {
+            $scope.getStreetList(item.id);
+            vm.jsondata.user.cityCode = item.id;
+        }
+        if (item.cn && item.cn.length > 0) {
+            vm.jsondata.user.city = item.cn.join('');
+        }
+    });
+
+    $scope.getStreetList = function (cityCode) {
+        if (!cityCode) {
+            $scope.street_data = [];
+            return;
+        }
+        else {
+            $scope.streetList = [];
+        }
+
+        $scope.streetList = CityPickerService.getStreetData(cityCode);
+        $scope.street_data = [];
+
+        for (var i = 0; i < $scope.streetList.length; i++) {
+            $scope.street_data.push({id: $scope.streetList[i].id, name: $scope.streetList[i].areaName});
+        }
     }
+
 
     //查询司机明细
-    vm.getDriverInfo = function(){
-      infoAuditService.getDriverInfo($scope.pid).then(function (response) {
-        if(response.data.code == "200"){
-          vm.jsondata = response.data.body;
+    $scope.getDriverInfo = function () {
+        $sails.get('/driver/' + $scope.uid)
+            .success(function (data, status, headers, jwr) {
+                vm.jsondata = data;
+                vm.selectCity = data.user.cityCode;
+                $scope.getStreetList(data.user.cityCode);
+            })
+            .error(function (data, status, headers, jwr) {
+            });
+    }
+
+    //新增OR修改
+    $scope.update = function () {
+        if ($scope.myForm.$valid) {
+            vm.jsondata.user.status = vm.jsondata.user.status == '1' ? true : false;
+            var data = angular.extend({}, vm.jsondata.user, vm.jsondata.cars[0], vm.jsondata);
+            $sails.post('/driver/update', data)
+                .success(function (data) {
+                    $scope.closeThisDialog(data);
+                    dialog.notify('编辑成功！', 'success');
+                })
+                .error(function (data) {
+                    $scope.closeThisDialog(null);
+                    dialog.notify('编辑失败！', 'error');
+                });
         }
-      });
+        $scope.myForm.submitted = true;
     }
 
-    // //新增OR修改
-    // vm.update = function(){
-    //     if($scope.myForm.$valid){
-    //         infoAuditService.addDriverInfo(vm.jsondata).then(function (response) {
-    //             if(response.data.code == "200"){
-    //                 $scope.closeThisDialog(response.data);
-    //             }
-    //         });
-    //     }
-    //     $scope.myForm.submitted = true;
-    // }
-
-
-    //取消
-    vm.cancel = function(){
-      $scope.closeThisDialog(null);
+    $scope.cancel = function () {
+        $scope.closeThisDialog(null);
     }
 
-    //上传图片至文件服务器
-    $scope.upload = function (files,callback) {
-      if (files && files.length) {
-        for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          Upload.upload({
-            url: loc_host + '/ws/system/fastdfs/upload',
-            fields: {'username': $scope.username},
-            file: file
-          }).progress(function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            //  console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-          }).success(function (data, status, headers, config) {
-            if (status==200) {
-              if(callback)
-              {
-                callback(data.body);
-              }
-              // return data.body;
-            };
-            console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-          });
+    $scope.upload = function (file, errFiles) {
+        if (file) {
+            Upload.upload({
+                url: $scope.sails.url + '/user/uploadAvatar',
+                data: {avatar: file}
+            }).progress(function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.avatar.name);
+            }).success(function (data, status, headers, config) {
+                if (status == 200) {
+                    vm.jsondata.user.logo = data;
+                }
+            });
         }
-      }
     }
 
-    //头像
-    $scope.$watch('files', function () {
-       $scope.upload($scope.files,function(data){
-             vm.jsondata.image=data;
-       });
-    });
-    
-    //身份证号
-    $scope.$watch('useridsnurl', function () {
-      $scope.upload($scope.useridsnurl,function(data){
-        vm.jsondata.orgcodelicurl=data;
-      });
-    });
+    $scope.uploadCarImage = function (file, errFiles) {
+        if (file) {
+            Upload.upload({
+                url: $scope.sails.url + '/car/upload',
+                data: {avatar: file, filename: file.name}
+            }).progress(function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.avatar.name);
+            }).success(function (data, status, headers, config) {
+                if (status == 200) {
+                    vm.jsondata.cars[0].carImage = $scope.sails.url + '/car/avatar/' + data;
+                }
+            });
+        }
+    }
 
-    //驾驶证号
-    $scope.$watch('licenseurl', function () {
-      $scope.upload($scope.licenseurl,function(data){
-        vm.jsondata.logourl=data;
-      });
-    });
+    $scope.uploadDriverLicense = function (file, errFiles) {
+        if (file) {
+            Upload.upload({
+                url: $scope.sails.url + '/car/upload',
+                data: {avatar: file}
+            }).progress(function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.avatar.name);
+            }).success(function (data, status, headers, config) {
+                if (status == 200) {
+                    vm.jsondata.driverLicenseImage = $scope.sails.url + '/car/avatar/' + data;
+                }
+            });
+        }
+    }
 
-    //行驶证号
-    $scope.$watch('travellicenseurl', function () {
-      $scope.upload($scope.travellicenseurl,function(data){
-        vm.jsondata.taxlicurl=data;
-      });
-    });
+    $scope.uploadDrivingLicense = function (file, errFiles) {
+        if (file) {
+            Upload.upload({
+                url: $scope.sails.url + '/car/upload',
+                data: {avatar: file}
+            }).progress(function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.avatar.name);
+            }).success(function (data, status, headers, config) {
+                if (status == 200) {
+                    vm.jsondata.drivingLicenseImage = $scope.sails.url + '/car/avatar/' + data;
+                }
+            });
+        }
+    }
 
-    //从业资格证
-    $scope.$watch('filesbiz', function () {
-      $scope.upload($scope.filesbiz,function(data){
-        vm.jsondata.bizlicurl=data;
-      });
-    });
-
-    if($scope.pid){
-      vm.getDriverInfo();
+    if ($scope.uid) {
+        $scope.getDriverInfo();
     }
 }]);

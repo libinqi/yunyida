@@ -196,9 +196,8 @@ module.exports = {
             var avatarId = uploadedFiles[0].fd;
             avatarId = avatarId.replace(sails.config.appPath + '\\assets\\images\\', '');
             avatarId = avatarId.replace(sails.config.appPath + '/assets/images/', '');
-            avatarId = avatarId.toLowerCase().replace('.jpg', '');
 
-            return res.send(avatarId);
+            return res.send(avatarId.toLowerCase());
         });
     },
     /**
@@ -211,7 +210,7 @@ module.exports = {
             id: 'string'
         });
 
-        var avatarFd = sails.config.appPath + '/assets/images/' + req.param('id') + '.jpg';
+        var avatarFd = sails.config.appPath + '/assets/images/' + req.param('id');
         var skipperDisk = require('skipper-disk');
         var fileAdapter = skipperDisk(/* optional opts */);
 
