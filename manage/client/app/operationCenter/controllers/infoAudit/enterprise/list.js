@@ -86,7 +86,7 @@ app.controller('infoAuditEnterpriseListCtrl', ['$scope', '$http', 'dialog', '$sa
 
     //编辑企业信息
     $scope.edit = function (uid) {
-        $scope.sid = uid;
+        $scope.uid = uid;
         $scope.isView = false;
         dialog.open({
             template: 'app/operationCenter/views/infoAudit/enterprise/info.html',
