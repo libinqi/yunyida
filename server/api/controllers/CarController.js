@@ -4,8 +4,6 @@
  * @description :: Server-side logic for managing cars
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-var uuid = require('node-uuid'),
-    path = require('path');
 
 module.exports = {
     /**
