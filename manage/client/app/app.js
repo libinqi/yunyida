@@ -14,14 +14,7 @@ angular.module('yydApp', [
         'w5c.validator',
         'ngSails',
         'commonApp',
-        'opCenterApp',
-        //'logisSiteApp',
-        //'platMonitorApp',
-        //'parkMonitorApp',
-        //'indexCenterApp',
-        //'transportMonitorApp',
-        //'supplyMonitorApp',
-        //'priceMonitorApp'
+        'opCenterApp'
     ])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $tooltipProvider, $sailsProvider, ngDialogProvider) {
         //        $urlRouterProvider

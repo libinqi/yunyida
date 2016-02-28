@@ -9,8 +9,6 @@ var opCenterApp = angular.module('opCenterApp', [
         'ngSanitize',
         'ui.router',
         'ui.bootstrap',
-        'ui.tree',
-        'ui.tree-filter',
         'ui.highlight',
         'commonApp',
         'pageslide-directive',
@@ -245,7 +243,7 @@ var opCenterApp = angular.module('opCenterApp', [
             }
         });
     }])
-    .controller('opCenterIndexCtrl', ['$scope', '$timeout', '$location', 'customersCenterService', 'homeManageService', 'systemAppService', function ($scope, $timeout, $location, customersCenterService, homeManageService, systemAppService) {
+    .controller('opCenterIndexCtrl', ['$scope', '$timeout', '$location', 'systemAppService', function ($scope, $timeout, $location, systemAppService) {
         $scope.navs = [];
         $scope.parentMenus = [];
         $scope.rootMenu = {};
