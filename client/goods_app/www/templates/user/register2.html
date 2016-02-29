@@ -10,7 +10,7 @@
     <div class="list padding">
       <label class="item item-input" style="border-bottom:1px solid #ccc">
         <span class="input-label">企业名称</span>
-        <input type="text" ng-model="userData.enterpriseName">
+        <input type="text" ng-model="userData.enterpriseName" placeholder="选填">
       </label>
       <label class="item item-input">
         <span class="input-label">姓名</span>
@@ -28,7 +28,7 @@
       </label>
       <label class="item item-input">
         <span class="input-label">街道</span>
-        <input ng-if="streetList.length<=0" type="text" ng-model="userData.street">
+        <input ng-if="streetList.length<=0" type="text" ng-model="userData.street" placeholder="选填">
         <ionic-dict-picker ng-if="streetList.length>0" backdrop=false backdrop-click-to-close=true
                            css-class="text-align-l"
                            dictmodel="userData.street" dictdata="street_data" okText="确定"
@@ -36,7 +36,7 @@
       </label>
       <label class="item item-input">
         <span class="input-label">详细地址</span>
-        <input type="text" ng-model="userData.address">
+        <input type="text" ng-model="userData.address" placeholder="选填">
       </label>
       <div class="padding">
         <button class="button button-block button-assertive" type="submit">立即注册</button>

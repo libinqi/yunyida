@@ -28,7 +28,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     eCityCode: '',//目的地城市代码
     eStreet: '',//目的地街道
     eAddress: '',//目的地详细地址
-    publishType: '随机发货',// 发布方式
+    publishType: '快捷发货',// 发布方式
     status: true,//状态
     remark: '',//备注说明
     user: user.userId//所属用户
@@ -275,6 +275,19 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       $scope.showMsg('请填写货物信息！');
       return;
     }
+    if ($scope.goodsInfo.goodsType == '城市配送' && $scope.goodsInfo.sCity != $scope.goodsInfo.eCity) {
+      $scope.showMsg('跨市发货请选择整车业务类型进行发布！');
+      return;
+    }
+
+    if($scope.goodsInfo.goodsType=="零担")
+    {
+      $scope.goodsInfo.publishType='快捷发货';
+    }
+    else{
+      $scope.goodsInfo.publishType='立即发货';
+    }
+
     $ionicLoading.show({
       template: "正在发货中..."
     });
@@ -630,30 +643,30 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
           }
           else {
             $scope.showMsg('发货成功！');
-            var confirmPopup = $ionicPopup.confirm({
-              title: '城市配送',
-              template: '是否需要城市配送司机送至指定物流公司?',
-              buttons: [
-                {
-                  text: '暂不需要', onTap: function (e) {
-                  return false;
-                }
-                },
-                {
-                  text: '需要', type: 'button-assertive', onTap: function (e) {
-                  return true;
-                }
-                }
-              ]
-            });
-            confirmPopup.then(function (res) {
-              if (res) {
-                $scope.changeGoodsType('城市配送');
-              }
-              else {
-                $state.go('tab.order');
-              }
-            });
+            //var confirmPopup = $ionicPopup.confirm({
+            //  title: '城市配送',
+            //  template: '是否需要城市配送司机送至指定物流公司?',
+            //  buttons: [
+            //    {
+            //      text: '暂不需要', onTap: function (e) {
+            //      return false;
+            //    }
+            //    },
+            //    {
+            //      text: '需要', type: 'button-assertive', onTap: function (e) {
+            //      return true;
+            //    }
+            //    }
+            //  ]
+            //});
+            //confirmPopup.then(function (res) {
+            //  if (res) {
+            //    $scope.changeGoodsType('城市配送');
+            //  }
+            //  else {
+            //    $state.go('tab.order');
+            //  }
+            //});
           }
         });
       }

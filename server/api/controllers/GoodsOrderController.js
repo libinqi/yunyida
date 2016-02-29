@@ -223,7 +223,7 @@ module.exports = {
         GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
             if (err) res.badRequest(err);
             order.goodsOrderStatus = '已取消';
-            order.carrier = null;
+            //order.carrier = null;
             order.goods.status = false;
             order.save();
             res.ok(order);
@@ -233,9 +233,25 @@ module.exports = {
         var orderId = req.body.orderId;
         GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
             if (err) res.badRequest(err);
+
+            if (order.carrier) {
+                push_driver_client.push().setPlatform('ios', 'android')
+                    .setAudience(JPush.tag(order.carrier + ''))
+                    .setNotification('您有一个订单被货主取消', JPush.ios('您有一个订单被货主取消'), JPush.android('您有一个订单被货主取消', null, 1))
+                    .send(function (err, res) {
+                        if (err) {
+                            console.log(err.message);
+                        } else {
+                            console.log('发送编号: ' + res.sendno);
+                            console.log('消息Id: ' + res.msg_id);
+                        }
+                    });
+            }
+
             order.goodsOrderStatus = '未接单';
             order.status = true;
             order.carrier = null;
+            order.goods.status = true;
             order.goods.publishType = '随机发货';
             order.save();
             res.ok(order);

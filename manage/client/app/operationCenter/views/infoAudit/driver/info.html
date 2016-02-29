@@ -88,7 +88,7 @@
                 <input class="form-control width-154" ng-if="streetList.length<=0" type="text"
                        ng-model="vm.jsondata.user.street" ng-readonly="isView">
                 <select ng-if="streetList.length>0" class="form-control width-154" name="type"
-                        ng-model="vm.jsondata.user.street" ng-options="st.id as st.name for st in street_data"
+                        ng-model="vm.jsondata.user.street" ng-options="st.name as st.name for st in street_data"
                         ng-readonly="isView">
                     <option value="">--请选择所属街道--</option>
                 </select>

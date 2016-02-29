@@ -123,6 +123,22 @@ module.exports = {
         var data_from = req.params.all();
         User.create(data_from).exec(function (err, user) {
             if (err) res.badRequest(err);
+            var goodsAddress={
+                consignor:  user.realName,//发/收货人
+                phoneNumber:  user.phoneNumber,//手机号码
+                city:  user.city,//所在城市
+                cityCode:  user.cityCode,//所在城市代码
+                street:  user.street,//街道
+                address:  user.address,//详细地址
+                lng:  user.lng,//经度
+                lat: user.lat,//纬度
+                isDefault: true,//是否默认发货地址
+                type: '发货',//收发货地址类型
+                user: user.userId
+            };
+            GoodsAddress.create(goodsAddress).exec(function (err) {
+                if (err) res.badRequest(err);
+            });
             res.ok(user);
         })
     },

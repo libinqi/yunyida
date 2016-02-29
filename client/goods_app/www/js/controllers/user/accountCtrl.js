@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('AccountCtrl', function ($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $state, $stateParams, UserInfo, loginService) {
+angular.module('starter.controllers').controller('AccountCtrl', function ($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $state, $stateParams, UserInfo, dictService,CityPickerService) {
   $scope.userData = {
     userId: '', //用户id
     cardNumber: '', //证件号码
@@ -87,18 +87,18 @@ angular.module('starter.controllers').controller('AccountCtrl', function ($scope
       $scope.showMsg('请填写身份证号码');
       return false;
     }
-    if (!$scope.userData.enterpriseName) {
-      $scope.showMsg('请填写企业名称');
-      return false;
-    }
+    //if (!$scope.userData.enterpriseName) {
+    //  $scope.showMsg('请填写企业名称');
+    //  return false;
+    //}
     if (!$scope.userData.city) {
       $scope.showMsg('请选择所在城市');
       return false;
     }
-    if (!$scope.userData.street) {
-      $scope.showMsg('请选择所属街道');
-      return false;
-    }
+    //if (!$scope.userData.street) {
+    //  $scope.showMsg('请选择所属街道');
+    //  return false;
+    //}
     $ionicLoading.show({
       template: "正在更新个人资料..."
     });
