@@ -37,8 +37,9 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       //window.plugins.jPushPlugin.setDebugMode(true);
 
       window.plugins.jPushPlugin.openNotificationInAndroidCallback = function (data) {
-        $location.path('/order');
+        $location.path('/tab/order');
       }
+
     });
 
     //双击退出

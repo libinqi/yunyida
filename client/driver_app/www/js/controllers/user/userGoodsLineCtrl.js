@@ -67,6 +67,12 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
     });
   });
 
+  $scope.$watch('goodsLine.sStreet', function () {
+    if ($scope.goodsLine.sStreet == '选择所在街道') {
+      $scope.goodsLine.sStreet = '';
+    }
+  });
+
   $scope.eStreetList = [];
 
   $scope.$watch('goodsLine.eCityCode', function (oldValue, newValue) {
@@ -87,6 +93,12 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
         dictService.e_street_data.push({id: $scope.eStreetList[i].id, name: $scope.eStreetList[i].areaName});
       }
     });
+  });
+
+  $scope.$watch('goodsLine.eStreet', function () {
+    if ($scope.goodsLine.eStreet == '选择所在街道') {
+      $scope.goodsLine.eStreet = '';
+    }
   });
 
   //触发发货地址弹出层事件

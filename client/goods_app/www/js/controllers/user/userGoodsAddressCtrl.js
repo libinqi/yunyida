@@ -124,6 +124,13 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
           }
         });
       });
+
+      $scope.$watch('goodsAddress.street', function () {
+        if($scope.goodsAddress.street == '选择所在街道')
+        {
+          $scope.goodsAddress.street = '';
+        }
+      });
     }
     $scope.goodsAddressModal.show();
   };
@@ -145,10 +152,10 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
       $scope.showMsg('请选择起始城市');
       return;
     }
-    if (!$scope.goodsAddress.street) {
-      $scope.showMsg('请选择起始地街道');
-      return;
-    }
+    //if (!$scope.goodsAddress.street) {
+    //  $scope.showMsg('请选择起始地街道');
+    //  return;
+    //}
     $ionicLoading.show({
       template: "正在保存发货地址..."
     });

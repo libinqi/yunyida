@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('AllOrderCtrl', function ($scope, $http, $timeout, $ionicModal, $ionicLoading, $ionicHistory, $ionicPopover,$ionicPopup,$ionicSideMenuDelegate, $state, $stateParams, UserInfo) {
+angular.module('starter.controllers').controller('AllOrderCtrl', function ($scope, $http, $timeout, $ionicModal, $ionicLoading, $ionicHistory, $ionicPopover, $ionicPopup, $ionicSideMenuDelegate, $state, $stateParams, UserInfo) {
   $scope.backGo = function () {
     $ionicHistory.goBack();
   };
@@ -27,28 +27,28 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   $scope.query = {
     page: 1,
     rows: 8,
-    orderStatus:'',
+    orderStatus: '',
     userId: UserInfo.data.userId
   };
 
-  $scope.orderStatisList=[
-    {status:'全部',count:0},
-    {status:'未接单',count:0},
-    {status:'接单',count:0},
-    {status:'确认接单',count:0},
-    {status:'确认承运',count:0},
-    {status:'已取消',count:0},
-    {status:'已完成',count:0}
+  $scope.orderStatisList = [
+    {status: '全部', count: 0},
+    {status: '未接单', count: 0},
+    {status: '接单', count: 0},
+    {status: '确认接单', count: 0},
+    {status: '确认承运', count: 0},
+    {status: '已取消', count: 0},
+    {status: '已完成', count: 0}
   ];
 
   $scope.toggleLeft = function () {
     //$ionicSideMenuDelegate.toggleLeft();
     //$timeout(function () {
-      $scope.getOrderStatis();
+    $scope.getOrderStatis();
     //});
   };
 
-  $scope.getOrderStatis=function(){
+  $scope.getOrderStatis = function () {
     io.socket.get('/order/shipperOrderStatis', $scope.query, function serverResponded(body, JWR) {
       if (JWR.statusCode !== 200) {
         $scope.showMsg('请求失败,网络不给力！');
@@ -108,9 +108,9 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   //  $scope.loadMore();
   //});
 
-  $scope.orderFilter=function(orderStatus){
-    if(orderStatus=='全部')orderStatus='';
-    $scope.query.orderStatus=orderStatus;
+  $scope.orderFilter = function (orderStatus) {
+    if (orderStatus == '全部')orderStatus = '';
+    $scope.query.orderStatus = orderStatus;
     $scope.doRefresh();
     $scope.toggleLeft();
   }
@@ -138,12 +138,20 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
       title: '取消订单',
       template: '您确定要取消订单吗?',
       buttons: [
-        { text: '暂不取消',onTap: function(e) {return false;}},
-        { text: '确定',type: 'button-assertive',onTap: function(e) {return true;}}
+        {
+          text: '暂不取消', onTap: function (e) {
+          return false;
+        }
+        },
+        {
+          text: '确定', type: 'button-assertive', onTap: function (e) {
+          return true;
+        }
+        }
       ]
     });
-    confirmPopup.then(function(res) {
-      if(res) {
+    confirmPopup.then(function (res) {
+      if (res) {
         io.socket.post('/order/cancelOrder', {orderId: orderId}, function serverResponded(body, JWR) {
           if (JWR.statusCode !== 200) {
             $scope.showMsg('请求失败,网络不给力！');
@@ -160,23 +168,31 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
             $scope.closeDetail();
           }
         });
-      }});
+      }
+    });
   }
 
   //重新发布订单
   $scope.refreshOrder = function (orderId) {
-    if($scope.orderItem&&$scope.orderItem.goods.goodsType=='指定发货')
-    {
+    if ($scope.orderItem && $scope.orderItem.goods.goodsType == '指定发货') {
       var confirmPopup = $ionicPopup.confirm({
         title: '重新发布订单',
         template: '此订单即转化为随机发货订单，是否继续?',
         buttons: [
-          { text: '暂不发布',onTap: function(e) {return false;}},
-          { text: '确定',type: 'button-assertive',onTap: function(e) {return true;}}
+          {
+            text: '暂不发布', onTap: function (e) {
+            return false;
+          }
+          },
+          {
+            text: '确定', type: 'button-assertive', onTap: function (e) {
+            return true;
+          }
+          }
         ]
       });
-      confirmPopup.then(function(res) {
-        if(res) {
+      confirmPopup.then(function (res) {
+        if (res) {
           io.socket.post('/order/refreshOrder', {orderId: orderId}, function serverResponded(body, JWR) {
             if (JWR.statusCode !== 200) {
               $scope.showMsg('请求失败,网络不给力！');
@@ -196,17 +212,25 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
         }
       });
     }
-    else{
+    else {
       var confirmPopup = $ionicPopup.confirm({
         title: '重新发布订单',
         template: '您确定要重新发布订单吗?',
         buttons: [
-          { text: '暂不发布',onTap: function(e) {return false;}},
-          { text: '确定',type: 'button-assertive',onTap: function(e) {return true;}}
+          {
+            text: '暂不发布', onTap: function (e) {
+            return false;
+          }
+          },
+          {
+            text: '确定', type: 'button-assertive', onTap: function (e) {
+            return true;
+          }
+          }
         ]
       });
-      confirmPopup.then(function(res) {
-        if(res) {
+      confirmPopup.then(function (res) {
+        if (res) {
           io.socket.post('/order/refreshOrder', {orderId: orderId}, function serverResponded(body, JWR) {
             if (JWR.statusCode !== 200) {
               $scope.showMsg('请求失败,网络不给力！');
@@ -234,12 +258,20 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
       title: '删除订单',
       template: '您确定要删除订单吗?',
       buttons: [
-        { text: '取消',onTap: function(e) {return false;}},
-        { text: '确定',type: 'button-assertive',onTap: function(e) {return true;}}
-        ]
+        {
+          text: '取消', onTap: function (e) {
+          return false;
+        }
+        },
+        {
+          text: '确定', type: 'button-assertive', onTap: function (e) {
+          return true;
+        }
+        }
+      ]
     });
-    confirmPopup.then(function(res) {
-      if(res) {
+    confirmPopup.then(function (res) {
+      if (res) {
         io.socket.post('/order/deleteOrder', {orderId: orderId}, function serverResponded(body, JWR) {
           if (JWR.statusCode !== 200) {
             $scope.showMsg('请求失败,网络不给力！');
@@ -255,8 +287,8 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
                   if ($scope.orderItem) {
                     $scope.closeDetail();
                   }
-                  $timeout(function(){
-                    $scope.flag.showDelete=false;
+                  $timeout(function () {
+                    $scope.flag.showDelete = false;
                   });
                 }
               }
@@ -266,6 +298,10 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
         });
       }
     });
+  }
+
+  $scope.peisong = function (orderId) {
+    $location.path('/tab/index?orderId=' + orderId);
   }
 
   var fentip = ["很差", "一般", "好", "很好", "非常好"];
@@ -307,7 +343,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
       }
     }
     else {
-      if ($scope.evaluateData.evaluationLevel>= num) {
+      if ($scope.evaluateData.evaluationLevel >= num) {
         rtnClass = "stared";
       }
       else {
@@ -331,8 +367,8 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   $scope.peopleMouseLeave = function (num) {
     $scope.selectPeople = num;
     $scope.isPMouseEnter = false;
-    if ($scope.evaluateData.evaluationLevel> 0) {
-      $scope.msgPeople = fentip[$scope.evaluateData.evaluationLevel- 1];
+    if ($scope.evaluateData.evaluationLevel > 0) {
+      $scope.msgPeople = fentip[$scope.evaluateData.evaluationLevel - 1];
     }
     else {
       $scope.msgPeople = "请给此项打分";

@@ -435,6 +435,10 @@ a{
   height: 44px;
   width: 100%;
 }
+.city-picker .city-picker-header .button{
+
+}
+
 .city-picker ion-scroll li {
   position: relative;
   top: 0;
@@ -551,6 +555,15 @@ a{
   border-color:#ef6600;
   background-color:#ef6600;
   color: #fff;
+  width: 50px;
+}
+
+.bar-custom .buttonLeft{
+  border-color:#c0c0c0;
+  background-color:#cfd5da;
+  color: #666;
+  margin-right: 10px;
+  width: 50px;
 }
 
 /*下拉刷新color*/

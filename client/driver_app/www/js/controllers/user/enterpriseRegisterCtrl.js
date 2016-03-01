@@ -47,6 +47,12 @@ angular.module('starter.controllers').controller('EnterpriseRegisterCtrl', funct
       });
     });
 
+    $scope.$watch('userData.street', function () {
+      if ($scope.userData.street == '选择所在街道') {
+        $scope.userData.street = '';
+      }
+    });
+
     //geolocationService.getCurrentPosition(function (result) {
     //  $scope.userData.city = result.addressComponents.province.replace(/省/g, "")+result.addressComponents.city.replace(/市/g, "")+result.addressComponents.district;
     //  $scope.userData.street = result.addressComponents.street;

@@ -28,7 +28,7 @@
       </label>
       <label class="item item-input">
         <span class="input-label">街道</span>
-        <input ng-if="streetList.length<=0" type="text" ng-model="userData.street" placeholder="选填">
+        <input ng-if="streetList.length<=0" type="text" placeholder="选填" ng-model="userData.street" placeholder="选填">
         <ionic-dict-picker ng-if="streetList.length>0" backdrop=false backdrop-click-to-close=true
                            css-class="text-align-l"
                            dictmodel="userData.street" dictdata="street_data" okText="确定"

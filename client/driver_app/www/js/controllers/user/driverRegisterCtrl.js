@@ -9,8 +9,8 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
       password: '', //密码
       enterpriseName: '', //企业名称
       city: '',//市
-      street: '',//街道
-      address: '',//详细地址
+      //street: '',//街道
+      //address: '',//详细地址
       cityCode: '',//城市或者地址代码
       cardNumber: '',//证件号码
       drivingLicenseImage: '',//行驶证图片
@@ -86,12 +86,12 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
         if (data.district) {
           city += data.district;
         }
-        if (data.street) {
-          $scope.userData.street = data.street;
-        }
-        if (data.streetNumber) {
-          $scope.userData.address = data.streetNumber;
-        }
+        //if (data.street) {
+        //  $scope.userData.street = data.street;
+        //}
+        //if (data.streetNumber) {
+        //  $scope.userData.address = data.streetNumber;
+        //}
         $scope.userData.city = city;
         $scope.userData.lng = data.longitude;
         $scope.userData.lat = data.latitude;

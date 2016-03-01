@@ -105,8 +105,8 @@ angular.module('starter.controllers').controller('ReceiveGoodsAddressCtrl', func
       }, function (err) {
       });
 
-      $scope.$watch('goodsAddress.cityCode', function () {
-        $scope.goodsAddress.street = '';
+      $scope.$watch('goodsAddress.cityCode', function (oldValue,newValue) {
+        if (oldValue && newValue) $scope.goodsAddress.street = '';
         if (!$scope.goodsAddress.cityCode) {
           dictService.street_data = [];
           return;
@@ -123,6 +123,13 @@ angular.module('starter.controllers').controller('ReceiveGoodsAddressCtrl', func
             dictService.street_data.push({id: $scope.streetList[i].id, name: $scope.streetList[i].areaName});
           }
         });
+      });
+
+      $scope.$watch('goodsAddress.street', function () {
+        if($scope.goodsAddress.street == '选择所在街道')
+        {
+          $scope.goodsAddress.street = '';
+        }
       });
     }
     $scope.goodsAddressModal.show();
@@ -145,10 +152,10 @@ angular.module('starter.controllers').controller('ReceiveGoodsAddressCtrl', func
       $scope.showMsg('请选择起始城市');
       return;
     }
-    if (!$scope.goodsAddress.street) {
-      $scope.showMsg('请选择起始地街道');
-      return;
-    }
+    //if (!$scope.goodsAddress.street) {
+    //  $scope.showMsg('请选择起始地街道');
+    //  return;
+    //}
     $ionicLoading.show({
       template: "正在保存收货地址..."
     });

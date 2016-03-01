@@ -19,15 +19,38 @@ app.directive('ionicCityPicker', ['$ionicPopup', '$timeout', 'CityPickerService'
       vm.cityHandle = "cityHandle" + attrs.citydata;
       vm.countryHandle = "countryHandle" + attrs.citydata;
       vm.placeholder = attrs.placeholder || "请选择城市";
-      vm.okText = attrs.okText || "确定";
+      vm.okText = attrs.oktext || "确定";
+      vm.cancelText = attrs.canceltext || "取消";
       vm.cssClass = attrs.cssClass;
       vm.barCssClass = attrs.barCssClass || "bar-custom";
       vm.backdrop = scope.$eval(scope.backdrop) || false;
       vm.backdropClickToClose = scope.$eval(scope.backdropClickToClose) || false;
       vm.cityData = CityPickerService.cityList;
+      vm.selectCity = scope.citydata || "";
+      vm.selectCityCode = scope.citycode || "";
+      vm.isQuan = attrs.isquan || false;//是否支持全国选择
+
+      if (vm.isQuan) {
+        vm.cityData.unshift(
+          {
+            "id": "0",
+            "areaName": "全国",
+            "parentId": "0",
+            "shortName": "全国",
+            "lng": "0",
+            "lat": "0",
+            "level": 1,
+            "sort": 0,
+            "sub": []
+          }
+        );
+      }
+
       // vm.tag=attrs.tag || "-";
       vm.returnok = function () {
         citypickerModel && citypickerModel.hide();
+        scope.citydata = vm.selectCity;
+        scope.citycode = vm.selectCityCode;
         scope.buttonClicked && scope.buttonClicked();
       }
       vm.ClickToClose = function () {
@@ -57,15 +80,21 @@ app.directive('ionicCityPicker', ['$ionicPopup', '$timeout', 'CityPickerService'
         if (top === index * 36) {
           vm.dataing = $timeout(function () {
             province && (vm.province = vm.cityData[index], vm.city = vm.province.sub[0], vm.country = {}, (vm.city && vm.city.sub && (vm.country = vm.city.sub[0])));//处理省市乡联动数据
-            city && (vm.city=vm.province.sub[index], vm.country = {}, (vm.city && vm.city.sub && (vm.country = vm.city.sub[0])));//处理市乡联动数据
-            country && (vm.country=vm.city.sub[index]);//处理乡数据
+            city && (vm.city = vm.province.sub[index], vm.country = {}, (vm.city && vm.city.sub && (vm.country = vm.city.sub[0])));//处理市乡联动数据
+            country && (vm.country = vm.city.sub[index]);//处理乡数据
             HandleChild && $ionicScrollDelegate.$getByHandle(HandleChild).scrollTop();//初始化子scroll top位
 
             //数据同步
-            (vm.city.sub && vm.city.sub.length > 0) ? (scope.citydata = vm.province.shortName + vm.city.shortName + vm.country.areaName ) : (scope.citydata = vm.province.shortName + vm.city.shortName);
-            (vm.city.sub && vm.city.sub.length > 0) ? (scope.citycode = vm.country.id) : (scope.citycode = vm.city.id);
-            if (scope.citydata.indexOf("不限") > 0) {
-              scope.citydata = scope.citydata.replace('不限', '');
+            if (vm.city) {
+              (vm.city && vm.city.sub && vm.city.sub.length > 0) ? (vm.selectCity = vm.province.shortName + vm.city.shortName + vm.country.areaName ) : (vm.selectCity = vm.province.shortName + vm.city.shortName);
+              (vm.city && vm.city.sub && vm.city.sub.length > 0) ? (vm.selectCityCode = vm.country.id) : (vm.selectCityCode = vm.city.id);
+            }
+            else {
+              (vm.province && vm.province.sub == 0) ? (vm.selectCity = vm.province.shortName) : (vm.selectCity = "");
+              (vm.province && vm.province.sub == 0) ? (vm.selectCityCode = vm.province.id) : (vm.selectCityCode = "");
+            }
+            if (vm.selectCity.indexOf("不限") > 0) {
+              vm.selectCity = vm.selectCity.replace('不限', '');
             }
           }, 150)
         } else {

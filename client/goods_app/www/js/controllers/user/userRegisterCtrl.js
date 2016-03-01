@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('UserRegisterCtrl', function ($scope, $http, $timeout, $ionicHistory, $ionicLoading, $ionicPopover, $state, UserInfo, loginService, CityPickerService,dictService) {
+angular.module('starter.controllers').controller('UserRegisterCtrl', function ($scope, $http, $timeout, $ionicHistory, $ionicLoading, $ionicPopover, $state, UserInfo, loginService, CityPickerService, dictService) {
     $scope.userData = {
       phoneNumber: '', //手机
       userName: '', //用户名
@@ -37,6 +37,12 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
           dictService.street_data.push({id: $scope.streetList[i].id, name: $scope.streetList[i].areaName});
         }
       });
+    });
+
+    $scope.$watch('userData.street', function () {
+      if ($scope.userData.street == '选择所在街道') {
+        $scope.userData.street = '';
+      }
     });
 
     //geolocationService.getCurrentPosition(function (result) {

@@ -4,7 +4,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     return;
   }
 
-  window.plugins.jPushPlugin.setTagsWithAlias([UserInfo.data.userId, UserInfo.data.phoneNumber], UserInfo.data.userType);
+  //window.plugins.jPushPlugin.setTagsWithAlias([UserInfo.data.userId, UserInfo.data.phoneNumber], UserInfo.data.userType);
 
   var user = UserInfo.data;
   // var $scope = this;
@@ -66,19 +66,12 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
         dictService.street_data.push({id: $scope.streetList[i].id, name: $scope.streetList[i].areaName});
       }
     });
+  });
 
-
-    //io.socket.get('/areas/getStreetData', {cityCode: $scope.goodsInfo.eCityCode}, function serverResponded(body, JWR) {
-    //  if (JWR.statusCode !== 200) {
-    //    dictService.street_data = [];
-    //  }
-    //  else {
-    //    dictService.street_data = [];
-    //    for (var i = 0; i < body.length; i++) {
-    //      dictService.street_data.push(body[i].areaName);
-    //    }
-    //  }
-    //});
+  $scope.$watch('goodsInfo.eStreet', function () {
+    if ($scope.goodsInfo.eStreet == '选择所在街道') {
+      $scope.goodsInfo.eStreet = '';
+    }
   });
 
   $scope.$watch('goodsInfo.carType', function () {
@@ -143,12 +136,6 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
           if (data.district) {
             city += data.district;
           }
-          if (data.street) {
-            $scope.goodsInfo.eStreet = data.street;
-          }
-          if (data.streetNumber) {
-            $scope.goodsInfo.eAddress = data.streetNumber;
-          }
           $scope.goodsInfo.eCity = city;
           //$scope.goodsAddress.lng = data.longitude;
           //$scope.goodsAddress.lat = data.latitude;
@@ -168,10 +155,10 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       $scope.showMsg('请选择目的城市');
       return;
     }
-    if (!$scope.goodsInfo.eStreet) {
-      $scope.showMsg('请选择目的地街道');
-      return;
-    }
+    //if (!$scope.goodsInfo.eStreet) {
+    //  $scope.showMsg('请选择目的地街道');
+    //  return;
+    //}
     if (!$scope.goodsInfo.consignee) {
       $scope.showMsg('请填写收货人姓名');
       return;
@@ -280,12 +267,11 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       return;
     }
 
-    if($scope.goodsInfo.goodsType=="零担")
-    {
-      $scope.goodsInfo.publishType='快捷发货';
+    if ($scope.goodsInfo.goodsType == "零担") {
+      $scope.goodsInfo.publishType = '快捷发货';
     }
-    else{
-      $scope.goodsInfo.publishType='立即发货';
+    else {
+      $scope.goodsInfo.publishType = '立即发货';
     }
 
     $ionicLoading.show({
@@ -427,10 +413,10 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       $scope.showMsg('请选择起始城市');
       return;
     }
-    if (!$scope.goodsAddress.street) {
-      $scope.showMsg('请选择起始地街道');
-      return;
-    }
+    //if (!$scope.goodsAddress.street) {
+    //  $scope.showMsg('请选择起始地街道');
+    //  return;
+    //}
     $ionicLoading.show({
       template: "正在保存发货地址..."
     });
@@ -672,4 +658,36 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       }
     });
   }
+
+  //$rootScope.$on('$locationChangeSuccess', function (evt, current, previous) {
+    var orderId = $location.search().orderId;
+    if (orderId) {
+      io.socket.get('/goodsOrder/' + orderId, function serverResponded(body, JWR) {
+        if (JWR.statusCode == 200) {
+
+          $scope.goodsInfo.goodsName = body.goods.goodsName;//货物名称
+          $scope.goodsInfo.goodsAttribute = body.goods.goodsAttribute;//货物属性:普通,加急
+          $scope.goodsInfo.goodsNumber = body.goods.goodsNumber; //货物数量
+          $scope.goodsInfo.goodsUnit = body.goods.goodsUnit; //数量单位:件,方,吨
+          $scope.goodsInfo.remark = body.goods.remark; ////备注说明
+          $scope.goodsInfo.consignor = body.shipper.realName;//发货人
+          $scope.goodsInfo.sPhoneNumber = body.shipper.phoneNumber;//起始地手机号码
+          $scope.goodsInfo.sCity = body.shipper.city;//起始地城市
+          $scope.goodsInfo.sCityCode = body.shipper.cityCode;//起始地城市代码
+          $scope.goodsInfo.sStreet = body.shipper.street;//起始地街道
+          $scope.goodsInfo.sAddress = body.shipper.address;//起始地详细地址
+          $scope.goodsInfo.consignee = body.carrier.realName;//收货人
+          $scope.goodsInfo.ePhoneNumber = body.carrier.phoneNumber;//目的地手机号码
+          $scope.goodsInfo.eCity = body.carrier.city;//目的地城市
+          $scope.goodsInfo.eCityCode = body.carrier.cityCode;//目的地城市代码
+          $scope.goodsInfo.eStreet = body.carrier.street;//目的地街道
+          $scope.goodsInfo.eAddress = body.carrier.address;//目的地详细地址
+
+          $scope.goodsInfo.goodsInfoText = $scope.goodsInfo.goodsName + '/' + $scope.goodsInfo.goodsAttribute;
+          $scope.changeGoodsType('城市配送');
+        }
+      });
+    }
+  //});
+
 });

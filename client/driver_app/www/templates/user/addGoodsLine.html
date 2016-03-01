@@ -14,7 +14,7 @@
       </label>
       <label class="item item-input">
         <span class="input-label">起始地街道</span>
-        <input ng-if="sStreetList.length<=0" type="text" ng-model="goodsLine.sStreet">
+        <input ng-if="sStreetList.length<=0" type="text" placeholder="选填" ng-model="goodsLine.sStreet">
         <ionic-dict-picker ng-if="sStreetList.length>0" backdrop=false backdrop-click-to-close=true
                            css-class="text-align-l"
                            dictmodel="goodsLine.sStreet" dictdata="s_street_data" okText="确定"
@@ -27,12 +27,12 @@
       <label class="item item-input">
         <span class="input-label" style="width:35%">目的城市</span>
         <ionic-city-picker placeholder="目的城市" backdrop=false backdrop-click-to-close=true css-class="text-align-l"
-                           okText="确定" citydata="goodsLine.eCity" citycode="goodsLine.eCityCode" style="width:60%;"></ionic-city-picker>
+                           okText="确定" citydata="goodsLine.eCity" isQuan="true" citycode="goodsLine.eCityCode" style="width:60%;"></ionic-city-picker>
         <i class="icon ion-chevron-right " style="color: #ACACAC;"></i>
       </label>
       <label class="item item-input">
         <span class="input-label">目的地街道</span>
-        <input ng-if="eStreetList.length<=0" type="text" ng-model="goodsLine.eStreet">
+        <input ng-if="eStreetList.length<=0" type="text" placeholder="选填" ng-model="goodsLine.eStreet">
         <ionic-dict-picker ng-if="eStreetList.length>0" backdrop=false backdrop-click-to-close=true
                            css-class="text-align-l"
                            dictmodel="goodsLine.eStreet" dictdata="e_street_data" okText="确定"

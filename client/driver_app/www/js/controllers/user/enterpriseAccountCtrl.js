@@ -39,6 +39,12 @@ angular.module('starter.controllers').controller('EnterpriseAccountCtrl', functi
       });
     });
 
+    $scope.$watch('userData.street', function () {
+      if ($scope.userData.street == '选择所在街道') {
+        $scope.userData.street = '';
+      }
+    });
+
     //window.LocationPlugin.getLocation(function (data) {
     //  //data.longitude 经度
     //  //data.latitude 纬度

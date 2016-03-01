@@ -5,6 +5,7 @@
       <header class=" bar city-picker-header" ng-class="vm.barCssClass">
         <h1 class="title"></h1>
         <div class="buttons">
+          <button class="button buttonLeft" ng-click="vm.ClickToClose()">{{vm.cancelText}}</button>
           <button class="button" ng-click="vm.returnok()">{{vm.okText}}</button>
         </div>
       </header>

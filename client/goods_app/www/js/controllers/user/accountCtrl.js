@@ -41,6 +41,12 @@ angular.module('starter.controllers').controller('AccountCtrl', function ($scope
     });
   });
 
+  $scope.$watch('userData.street', function () {
+    if ($scope.userData.street == '选择所在街道') {
+      $scope.userData.street = '';
+    }
+  });
+
   $scope.backGo = function () {
     $ionicHistory.goBack();
   };

@@ -553,6 +553,14 @@ a{
   color: #fff;
 }
 
+.bar-custom .buttonLeft{
+  border-color:#c0c0c0;
+  background-color:#cfd5da;
+  color: #666;
+  margin-right: 10px;
+  width: 50px;
+}
+
 /*下拉刷新color*/
 
 .ion-ios-refresh-empty {
