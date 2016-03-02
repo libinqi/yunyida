@@ -48,8 +48,8 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   $scope.streetList = [];
   $scope.carLengthList = [];
 
-  $scope.$watch('goodsInfo.eCityCode', function () {
-    $scope.goodsInfo.eStreet = '';
+  $scope.$watch('goodsInfo.eCityCode', function (oldValue, newValue) {
+    if (oldValue && newValue) $scope.goodsInfo.eStreet = '';
     if (!$scope.goodsInfo.eCityCode) {
       dictService.street_data = [];
       return;
@@ -263,7 +263,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       return;
     }
     if ($scope.goodsInfo.goodsType == '城市配送' && $scope.goodsInfo.sCity != $scope.goodsInfo.eCity) {
-      $scope.showMsg('跨市发货请选择整车业务类型进行发布！');
+      $scope.showMsg('跨市发货请选择整车！');
       return;
     }
 
@@ -660,34 +660,34 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   }
 
   //$rootScope.$on('$locationChangeSuccess', function (evt, current, previous) {
-    var orderId = $location.search().orderId;
-    if (orderId) {
-      io.socket.get('/goodsOrder/' + orderId, function serverResponded(body, JWR) {
-        if (JWR.statusCode == 200) {
+  var orderId = $location.search().orderId;
+  if (orderId) {
+    io.socket.get('/goodsOrder/' + orderId, function serverResponded(body, JWR) {
+      if (JWR.statusCode == 200) {
 
-          $scope.goodsInfo.goodsName = body.goods.goodsName;//货物名称
-          $scope.goodsInfo.goodsAttribute = body.goods.goodsAttribute;//货物属性:普通,加急
-          $scope.goodsInfo.goodsNumber = body.goods.goodsNumber; //货物数量
-          $scope.goodsInfo.goodsUnit = body.goods.goodsUnit; //数量单位:件,方,吨
-          $scope.goodsInfo.remark = body.goods.remark; ////备注说明
-          $scope.goodsInfo.consignor = body.shipper.realName;//发货人
-          $scope.goodsInfo.sPhoneNumber = body.shipper.phoneNumber;//起始地手机号码
-          $scope.goodsInfo.sCity = body.shipper.city;//起始地城市
-          $scope.goodsInfo.sCityCode = body.shipper.cityCode;//起始地城市代码
-          $scope.goodsInfo.sStreet = body.shipper.street;//起始地街道
-          $scope.goodsInfo.sAddress = body.shipper.address;//起始地详细地址
-          $scope.goodsInfo.consignee = body.carrier.realName;//收货人
-          $scope.goodsInfo.ePhoneNumber = body.carrier.phoneNumber;//目的地手机号码
-          $scope.goodsInfo.eCity = body.carrier.city;//目的地城市
-          $scope.goodsInfo.eCityCode = body.carrier.cityCode;//目的地城市代码
-          $scope.goodsInfo.eStreet = body.carrier.street;//目的地街道
-          $scope.goodsInfo.eAddress = body.carrier.address;//目的地详细地址
+        $scope.goodsInfo.goodsName = body.goods.goodsName;//货物名称
+        $scope.goodsInfo.goodsAttribute = body.goods.goodsAttribute;//货物属性:普通,加急
+        $scope.goodsInfo.goodsNumber = body.goods.goodsNumber; //货物数量
+        $scope.goodsInfo.goodsUnit = body.goods.goodsUnit; //数量单位:件,方,吨
+        $scope.goodsInfo.remark = body.goods.remark; ////备注说明
+        $scope.goodsInfo.consignor = body.shipper.realName;//发货人
+        $scope.goodsInfo.sPhoneNumber = body.shipper.phoneNumber;//起始地手机号码
+        $scope.goodsInfo.sCity = body.shipper.city;//起始地城市
+        $scope.goodsInfo.sCityCode = body.shipper.cityCode;//起始地城市代码
+        $scope.goodsInfo.sStreet = body.shipper.street;//起始地街道
+        $scope.goodsInfo.sAddress = body.shipper.address;//起始地详细地址
+        $scope.goodsInfo.consignee = body.carrier.realName;//收货人
+        $scope.goodsInfo.ePhoneNumber = body.carrier.phoneNumber;//目的地手机号码
+        $scope.goodsInfo.eCity = body.carrier.city;//目的地城市
+        $scope.goodsInfo.eCityCode = body.carrier.cityCode;//目的地城市代码
+        $scope.goodsInfo.eStreet = body.carrier.street;//目的地街道
+        $scope.goodsInfo.eAddress = body.carrier.address;//目的地详细地址
 
-          $scope.goodsInfo.goodsInfoText = $scope.goodsInfo.goodsName + '/' + $scope.goodsInfo.goodsAttribute;
-          $scope.changeGoodsType('城市配送');
-        }
-      });
-    }
+        $scope.goodsInfo.goodsInfoText = $scope.goodsInfo.goodsName + '/' + $scope.goodsInfo.goodsAttribute;
+        $scope.changeGoodsType('城市配送');
+      }
+    });
+  }
   //});
 
 });

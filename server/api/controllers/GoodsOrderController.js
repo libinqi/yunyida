@@ -137,8 +137,8 @@ module.exports = {
                     if (err) {
                         console.log(err.message);
                     } else {
-                        console.log('发送编号: ' + res.sendno);
-                        console.log('消息Id: ' + res.msg_id);
+                        //console.log('发送编号: ' + res.sendno);
+                        //console.log('消息Id: ' + res.msg_id);
                     }
                 });
 
@@ -164,8 +164,8 @@ module.exports = {
                     if (err) {
                         console.log(err.message);
                     } else {
-                        console.log('发送编号: ' + res.sendno);
-                        console.log('消息Id: ' + res.msg_id);
+                        //console.log('发送编号: ' + res.sendno);
+                        //console.log('消息Id: ' + res.msg_id);
                     }
                 });
 
@@ -178,7 +178,7 @@ module.exports = {
             if (err) res.badRequest(err);
             order.goodsOrderStatus = '未接单';
             order.carrier = null;
-            order.goods.publishType = '随机发货';
+            order.goods.publishType = (order.goods.goodsType == '零担' ? '快捷发货' : '立即发货');
             order.goods.status = true;
             order.save();
 
@@ -189,8 +189,8 @@ module.exports = {
                     if (err) {
                         console.log(err.message);
                     } else {
-                        console.log('发送编号: ' + res.sendno);
-                        console.log('消息Id: ' + res.msg_id);
+                        //console.log('发送编号: ' + res.sendno);
+                        //console.log('消息Id: ' + res.msg_id);
                     }
                 });
 
@@ -242,8 +242,8 @@ module.exports = {
                         if (err) {
                             console.log(err.message);
                         } else {
-                            console.log('发送编号: ' + res.sendno);
-                            console.log('消息Id: ' + res.msg_id);
+                            //console.log('发送编号: ' + res.sendno);
+                            //console.log('消息Id: ' + res.msg_id);
                         }
                     });
             }
@@ -252,7 +252,7 @@ module.exports = {
             order.status = true;
             order.carrier = null;
             order.goods.status = true;
-            order.goods.publishType = '随机发货';
+            order.goods.publishType = (order.goods.goodsType == '零担' ? '快捷发货' : '立即发货');
             order.save();
             res.ok(order);
         });

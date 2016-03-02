@@ -26,7 +26,7 @@ module.exports = {
 
         var option = {
             goodsType: goodsType,
-            publishType: '随机发货',
+            publishType: {'!': '指定发货'},
             status: true
         };
 

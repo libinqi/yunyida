@@ -44,13 +44,13 @@
             </div>
             <div ng-if="driverInfo.userType=='司机'" class="padding" style="text-align: center">
               <div ng-if="driverItem.drivingLicenseImage" style="width: 33%;float: left; ">
-                <img src="{{driverItem.drivingLicenseImage}}" class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;width: 46px;height: 46px;"/>
+                <img ng-src="{{driverItem.drivingLicenseImage}}" class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;width: 46px;height: 46px;"/>
               </div>
               <div ng-if="driverItem.driverLicenseImage" style="width: 33%;float: left;">
-                <img src="{{driverItem.driverLicenseImage}}" class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;width: 46px;height: 46px;"/>
+                <img ng-src="{{driverItem.driverLicenseImage}}" class="icon ion-chevron-right icon-accessory" style="color: #ACACAC;width: 46px;height: 46px;"/>
               </div>
               <div ng-if="driverItem.cars[0].carImage"  style="width: 33%;float: left;">
-                <img src="{{driverItem.cars[0].carImage}}" class="icon ion-chevron-right icon-accessory"style="color: #ACACAC;width: 46px;height: 46px;"/>
+                <img ng-src="{{driverItem.cars[0].carImage}}" class="icon ion-chevron-right icon-accessory"style="color: #ACACAC;width: 46px;height: 46px;"/>
               </div>
             </div>
             <!-- 物流企业信息 -->

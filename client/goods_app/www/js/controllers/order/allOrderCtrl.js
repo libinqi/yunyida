@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('AllOrderCtrl', function ($scope, $http, $timeout, $ionicModal, $ionicLoading, $ionicHistory, $ionicPopover, $ionicPopup, $ionicSideMenuDelegate, $state, $stateParams, UserInfo) {
+angular.module('starter.controllers').controller('AllOrderCtrl', function ($scope, $http, $location, $timeout, $ionicModal, $ionicLoading, $ionicHistory, $ionicPopover, $ionicPopup, $ionicSideMenuDelegate, $state, $stateParams, UserInfo) {
   $scope.backGo = function () {
     $ionicHistory.goBack();
   };
@@ -333,7 +333,8 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   }
 
   $scope.peisong = function (orderId) {
-    $location.path('/tab/index?orderId=' + orderId);
+    $location.url('/tab/index?orderId=' + orderId);
+    $scope.closeDetail();
   }
 
   var fentip = ["很差", "一般", "好", "很好", "非常好"];
