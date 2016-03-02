@@ -33,7 +33,7 @@ module.exports = {
         if (sCity) {
             option.sCity = {'contains': sCity};
         }
-        if (eCity) {
+        if (eCity && eCity != "全国") {
             option.eCity = {'contains': eCity};
         }
         Goods.find(option)
