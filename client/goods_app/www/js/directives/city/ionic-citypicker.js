@@ -31,6 +31,7 @@ app.directive('ionicCityPicker', ['$ionicPopup', '$timeout', 'CityPickerService'
       vm.isQuan = attrs.isquan || false;//是否支持全国选择
 
       if (vm.isQuan) {
+        if (vm.cityData[0].areaName == "全国") {return;}
         vm.cityData.unshift(
           {
             "id": "0",
@@ -44,6 +45,11 @@ app.directive('ionicCityPicker', ['$ionicPopup', '$timeout', 'CityPickerService'
             "sub": []
           }
         );
+      }
+      else {
+        if (vm.cityData[0].areaName == "全国") {
+          vm.cityData = vm.cityData.slice(1);
+        }
       }
 
       // vm.tag=attrs.tag || "-";

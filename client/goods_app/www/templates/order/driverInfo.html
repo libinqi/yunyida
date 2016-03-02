@@ -33,7 +33,7 @@
             </label>
             <label class="item-detail">
               <div class="order-detail-label">电话：</div>
-              <label>{{driverInfo.phoneNumber| handlePhone}}</label>
+              <label>{{driverInfo.phoneNumber}}</label>
             </label>
             <!-- 司机信息 -->
             <div ng-if="driverInfo.userType=='司机'">
@@ -78,7 +78,7 @@
       </div>
     </section>
     <div class="button-bar" style="margin-top:10px">
-      <a class="button button-positive" style="margin-right:10px;margin-left:10px;"
+      <a class="button button-assertive" style="margin-right:10px;margin-left:10px;"
       href="tel:{{driverInfo.phoneNumber}}">马上联系
       </a>
     </div>

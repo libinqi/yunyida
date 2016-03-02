@@ -11,6 +11,7 @@
   <access origin="*"/>
   <allow-navigation href="*"/>
   <allow-navigation href="http://*/*"/>
+  <allow-navigation href="data:*" />
   <allow-intent href="*"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>

@@ -68,12 +68,12 @@
             <label style="color: #ff0000">{{orderItem.goodsOrderStatus}}</label>
           </label>
           <!-- 承运人信息 -->
-          <label ng-if="orderItem.carrier" class="item-detail">
+          <div ng-if="orderItem.carrier" ng-click="getDriver(orderItem.carrier)" class="item-detail">
             <div class="order-detail-label2" style="font-size: 16px;">承&nbsp;&nbsp;运&nbsp;人：</div>
             <label>{{orderItem.carrier.userType=='物流企业'?
               orderItem.carrier.realName+'('+orderItem.carrier.enterpriseName+')':orderItem.carrier.realName}}</label>
-            <a href="#" ng-click="getDriver(orderItem.carrier)">详情</a>
-          </label>
+            <span style="color: #021fff" ng-click="getDriver(orderItem.carrier)">&nbsp;详情</span>
+          </div>
           <div ng-if="orderItem.carrier" class="item-detail">
             <div class="order-detail-label2" style="font-size: 16px;">承运人电话：</div>
             <span style="color: #ff0000"><a href="tel:{{orderItem.carrier.phoneNumber}}">{{orderItem.carrier.phoneNumber}}</a></span>

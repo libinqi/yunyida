@@ -37,9 +37,6 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.yunyida56.goodsapp"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.yunyida56.goodsapp"
-        },
         "cordova-plugin-x-toast": {
             "PACKAGE_NAME": "com.yunyida56.goodsapp"
         },
@@ -52,6 +49,9 @@
         },
         "cordova-plugin-wechat": {
             "WECHATAPPID": "wx17eb12e02148d1ba",
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.yunyida56.goodsapp"
         }
     },

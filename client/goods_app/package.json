@@ -18,7 +18,6 @@
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",
-    "cordova-plugin-whitelist",
     "cordova-plugin-file",
     "cordova-plugin-file-transfer",
     "cordova-plugin-actionsheet",
@@ -35,7 +34,8 @@
       },
       "locator": "cordova-plugin-wechat",
       "id": "cordova-plugin-wechat"
-    }
+    },
+    "cordova-plugin-whitelist"
   ],
   "cordovaPlatforms": [
     "ios",
