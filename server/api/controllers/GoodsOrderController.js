@@ -5,8 +5,8 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 var JPush = require("jpush-sdk");
-var push_goods_client = JPush.buildClient(sails.config.jpush_goods.apiKey, sails.config.jpush_goods.apiSecret);
-var push_driver_client = JPush.buildClient(sails.config.jpush_driver.apiKey, sails.config.jpush_driver.apiSecret);
+var push_goods_client = JPush.buildClient(sails.config.jpush_goods.apiKey, sails.config.jpush_goods.apiSecret, null, false);
+var push_driver_client = JPush.buildClient(sails.config.jpush_driver.apiKey, sails.config.jpush_driver.apiSecret, null, false);
 
 module.exports = {
     userOrder: function (req, res) {
