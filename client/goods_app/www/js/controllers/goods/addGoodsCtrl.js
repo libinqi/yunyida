@@ -4,7 +4,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     return;
   }
 
-  //window.plugins.jPushPlugin.setTagsWithAlias([UserInfo.data.userId, UserInfo.data.phoneNumber], UserInfo.data.userType);
+  window.plugins.jPushPlugin.setTagsWithAlias([UserInfo.data.userId, UserInfo.data.phoneNumber], UserInfo.data.userType);
 
   var user = UserInfo.data;
   // var $scope = this;

@@ -72,6 +72,7 @@
             <div class="order-detail-label2" style="font-size: 16px;">承&nbsp;&nbsp;运&nbsp;人：</div>
             <label>{{orderItem.carrier.userType=='物流企业'?
               orderItem.carrier.realName+'('+orderItem.carrier.enterpriseName+')':orderItem.carrier.realName}}</label>
+            <a href="#" ng-click="getDriver(orderItem.carrier)">详情</a>
           </label>
           <div ng-if="orderItem.carrier" class="item-detail">
             <div class="order-detail-label2" style="font-size: 16px;">承运人电话：</div>

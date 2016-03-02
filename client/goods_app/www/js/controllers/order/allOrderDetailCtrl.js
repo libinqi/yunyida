@@ -61,7 +61,6 @@ angular.module('starter.controllers').controller('AllOrderDetailCtrl', ['$scope'
 
   }
 
-
   $scope.getOrderInfo();
 
   $scope.backGo = function () {
@@ -77,6 +76,39 @@ angular.module('starter.controllers').controller('AllOrderDetailCtrl', ['$scope'
     $timeout(function () {
       $scope.popover.hide();
     }, 1000);
+  }
+
+
+  $scope.driverInfo;
+  $scope.driverItem;
+
+  //触发承运人详情选择弹出层事件
+  $ionicModal.fromTemplateUrl('templates/order/driverInfo.html ', {
+    scope: $scope
+  }).then(function (modal) {
+    $scope.driverInfoModal = modal;
+  });
+  //弹出承运人详情选择页面
+  $scope.showDriverInfo = function () {
+    $scope.driverInfoModal.show();
+  };
+  //隐藏承运人详情选择页面
+  $scope.hideDriverInfo = function () {
+    $scope.driverInfoModal.hide();
+  };
+
+  $scope.getDriver = function (item) {
+    $scope.driverInfo = item;
+    var url = $scope.driverInfo.userType == '司机' ? '/driver/' + $scope.driverInfo.userId : '/enterprise/' + $scope.driverInfo.userId;
+    io.socket.post(url, function serverResponded(body, JWR) {
+      if (JWR.statusCode !== 200) {
+        $scope.showMsg('请求失败,网络不给力！');
+      }
+      else {
+        $scope.driverItem = body;
+        $scope.showDriverInfo();
+      }
+    });
   }
 
 }]);
