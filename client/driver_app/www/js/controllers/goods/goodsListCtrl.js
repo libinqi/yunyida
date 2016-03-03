@@ -19,6 +19,11 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
     goodsType: '零担'//货物类型:零担, 整车, 城市配送
   };
 
+  $scope.banner = [
+    {img:'img/banner2.jpg',url:'',title:''},
+    {img:'img/banner3.jpg',url:'',title:''}
+  ];
+
   $scope.changeGoodsType = function (type) {
     $scope.query.goodsType = type;
     $scope.doRefresh();

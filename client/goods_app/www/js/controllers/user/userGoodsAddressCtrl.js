@@ -74,36 +74,36 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
       };
       $scope.isAdd = true;
 
-      window.LocationPlugin.getLocation(function (data) {
-        //data.longitude 经度
-        //data.latitude 纬度
-        //data.province 省份
-        //data.city 城市
-        //data.cityCode 城市编码
-        //data.district 区/县
-        //data.street 街道
-        //data.streetNumber 街道号码
-        //data.address 文字描述的地址信息
-        //data.hasRadius 是否有定位精度半径
-        //data.radius 定位精度半径
-        //data.type 定位方式
-        $timeout(function () {
-          var city = data.province.replace('省', '') + data.city.replace('市', '');
-          if (data.district) {
-            city += data.district;
-          }
-          if (data.street) {
-            $scope.goodsAddress.street = data.street;
-          }
-          if (data.streetNumber) {
-            $scope.goodsAddress.address = data.streetNumber;
-          }
-          $scope.goodsAddress.city = city;
-          $scope.goodsAddress.lng = data.longitude;
-          $scope.goodsAddress.lat = data.latitude;
-        });
-      }, function (err) {
-      });
+      //window.LocationPlugin.getLocation(function (data) {
+      //  //data.longitude 经度
+      //  //data.latitude 纬度
+      //  //data.province 省份
+      //  //data.city 城市
+      //  //data.cityCode 城市编码
+      //  //data.district 区/县
+      //  //data.street 街道
+      //  //data.streetNumber 街道号码
+      //  //data.address 文字描述的地址信息
+      //  //data.hasRadius 是否有定位精度半径
+      //  //data.radius 定位精度半径
+      //  //data.type 定位方式
+      //  $timeout(function () {
+      //    var city = data.province.replace('省', '') + data.city.replace('市', '');
+      //    if (data.district) {
+      //      city += data.district;
+      //    }
+      //    if (data.street) {
+      //      $scope.goodsAddress.street = data.street;
+      //    }
+      //    if (data.streetNumber) {
+      //      $scope.goodsAddress.address = data.streetNumber;
+      //    }
+      //    $scope.goodsAddress.city = city;
+      //    $scope.goodsAddress.lng = data.longitude;
+      //    $scope.goodsAddress.lat = data.latitude;
+      //  });
+      //}, function (err) {
+      //});
 
       $scope.$watch('goodsAddress.cityCode', function (oldValue,newValue) {
         if (oldValue && newValue) $scope.goodsAddress.street = '';

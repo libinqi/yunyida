@@ -37,12 +37,17 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   $scope.goodsInfo.goodsUnit = dictService.goods_unit[0].name;
   $scope.goodsInfo.carType = dictService.car_type[0].name;
 
-  $scope.locationInfo = geolocationService.locationInfo;
-  var province = $scope.locationInfo.province;
-  province = province.replace(/省/g, "");
-  var city = $scope.locationInfo.city;
-  city = city.replace(/市/g, "");
-  $scope.goodsInfo.placeOfDeparture = province + city;
+  //$scope.locationInfo = geolocationService.locationInfo;
+  //var province = $scope.locationInfo.province;
+  //province = province.replace(/省/g, "");
+  //var city = $scope.locationInfo.city;
+  //city = city.replace(/市/g, "");
+  //$scope.goodsInfo.placeOfDeparture = province + city;
+
+  $scope.banner = [
+    {img:'img/banner1.jpg',url:'',title:''},
+    {img:'img/banner3.jpg',url:'',title:''}
+  ];
 
   dictService.street_data = [];
   $scope.streetList = [];
@@ -118,30 +123,30 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   //弹出收货目的信息页面
   $scope.showEndInfo = function () {
     if (!$scope.goodsInfo.eCity && $scope.goodsInfo.goodsType == '城市配送') {
-      window.LocationPlugin.getLocation(function (data) {
-        //data.longitude 经度
-        //data.latitude 纬度
-        //data.province 省份
-        //data.city 城市
-        //data.cityCode 城市编码
-        //data.district 区/县
-        //data.street 街道
-        //data.streetNumber 街道号码
-        //data.address 文字描述的地址信息
-        //data.hasRadius 是否有定位精度半径
-        //data.radius 定位精度半径
-        //data.type 定位方式
-        $timeout(function () {
-          var city = data.province.replace('省', '') + data.city.replace('市', '');
-          if (data.district) {
-            city += data.district;
-          }
-          $scope.goodsInfo.eCity = city;
-          //$scope.goodsAddress.lng = data.longitude;
-          //$scope.goodsAddress.lat = data.latitude;
-        });
-      }, function (err) {
-      });
+      //window.LocationPlugin.getLocation(function (data) {
+      //  //data.longitude 经度
+      //  //data.latitude 纬度
+      //  //data.province 省份
+      //  //data.city 城市
+      //  //data.cityCode 城市编码
+      //  //data.district 区/县
+      //  //data.street 街道
+      //  //data.streetNumber 街道号码
+      //  //data.address 文字描述的地址信息
+      //  //data.hasRadius 是否有定位精度半径
+      //  //data.radius 定位精度半径
+      //  //data.type 定位方式
+      //  $timeout(function () {
+      //    var city = data.province.replace('省', '') + data.city.replace('市', '');
+      //    if (data.district) {
+      //      city += data.district;
+      //    }
+      //    $scope.goodsInfo.eCity = city;
+      //    //$scope.goodsAddress.lng = data.longitude;
+      //    //$scope.goodsAddress.lat = data.latitude;
+      //  });
+      //}, function (err) {
+      //});
     }
     $scope.endInfoModal.show();
   };
@@ -262,7 +267,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       $scope.showMsg('请填写货物信息！');
       return;
     }
-    if ($scope.goodsInfo.goodsType == '城市配送' && ($scope.goodsInfo.sCity + $scope.goodsInfo.sStreet) != ($scope.goodsInfo.eCity + $scope.goodsInfo.eStreet)) {
+    if ($scope.goodsInfo.goodsType == '城市配送' && $scope.goodsInfo.sCityCode.substr(0,4) != $scope.goodsInfo.eCityCode.substr(0,4)) {
       $scope.showMsg('跨市发货请选择整车！');
       return;
     }
@@ -362,36 +367,36 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
         user: user.userId//所属用户
       };
       $scope.isAdd = true;
-      window.LocationPlugin.getLocation(function (data) {
-        //data.longitude 经度
-        //data.latitude 纬度
-        //data.province 省份
-        //data.city 城市
-        //data.cityCode 城市编码
-        //data.district 区/县
-        //data.street 街道
-        //data.streetNumber 街道号码
-        //data.address 文字描述的地址信息
-        //data.hasRadius 是否有定位精度半径
-        //data.radius 定位精度半径
-        //data.type 定位方式
-        $timeout(function () {
-          var city = data.province.replace('省', '') + data.city.replace('市', '');
-          if (data.district) {
-            city += data.district;
-          }
-          if (data.street) {
-            $scope.goodsAddress.street = data.street;
-          }
-          if (data.streetNumber) {
-            $scope.goodsAddress.address = data.streetNumber;
-          }
-          $scope.goodsAddress.city = city;
-          $scope.goodsAddress.lng = data.longitude;
-          $scope.goodsAddress.lat = data.latitude;
-        });
-      }, function (err) {
-      });
+      //window.LocationPlugin.getLocation(function (data) {
+      //  //data.longitude 经度
+      //  //data.latitude 纬度
+      //  //data.province 省份
+      //  //data.city 城市
+      //  //data.cityCode 城市编码
+      //  //data.district 区/县
+      //  //data.street 街道
+      //  //data.streetNumber 街道号码
+      //  //data.address 文字描述的地址信息
+      //  //data.hasRadius 是否有定位精度半径
+      //  //data.radius 定位精度半径
+      //  //data.type 定位方式
+      //  $timeout(function () {
+      //    var city = data.province.replace('省', '') + data.city.replace('市', '');
+      //    if (data.district) {
+      //      city += data.district;
+      //    }
+      //    if (data.street) {
+      //      $scope.goodsAddress.street = data.street;
+      //    }
+      //    if (data.streetNumber) {
+      //      $scope.goodsAddress.address = data.streetNumber;
+      //    }
+      //    $scope.goodsAddress.city = city;
+      //    $scope.goodsAddress.lng = data.longitude;
+      //    $scope.goodsAddress.lat = data.latitude;
+      //  });
+      //}, function (err) {
+      //});
     }
     $scope.goodsAddressModal.show();
   };

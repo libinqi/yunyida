@@ -4,7 +4,13 @@
                                                        style="width:20px;position:relative;top:2px;"></a>
 </ion-header-bar>
 <ion-view view-title="云驿达-货主">
-  <ion-content padding="true" class="has-header">
+  <ion-slide-box does-continue="true" auto-play="true" slide-interval="4000" on-slide-changed="slideHasChanged($index)" style="padding-top: 1.9rem">
+    <ion-slide ng-repeat="b in banner">
+      <div class="box"style="width:16rem;height:7.2rem;background:url({{b.img}}) center 0 no-repeat;text-align:center;background-size:16rem 7.2rem">
+      </div>
+    </ion-slide>
+  </ion-slide-box>
+  <div class="padding">
     <div class="button-tabs">
       <button class="button button-assertive" ng-class="{'button-active':goodsInfo.goodsType=='零担'}"
               ng-click="changeGoodsType('零担')">零担
@@ -57,5 +63,5 @@
          ng-show="goodsInfo.goodsType=='零担'" ng-click="getCarrier()">指定发货</a>
       <a class="button button-assertive" ng-click="addGoods()" style="margin-right:10px;margin-left:10px;">{{goodsInfo.goodsType=='零担'?'快捷发货':'立即发货'}}</a>
     </div>
-  </ion-content>
+  </div>
 </ion-view>

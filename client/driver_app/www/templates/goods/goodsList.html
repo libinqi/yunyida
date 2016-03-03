@@ -1,44 +1,57 @@
 <ion-header-bar class="bar-positive" style="border:0px !important;background-color:#387ef5;color:#fff !important;">
   <div class="title title-center header-item" style="color:#fff !important;">云驿达-{{user.userType}}</div>
-  <a class="button icon-left ion-ios-search-strong button-clear button-light" style="color: #fff !important;" ng-click="goodsQuery()"></a>
+  <a class="button icon-left ion-ios-search-strong button-clear button-light" style="color: #fff !important;"
+     ng-click="goodsQuery()"></a>
 </ion-header-bar>
-<div class="button-tabs">
-  <button class="button button-positive" ng-class="{'button-active':query.goodsType=='零担'}"
-          ng-click="changeGoodsType('零担')">零担
-  </button>
-  <button class="button button-positive" ng-class="{'button-active':query.goodsType=='城市配送'}"
-          ng-click="changeGoodsType('城市配送')">城市配送
-  </button>
-  <button class="button button-positive" ng-class="{'button-active':query.goodsType=='整车'}"
-          ng-click="changeGoodsType('整车')">整车
-  </button>
-</div>
-<ion-content padding="true" class="has-header" style="margin-top: 40px;">
-  <ion-list>
-    <ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()"
-                   on-pulling="pulltext()" spinner="ripple" pulling-icon="ion-ios-refresh-empty"></ion-refresher>
-    <ion-item ng-repeat="item in goodsList" class="item item-thumbnail-right">
-      <img style="width: 18px !important;height: 30px !important;top:64px !important;right:20px !important;"
-           src="img/arrow-right.png" ng-click="goodsDetail(item)">
-        <p style="height: 28px;padding:5px 12px 2px 0px;" ng-click="goodsDetail(item)">
-          <span style="margin-right: 45px;">{{item.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</span>
-          <span style="color: #ef6600;font-weight: bold;">{{item.user.enterpriseName}}</span>
-        </p>
-        <p style="height: 32px;color: #222222;font-size: 16px;"
-           ng-click="goodsDetail(item)">
-          <img style="width: 18px;height: 27px;vertical-align: bottom" src="img/red-marker.png"/>
-          <span>{{item.sCity+item.sStreet}}</span>
-        </p>
-        <p style="height: 32px;color: #222222;font-size: 16px;"
-           ng-click="goodsDetail(item)">
-          <img style="width: 18px;height: 27px;vertical-align: bottom" src="img/gray-marker.png"/>
-          <span>{{item.eCity+item.eStreet}}</span>
-        </p>
-        <!--<button class="button button-positive" style="top: 0;right: 0;height: 100%;width: 22%;padding-left: 20px;" ng-click="addOrder(item.goodsOrders[0].goodsOrderId)">接单</button>-->
-    </ion-item>
-  </ion-list>
-  <ion-infinite-scroll ng-if="load_over" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
-  <div ng-if="goodsList.length==0" class="bar bar-positive">
-    <div class="no-content">目前没有{{query.goodsType}}货源</div>
+<ion-view view-title="云驿达-{{user.userType}}">
+  <ion-slide-box does-continue="true" auto-play="true" slide-interval="4000" on-slide-changed="slideHasChanged($index)"
+                 style="padding-top: 1.9rem">
+    <ion-slide ng-repeat="b in banner">
+      <div class="box"
+           style="width:16rem;height:7.2rem;background:url({{b.img}}) center 0 no-repeat;text-align:center;background-size:16rem 7.2rem">
+      </div>
+    </ion-slide>
+  </ion-slide-box>
+  <div class="padding">
+    <div class="button-tabs" style="margin: 0px auto;">
+      <button class="button button-positive" ng-class="{'button-active':query.goodsType=='零担'}"
+              ng-click="changeGoodsType('零担')">零担
+      </button>
+      <button class="button button-positive" ng-class="{'button-active':query.goodsType=='城市配送'}"
+              ng-click="changeGoodsType('城市配送')">城市配送
+      </button>
+      <button class="button button-positive" ng-class="{'button-active':query.goodsType=='整车'}"
+              ng-click="changeGoodsType('整车')">整车
+      </button>
+    </div>
+    <ion-content style="margin-top: 9.1rem;padding: 10px">
+      <ion-list>
+        <ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()"
+                       on-pulling="pulltext()" spinner="ripple" pulling-icon="ion-ios-refresh-empty"></ion-refresher>
+        <ion-item ng-repeat="item in goodsList" class="item item-thumbnail-right">
+          <img style="width: 18px !important;height: 30px !important;top:64px !important;right:20px !important;"
+               src="img/arrow-right.png" ng-click="goodsDetail(item)">
+          <p style="height: 28px;padding:5px 12px 2px 0px;" ng-click="goodsDetail(item)">
+            <span style="margin-right: 45px;">{{item.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</span>
+            <span style="color: #ef6600;font-weight: bold;">{{item.user.enterpriseName}}</span>
+          </p>
+          <p style="height: 32px;color: #222222;font-size: 16px;"
+             ng-click="goodsDetail(item)">
+            <img style="width: 18px;height: 27px;vertical-align: bottom" src="img/red-marker.png"/>
+            <span>{{item.sCity+item.sStreet}}</span>
+          </p>
+          <p style="height: 32px;color: #222222;font-size: 16px;"
+             ng-click="goodsDetail(item)">
+            <img style="width: 18px;height: 27px;vertical-align: bottom" src="img/gray-marker.png"/>
+            <span>{{item.eCity+item.eStreet}}</span>
+          </p>
+          <!--<button class="button button-positive" style="top: 0;right: 0;height: 100%;width: 22%;padding-left: 20px;" ng-click="addOrder(item.goodsOrders[0].goodsOrderId)">接单</button>-->
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll ng-if="load_over" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+      <div ng-if="goodsList.length==0" class="bar bar-positive">
+        <div class="no-content">目前没有{{query.goodsType}}货源</div>
+      </div>
+    </ion-content>
   </div>
-</ion-content>
+</ion-view>
