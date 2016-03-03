@@ -262,7 +262,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       $scope.showMsg('请填写货物信息！');
       return;
     }
-    if ($scope.goodsInfo.goodsType == '城市配送' && $scope.goodsInfo.sCity != $scope.goodsInfo.eCity) {
+    if ($scope.goodsInfo.goodsType == '城市配送' && ($scope.goodsInfo.sCity + $scope.goodsInfo.sStreet) != ($scope.goodsInfo.eCity + $scope.goodsInfo.eStreet)) {
       $scope.showMsg('跨市发货请选择整车！');
       return;
     }

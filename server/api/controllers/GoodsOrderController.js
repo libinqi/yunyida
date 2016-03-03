@@ -224,6 +224,20 @@ module.exports = {
             if (err) res.badRequest(err);
             order.goodsOrderStatus = '已取消';
             //order.carrier = null;
+            if (order.carrier) {
+                push_driver_client.push().setPlatform('ios', 'android')
+                    .setAudience(JPush.tag(order.carrier + ''))
+                    .setNotification('您有一个订单被货主取消，请及时查看！!', JPush.ios('您有一个订单被货主取消，请及时查看！'), JPush.android('您有一个订单被货主取消，请及时查看！', null, 1))
+                    .send(function (err, res) {
+                        if (err) {
+                            console.log(err.message);
+                        } else {
+                            //console.log('发送编号: ' + res.sendno);
+                            //console.log('消息Id: ' + res.msg_id);
+                        }
+                    });
+            }
+
             order.goods.status = false;
             order.save();
             res.ok(order);
@@ -237,7 +251,7 @@ module.exports = {
             if (order.carrier) {
                 push_driver_client.push().setPlatform('ios', 'android')
                     .setAudience(JPush.tag(order.carrier + ''))
-                    .setNotification('您有一个订单被货主取消', JPush.ios('您有一个订单被货主取消'), JPush.android('您有一个订单被货主取消', null, 1))
+                    .setNotification('您有一个订单被货主重新发布,请接单后及时与货主联系!', JPush.ios('您有一个订单被货主重新发布,请接单后及时与货主联系!'), JPush.android('您有一个订单被货主重新发布,请接单后及时与货主联系!', null, 1))
                     .send(function (err, res) {
                         if (err) {
                             console.log(err.message);

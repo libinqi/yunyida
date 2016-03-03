@@ -95,6 +95,12 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
     });
   });
 
+  $scope.$watch('goodsLine.sStreet', function () {
+    if ($scope.goodsLine.sStreet == '选择所在街道') {
+      $scope.goodsLine.sStreet = '';
+    }
+  });
+
   $scope.$watch('goodsLine.eStreet', function () {
     if ($scope.goodsLine.eStreet == '选择所在街道') {
       $scope.goodsLine.eStreet = '';
@@ -176,10 +182,10 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
       $scope.showMsg('请选择目的城市');
       return;
     }
-    if (!$scope.goodsLine.eStreet) {
-      $scope.showMsg('请选择目的地街道');
-      return;
-    }
+    //if (!$scope.goodsLine.eStreet) {
+    //  $scope.showMsg('请选择目的地街道');
+    //  return;
+    //}
     $ionicLoading.show({
       template: "正在保存专线信息..."
     });

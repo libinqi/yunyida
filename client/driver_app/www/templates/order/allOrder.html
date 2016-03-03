@@ -18,8 +18,7 @@
                src="img/arrow-right.png" ng-click="orderDetail(item)">
           <p style="height: 28px;padding:5px 12px 2px 0px;" ng-click="orderDetail(item)">
             <span style="margin-right: 30px;">{{item.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</span>
-            <span style="color: #ef6600;" ng-if="item.goods.goodsType=='零担'">{{item.goods.goodsType}}-{{item.goods.publishType}}</span>
-            <span style="color: #ef6600;" ng-if="item.goods.goodsType!='零担'">{{item.goods.goodsType}}-{{item.goods.publishType}}</span>
+            <span style="color: #ef6600;">{{item.goods.goodsType}}</span>
             <span style="color: #387ef5;float: right;font-weight: bold;">{{item.goodsOrderStatus}}</span>
           </p>
           <p style="height: 32px;color: #222222;font-size: 16px;"

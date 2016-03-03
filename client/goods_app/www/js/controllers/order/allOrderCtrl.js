@@ -151,15 +151,22 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   };
 
   $scope.getDriver = function (item) {
-    $scope.driverInfo = item;
-    var url = $scope.driverInfo.userType == '司机' ? '/driver/' + $scope.driverInfo.userId : '/enterprise/' + $scope.driverInfo.userId;
-    io.socket.post(url, function serverResponded(body, JWR) {
+    io.socket.get('/user/'+item.userId, function serverResponded(user, JWR) {
       if (JWR.statusCode !== 200) {
         $scope.showMsg('请求失败,网络不给力！');
       }
       else {
-        $scope.driverItem = body;
-        $scope.showDriverInfo();
+        $scope.driverInfo = user;
+        var url = $scope.driverInfo.userType == '司机' ? '/driver/' + $scope.driverInfo.userId : '/enterprise/' + $scope.driverInfo.userId;
+        io.socket.post(url, function serverResponded(body, JWR) {
+          if (JWR.statusCode !== 200) {
+            $scope.showMsg('请求失败,网络不给力！');
+          }
+          else {
+            $scope.driverItem = body;
+            $scope.showDriverInfo();
+          }
+        });
       }
     });
   }

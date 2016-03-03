@@ -15,7 +15,7 @@
       <label class="item item-input">
         <span class="input-label">起始地街道</span>
         <input ng-if="sStreetList.length<=0" type="text" placeholder="选填" ng-model="goodsLine.sStreet">
-        <ionic-dict-picker ng-if="sStreetList.length>0" backdrop=false backdrop-click-to-close=true
+        <ionic-dict-picker ng-if="sStreetList.length>0" placeholder="选填" backdrop=false backdrop-click-to-close=true
                            css-class="text-align-l"
                            dictmodel="goodsLine.sStreet" dictdata="s_street_data" okText="确定"
                            style="width:55%"></ionic-dict-picker>
@@ -33,7 +33,7 @@
       <label class="item item-input">
         <span class="input-label">目的地街道</span>
         <input ng-if="eStreetList.length<=0" type="text" placeholder="选填" ng-model="goodsLine.eStreet">
-        <ionic-dict-picker ng-if="eStreetList.length>0" backdrop=false backdrop-click-to-close=true
+        <ionic-dict-picker ng-if="eStreetList.length>0"  placeholder="选填" backdrop=false backdrop-click-to-close=true
                            css-class="text-align-l"
                            dictmodel="goodsLine.eStreet" dictdata="e_street_data" okText="确定"
                            style="width:55%"></ionic-dict-picker>

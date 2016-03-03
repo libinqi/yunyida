@@ -405,10 +405,6 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
         $scope.showMsg('所在城市不能为空');
         return false;
       }
-      if (!$scope.userData.street) {
-        $scope.showMsg('街道不能为空');
-        return false;
-      }
       if (!$scope.userData.drivingLicenseImage) {
         $scope.showMsg('请上传行驶证图片');
         return false;
