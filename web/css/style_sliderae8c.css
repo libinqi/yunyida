@@ -1,0 +1,96 @@
+.intro {
+    padding: 0;
+    background: no-repeat;
+}
+
+.intro .intro-slider,
+.intro .intro-slider .item {
+    width: 100%;
+    height: 800px;
+}
+
+.intro .intro-slider .item.one {
+    background: url(../images/slide1.jpg);
+    background-size: cover;
+    -ms-filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide1.jpg', sizingMethod='scale')";
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide1.jpg', sizingMethod='scale');
+}
+
+.intro .intro-slider .item.two {
+    background: url(../images/slide2.jpg);
+    background-size: cover;
+    -ms-filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide2.jpg', sizingMethod='scale')";
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide2.jpg', sizingMethod='scale');
+}
+
+.intro .intro-slider .item.three {
+    background: url(../images/slide3.jpg);
+    -ms-filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide3.jpg', sizingMethod='scale')";
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide3.jpg', sizingMethod='scale');
+    background-size: cover;
+}
+
+.intro .intro-slider .item.four {
+    background: url(../images/slide4.jpg);
+    -ms-filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide4.jpg', sizingMethod='scale')";
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide4.jpg', sizingMethod='scale');
+    background-size: cover;
+}
+
+
+.intro .intro-slider .item .background-image img {
+    width: 100%;
+}
+
+.intro .intro-slider .container {
+    color: #ffffff;
+    padding: 150px 0px;
+}
+
+.intro .intro-slider .container .paddingtop {
+    margin-top: 10%;
+}
+
+.intro .intro-slider .container .paddingtop20 {
+    margin-top: 20%;
+}
+
+.intro .intro-slider .container .paddingtop22 {
+    margin-top: 22%;
+}
+
+.intro .intro-slider .container .paddingtop40 {
+    margin-top: 40%;
+}
+
+.intro .intro-slider .container .paddingtop30 {
+    margin-top: 35%;
+}
+
+.intro .intro-slider .container h1 {
+    font-size: 38px;
+    line-height: 1.5em;
+    margin-bottom: 20px;
+}
+
+.intro .intro-slider .container figure img {
+    max-height: 526px;
+}
+
+.intro .owl-controls {
+    position: relative;
+    bottom: 50px;
+}
+
+.intro .owl-controls .owl-page span {
+    width: 15px;
+    height: 15px;
+    background: transparent;
+    border: 2px solid #ffffff;
+    opacity: 1;
+}
+
+.intro .owl-controls .owl-page.active span, 
+.intro .owl-controls.clickable .owl-page:hover span {
+    background: #ffffff;
+}
