@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 
 angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngCordova', 'ionic-citydata', 'ionic-citypicker', 'ionic-dictpicker', 'angularMoment'])
-  .run(function ($ionicPlatform, $ionicPopup, $location, $rootScope, $ionicHistory, $cordovaToast, $timeout, amMoment, dictService, geolocationService) {
+  .run(function ($ionicPlatform, $ionicPopup, $location, $rootScope, $ionicHistory, $cordovaToast, $cordovaAppVersion, $timeout, amMoment, dictService, UserInfo) {
     $ionicPlatform.ready(function () {
       // set moment locale
       amMoment.changeLocale('zh-cn');
@@ -38,8 +38,37 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       //window.plugins.jPushPlugin.setDebugMode(true);
 
       window.plugins.jPushPlugin.openNotificationInAndroidCallback = function (data) {
-        window.location.href='#/tab/order';
+        window.location.href = '#/tab/order';
       }
+
+      //检查更新
+      checkUpdate();
+
+      function checkUpdate() {
+        $cordovaAppVersion.getAppVersion().then(function (version) {
+          UserInfo.add('version', version);
+          $http.get('http://www.yunyida56.com/assets/version.json').success(function (data) {
+            if (data && version != data.driverapp.version) {
+              showUpdateConfirm(data.driverapp.url);
+            }
+          })
+        });
+      }
+
+      function showUpdateConfirm(url) {
+        var confirmPopup = $ionicPopup.confirm({
+          title: '有新版本了！是否要升级？',
+          cancelText: '下一次',
+          okText: '确定'
+        });
+        var url = url;
+        confirmPopup.then(function (res) {
+          if (res) {
+            window.open(url, '_system', 'location=yes');
+          }
+        });
+      }
+
     });
 
     //双击退出

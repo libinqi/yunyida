@@ -10,30 +10,30 @@
 }
 
 .intro .intro-slider .item.one {
-    background: url(../../m.56xiaomi.com/WebSite/slide1.jpg);
+    background: url(../images/slide1.jpg);
     background-size: cover;
-    -ms-filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://m.56xiaomi.com/WebSite/slide1.jpg', sizingMethod='scale')";
-    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../m.56xiaomi.com/WebSite/slide1.jpg', sizingMethod='scale');
+    -ms-filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide1.jpg', sizingMethod='scale')";
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide1.jpg', sizingMethod='scale');
 }
 
 .intro .intro-slider .item.two {
-    background: url(../../m.56xiaomi.com/WebSite/slide2.jpg);
+    background: url(../images/slide2.jpg);
     background-size: cover;
-    -ms-filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://m.56xiaomi.com/WebSite/slide2.jpg', sizingMethod='scale')";
-    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../m.56xiaomi.com/WebSite/slide2.jpg', sizingMethod='scale');
+    -ms-filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide2.jpg', sizingMethod='scale')";
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide2.jpg', sizingMethod='scale');
 }
 
 .intro .intro-slider .item.three {
-    background: url(../../m.56xiaomi.com/WebSite/slide3.jpg);
-    -ms-filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://m.56xiaomi.com/WebSite/slide3.jpg', sizingMethod='scale')";
-    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../m.56xiaomi.com/WebSite/slide3.jpg', sizingMethod='scale');
+    background: url(../images/slide3.jpg);
+    -ms-filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide3.jpg', sizingMethod='scale')";
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide3.jpg', sizingMethod='scale');
     background-size: cover;
 }
 
 .intro .intro-slider .item.four {
-    background: url(../../m.56xiaomi.com/WebSite/slide4.jpg);
-    -ms-filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://m.56xiaomi.com/WebSite/slide4.jpg', sizingMethod='scale')";
-    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../m.56xiaomi.com/WebSite/slide4.jpg', sizingMethod='scale');
+    background: url(../images/slide4.jpg);
+    -ms-filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide4.jpg', sizingMethod='scale')";
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/slide4.jpg', sizingMethod='scale');
     background-size: cover;
 }
 
