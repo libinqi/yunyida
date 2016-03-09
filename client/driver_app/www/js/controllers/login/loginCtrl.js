@@ -34,8 +34,14 @@ angular.module('starter.controllers')
       loginService.userLogin(user.username, user.password, function (data) {
         $ionicLoading.hide();
         if (typeof(data) == "object") {
-          UserInfo.save(data);
-          $state.go('tab.index');
+          if(!data.status)
+          {
+            $scope.showMsg("您的账号未审核通过，请联系客服");
+          }
+          else {
+            UserInfo.save(data);
+            $state.go('tab.index');
+          }
         }
         else {
           $scope.showMsg(data);

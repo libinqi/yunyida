@@ -33,10 +33,10 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
 
   $scope.orderStatisList = [
     {status: '全部', count: 0},
-    {status: '未接单', count: 0},
-    {status: '接单', count: 0},
-    {status: '确认接单', count: 0},
-    {status: '确认承运', count: 0},
+    {status: '已下单', count: 0},
+    {status: '已报价', count: 0},
+    {status: '已接单', count: 0},
+    {status: '已承运', count: 0},
     {status: '已取消', count: 0},
     {status: '已完成', count: 0}
   ];

@@ -393,9 +393,15 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
         $scope.showMsg('姓名不能为空');
         return false;
       }
+      var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
       if (!$scope.userData.cardNumber) {
-        $scope.showMsg('身份证号码不能为空');
+        $scope.showMsg('证件号码不能为空');
         return false;
+      }
+      if(reg.test($scope.userData.cardNumber) === false)
+      {
+        $scope.showMsg('证件号码不正确');
+        return  false;
       }
       if (!$scope.userData.carNumber) {
         $scope.showMsg('车牌号不能为空');
@@ -410,9 +416,14 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
         return false;
       }
       if (!$scope.userData.driverLicenseImage) {
-        $scope.showMsg('请上驾驶证图片图片');
+        $scope.showMsg('请上传驾驶证图片图片');
         return false;
       }
+      if (!$scope.userData.carImage) {
+        $scope.showMsg('请上传司机车辆合照');
+        return false;
+      }
+
 
       $ionicLoading.show({
         template: "正在注册..."

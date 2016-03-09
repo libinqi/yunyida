@@ -10,6 +10,12 @@ module.exports = {
         var data_from = req.params.all();
         Goods.create(data_from).exec(function (err, goods) {
             if (err) res.badRequest(err);
+
+            if (data_from.orderId) {
+                GoodsOrder.update({goodsOrderId: data_from.orderId}, {isPeiSong: true}).exec(function (err) {
+                    if (err) res.badRequest(err);
+                });
+            }
             GoodsOrder.create({goods: goods.goodsId, shipper: goods.user}).exec(function (err, goodsOrder) {
                 if (err) res.badRequest(err);
                 goods.goodsOrder = goodsOrder;
@@ -40,7 +46,7 @@ module.exports = {
             .sort('updatedAt DESC')
             .paginate({page: page, limit: rows})
             .populate('user')
-            .populate('goodsOrders', {goodsOrderStatus: '未接单'}).exec(function (err, data) {
+            .populate('goodsOrders', {goodsOrderStatus: '已下单'}).exec(function (err, data) {
             if (err) res.badRequest(err);
             res.ok(data);
         });

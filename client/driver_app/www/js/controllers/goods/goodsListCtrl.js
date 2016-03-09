@@ -20,8 +20,8 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
   };
 
   $scope.banner = [
-    {img:'img/banner2.jpg',url:'',title:''},
-    {img:'img/banner3.jpg',url:'',title:''}
+    {img: 'img/banner2.jpg', url: '', title: ''},
+    {img: 'img/banner3.jpg', url: '', title: ''}
   ];
 
   $scope.changeGoodsType = function (type) {
@@ -96,6 +96,14 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
   //  $scope.loadMore();
   //});
 
+  if ($scope.user.userType == '物流企业') {
+    io.socket.get('/enterprise/' + $scope.user.userId, function serverResponded(body, JWR) {
+      if (JWR.statusCode == 200) {
+        $scope.user.enterprise = body;
+      }
+    });
+  }
+
   //货物查询
   $scope.goodsQuery = function () {
     $scope.queryModal.show();
@@ -116,10 +124,10 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
 
   //重置货物查询
   $scope.resetQuery = function () {
-    $scope.query.sCity='';
-    $scope.query.sCityCode='';
-    $scope.query.eCity='';
-    $scope.query.eCityCode='';
+    $scope.query.sCity = '';
+    $scope.query.sCityCode = '';
+    $scope.query.eCity = '';
+    $scope.query.eCityCode = '';
   };
 
   //关闭货物查询
@@ -145,9 +153,19 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
     $scope.detail.hide();
   };
 
-  $scope.addOrder = function (goodsOrderId) {
-    io.socket.post('/order/carrierOrder', {
-      orderStatus: '接单',
+  $scope.addOrder = function (goodsItem) {
+    var goodsOrder = goodsItem.goodsOrders[0];
+    if ($scope.user.userType == '司机' && goodsItem.goodsType == '零担') {
+      $scope.showMsg('司机无法受理零担业务！');
+      return false;
+    }
+    else if ($scope.user.userType == '物流企业'
+      && ($scope.user.enterprise && $scope.user.enterprise.businessType.indexOf(goodsItem.goodsType) < 0)) {
+      $scope.showMsg('您暂时无法受理' + goodsItem.goodsType + '业务！');
+      return false;
+    }
+    io.socket.get('/order/carrierOrder', {
+      orderStatus: '已报价',
       userId: $scope.user.userId,
       page: 1,
       row: 10
@@ -158,8 +176,8 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
       else {
         if (body.length >= 1) {
           var confirmPopup = $ionicPopup.confirm({
-            title: '接单提醒',
-            template: '您有订单未确认不能接单，是否马上去确认?',
+            title: '报价提醒',
+            template: '您有1个订单未确认接单不能继续报价，是否马上去确认?',
             buttons: [
               {
                 text: '取消', onTap: function (e) {
@@ -181,8 +199,8 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
           });
         }
         else {
-          io.socket.post('/order/carrierOrder', {
-            orderStatus: '确认接单',
+          io.socket.get('/order/carrierOrder', {
+            orderStatus: '已接单',
             userId: $scope.user.userId,
             page: 1,
             row: 10
@@ -194,7 +212,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
               if (body.length >= 10) {
                 var confirmPopup = $ionicPopup.confirm({
                   title: '接单提醒',
-                  template: '您有订单未承运不能接单，是否马上去承运?',
+                  template: '您已有10个订单未确认承运不能继续接单，是否马上确认承运？',
                   buttons: [
                     {
                       text: '取消', onTap: function (e) {
@@ -216,14 +234,14 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
               }
               else {
                 io.socket.post('/order/addOrder', {
-                  orderId: goodsOrderId,
+                  orderId: goodsOrder.goodsOrderId,
                   userId: $scope.user.userId
                 }, function serverResponded(body, JWR) {
                   if (JWR.statusCode !== 200) {
                     $scope.showMsg('请求失败,网络不给力！');
                   }
                   else {
-                    $scope.showMsg('接单成功！');
+                    $scope.showMsg('报价成功！');
                     $scope.closeDetail();
                     $state.go('tab.order');
                   }

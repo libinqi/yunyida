@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('UserGoodsAddressCtrl', function ($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $ionicModal, $state, UserInfo,CityPickerService ,dictService) {
+angular.module('starter.controllers').controller('UserGoodsAddressCtrl', function ($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $ionicModal, $state, UserInfo, CityPickerService, dictService) {
   var user = UserInfo.data;
   $scope.pulltextchange = '下拉刷新';
 
@@ -39,12 +39,38 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
     lng: '',//经度
     lat: '',//纬度
     isDefault: false,//是否默认发货地址
-    type:'发货',
+    type: '发货',
     user: user.userId//所属用户
   };
 
   $scope.isAdd = true;
   $scope.streetList = [];
+
+  $scope.$watch('goodsAddress.cityCode', function (oldValue, newValue) {
+    if (oldValue && newValue) $scope.goodsAddress.street = '';
+    if (!$scope.goodsAddress.cityCode) {
+      dictService.street_data = [];
+      return;
+    }
+    else {
+      $scope.streetList = [];
+    }
+
+    $timeout(function () {
+      $scope.streetList = CityPickerService.getStreetData($scope.goodsAddress.cityCode);
+      dictService.street_data = [];
+
+      for (var i = 0; i < $scope.streetList.length; i++) {
+        dictService.street_data.push({id: $scope.streetList[i].id, name: $scope.streetList[i].areaName});
+      }
+    });
+  });
+
+  $scope.$watch('goodsAddress.street', function () {
+    if ($scope.goodsAddress.street == '选择所在街道') {
+      $scope.goodsAddress.street = '';
+    }
+  });
 
   //触发发货地址弹出层事件
   $ionicModal.fromTemplateUrl('templates/user/addGoodsAddress.html ', {
@@ -59,19 +85,17 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
       $scope.isAdd = false;
     }
     else {
-      $scope.goodsAddress = {
-        consignor: '',//发货人
-        phoneNumber: '',//手机号码
-        city: '',//所在城市
-        cityCode: '',//所在城市编码
-        street: '',//街道
-        address: '',//详细地址
-        lng: '',//经度
-        lat: '',//纬度
-        isDefault: false,//是否默认发货地址
-        type:'发货',
-        user: user.userId//所属用户
-      };
+      $scope.goodsAddress.consignor = '';//发货人
+      $scope.goodsAddress.phoneNumber = '';//手机号码
+      $scope.goodsAddress.city = '';//所在城市
+      $scope.goodsAddress.cityCode = '';//所在城市编码
+      $scope.goodsAddress.street = '';//街道
+      $scope.goodsAddress.address = '';//详细地址
+      $scope.goodsAddress.lng = '';//经度
+      $scope.goodsAddress.lat = '';//纬度
+      $scope.goodsAddress.isDefault = false;//是否默认发货地址
+      $scope.goodsAddress.type = '发货';
+      $scope.goodsAddress.user = user.userId;//所属用户
       $scope.isAdd = true;
 
       //window.LocationPlugin.getLocation(function (data) {
@@ -104,33 +128,6 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
       //  });
       //}, function (err) {
       //});
-
-      $scope.$watch('goodsAddress.cityCode', function (oldValue,newValue) {
-        if (oldValue && newValue) $scope.goodsAddress.street = '';
-        if (!$scope.goodsAddress.cityCode) {
-          dictService.street_data = [];
-          return;
-        }
-        else {
-          $scope.streetList = [];
-        }
-
-        $timeout(function () {
-          $scope.streetList = CityPickerService.getStreetData($scope.goodsAddress.cityCode);
-          dictService.street_data = [];
-
-          for (var i = 0; i < $scope.streetList.length; i++) {
-            dictService.street_data.push({id: $scope.streetList[i].id, name: $scope.streetList[i].areaName});
-          }
-        });
-      });
-
-      $scope.$watch('goodsAddress.street', function () {
-        if($scope.goodsAddress.street == '选择所在街道')
-        {
-          $scope.goodsAddress.street = '';
-        }
-      });
     }
     $scope.goodsAddressModal.show();
   };
@@ -194,7 +191,7 @@ angular.module('starter.controllers').controller('UserGoodsAddressCtrl', functio
   $scope.query = {
     page: 1,
     rows: 8,
-    type:'发货',
+    type: '发货',
     userId: user.userId
   };
 

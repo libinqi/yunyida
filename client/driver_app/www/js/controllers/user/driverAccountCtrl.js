@@ -293,6 +293,16 @@ angular.module('starter.controllers').controller('DriverAccountCtrl', function (
         $scope.showMsg('证件号码不能为空');
         return false;
       }
+      var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+      if (!$scope.userData.cardNumber) {
+        $scope.showMsg('证件号码不能为空');
+        return false;
+      }
+      if(reg.test($scope.userData.cardNumber) === false)
+      {
+        $scope.showMsg('证件号码不正确');
+        return  false;
+      }
       if (!$scope.userData.carNumber) {
         $scope.showMsg('车牌号不能为空');
         return false;

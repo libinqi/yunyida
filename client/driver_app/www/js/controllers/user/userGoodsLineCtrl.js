@@ -174,10 +174,10 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
       $scope.showMsg('请选择起始城市');
       return;
     }
-    if (!$scope.goodsLine.sStreet) {
-      $scope.showMsg('请选择起始地街道');
-      return;
-    }
+    //if (!$scope.goodsLine.sStreet) {
+    //  $scope.showMsg('请选择起始地街道');
+    //  return;
+    //}
     if (!$scope.goodsLine.eCity) {
       $scope.showMsg('请选择目的城市');
       return;
