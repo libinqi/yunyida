@@ -115,6 +115,31 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     $scope.toggleLeft();
   }
 
+  $scope.orderStatusPic = function (orderStatus) {
+    var img = '';
+    switch (orderStatus) {
+      case '已下单':
+        img = 'order1';
+        break;
+      case '已报价':
+        img = 'order2';
+        break;
+      case '已接单':
+        img = 'order3';
+        break;
+      case '已承运':
+        img = 'order4';
+        break;
+      case '已完成':
+        img = 'order5';
+        break;
+      case '已取消':
+        img = 'order6';
+        break;
+    }
+    return img;
+  }
+
   //查看订单详情
   $scope.orderDetail = function (item) {
     $scope.orderItem = item;

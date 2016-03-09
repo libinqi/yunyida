@@ -53,7 +53,7 @@
         <div class="item item-text-wrap">
           <label class="item-detail">
             <div class="order-detail-label2" style="font-size: 16px;">货物信息：</div>
-            <label>{{orderItem.goods.goodsName+' '+orderItem.goods.goodsNumber+orderItem.goods.goodsUnit}}</label>
+            <img ng-src="{{'img/'+orderStatusPic(orderItem.goodsOrderStatus)+'.jpg'}}" width="99%" height="100px">
           </label>
           <!-- 订单类型 -->
           <label class="item-detail">

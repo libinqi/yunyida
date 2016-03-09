@@ -31,23 +31,23 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     userId: UserInfo.data.userId
   };
 
-  $scope.orderStatisList=[
-    {status:'全部',count:0},
-    {status:'已报价',count:0},
-    {status:'已接单',count:0},
-    {status:'已承运',count:0},
-    {status:'已取消',count:0},
-    {status:'已完成',count:0}
+  $scope.orderStatisList = [
+    {status: '全部', count: 0},
+    {status: '已报价', count: 0},
+    {status: '已接单', count: 0},
+    {status: '已承运', count: 0},
+    {status: '已取消', count: 0},
+    {status: '已完成', count: 0}
   ];
 
   $scope.toggleLeft = function () {
     //$ionicSideMenuDelegate.toggleLeft();
     //$timeout(function () {
-      $scope.getOrderStatis();
+    $scope.getOrderStatis();
     //});
   };
 
-  $scope.getOrderStatis=function(){
+  $scope.getOrderStatis = function () {
     io.socket.get('/order/carrierOrderStatis', $scope.query, function serverResponded(body, JWR) {
       if (JWR.statusCode !== 200) {
         $scope.showMsg('请求失败,网络不给力！');
@@ -108,10 +108,32 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   //});
 
   $scope.orderFilter = function (orderStatus) {
-    if(orderStatus=='全部')orderStatus='';
+    if (orderStatus == '全部')orderStatus = '';
     $scope.query.orderStatus = orderStatus;
     $scope.doRefresh();
     $scope.toggleLeft();
+  }
+
+  $scope.orderStatusPic = function (orderStatus) {
+    var img = '';
+    switch (orderStatus) {
+      case '已报价':
+        img = 'order1';
+        break;
+      case '已接单':
+        img = 'order2';
+        break;
+      case '已承运':
+        img = 'order3';
+        break;
+      case '已完成':
+        img = 'order4';
+        break;
+      case '已取消':
+        img = 'order5';
+        break;
+    }
+    return img;
   }
 
   //查看订单详情
@@ -255,12 +277,12 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
 
   $scope.evaluatePeopleClass = function (num) {
     var rtnClass = "";
-      if ($scope.orderItem.evaluationLevel>= num) {
-        rtnClass = "stared";
-      }
-      else {
-        rtnClass = "star";
-      }
+    if ($scope.orderItem.evaluationLevel >= num) {
+      rtnClass = "stared";
+    }
+    else {
+      rtnClass = "star";
+    }
     return rtnClass;
   }
 });
