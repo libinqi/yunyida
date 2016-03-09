@@ -33,9 +33,9 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
 
   $scope.orderStatisList=[
     {status:'全部',count:0},
-    {status:'接单',count:0},
-    {status:'确认接单',count:0},
-    {status:'确认承运',count:0},
+    {status:'已报价',count:0},
+    {status:'已接单',count:0},
+    {status:'已承运',count:0},
     {status:'已取消',count:0},
     {status:'已完成',count:0}
   ];
@@ -131,11 +131,11 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     $scope.detail.hide();
   };
 
-  //取消接单
+  //取消已报价
   $scope.cancelOrder = function (orderId) {
     var confirmPopup = $ionicPopup.confirm({
-      title: '取消接单',
-      template: '您确定要取消接单吗?',
+      title: '取消已报价',
+      template: '您确定要取消已报价吗?',
       buttons: [
         {
           text: '暂不取消', onTap: function (e) {
@@ -166,7 +166,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
                 }
               }
             }
-            $scope.showMsg('取消接单成功！');
+            $scope.showMsg('取消已报价成功！');
             $scope.closeDetail();
             $scope.doRefresh();
           }
@@ -175,9 +175,9 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     });
   }
 
-  //确认接单
+  //已接单
   $scope.confirmOrder = function (orderId) {
-    io.socket.post('/order/updateOrder', {orderId: orderId, orderStatus: '确认接单'}, function serverResponded(body, JWR) {
+    io.socket.post('/order/updateOrder', {orderId: orderId, orderStatus: '已接单'}, function serverResponded(body, JWR) {
       if (JWR.statusCode !== 200) {
         $scope.showMsg('请求失败,网络不给力！');
       }
@@ -190,7 +190,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
             }
           }
         }
-        $scope.showMsg('确认接单成功！');
+        $scope.showMsg('已接单成功！');
       }
     });
   }
@@ -201,7 +201,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     orderId: ''
   }
 
-  //确认承运
+  //已承运
   $scope.confirmCarrier = function (orderId) {
     $scope.carrierOrder.orderId = orderId;
     $scope.confirmCarrierOrder.show();
@@ -213,7 +213,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   }).then(function (detail) {
     $scope.confirmCarrierOrder = detail;
   });
-  //关闭确认承运
+  //关闭已承运
   $scope.closeCarrier = function () {
     $scope.confirmCarrierOrder.hide();
   };

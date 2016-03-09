@@ -130,9 +130,15 @@ angular.module('starter.controllers').controller('EnterpriseAccountCtrl', functi
         $scope.showMsg('姓名不能为空');
         return false;
       }
+      var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
       if (!$scope.userData.cardNumber) {
         $scope.showMsg('身份证号码不能为空');
         return false;
+      }
+      if(reg.test($scope.userData.cardNumber) === false)
+      {
+        $scope.showMsg('身份证号码不正确');
+        return  false;
       }
       if (!$scope.userData.enterpriseName) {
         $scope.showMsg('企业名称不能为空');
@@ -144,6 +150,10 @@ angular.module('starter.controllers').controller('EnterpriseAccountCtrl', functi
       }
       if (!$scope.userData.street) {
         $scope.showMsg('街道不能为空');
+        return false;
+      }
+      if (!$scope.userData.address) {
+        $scope.showMsg('详细地址不能为空');
         return false;
       }
       if (!$scope.userData.businessLicenseNumber) {

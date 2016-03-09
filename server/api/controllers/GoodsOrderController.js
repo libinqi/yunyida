@@ -125,14 +125,14 @@ module.exports = {
         var userId = req.body.userId;
         GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
             if (err) res.badRequest(err);
-            order.goodsOrderStatus = '接单';
+            order.goodsOrderStatus = '已报价';
             order.carrier = userId;
             order.goods.status = false;
             order.save();
 
             push_goods_client.push().setPlatform('ios', 'android')
                 .setAudience(JPush.tag(order.shipper + ''))
-                .setNotification('您有一票货被接单，快去看看', JPush.ios('您有一票货被接单，快去看看'), JPush.android('您有一票货被接单，快去看看', null, 1))
+                .setNotification('您有一票货被已报价，快去看看', JPush.ios('您有一票货被已报价，快去看看'), JPush.android('您有一票货被已报价，快去看看', null, 1))
                 .send(function (err, res) {
                     if (err) {
                         console.log(err.message);
@@ -150,7 +150,7 @@ module.exports = {
         var userId = req.body.userId;
         GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
             if (err) res.badRequest(err);
-            order.goodsOrderStatus = '接单';
+            order.goodsOrderStatus = '已报价';
             order.carrier = userId;
             order.goods.status = false;
             order.save();
@@ -176,7 +176,7 @@ module.exports = {
         var orderId = req.body.orderId;
         GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
             if (err) res.badRequest(err);
-            order.goodsOrderStatus = '未接单';
+            order.goodsOrderStatus = '已下单';
             order.carrier = null;
             order.goods.publishType = (order.goods.goodsType == '零担' ? '快捷发货' : '立即发货');
             order.goods.status = true;
@@ -184,7 +184,7 @@ module.exports = {
 
             push_goods_client.push().setPlatform('ios', 'android')
                 .setAudience(JPush.tag(order.shipper + ''))
-                .setNotification('您有一个订单被取消接单', JPush.ios('您有一个订单被取消接单'), JPush.android('您有一个订单被取消接单', null, 1))
+                .setNotification('您有一个订单被取消已报价', JPush.ios('您有一个订单被取消已报价'), JPush.android('您有一个订单被取消已报价', null, 1))
                 .send(function (err, res) {
                     if (err) {
                         console.log(err.message);
@@ -212,7 +212,7 @@ module.exports = {
         var pricing = req.body.pricing;
         GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
             if (err) res.badRequest(err);
-            order.goodsOrderStatus = '确认承运';
+            order.goodsOrderStatus = '已承运';
             order.pricing = pricing;
             order.save();
             res.ok(order);
@@ -251,7 +251,7 @@ module.exports = {
             if (order.carrier) {
                 push_driver_client.push().setPlatform('ios', 'android')
                     .setAudience(JPush.tag(order.carrier + ''))
-                    .setNotification('您有一个订单被货主重新发布,请接单后及时与货主联系!', JPush.ios('您有一个订单被货主重新发布,请接单后及时与货主联系!'), JPush.android('您有一个订单被货主重新发布,请接单后及时与货主联系!', null, 1))
+                    .setNotification('您有一个订单被货主重新发布,请已报价后及时与货主联系!', JPush.ios('您有一个订单被货主重新发布,请已报价后及时与货主联系!'), JPush.android('您有一个订单被货主重新发布,请已报价后及时与货主联系!', null, 1))
                     .send(function (err, res) {
                         if (err) {
                             console.log(err.message);
@@ -262,7 +262,7 @@ module.exports = {
                     });
             }
 
-            order.goodsOrderStatus = '未接单';
+            order.goodsOrderStatus = '已下单';
             order.status = true;
             order.carrier = null;
             order.goods.status = true;
@@ -300,10 +300,9 @@ module.exports = {
     carrierOrderStatis: function (req, res) {
         var userId = req.body.userId;
         var sql = "SELECT COUNT(*) as count,'全部' as 'status' FROM goodsorder WHERE goodsOrderStatus!='已删除' AND  carrier=" + userId;
-        sql += " UNION ALL SELECT COUNT(*) as count,'未接单' as 'status' FROM goodsorder WHERE goodsOrderStatus='未接单' AND  carrier=" + userId;
-        sql += " UNION ALL SELECT COUNT(*) as count,'接单' as 'status' FROM goodsorder WHERE goodsOrderStatus='接单' AND  carrier=" + userId;
-        sql += " UNION ALL SELECT COUNT(*) as count,'确认接单' as 'status' FROM goodsorder WHERE goodsOrderStatus='确认接单' AND  carrier=" + userId;
-        sql += " UNION ALL SELECT COUNT(*) as count,'确认承运' as 'status' FROM goodsorder WHERE goodsOrderStatus='确认承运' AND  carrier=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'已报价' as 'status' FROM goodsorder WHERE goodsOrderStatus='已报价' AND  carrier=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'已接单' as 'status' FROM goodsorder WHERE goodsOrderStatus='已接单' AND  carrier=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'已承运' as 'status' FROM goodsorder WHERE goodsOrderStatus='已承运' AND  carrier=" + userId;
         sql += " UNION ALL SELECT COUNT(*) as count,'已取消' as 'status' FROM goodsorder WHERE goodsOrderStatus='已取消' AND  carrier=" + userId;
         sql += " UNION ALL SELECT COUNT(*) as count,'已完成' as 'status' FROM goodsorder WHERE goodsOrderStatus='已完成' AND  carrier=" + userId;
 
@@ -315,10 +314,10 @@ module.exports = {
     shipperOrderStatis: function (req, res) {
         var userId = req.body.userId;
         var sql = "SELECT COUNT(*) as count,'全部' as 'status' FROM goodsorder WHERE goodsOrderStatus!='已删除' AND shipper=" + userId;
-        sql += " UNION ALL SELECT COUNT(*) as count,'未接单' as 'status' FROM goodsorder WHERE goodsOrderStatus='未接单' AND shipper=" + userId;
-        sql += " UNION ALL SELECT COUNT(*) as count,'接单' as 'status' FROM goodsorder WHERE goodsOrderStatus='接单' AND shipper=" + userId;
-        sql += " UNION ALL SELECT COUNT(*) as count,'确认接单' as 'status' FROM goodsorder WHERE goodsOrderStatus='确认接单' AND shipper=" + userId;
-        sql += " UNION ALL SELECT COUNT(*) as count,'确认承运' as 'status' FROM goodsorder WHERE goodsOrderStatus='确认承运' AND shipper=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'已下单' as 'status' FROM goodsorder WHERE goodsOrderStatus='已下单' AND shipper=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'已报价' as 'status' FROM goodsorder WHERE goodsOrderStatus='已报价' AND shipper=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'已接单' as 'status' FROM goodsorder WHERE goodsOrderStatus='已接单' AND shipper=" + userId;
+        sql += " UNION ALL SELECT COUNT(*) as count,'已承运' as 'status' FROM goodsorder WHERE goodsOrderStatus='已承运' AND shipper=" + userId;
         sql += " UNION ALL SELECT COUNT(*) as count,'已取消' as 'status' FROM goodsorder WHERE goodsOrderStatus='已取消' AND shipper=" + userId;
         sql += " UNION ALL SELECT COUNT(*) as count,'已完成' as 'status' FROM goodsorder WHERE goodsOrderStatus='已完成' AND shipper=" + userId;
 

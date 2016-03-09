@@ -204,9 +204,15 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
         $scope.showMsg('姓名不能为空');
         return false;
       }
+      var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
       if (!$scope.userData.cardNumber) {
         $scope.showMsg('身份证号码不能为空');
         return false;
+      }
+      if(reg.test($scope.userData.cardNumber) === false)
+      {
+        $scope.showMsg('身份证号码不正确');
+        return  false;
       }
       if (!$scope.userData.city) {
         $scope.showMsg('所在城市不能为空');

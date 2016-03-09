@@ -147,7 +147,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
 
   $scope.addOrder = function (goodsOrderId) {
     io.socket.post('/order/carrierOrder', {
-      orderStatus: '接单',
+      orderStatus: '已报价',
       userId: $scope.user.userId,
       page: 1,
       row: 10
@@ -158,8 +158,8 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
       else {
         if (body.length >= 1) {
           var confirmPopup = $ionicPopup.confirm({
-            title: '接单提醒',
-            template: '您有订单未确认不能接单，是否马上去确认?',
+            title: '已报价提醒',
+            template: '您有订单未确认不能已报价，是否马上去确认?',
             buttons: [
               {
                 text: '取消', onTap: function (e) {
@@ -182,7 +182,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
         }
         else {
           io.socket.post('/order/carrierOrder', {
-            orderStatus: '确认接单',
+            orderStatus: '已接单',
             userId: $scope.user.userId,
             page: 1,
             row: 10
@@ -193,8 +193,8 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
             else {
               if (body.length >= 10) {
                 var confirmPopup = $ionicPopup.confirm({
-                  title: '接单提醒',
-                  template: '您有订单未承运不能接单，是否马上去承运?',
+                  title: '已报价提醒',
+                  template: '您有订单未承运不能已报价，是否马上去承运?',
                   buttons: [
                     {
                       text: '取消', onTap: function (e) {
@@ -223,7 +223,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
                     $scope.showMsg('请求失败,网络不给力！');
                   }
                   else {
-                    $scope.showMsg('接单成功！');
+                    $scope.showMsg('已报价成功！');
                     $scope.closeDetail();
                     $state.go('tab.order');
                   }

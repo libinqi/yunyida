@@ -84,34 +84,34 @@
           </label>
         </div>
       </div>
-      <!-- 服务评价 -->
-      <div class="card" ng-if="orderItem.evaluationLevel" style="margin:10px 0px !important;">
-        <div class="item item-divider">
-          服务评价信息
-        </div>
-        <div class="item item-text-wrap">
-          <label class="item-detail">
-            <div class="order-detail-label2" style="font-size: 16px;">满意度：</div>
-            <label title="很差"  ng-class="evaluatePeopleClass(1)"></label>
-            <label title="一般" ng-class="evaluatePeopleClass(2)"></label>
-            <label title="好" ng-class="evaluatePeopleClass(3)"></label>
-            <label title="很好" ng-class="evaluatePeopleClass(4)"></label>
-            <label title="非常好" ng-class="evaluatePeopleClass(5)"></label>
-          </label>
-          <!-- 货物属性 -->
-          <label ng-if="orderItem.evaluationContent" class="item-detail">
-            <div class="order-detail-label2" style="font-size: 16px;">评&nbsp;&nbsp;&nbsp;价：</div>
-            <label>{{orderItem.evaluationContent}}</label>
-          </label>
-          </div>
-      </div>
+      <!--&lt;!&ndash; 服务评价 &ndash;&gt;-->
+      <!--<div class="card" ng-if="orderItem.evaluationLevel" style="margin:10px 0px !important;">-->
+        <!--<div class="item item-divider">-->
+          <!--服务评价信息-->
+        <!--</div>-->
+        <!--<div class="item item-text-wrap">-->
+          <!--<label class="item-detail">-->
+            <!--<div class="order-detail-label2" style="font-size: 16px;">满意度：</div>-->
+            <!--<label title="很差"  ng-class="evaluatePeopleClass(1)"></label>-->
+            <!--<label title="一般" ng-class="evaluatePeopleClass(2)"></label>-->
+            <!--<label title="好" ng-class="evaluatePeopleClass(3)"></label>-->
+            <!--<label title="很好" ng-class="evaluatePeopleClass(4)"></label>-->
+            <!--<label title="非常好" ng-class="evaluatePeopleClass(5)"></label>-->
+          <!--</label>-->
+          <!--&lt;!&ndash; 货物属性 &ndash;&gt;-->
+          <!--<label ng-if="orderItem.evaluationContent" class="item-detail">-->
+            <!--<div class="order-detail-label2" style="font-size: 16px;">评&nbsp;&nbsp;&nbsp;价：</div>-->
+            <!--<label>{{orderItem.evaluationContent}}</label>-->
+          <!--</label>-->
+          <!--</div>-->
+      <!--</div>-->
       <div class="button-bar" style="margin-top:10px">
-        <button class="button button-assertive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus!='确认承运'&&orderItem.goodsOrderStatus!='已完成'" ng-click="cancelOrder(orderItem.goodsOrderId)">取消接单
+        <button class="button button-assertive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus!='已承运'&&orderItem.goodsOrderStatus!='已完成'" ng-click="cancelOrder(orderItem.goodsOrderId)">取消
         </button>
-        <button class="button button-positive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus=='接单'"
-                ng-click="confirmOrder(orderItem.goodsOrderId)">确认接单
+        <button class="button button-positive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus=='已报价'"
+                ng-click="confirmOrder(orderItem.goodsOrderId)">接单
         </button>
-        <button class="button button-positive" ng-if="orderItem.goodsOrderStatus=='确认接单'" ng-click="confirmCarrier(orderItem.goodsOrderId)">确认承运
+        <button class="button button-positive" ng-if="orderItem.goodsOrderStatus=='已接单'" ng-click="confirmCarrier(orderItem.goodsOrderId)">承运
         </button>
       </div>
     </div>

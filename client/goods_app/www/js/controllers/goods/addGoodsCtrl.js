@@ -31,7 +31,8 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     publishType: '快捷发货',// 发布方式
     status: true,//状态
     remark: '',//备注说明
-    user: user.userId//所属用户
+    user: user.userId,//所属用户
+    orderId:''
   };
   $scope.goodsInfo.goodsAttribute = dictService.goods_attr[0].name;
   $scope.goodsInfo.goodsUnit = dictService.goods_unit[0].name;
@@ -45,8 +46,8 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   //$scope.goodsInfo.placeOfDeparture = province + city;
 
   $scope.banner = [
-    {img:'img/banner1.jpg',url:'',title:''},
-    {img:'img/banner3.jpg',url:'',title:''}
+    {img: 'img/banner1.jpg', url: '', title: ''},
+    {img: 'img/banner3.jpg', url: '', title: ''}
   ];
 
   dictService.street_data = [];
@@ -112,6 +113,11 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
 
   $scope.changeGoodsType = function (type) {
     $scope.goodsInfo.goodsType = type;
+
+    if ($scope.goodsInfo.goodsType == '城市配送' && $scope.goodsInfo.sCity && $scope.goodsInfo.sCityCode) {
+      $scope.goodsInfo.eCity = $scope.goodsInfo.sCity;
+      $scope.goodsInfo.eCityCode = $scope.goodsInfo.sCityCode;
+    }
   }
 
   //触发收货目的信息弹出层事件
@@ -267,7 +273,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       $scope.showMsg('请填写货物信息！');
       return;
     }
-    if ($scope.goodsInfo.goodsType == '城市配送' && $scope.goodsInfo.sCityCode.substr(0,4) != $scope.goodsInfo.eCityCode.substr(0,4)) {
+    if ($scope.goodsInfo.goodsType == '城市配送' && $scope.goodsInfo.sCityCode.substr(0, 4) != $scope.goodsInfo.eCityCode.substr(0, 4)) {
       $scope.showMsg('跨市发货请选择整车！');
       return;
     }
@@ -316,6 +322,11 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     $scope.goodsInfo.consignor = item.consignor;
     $scope.goodsInfo.sPhoneNumber = item.phoneNumber;
     $scope.goodsInfo.sAddress = item.address;
+
+    if ($scope.goodsInfo.goodsType == '城市配送') {
+      $scope.goodsInfo.eCity = $scope.goodsInfo.sCity;
+      $scope.goodsInfo.eCityCode = $scope.goodsInfo.sCityCode;
+    }
 
     $scope.startInfoModal.hide();
   };
@@ -665,8 +676,8 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   }
 
   //$rootScope.$on('$locationChangeSuccess', function (evt, current, previous) {
-  var orderId = $location.search().orderId;
-  if (orderId) {
+  $scope.goodsInfo.orderId = $location.search().orderId;
+  if ($scope.goodsInfo.orderId) {
     io.socket.get('/goodsOrder/' + orderId, function serverResponded(body, JWR) {
       if (JWR.statusCode == 200) {
 
