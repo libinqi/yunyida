@@ -126,5 +126,14 @@
         "variables": {
             "WECHATAPPID": "wxcbea716f2bd465c2"
         }
+    },
+    "cordova-plugin-app-version": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/whiteoctober/cordova-plugin-app-version.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

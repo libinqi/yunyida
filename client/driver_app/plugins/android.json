@@ -53,6 +53,9 @@
         "cordova-plugin-wechat": {
             "WECHATAPPID": "wxcbea716f2bd465c2",
             "PACKAGE_NAME": "com.yunyida56.driverapp"
+        },
+        "cordova-plugin-app-version": {
+            "PACKAGE_NAME": "com.yunyida56.driverapp"
         }
     },
     "dependent_plugins": {}
