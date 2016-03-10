@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 
 angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngCordova', 'ionic-citydata', 'ionic-citypicker', 'ionic-dictpicker', 'angularMoment'])
-  .run(function ($ionicPlatform, $ionicPopup, $location, $rootScope, $ionicHistory, $cordovaToast, $cordovaAppVersion, $http, $timeout, amMoment, dictService) {
+  .run(function ($ionicPlatform, $ionicPopup, $location, $rootScope, $ionicHistory, $cordovaToast, $cordovaAppVersion, $cordovaFileTransfer, $cordovaFile, $cordovaFileOpener2, $ionicLoading, $http, $timeout, amMoment, dictService) {
     $ionicPlatform.ready(function () {
       // set moment locale
       amMoment.changeLocale('zh-cn');
@@ -49,8 +49,8 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       function checkUpdate() {
         $cordovaAppVersion.getVersionNumber().then(function (version) {
           $http.get('http://www.yunyida56.com/assets/version.json').success(function (data) {
-            if (data && version != data.goodsapp.version) {
-              showUpdateConfirm(data.goodsapp.url);
+            if (data && version != data.driverapp.version) {
+              showUpdateConfirm(data.driverapp.url);
             }
           })
         });
@@ -72,10 +72,38 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
             }
           ]
         });
-        var url = url;
+        var url = url; //可以从服务端获取更新APP的路径
         confirmPopup.then(function (res) {
           if (res) {
-            window.open(url, '_system', 'location=yes');
+            $ionicLoading.show({
+              template: "已经下载：0%"
+            });
+            var targetPath = "file:///storage/sdcard0/Download/driver_app.apk"; //APP下载存放的路径，可以使用cordova file插件进行相关配置
+            var trustHosts = true;
+            var options = {};
+            $cordovaFileTransfer.download(url, targetPath, options, trustHosts).then(function (result) {
+              // 打开下载下来的APP
+              $cordovaFileOpener2.open(targetPath, 'application/vnd.android.package-archive'
+              ).then(function () {
+                // 成功
+              }, function (err) {
+                // 错误
+              });
+              $ionicLoading.hide();
+            }, function (err) {
+              $ionicLoading.show({template: '下载失败！', noBackdrop: true, duration: 2000});
+            }, function (progress) {
+              //进度，这里使用文字显示下载百分比
+              $timeout(function () {
+                var downloadProgress = (progress.loaded / progress.total) * 100;
+                $ionicLoading.show({
+                  template: "已经下载：" + Math.floor(downloadProgress) + "%"
+                });
+                if (downloadProgress > 99) {
+                  $ionicLoading.hide();
+                }
+              })
+            });
           }
         });
       }

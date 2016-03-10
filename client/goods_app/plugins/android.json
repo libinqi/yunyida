@@ -56,6 +56,9 @@
         },
         "cordova-plugin-app-version": {
             "PACKAGE_NAME": "com.yunyida56.goodsapp"
+        },
+        "cordova-plugin-file-opener2": {
+            "PACKAGE_NAME": "com.yunyida56.goodsapp"
         }
     },
     "dependent_plugins": {}
