@@ -10,14 +10,13 @@ module.exports = {
         var data_from = req.params.all();
         Goods.create(data_from).exec(function (err, goods) {
             if (err) res.badRequest(err);
-
-            if (data_from.orderId) {
-                GoodsOrder.update({goodsOrderId: data_from.orderId}, {isPeiSong: true}).exec(function (err) {
-                    if (err) res.badRequest(err);
-                });
-            }
             GoodsOrder.create({goods: goods.goodsId, shipper: goods.user}).exec(function (err, goodsOrder) {
                 if (err) res.badRequest(err);
+                if (data_from.orderId) {
+                    GoodsOrder.update({goodsOrderId: data_from.orderId}, {isPeiSong: true}).exec(function (err) {
+                        if (err) res.badRequest(err);
+                    });
+                }
                 goods.goodsOrder = goodsOrder;
                 res.ok(goods);
             });

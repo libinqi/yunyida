@@ -678,7 +678,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   //$rootScope.$on('$locationChangeSuccess', function (evt, current, previous) {
   $scope.goodsInfo.orderId = $location.search().orderId;
   if ($scope.goodsInfo.orderId) {
-    io.socket.get('/goodsOrder/' + orderId, function serverResponded(body, JWR) {
+    io.socket.get('/goodsOrder/' + $scope.goodsInfo.orderId, function serverResponded(body, JWR) {
       if (JWR.statusCode == 200) {
 
         $scope.goodsInfo.goodsName = body.goods.goodsName;//货物名称

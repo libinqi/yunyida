@@ -17,10 +17,10 @@
         <div class="item item-text-wrap">
           <!-- 发货人信息 -->
           <label class="item-detail">
-          <img src="img/person.png" width="20px" height="20px">
-          <div class="order-detail-label" style="font-size: 16px;">发货人：</div>
-          <label>{{orderItem.goods.consignor}}</label>
-        </label>
+            <img src="img/person.png" width="20px" height="20px">
+            <div class="order-detail-label" style="font-size: 16px;">发货人：</div>
+            <label>{{orderItem.goods.consignor}}</label>
+          </label>
           <label class="item-detail" style="margin-left:27px">
             <div class="order-detail-label">地址：</div>
             <label>{{orderItem.goods.sCity+orderItem.goods.sStreet+orderItem.goods.sAddress}}</label>
@@ -58,13 +58,14 @@
           <!-- 订单类型 -->
           <label class="item-detail">
             <div class="order-detail-label2" style="font-size: 16px;">订单类型：</div>
-            <label ng-if="orderItem.goods.goodsType=='零担'">{{orderItem.goods.goodsType}}-{{orderItem.goods.publishType}} <span style="color: #ef6600">{{orderItem.goods.goodsAttribute}}</span></label>
+            <label ng-if="orderItem.goods.goodsType=='零担'">{{orderItem.goods.goodsType}}-{{orderItem.goods.publishType}}
+              <span style="color: #ef6600">{{orderItem.goods.goodsAttribute}}</span></label>
             <label ng-if="orderItem.goods.goodsType!='零担'">{{orderItem.goods.goodsType}} <span style="color: #ef6600">{{orderItem.goods.goodsAttribute}}</span></label>
           </label>
           <!-- 需求车辆 -->
           <!--<label class="item-detail" ng-if="orderItem.goods.carType!='不限'">-->
-            <!--<div class="order-detail-label2" style="font-size: 16px;">需求车辆：</div>-->
-            <!--<label>{{orderItem.goods.carType}}</label>-->
+          <!--<div class="order-detail-label2" style="font-size: 16px;">需求车辆：</div>-->
+          <!--<label>{{orderItem.goods.carType}}</label>-->
           <!--</label>-->
           <!-- 运价 -->
           <label class="item-detail" ng-if="orderItem.pricing">
@@ -91,15 +92,16 @@
         </div>
         <div class="item item-text-wrap">
           <!-- 承运人信息 -->
-          <div ng-click="getDriver(orderItem.carrier)" class="item-detail">
-            <div class="order-detail-label2" style="font-size: 16px;">承&nbsp;&nbsp;运&nbsp;人：</div>
-            <label>{{orderItem.carrier.userType=='物流企业'?
-              orderItem.carrier.realName+'('+orderItem.carrier.enterpriseName+')':orderItem.carrier.realName}}</label>
-            <span style="color: #021fff" ng-click="getDriver(orderItem.carrier)">&nbsp;详情</span>
-          </div>
-          <div ng-if="orderItem.carrier" class="item-detail">
-            <div class="order-detail-label2" style="font-size: 16px;">承运人电话：</div>
-            <span style="color: #ff0000"><a href="tel:{{orderItem.carrier.phoneNumber}}">{{orderItem.carrier.phoneNumber}}</a></span>
+          <div class="item-detail">
+            <div style="float: left;" ng-click="getDriver(orderItem.carrier)"><img
+              ng-src="{{orderItem.carrier.userType=='物流企业'?'img/enterprise.jpg':'img/driver.jpg'}}" width="65px"
+              height="65px"></div>
+            <div style="font-size: 16px;float: left;margin: -25px 0px 0px 10px;"
+                 ng-click="getDriver(orderItem.carrier)"><label>{{orderItem.carrier.userType=='物流企业'?
+              orderItem.carrier.enterpriseName+'('+orderItem.carrier.realName+')':orderItem.carrier.realName}}</label>
+            </div>
+            <div style="float: left;margin: 0px 10px 0px 50px;"><a href="tel:{{orderItem.carrier.phoneNumber}}"><img
+              src="img/call.jpg" width="55px" height="55px"></a></div>
           </div>
         </div>
       </div>
@@ -113,7 +115,7 @@
                 ng-click="deleteOrder(orderItem.goodsOrderId)">删除订单
         </button>
         <button class="button button-assertive" style="margin-right:10px;margin-left:10px;"
-                ng-if="orderItem.isPeiSong&&orderItem.goodsOrderStatus=='已接单'&&orderItem.goods.goodsType=='零担'"
+                ng-if="!orderItem.isPeiSong&&orderItem.goodsOrderStatus=='已接单'&&orderItem.goods.goodsType=='零担'"
                 ng-click="peisong(orderItem.goodsOrderId)">发起城市配送
         </button>
         <button class="button button-assertive" style="margin-right:10px;margin-left:10px;"
