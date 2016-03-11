@@ -140,9 +140,22 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     return img;
   }
 
+  $scope.getCarrierEvaluation = function (item) {
+    io.socket.get('/order/carrierEvaluation/' + item.userId, function serverResponded(body, JWR) {
+      if (JWR.statusCode == 200) {
+        $scope.showMsg('请求失败,网络不给力！');
+        item.orderTotal = body.orderTotal;
+        item.evaluationScore = body.evaluationScore;
+      }
+    });
+  }
+
   //查看订单详情
   $scope.orderDetail = function (item) {
     $scope.orderItem = item;
+    if ($scope.orderItem.carrier) {
+      $scope.getCarrierEvaluation($scope.orderItem.carrier);
+    }
     $scope.detail.show();
   }
 
@@ -176,7 +189,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   };
 
   $scope.getDriver = function (item) {
-    io.socket.get('/user/'+item.userId, function serverResponded(user, JWR) {
+    io.socket.get('/user/' + item.userId, function serverResponded(user, JWR) {
       if (JWR.statusCode !== 200) {
         $scope.showMsg('请求失败,网络不给力！');
       }

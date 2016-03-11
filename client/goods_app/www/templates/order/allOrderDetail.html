@@ -97,8 +97,16 @@
               ng-src="{{orderItem.carrier.userType=='物流企业'?'img/enterprise.jpg':'img/driver.jpg'}}" width="65px"
               height="65px"></div>
             <div style="font-size: 16px;float: left;margin: -25px 0px 0px 10px;"
-                 ng-click="getDriver(orderItem.carrier)"><label>{{orderItem.carrier.userType=='物流企业'?
-              orderItem.carrier.enterpriseName+'('+orderItem.carrier.realName+')':orderItem.carrier.realName}}</label>
+                 ng-click="getDriver(orderItem.carrier)">
+              <label>{{orderItem.carrier.userType=='物流企业'?
+                orderItem.carrier.enterpriseName+'('+orderItem.carrier.realName+')':orderItem.carrier.realName}}</label>
+              <label ng-class="{'stared':orderItem.carrier.evaluationScore>=1,'star':orderItem.carrier.evaluationScore<1}"></label>
+              <label ng-class="{'stared':orderItem.carrier.evaluationScore>=2,'star':orderItem.carrier.evaluationScore<2}"></label>
+              <label ng-class="{'stared':orderItem.carrier.evaluationScore>=3,'star':orderItem.carrier.evaluationScore<3}"></label>
+              <label ng-class="{'stared':orderItem.carrier.evaluationScore>=4,'star':orderItem.carrier.evaluationScore<4}"></label>
+              <label ng-class="{'stared':orderItem.carrier.evaluationScore>=5,'star':orderItem.carrier.evaluationScore<5}"></label>
+              <label>{{orderItem.carrier.evaluationScore}}</label>
+              <label>{{orderItem.carrier.orderTotal}}单</label>
             </div>
             <div style="float: left;margin: 0px 10px 0px 50px;"><a href="tel:{{orderItem.carrier.phoneNumber}}"><img
               src="img/call.jpg" width="55px" height="55px"></a></div>

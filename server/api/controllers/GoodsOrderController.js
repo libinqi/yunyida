@@ -120,6 +120,14 @@ module.exports = {
             res.ok(data);
         });
     },
+    carrierEvaluation: function (req, res) {
+        var carrier = req.body.carrier;
+        var sql = "SELECT COUNT(*) as orderTotal,round(AVG(evaluationLevel),1) as evaluationScore FROM goodsorder WHERE goodsOrderStatus='已完成' AND carrier=" + carrier;
+        GoodsOrder.query(sql, function (err, rows) {
+            if (err) res.badRequest(err);
+            res.ok({body: rows[0]});
+        });
+    },
     addOrder: function (req, res) {
         var orderId = req.body.orderId;
         var userId = req.body.userId;
