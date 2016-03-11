@@ -140,35 +140,6 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     return img;
   }
 
-  $scope.getCarrierEvaluation = function (item) {
-    io.socket.get('/order/carrierEvaluation/' + item.userId, function serverResponded(body, JWR) {
-      if (JWR.statusCode == 200) {
-        $scope.showMsg('请求失败,网络不给力！');
-        item.orderTotal = body.orderTotal;
-        item.evaluationScore = body.evaluationScore;
-      }
-    });
-  }
-
-  //查看订单详情
-  $scope.orderDetail = function (item) {
-    $scope.orderItem = item;
-    if ($scope.orderItem.carrier) {
-      $scope.getCarrierEvaluation($scope.orderItem.carrier);
-    }
-    $scope.detail.show();
-  }
-
-  //触发弹出层事件
-  $ionicModal.fromTemplateUrl('templates/order/allOrderDetail.html ', {
-    scope: $scope
-  }).then(function (detail) {
-    $scope.detail = detail;
-  });
-  //关闭订单详情
-  $scope.closeDetail = function () {
-    $scope.detail.hide();
-  };
 
   $scope.driverInfo;
   $scope.driverItem;
@@ -202,12 +173,56 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
           }
           else {
             $scope.driverItem = body;
-            $scope.showDriverInfo();
+            //$scope.showDriverInfo();
           }
         });
       }
     });
   }
+
+  $scope.getCarrierOrder = function (item) {
+    io.socket.get('/order/carrierOrder', {
+      userId: item.userId,
+      page: 1,
+      rows: 50,
+      orderStatus: '已完成'
+    }, function serverResponded(data, JWR) {
+      if (JWR.statusCode == 200) {
+        item.orderList = data;
+      }
+    });
+  }
+
+  $scope.getCarrierEvaluation = function (item) {
+    io.socket.get('/order/carrierEvaluation', {carrier: item.userId}, function serverResponded(data, JWR) {
+      if (JWR.statusCode == 200) {
+        item.orderTotal = data.body.orderTotal;
+        item.evaluationScore = data.body.evaluationScore;
+      }
+    });
+  }
+
+  //查看订单详情
+  $scope.orderDetail = function (item) {
+    $scope.orderItem = item;
+    if ($scope.orderItem.carrier) {
+      $scope.getCarrierEvaluation($scope.orderItem.carrier);
+      $scope.getDriver($scope.orderItem.carrier);
+      $scope.getCarrierOrder($scope.orderItem.carrier);
+    }
+    $scope.detail.show();
+  }
+
+  //触发弹出层事件
+  $ionicModal.fromTemplateUrl('templates/order/allOrderDetail.html ', {
+    scope: $scope
+  }).then(function (detail) {
+    $scope.detail = detail;
+  });
+  //关闭订单详情
+  $scope.closeDetail = function () {
+    $scope.detail.hide();
+  };
 
   //取消订单
   $scope.cancelOrder = function (orderId) {

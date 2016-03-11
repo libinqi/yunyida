@@ -4,7 +4,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     return;
   }
 
-  window.plugins.jPushPlugin.setTagsWithAlias([UserInfo.data.userId, UserInfo.data.phoneNumber], UserInfo.data.userType);
+  //window.plugins.jPushPlugin.setTagsWithAlias([UserInfo.data.userId, UserInfo.data.phoneNumber], UserInfo.data.userType);
 
   var user = UserInfo.data;
   // var $scope = this;
@@ -613,6 +613,8 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
 
   $scope.getDriver = function (item) {
     $scope.driverInfo = item;
+    $scope.getCarrierOrder($scope.driverInfo);
+    $scope.getCarrierEvaluation($scope.driverInfo);
     var url = $scope.driverInfo.userType == '司机' ? '/driver/' + $scope.driverInfo.userId : '/enterprise/' + $scope.driverInfo.userId;
     io.socket.post(url, function serverResponded(body, JWR) {
       if (JWR.statusCode !== 200) {
@@ -621,6 +623,29 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       else {
         $scope.driverItem = body;
         $scope.showDriverInfo();
+      }
+    });
+  }
+
+
+  $scope.getCarrierOrder = function (item) {
+    io.socket.get('/order/carrierOrder', {
+      userId: item.userId,
+      page: 1,
+      rows: 50,
+      orderStatus: '已完成'
+    }, function serverResponded(data, JWR) {
+      if (JWR.statusCode == 200) {
+        item.orderList = data;
+      }
+    });
+  }
+
+  $scope.getCarrierEvaluation = function (item) {
+    io.socket.get('/order/carrierEvaluation', {carrier: item.userId}, function serverResponded(data, JWR) {
+      if (JWR.statusCode == 200) {
+        item.orderTotal = data.body.orderTotal;
+        item.evaluationScore = data.body.evaluationScore;
       }
     });
   }

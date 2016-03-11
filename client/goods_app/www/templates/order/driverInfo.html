@@ -6,65 +6,42 @@
 </ion-header-bar>
 <ion-view view-title="{{driverInfo.userType}}">
   <ion-content class="padding">
-    <section ng-if="driverInfo.userType=='物流企业'&&driverInfo.logo" id="user-bg" class="relative" style="height: auto;">
-      <div class="user-ava relative" style="height: auto;top:0px;">
-        <div>
-          <!-- <img ng-src="{{avaImg}}" alt="" class="ava"> -->
-          <img src="img/ava-block.png" alt="" class="ava"
-               style="background-image:url('{{driverInfo.logo}}');margin-left: 40%">
-        </div>
-      </div>
-    </section>
-    <section ng-if="driverInfo.userType=='司机'&&driverItem.cars[0].carImage">
-      <div>
-        <img ng-src="{{driverItem.cars[0].carImage}}" width="100%" height="100px">
-      </div>
-    </section>
-    <section>
+    <section ng-if="driverInfo.userType=='物流企业'" class="relative" style="height: auto;">
       <div style="width:100%;margin:10px auto;text-ailgn:center;">
         <div class="card" style="margin:5px 0px !important;">
           <div class="item item-divider">
             {{driverInfo.userType}}信息
           </div>
           <div class="item item-text-wrap">
-            <!-- 承运人信息 -->
+            <!-- 物流企业信息 -->
             <label class="item-detail">
-              <div class="order-detail-label">承运人：</div>
-              <label>{{driverInfo.enterpriseName?driverInfo.enterpriseName:driverInfo.realName;}}</label>
+              <label style="width: 20em;font-size: 16px;font-weight: bold;text-align: center;height: 30px;">{{driverInfo.enterpriseName}}</label>
+              <label ng-if="orderItem.carrier.evaluationScore"
+                     style="border-radius:5px;border:1px solid #ffbd08;background: #ffbd08;padding:0px 10px 0px 10px;color: #ffffff;">{{orderItem.carrier.evaluationScore}}</label>
             </label>
-            <label ng-if="driverInfo.userType=='物流企业'" class="item-detail">
-              <div class="order-detail-label">地址：</div>
+            <label class="item-detail">
+              <div style="width:35%" class="order-detail-label">公司详细地址：</div>
               <label>{{driverInfo.city+driverInfo.street+driverInfo.address}}</label>
             </label>
             <label class="item-detail">
-              <div class="order-detail-label">电话：</div>
+              <div style="width:35%" class="order-detail-label">联系人：</div>
+              <label>{{driverInfo.realName}}</label>
+            </label>
+            <label class="item-detail">
+              <div style="width:35%" class="order-detail-label">身份证号码：</div>
+              <label>{{driverInfo.cardNumber}}</label>
+            </label>
+            <label class="item-detail">
+              <div style="width:35%" class="order-detail-label">联系电话：</div>
               <label>{{driverInfo.phoneNumber}}</label>
             </label>
-            <!-- 司机信息 -->
-            <div ng-if="driverInfo.userType=='司机'">
+            <label ng-if="driverItem.businessLicenseNumber" class="item-detail">
+              <div style="width:35%" class="order-detail-label">营业执照编号：</div>
+              <label>{{driverItem.businessLicenseNumber}}</label>
+            </label>
+            <div>
               <label class="item-detail">
-                <div class="order-detail-label">车辆信息：</div>
-                <label>{{driverItem.cars[0].carNumber+' '+driverItem.cars[0].carType+' '+driverItem.cars[0].carLength}}</label>
-              </label>
-            </div>
-            <div ng-if="driverInfo.userType=='司机'" class="padding" style="text-align: center">
-              <div ng-if="driverItem.drivingLicenseImage" style="width: 33%;float: left; ">
-                <img ng-src="{{driverItem.drivingLicenseImage}}" class="icon ion-chevron-right icon-accessory"
-                     style="color: #ACACAC;width: 46px;height: 46px;"/>
-              </div>
-              <div ng-if="driverItem.driverLicenseImage" style="width: 33%;float: left;">
-                <img ng-src="{{driverItem.driverLicenseImage}}" class="icon ion-chevron-right icon-accessory"
-                     style="color: #ACACAC;width: 46px;height: 46px;"/>
-              </div>
-              <div ng-if="driverItem.cars[0].carImage" style="width: 33%;float: left;">
-                <img ng-src="{{driverItem.cars[0].carImage}}" class="icon ion-chevron-right icon-accessory"
-                     style="color: #ACACAC;width: 46px;height: 46px;"/>
-              </div>
-            </div>
-            <!-- 物流企业信息 -->
-            <div ng-if="driverInfo.userType=='物流企业'">
-              <label class="item-detail">
-                <div class="order-detail-label">业务类型：</div>
+                <div style="width:35%" class="order-detail-label">经营业务类型：</div>
                 <label>{{driverItem.businessType}}</label>
               </label>
             </div>
@@ -78,9 +55,103 @@
           </div>
           <div class="item item-text-wrap">
             <label class="item-detail" ng-repeat="line in driverInfo.goodsLines">
-              <!--<div class="order-detail-label2" style="font-size: 16px;"></div>-->
               <label>{{line.sCity+line.sStreet+line.sAddress+' → '+line.eCity+line.eStreet+line.eAddress}}</label>
             </label>
+          </div>
+        </div>
+        <!-- 订单评价 -->
+        <div ng-if="orderItem.carrier.orderTotal&&orderItem.carrier.orderTotal>0" class="card"
+             style="margin:10px 0px !important;">
+          <div class="item item-divider">
+            累计完成订单数—{{orderItem.carrier.orderTotal}}单
+          </div>
+          <div style="padding: 0px" class="item item-text-wrap">
+            <div class="list">
+              <a class="item item-thumbnail-right" href="#" ng-repeat="order in orderItem.carrier.orderList">
+                <span style="display: inline-block">
+                  <h2>{{order.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</h2>
+                  <p>{{order.evaluationContent}}</p>
+                </span>
+                <span style="margin:10px 15px 0px 0px;float: right">
+                  <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
+                         ng-class="{'stared':orderItem.carrier.evaluationScore>=1,'star':orderItem.carrier.evaluationScore<1}"></label>
+                  <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
+                         ng-class="{'stared':orderItem.carrier.evaluationScore>=2,'star':orderItem.carrier.evaluationScore<2}"></label>
+                  <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
+                         ng-class="{'stared':orderItem.carrier.evaluationScore>=3,'star':orderItem.carrier.evaluationScore<3}"></label>
+                  <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
+                         ng-class="{'stared':orderItem.carrier.evaluationScore>=4,'star':orderItem.carrier.evaluationScore<4}"></label>
+                  <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
+                         ng-class="{'stared':orderItem.carrier.evaluationScore>=5,'star':orderItem.carrier.evaluationScore<5}"></label>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section ng-if="driverInfo.userType=='司机'">
+      <div>
+        <img ng-src="{{driverItem.cars[0].carImage}}" width="100%" height="100px">
+      </div>
+      <div style="width:100%;margin:10px auto;text-ailgn:center;">
+        <div class="card" style="margin:5px 0px !important;">
+          <div class="item item-divider">
+            {{driverInfo.userType}}信息
+          </div>
+          <div class="item item-text-wrap">
+            <!-- 司机信息 -->
+            <!--<label class="item-detail">-->
+              <!--<div style="width:35%" class="order-detail-label">司机名称：</div>-->
+              <!--<label>{{driverInfo.realName}}</label>-->
+            <!--</label>-->
+            <label class="item-detail">
+              <div style="width:35%" class="order-detail-label">车牌号：</div>
+              <label>{{driverItem.cars[0].carNumber}}</label>
+              <label ng-if="driverInfo.evaluationScore"
+                     style="border-radius:5px;border:1px solid #ffbd08;background: #ffbd08;padding:0px 10px 0px 10px;color: #ffffff;">{{driverInfo.evaluationScore}}</label>
+            </label>
+            <label class="item-detail">
+              <div style="width:35%" class="order-detail-label">车型：</div>
+              <label>{{driverItem.cars[0].carNumber}}</label>
+            </label>
+            <label class="item-detail">
+              <div style="width:35%" class="order-detail-label">车长：</div>
+              <label>{{driverItem.cars[0].carNumber}}</label>
+            </label>
+            <label class="item-detail">
+              <div style="width:35%" class="order-detail-label">联系电话：</div>
+              <label>{{driverInfo.phoneNumber}}</label>
+            </label>
+          </div>
+        </div>
+        <!-- 订单评价 -->
+        <div ng-if="orderItem.carrier.orderTotal&&orderItem.carrier.orderTotal>0" class="card"
+             style="margin:10px 0px !important;">
+          <div class="item item-divider">
+            累计完成订单数—{{orderItem.carrier.orderTotal}}单
+          </div>
+          <div style="padding: 0px" class="item item-text-wrap">
+            <div class="list">
+              <a class="item item-thumbnail-right" href="#" ng-repeat="order in orderItem.carrier.orderList">
+                <span style="display: inline-block">
+                  <h2>{{order.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</h2>
+                  <p>{{order.evaluationContent}}</p>
+                </span>
+                <span style="margin:10px 15px 0px 0px;float: right">
+                  <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
+                         ng-class="{'stared':orderItem.carrier.evaluationScore>=1,'star':orderItem.carrier.evaluationScore<1}"></label>
+                  <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
+                         ng-class="{'stared':orderItem.carrier.evaluationScore>=2,'star':orderItem.carrier.evaluationScore<2}"></label>
+                  <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
+                         ng-class="{'stared':orderItem.carrier.evaluationScore>=3,'star':orderItem.carrier.evaluationScore<3}"></label>
+                  <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
+                         ng-class="{'stared':orderItem.carrier.evaluationScore>=4,'star':orderItem.carrier.evaluationScore<4}"></label>
+                  <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
+                         ng-class="{'stared':orderItem.carrier.evaluationScore>=5,'star':orderItem.carrier.evaluationScore<5}"></label>
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -89,7 +160,6 @@
       <a class="button button-assertive" style="margin-right:10px;margin-left:10px;"
          href="tel:{{driverInfo.phoneNumber}}">马上联系
       </a>
-    </div>
     </div>
   </ion-content>
 </ion-view>
