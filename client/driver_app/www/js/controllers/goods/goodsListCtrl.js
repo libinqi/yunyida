@@ -96,14 +96,6 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
   //  $scope.loadMore();
   //});
 
-  if ($scope.user.userType == '物流企业') {
-    io.socket.get('/enterprise/' + $scope.user.userId, function serverResponded(body, JWR) {
-      if (JWR.statusCode == 200) {
-        $scope.user.enterprise = body;
-      }
-    });
-  }
-
   //货物查询
   $scope.goodsQuery = function () {
     $scope.queryModal.show();
@@ -139,6 +131,13 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
   //查看货物详情
   $scope.goodsDetail = function (item) {
     $scope.goodsItem = item;
+    if ($scope.user.userType == '物流企业') {
+      io.socket.get('/enterprise/' + $scope.user.userId, function serverResponded(body, JWR) {
+        if (JWR.statusCode == 200) {
+          $scope.enterprise = body;
+        }
+      });
+    }
     $scope.detail.show();
   }
 
@@ -160,7 +159,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
       return false;
     }
     else if ($scope.user.userType == '物流企业'
-      && ($scope.user.enterprise && $scope.user.enterprise.businessType.indexOf(goodsItem.goodsType) < 0)) {
+      && ($scope.enterprise && $scope.enterprise.businessType.indexOf(goodsItem.goodsType) < 0)) {
       $scope.showMsg('您暂时无法受理' + goodsItem.goodsType + '业务！');
       return false;
     }

@@ -23,25 +23,25 @@
           </label>
           <label class="item-detail" style="margin-left:27px">
             <div class="order-detail-label">地址：</div>
-            <label>{{orderItem.goods.sCity+orderItem.goods.sStreet+orderItem.goods.sAddress}}</label>
+            <label style="width: 64%;">{{orderItem.goods.sCity+orderItem.goods.sStreet+orderItem.goods.sAddress}}</label>
           </label>
           <label class="item-detail" style="margin-left:27px;">
             <div class="order-detail-label">电话：</div>
-            <label>{{orderItem.goods.sPhoneNumber}}</label>
+            <label style="width: 64%;">{{orderItem.goods.sPhoneNumber}}</label>
           </label>
           <!-- 收货人信息 -->
           <label class="item-detail" style="margin-top:10px">
             <img src="img/person.png" width="20px" height="20px">
             <div class="order-detail-label" style="font-size: 16px;">收货人：</div>
-            <label>{{orderItem.goods.consignee}}</label>
+            <label style="width: 64%;">{{orderItem.goods.consignee}}</label>
           </label>
           <label class="item-detail" style="margin-left:27px">
             <div class="order-detail-label">地址：</div>
-            <label>{{orderItem.goods.eCity+orderItem.goods.eStreet+orderItem.goods.eAddress}}</label>
+            <label style="width: 64%;">{{orderItem.goods.eCity+orderItem.goods.eStreet+orderItem.goods.eAddress}}</label>
           </label>
           <div class="item-detail" style="margin-left:27px;">
             <div class="order-detail-label">电话：</div>
-            <a href="tel:{{orderItem.goods.ePhoneNumber}}">{{orderItem.goods.ePhoneNumber}}</a>
+            <a style="width: 64%;" href="tel:{{orderItem.goods.ePhoneNumber}}">{{orderItem.goods.ePhoneNumber}}</a>
           </div>
         </div>
       </div>
@@ -53,14 +53,14 @@
         <div class="item item-text-wrap">
           <label class="item-detail">
             <div class="order-detail-label2" style="font-size: 16px;">货物信息：</div>
-            <label>{{orderItem.goods.goodsName+' '+orderItem.goods.goodsNumber+orderItem.goods.goodsUnit}}</label>
+            <label style="width: 64%;">{{orderItem.goods.goodsName+' '+orderItem.goods.goodsNumber+orderItem.goods.goodsUnit}}</label>
           </label>
           <!-- 订单类型 -->
           <label class="item-detail">
             <div class="order-detail-label2" style="font-size: 16px;">订单类型：</div>
-            <label ng-if="orderItem.goods.goodsType=='零担'">{{orderItem.goods.goodsType}}-{{orderItem.goods.publishType}}
+            <label style="width: 64%;" ng-if="orderItem.goods.goodsType=='零担'">{{orderItem.goods.goodsType}}-{{orderItem.goods.publishType}}
               <span style="color: #ef6600">{{orderItem.goods.goodsAttribute}}</span></label>
-            <label ng-if="orderItem.goods.goodsType!='零担'">{{orderItem.goods.goodsType}} <span style="color: #ef6600">{{orderItem.goods.goodsAttribute}}</span></label>
+            <label style="width: 64%;" ng-if="orderItem.goods.goodsType!='零担'">{{orderItem.goods.goodsType}} <span style="color: #ef6600">{{orderItem.goods.goodsAttribute}}</span></label>
           </label>
           <!-- 需求车辆 -->
           <!--<label class="item-detail" ng-if="orderItem.goods.carType!='不限'">-->
@@ -76,7 +76,7 @@
           <!-- 备注说明 -->
           <label class="item-detail" ng-if="orderItem.goods.remark">
             <div class="order-detail-label2" style="font-size: 16px;">备注说明：</div>
-            <label>{{orderItem.goods.remark}}</label>
+            <label style="width: 64%;">{{orderItem.goods.remark}}</label>
           </label>
           <!-- 创建时间 -->
           <label class="item-detail">
@@ -90,7 +90,7 @@
         <div class="item item-divider">
           承运人
         </div>
-        <div class="item item-text-wrap">
+        <div style="padding: 5px;" class="item item-text-wrap">
           <!-- 物流企业信息 -->
           <div class="item-detail" ng-if="orderItem.carrier.userType=='物流企业'">
             <div style="float: left;" ng-click="showDriverInfo()">
@@ -117,7 +117,7 @@
               src="img/call.jpg" width="55px" height="55px"></a></div>
           </div>
           <!-- 司机信息 -->
-          <div class="item-detail" ng-if="orderItem.carrier.userType=='司机'">
+          <div style="padding: 5px;" class="item-detail" ng-if="orderItem.carrier.userType=='司机'">
             <div style="float: left;" ng-click="showDriverInfo()">
               <img src="img/driver.jpg" width="65px" height="65px"></div>
             <div style="font-size: 16px;float: left;margin: -10px 0px 0px 5px;"

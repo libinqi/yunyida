@@ -19,7 +19,7 @@ angular.module('starter.services').factory('UserInfo', function() {
     },
 
     add: function(k, v) {
-      window.localStorage[k] = userinfo[k] = v;
+      window.localStorage[k] = userInfo[k] = v;
     },
 
     addLong: function(k, v) {
