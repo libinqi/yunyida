@@ -15,9 +15,9 @@
           <div class="item item-text-wrap">
             <!-- 物流企业信息 -->
             <label class="item-detail">
-              <label style="width: 20em;font-size: 16px;font-weight: bold;text-align: center;height: 30px;">{{driverInfo.enterpriseName}}</label>
+              <label style="width: 22em;font-size: 16px;font-weight: bold;text-align: center;">{{driverInfo.enterpriseName}}</label>
               <label ng-if="orderItem.carrier.evaluationScore"
-                     style="border-radius:5px;border:1px solid #ffbd08;background: #ffbd08;padding:0px 10px 0px 10px;color: #ffffff;">{{orderItem.carrier.evaluationScore}}</label>
+                     style="background: url(img/fen.png) no-repeat;padding:5px 10px 0px 40px;color: #ffffff; width: 80px;height: 29px;background-size: 70px 29px;">{{orderItem.carrier.evaluationScore.length===1?orderItem.carrier.evaluationScore+'.0':orderItem.carrier.evaluationScore}}</label>
             </label>
             <label class="item-detail">
               <div style="width:35%" class="order-detail-label">公司详细地址：</div>
@@ -25,11 +25,11 @@
             </label>
             <label class="item-detail">
               <div style="width:35%" class="order-detail-label">联系人：</div>
-              <label>{{driverInfo.realName}}</label>
+              <label>{{driverInfo.realName|handleRealName}}</label>
             </label>
             <label class="item-detail">
               <div style="width:35%" class="order-detail-label">身份证号码：</div>
-              <label>{{driverInfo.cardNumber}}</label>
+              <label>{{driverInfo.cardNumber|handleCardNumber}}</label>
             </label>
             <label class="item-detail">
               <div style="width:35%" class="order-detail-label">联系电话：</div>
@@ -37,7 +37,7 @@
             </label>
             <label ng-if="driverItem.businessLicenseNumber" class="item-detail">
               <div style="width:35%" class="order-detail-label">营业执照编号：</div>
-              <label>{{driverItem.businessLicenseNumber}}</label>
+              <label>{{driverItem.businessLicenseNumber|handleBusinessLicenseNumber}}</label>
             </label>
             <div>
               <label class="item-detail">
@@ -55,7 +55,8 @@
           </div>
           <div class="item item-text-wrap">
             <label class="item-detail" ng-repeat="line in driverInfo.goodsLines">
-              <label>{{line.sCity+line.sStreet+line.sAddress+' → '+line.eCity+line.eStreet+line.eAddress}}</label>
+              <label style="width: 100%">{{line.sCity+line.sStreet+line.sAddress+' →
+                '+line.eCity+line.eStreet+line.eAddress}}</label>
             </label>
           </div>
         </div>
@@ -63,16 +64,16 @@
         <div ng-if="orderItem.carrier.orderTotal&&orderItem.carrier.orderTotal>0" class="card"
              style="margin:10px 0px !important;">
           <div class="item item-divider">
-            累计完成订单数—{{orderItem.carrier.orderTotal}}单
+            累计完成订单数({{orderItem.carrier.orderTotal}}单)
           </div>
           <div style="padding: 0px" class="item item-text-wrap">
             <div class="list">
               <a class="item item-thumbnail-right" href="#" ng-repeat="order in orderItem.carrier.orderList">
-                <span style="display: inline-block">
+                <span style="display: inline-block;width: 45%;">
                   <h2>{{order.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</h2>
                   <p>{{order.evaluationContent}}</p>
                 </span>
-                <span style="margin:10px 15px 0px 0px;float: right">
+                <span style="margin:10px 15px 0px 0px;float: right;width: 45%;text-align: right;">
                   <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
                          ng-class="{'stared':orderItem.carrier.evaluationScore>=1,'star':orderItem.carrier.evaluationScore<1}"></label>
                   <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
@@ -102,8 +103,8 @@
           <div class="item item-text-wrap">
             <!-- 司机信息 -->
             <!--<label class="item-detail">-->
-              <!--<div style="width:35%" class="order-detail-label">司机名称：</div>-->
-              <!--<label>{{driverInfo.realName}}</label>-->
+            <!--<div style="width:35%" class="order-detail-label">司机名称：</div>-->
+            <!--<label>{{driverInfo.realName}}</label>-->
             <!--</label>-->
             <label class="item-detail">
               <div style="width:35%" class="order-detail-label">车牌号：</div>
@@ -134,11 +135,11 @@
           <div style="padding: 0px" class="item item-text-wrap">
             <div class="list">
               <a class="item item-thumbnail-right" href="#" ng-repeat="order in orderItem.carrier.orderList">
-                <span style="display: inline-block">
+                <span style="display: inline-block;width: 45%;">
                   <h2>{{order.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</h2>
                   <p>{{order.evaluationContent}}</p>
                 </span>
-                <span style="margin:10px 15px 0px 0px;float: right">
+                <span style="margin:10px 15px 0px 0px;float: right;width: 45%;text-align: right;">
                   <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
                          ng-class="{'stared':orderItem.carrier.evaluationScore>=1,'star':orderItem.carrier.evaluationScore<1}"></label>
                   <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"

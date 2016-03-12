@@ -198,6 +198,9 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
       if (JWR.statusCode == 200) {
         item.orderTotal = data.body.orderTotal;
         item.evaluationScore = data.body.evaluationScore;
+        if (item.evaluationScore) {
+          item.evaluationScore = item.evaluationScore.toString();
+        }
       }
     });
   }

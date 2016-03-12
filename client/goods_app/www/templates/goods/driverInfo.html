@@ -25,11 +25,11 @@
             </label>
             <label class="item-detail">
               <div style="width:35%" class="order-detail-label">联系人：</div>
-              <label>{{driverInfo.realName}}</label>
+              <label>{{driverInfo.realName|handleRealName}}</label>
             </label>
             <label class="item-detail">
               <div style="width:35%" class="order-detail-label">身份证号码：</div>
-              <label>{{driverInfo.cardNumber}}</label>
+              <label>{{driverInfo.cardNumber|handleCardNumber}}</label>
             </label>
             <label class="item-detail">
               <div style="width:35%" class="order-detail-label">联系电话：</div>
@@ -37,7 +37,7 @@
             </label>
             <label ng-if="driverItem.businessLicenseNumber" class="item-detail">
               <div style="width:35%" class="order-detail-label">营业执照编号：</div>
-              <label>{{driverItem.businessLicenseNumber}}</label>
+              <label>{{driverItem.businessLicenseNumber|handleBusinessLicenseNumber}}</label>
             </label>
             <div>
               <label class="item-detail">

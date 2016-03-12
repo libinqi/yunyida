@@ -109,7 +109,7 @@
                      ng-class="{'stared':orderItem.carrier.evaluationScore>=4,'star':orderItem.carrier.evaluationScore<4}"></label>
               <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
                      ng-class="{'stared':orderItem.carrier.evaluationScore>=5,'star':orderItem.carrier.evaluationScore<5}"></label>
-              <label ng-if="orderItem.carrier.evaluationScore" style="border-radius:5px;border:1px solid #ffbd08;background: #ffbd08;padding:0px 10px 0px 10px;color: #ffffff;">{{orderItem.carrier.evaluationScore}}</label>
+              <label ng-if="orderItem.carrier.evaluationScore" style="border-radius:5px;border:1px solid #ffbd08;background: #ffbd08;padding:0px 10px 0px 10px;color: #ffffff;">{{orderItem.carrier.evaluationScore.length===1?orderItem.carrier.evaluationScore+'.0':orderItem.carrier.evaluationScore}}</label>
               <label style="margin-left:5px;">{{orderItem.carrier.orderTotal}}单</label>
                 </span>
             </div>
@@ -135,7 +135,7 @@
                      ng-class="{'stared':orderItem.carrier.evaluationScore>=4,'star':orderItem.carrier.evaluationScore<4}"></label>
               <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
                      ng-class="{'stared':orderItem.carrier.evaluationScore>=5,'star':orderItem.carrier.evaluationScore<5}"></label>
-              <label ng-if="orderItem.carrier.evaluationScore" style="border-radius:5px;border:1px solid #ffbd08;background: #ffbd08;padding:0px 10px 0px 10px;color: #ffffff;">{{orderItem.carrier.evaluationScore}}</label>
+              <label ng-if="orderItem.carrier.evaluationScore" style="border-radius:5px;border:1px solid #ffbd08;background: #ffbd08;padding:0px 10px 0px 10px;color: #ffffff;">{{orderItem.carrier.evaluationScore.length===1?orderItem.carrier.evaluationScore+'.0':orderItem.carrier.evaluationScore}}</label>
               <label style="margin-left:5px;">{{orderItem.carrier.orderTotal}}单</label>
                 </span>
             </div>
