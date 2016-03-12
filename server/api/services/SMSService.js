@@ -12,7 +12,7 @@ module.exports = {
             code += parseInt(Math.random() * (9 - 1 + 1) + 1);
         }
         app.smsSend({
-            sms_free_sign_name: '用户注册验证码',
+            sms_free_sign_name: '注册验证',
             sms_param: {"code": code, "product": "云驿达APP"},
             rec_num: phoneNumber,
             sms_template_code: 'SMS_5535393'
@@ -30,7 +30,7 @@ module.exports = {
             code += parseInt(Math.random() * (9 - 1 + 1) + 1);
         }
         app.smsSend({
-            sms_free_sign_name: '修改密码验证码',
+            sms_free_sign_name: '身份验证',
             sms_param: {"code": code, "product": "云驿达APP"},
             rec_num: phoneNumber,
             sms_template_code: 'SMS_5535391'
@@ -44,7 +44,7 @@ module.exports = {
     // 发送找回密码验证码
     SendAudit: function (phoneNumber, name, cb) {
         app.smsSend({
-            sms_free_sign_name: '审核通过通知',
+            sms_free_sign_name: '变更验证',
             sms_param: {"name": name, "product": "云驿达APP"},
             rec_num: phoneNumber,
             sms_template_code: 'SMS_5895451'
