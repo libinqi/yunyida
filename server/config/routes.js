@@ -59,7 +59,8 @@ module.exports.routes = {
     'post /user/update': 'UserController.update',
     'post /user/uploadAvatar': 'UserController.uploadAvatar',
     '/user/avatar/:id': 'UserController.avatar',
-    '/user/getValidCode': 'UserController.getValidCode',
+    '/user/getRegValidCode': 'UserController.getRegValidCode',
+    '/user/getFindValidCode': 'UserController.getFindValidCode',
     '/user/checkValidCode': 'UserController.checkValidCode',
 
     /***************************************************************************

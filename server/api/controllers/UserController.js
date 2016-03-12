@@ -171,9 +171,18 @@ module.exports = {
                 }
             });
     },
-    getValidCode: function (req, res) {
+    getRegValidCode: function (req, res) {
         var phoneNumber = req.body.phoneNumber || req.query.phoneNumber;
-        SMSService.Send(phoneNumber, function (code) {
+        SMSService.SendRegCode(phoneNumber, function (code) {
+            if (code) {
+                req.session.validCode = code;
+                res.ok({validCode: code});
+            }
+        });
+    },
+    getFindValidCode: function (req, res) {
+        var phoneNumber = req.body.phoneNumber || req.query.phoneNumber;
+        SMSService.SendFindCode(phoneNumber, function (code) {
             if (code) {
                 req.session.validCode = code;
                 res.ok({validCode: code});

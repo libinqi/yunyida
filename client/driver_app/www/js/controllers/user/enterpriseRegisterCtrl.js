@@ -16,7 +16,8 @@ angular.module('starter.controllers').controller('EnterpriseRegisterCtrl', funct
       businessLicenseNumber: '',//营业执照编号
       businessType: '',//业务类型
       lng: '',//经度
-      lat: ''//纬度
+      lat: '',//纬度
+      status: false
     };
 
     $scope.businessTypeList = [
@@ -152,11 +153,11 @@ angular.module('starter.controllers').controller('EnterpriseRegisterCtrl', funct
         if (JWR.statusCode !== 200) {
           $scope.showMsg('手机号码已存在，请重新输入...');
         } else {
-          io.socket.get('/user/getValidCode', {
+          io.socket.get('/user/getRegValidCode', {
             phoneNumber: $scope.userData.phoneNumber
           }, function serverResponded(body, JWR) {
             if (JWR.statusCode == 200) {
-              $scope.formData.validCode = body.validCode;
+              //$scope.formData.validCode = body.validCode;
               $scope.formData.securityCode = body.validCode;
               //console.log($scope.formData.validCode);
               $scope.timeOut();

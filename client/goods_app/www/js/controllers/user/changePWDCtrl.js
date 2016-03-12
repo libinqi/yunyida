@@ -58,12 +58,12 @@ angular.module('starter.controllers').controller('ChangePWDCtrl', function($scop
       if (JWR.statusCode == 200) {
         $scope.showMsg('手机号码不存在，请重新输入...');
       } else {
-        io.socket.get('/user/getValidCode', {
+        io.socket.get('/user/getFindValidCode', {
           phoneNumber: $scope.formData.phoneNumber
         }, function serverResponded(body, JWR) {
           if (JWR.statusCode == 200) {
-            $scope.formData.validCode = body.validCode;
-            console.log($scope.formData.validCode);
+            $scope.formData.securityCode = body.validCode;
+            //console.log($scope.formData.validCode);
             $scope.timeOut();
           }
           else {

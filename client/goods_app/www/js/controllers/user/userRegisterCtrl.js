@@ -144,11 +144,11 @@ angular.module('starter.controllers').controller('UserRegisterCtrl', function ($
         if (JWR.statusCode !== 200) {
           $scope.showMsg('手机号码已存在，请重新输入...');
         } else {
-          io.socket.get('/user/getValidCode', {
+          io.socket.get('/user/getRegValidCode', {
             phoneNumber: $scope.userData.phoneNumber
           }, function serverResponded(body, JWR) {
             if (JWR.statusCode == 200) {
-              $scope.formData.validCode = body.validCode;
+              //$scope.formData.validCode = body.validCode;
               $scope.formData.securityCode = body.validCode;
               //console.log($scope.formData.validCode);
               $scope.timeOut();

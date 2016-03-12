@@ -154,6 +154,11 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
 
   $scope.addOrder = function (goodsItem) {
     var goodsOrder = goodsItem.goodsOrders[0];
+    if(!$scope.user.status)
+    {
+      $scope.showMsg("您的账号未通过审核,暂时无法受理业务");
+      return false;
+    }
     if ($scope.user.userType == '司机' && goodsItem.goodsType == '零担') {
       $scope.showMsg('司机无法受理零担业务！');
       return false;

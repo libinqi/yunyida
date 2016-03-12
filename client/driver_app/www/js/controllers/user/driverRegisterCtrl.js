@@ -20,7 +20,8 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
       carLength: '',//车长
       carImage: '',//车辆图片
       lng: '',//经度
-      lat: ''//纬度
+      lat: '',//纬度
+      status: false
     };
     $scope.carLengthList = [];
 
@@ -159,11 +160,11 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
         if (JWR.statusCode !== 200) {
           $scope.showMsg('手机号码已存在，请重新输入...');
         } else {
-          io.socket.get('/user/getValidCode', {
+          io.socket.get('/user/getRegValidCode', {
             phoneNumber: $scope.userData.phoneNumber
           }, function serverResponded(body, JWR) {
             if (JWR.statusCode == 200) {
-              $scope.formData.validCode = body.validCode;
+              //$scope.formData.validCode = body.validCode;
               $scope.formData.securityCode = body.validCode;
               //console.log($scope.formData.validCode);
               $scope.timeOut();
@@ -398,10 +399,9 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
         $scope.showMsg('证件号码不能为空');
         return false;
       }
-      if(reg.test($scope.userData.cardNumber) === false)
-      {
+      if (reg.test($scope.userData.cardNumber) === false) {
         $scope.showMsg('证件号码不正确');
-        return  false;
+        return false;
       }
       if (!$scope.userData.carNumber) {
         $scope.showMsg('车牌号不能为空');
