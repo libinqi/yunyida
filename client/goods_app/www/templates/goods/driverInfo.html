@@ -33,7 +33,7 @@
             </label>
             <label class="item-detail">
               <div style="width:35%" class="order-detail-label">联系电话：</div>
-              <label>{{driverInfo.phoneNumber}}</label>
+              <label>{{driverInfo.phoneNumber|handlePhone}}</label>
             </label>
             <label ng-if="driverItem.businessLicenseNumber" class="item-detail">
               <div style="width:35%" class="order-detail-label">营业执照编号：</div>
