@@ -65,6 +65,8 @@ app.controller('infoAuditDriverListCtrl', ['$scope', '$http', 'dialog', '$sails'
             .success(function (data) {
                 dialog.notify((status ? '启用' : '停用') + '成功！', 'success');
                 $scope.getDriverList();
+                $sails.post('/driver/audit', {status:status,phoneNumber:item.phoneNumber,name:item.realName})
+                    .success(function (data) {});
             })
             .error(function (data) {
                 item.status = !status;

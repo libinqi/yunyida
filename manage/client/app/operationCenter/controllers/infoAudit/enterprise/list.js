@@ -65,6 +65,8 @@ app.controller('infoAuditEnterpriseListCtrl', ['$scope', '$http', 'dialog', '$sa
             .success(function (data) {
                 dialog.notify((status ? '启用' : '停用') + '成功！', 'success');
                 $scope.getEnterpriserList();
+                $sails.post('/enterprise/audit', {status:status,phoneNumber:item.phoneNumber,name:item.enterpriseName})
+                    .success(function (data) {});
             })
             .error(function (data) {
                 item.status = !status;

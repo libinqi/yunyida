@@ -107,5 +107,13 @@ module.exports = {
             }
         })
     },
+    audit: function (req, res) {
+        var data_from = req.params.all();
+        if(data_from.status)
+        {
+            SMSService.SendAudit(data_from.phoneNumber,data_from.name);
+            res.ok();
+        }
+    }
 };
 
