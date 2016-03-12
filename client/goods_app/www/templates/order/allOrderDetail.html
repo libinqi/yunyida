@@ -98,7 +98,7 @@
             <div style="font-size: 16px;float: left;margin: -10px 0px 0px 5px;"
                  ng-click="showDriverInfo()">
               <label>{{orderItem.carrier.enterpriseName+'('+orderItem.carrier.realName+')'}}</label>
-              <span style="display: inline-block;margin-top: 15px">
+              <span style="display: inline-block;margin-top: 15px;width: 100%;">
               <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
                      ng-class="{'stared':orderItem.carrier.evaluationScore>=1,'star':orderItem.carrier.evaluationScore<1}"></label>
               <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
@@ -124,7 +124,7 @@
                  ng-click="showDriverInfo()">
               <label>{{orderItem.carrier.realName+'●'+driverItem.cars[0].carNumber}}</label><br/>
               <label>{{driverItem.cars[0].carType+'-'+driverItem.cars[0].carLength}}</label>
-              <span style="display: inline-block;margin-top: 5px">
+              <span style="display: inline-block;margin-top: 5px;width: 100%;">
               <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
                      ng-class="{'stared':orderItem.carrier.evaluationScore>=1,'star':orderItem.carrier.evaluationScore<1}"></label>
               <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
