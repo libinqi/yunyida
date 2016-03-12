@@ -165,7 +165,7 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
           }, function serverResponded(body, JWR) {
             if (JWR.statusCode == 200) {
               //$scope.formData.validCode = body.validCode;
-              $scope.formData.securityCode = body.validCode;
+              //$scope.formData.securityCode = body.validCode;
               //console.log($scope.formData.validCode);
               $scope.timeOut();
             }

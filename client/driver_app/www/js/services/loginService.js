@@ -47,9 +47,9 @@ angular.module('starter.services').factory('loginService', function($http) {
           if (body.userType == '货主') {
             cb('您是货主用户，不能登录！');
           }
-          else if (!body.status) {
-            cb('您的账号异常,不允许登录！');
-          }
+          //else if (!body.status) {
+          //  cb('您的账号异常,不允许登录！');
+          //}
           else {
             body.userName = username;
             body.password = password;

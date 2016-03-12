@@ -154,8 +154,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
 
   $scope.addOrder = function (goodsItem) {
     var goodsOrder = goodsItem.goodsOrders[0];
-    if(!$scope.user.status)
-    {
+    if (!$scope.user.status || $scope.user.status == 'false') {
       $scope.showMsg("您的账号未通过审核,暂时无法受理业务");
       return false;
     }
@@ -189,7 +188,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
               }
               },
               {
-                text: '确定', type: 'button-assertive', onTap: function (e) {
+                text: '确定', type: 'button-positive', onTap: function (e) {
                 return true;
               }
               }
@@ -224,7 +223,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
                     }
                     },
                     {
-                      text: '确定', type: 'button-assertive', onTap: function (e) {
+                      text: '确定', type: 'button-positive', onTap: function (e) {
                       return true;
                     }
                     }

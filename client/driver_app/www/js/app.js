@@ -314,7 +314,6 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
 
       .state('backstep', {
         url: "/step",
-        abstract: true,
         templateUrl: "templates/user/getbackpwd.html",
         controller: "ChangePWDCtrl"
       })

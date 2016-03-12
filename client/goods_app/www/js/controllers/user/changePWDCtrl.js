@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('ChangePWDCtrl', function($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $state, UserInfo, loginService) {
+angular.module('starter.controllers').controller('ChangePWDCtrl', function ($scope, $http, $timeout, $ionicLoading, $ionicHistory, $ionicPopover, $state, UserInfo, loginService) {
   $scope.formData = {
     phoneNumber: '', //手机
     securityCode: '', //验证码
@@ -13,17 +13,17 @@ angular.module('starter.controllers').controller('ChangePWDCtrl', function($scop
   $scope.wait = 60;
   $scope.validBtnText = '获取验证码';
 
-  $scope.backGo = function() {
+  $scope.backGo = function () {
     $state.go('login');
   };
 
-  $scope.showMsg = function(txt) {
+  $scope.showMsg = function (txt) {
     var template = '<ion-popover-view style = "background-color:#ef473a !important" class = "light padding" > ' + txt + ' </ion-popover-view>';
     $scope.popover = $ionicPopover.fromTemplate(template, {
       scope: $scope
     });
     $scope.popover.show();
-    $timeout(function() {
+    $timeout(function () {
       $scope.popover.hide();
     }, 1400);
   }
@@ -52,29 +52,22 @@ angular.module('starter.controllers').controller('ChangePWDCtrl', function($scop
       $scope.showMsg('手机号格式错误');
       return false;
     }
-    io.socket.get('/user/checkIsExist', {
-      userName: $scope.formData.phoneNumber
+
+    io.socket.get('/user/getFindValidCode', {
+      phoneNumber: $scope.formData.phoneNumber
     }, function serverResponded(body, JWR) {
       if (JWR.statusCode == 200) {
-        $scope.showMsg('手机号码不存在，请重新输入...');
-      } else {
-        io.socket.get('/user/getFindValidCode', {
-          phoneNumber: $scope.formData.phoneNumber
-        }, function serverResponded(body, JWR) {
-          if (JWR.statusCode == 200) {
-            $scope.formData.securityCode = body.validCode;
-            //console.log($scope.formData.validCode);
-            $scope.timeOut();
-          }
-          else {
-            $scope.showMsg('发送验证码失败，请重新获取...');
-          }
-        });
+        //$scope.formData.securityCode = body.validCode;
+        //console.log($scope.formData.validCode);
+        $scope.timeOut();
+      }
+      else {
+        $scope.showMsg('发送验证码失败，请重新获取...');
       }
     });
   }
 
-  $scope.change = function() {
+  $scope.change = function () {
     var reg = /^1\d{10}$/;
     if (!$scope.formData.phoneNumber) {
       $scope.showMsg('手机号码不能为空');
@@ -87,14 +80,14 @@ angular.module('starter.controllers').controller('ChangePWDCtrl', function($scop
       $scope.showMsg('验证码不能为空');
       return false;
     }
-    else{
+    else {
       io.socket.get('/user/checkValidCode', {
         validCode: $scope.formData.securityCode,
         phoneNumber: $scope.formData.phoneNumber
       }, function serverResponded(body, JWR) {
         if (JWR.statusCode !== 200) {
           $scope.showMsg('验证码不正确，请重新输入...');
-        }else{
+        } else {
           if (!$scope.formData.password) {
             $scope.showMsg('新密码不能为空');
             return false;
@@ -114,7 +107,7 @@ angular.module('starter.controllers').controller('ChangePWDCtrl', function($scop
             if (JWR.statusCode !== 200) {
               $scope.showMsg('提交失败,请稍后再试！');
             }
-            else{
+            else {
               $scope.showMsg('密码修改成功！');
               $state.go('login');
             }
