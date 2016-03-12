@@ -1,11 +1,11 @@
 {
   "goodsapp": {
-    "version": "1.0.4",
+    "version": "1.0.5",
     "desc":"",
     "url": "http://www.yunyida56.com/assets/goods_app.apk"
   },
   "driverapp": {
-    "version": "1.0.4",
+    "version": "1.0.5",
     "desc":"",
     "url": "http://www.yunyida56.com/assets/driver_app.apk"
   }
