@@ -78,7 +78,6 @@ module.exports = {
         var sCityCode = req.body.sCityCode || req.query.sCityCode;
         var eCityCode = req.body.eCityCode || req.query.eCityCode;
         var eStreet = req.body.eStreet || req.query.eStreet;
-        ;
 
         var sql = "";
         if (eStreet) {
@@ -125,10 +124,7 @@ module.exports = {
             if (results && results.length > 0) {
                 var userIds = [];
                 for (var i = 0; i < results.length; i++) {
-                    var userId = results[i].userId;
-                    if (userIds.indexOf(userId) == -1) {
-                        userIds.push(userId);
-                    }
+                    userIds.push(results[i].userId);
                 }
                 User.find({userId: userIds})
                     .populate('goodsLines')
