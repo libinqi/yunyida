@@ -78,7 +78,6 @@ module.exports = {
         var sCityCode = req.body.sCityCode || req.query.sCityCode;
         var eCityCode = req.body.eCityCode || req.query.eCityCode;
         var eStreet = req.body.eStreet || req.query.eStreet;
-        ;
 
         var sql = "";
         if (eStreet) {
@@ -91,7 +90,7 @@ module.exports = {
             sql += " WHERE u.userType = '物流企业'";
             sql += " AND e.businessType LIKE '%零担%'";
             sql += " AND l.eCity!='全国'";
-            sql += " AND l.sCityCode LIKE '%" + sCityCode.substr(0, 4) + "%')";
+            sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%')";
             sql += " AND l.eStreet LIKE '%" + eStreet + "%')";
             sql += " UNION ALL";
             sql += " SELECT u.*,l.eCity,l.eCityCode";
@@ -101,8 +100,8 @@ module.exports = {
             sql += " WHERE u.userType = '物流企业'";
             sql += " AND e.businessType LIKE '%零担%'";
             sql += " AND l.eCity!='全国'";
-            sql += " AND l.sCityCode LIKE '%" + sCityCode.substr(0, 4) + "%')";
-            sql += " AND l.eCityCode LIKE '%" + eCityCode.substr(0, 4) + "%')";
+            sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%')";
+            sql += " AND l.eCityCode LIKE '%" + eCityCode.toString().substr(0, 4) + "%')";
             sql += "  ) as t";
             sql += " ORDER BY t.eCityCode DESC;";
         }
@@ -114,8 +113,8 @@ module.exports = {
             sql += " WHERE u.userType = '物流企业'";
             sql += " AND e.businessType LIKE '%零担%'";
             sql += " AND l.eCity!='全国'";
-            sql += " AND l.sCityCode LIKE '%" + sCityCode.substr(0, 4) + "%')";
-            sql += " AND l.eCityCode LIKE '%" + eCityCode.substr(0, 4) + "%')";
+            sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%')";
+            sql += " AND l.eCityCode LIKE '%" + eCityCode.toString().substr(0, 4) + "%')";
             sql += " ORDER BY l.eCityCode DESC;";
         }
 
