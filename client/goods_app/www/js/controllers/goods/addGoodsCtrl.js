@@ -32,7 +32,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     status: true,//状态
     remark: '',//备注说明
     user: user.userId,//所属用户
-    orderId:''
+    orderId: ''
   };
   $scope.goodsInfo.goodsAttribute = dictService.goods_attr[0].name;
   $scope.goodsInfo.goodsUnit = dictService.goods_unit[0].name;
@@ -554,11 +554,11 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   };
 
   $scope.getCarrier = function () {
-    if (!$scope.goodsInfo.consignor || !$scope.goodsInfo.sCity || !$scope.goodsInfo.sPhoneNumber) {
+    if (!$scope.goodsInfo.consignor || !$scope.goodsInfo.sCityCode || !$scope.goodsInfo.sPhoneNumber) {
       $scope.showMsg('请选择起始地发货信息！');
       return;
     }
-    if (!$scope.goodsInfo.consignee || !$scope.goodsInfo.eCity || !$scope.goodsInfo.ePhoneNumber) {
+    if (!$scope.goodsInfo.consignee || !$scope.goodsInfo.eCityCode || !$scope.goodsInfo.ePhoneNumber) {
       $scope.showMsg('请选择目的地收货信息！');
       return;
     }
@@ -567,8 +567,9 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       return;
     }
     io.socket.post('/user/getCarrier', {
-      sCity: $scope.goodsInfo.sCity,
-      eCity: $scope.goodsInfo.eCity
+      sCity: $scope.goodsInfo.sCityCode,
+      eCity: $scope.goodsInfo.eCityCode,
+      eStreet:$scope.goodsInfo.eStreet
     }, function serverResponded(body, JWR) {
       if (JWR.statusCode !== 200) {
         $scope.showMsg('请求失败,网络不给力！');
@@ -646,6 +647,15 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       if (JWR.statusCode == 200) {
         item.orderTotal = data.body.orderTotal;
         item.evaluationScore = data.body.evaluationScore;
+        if (item.evaluationScore) {
+          item.evaluationScore = item.evaluationScore.toString();
+          if (item.evaluationScore.length == 1) {
+            item.evaluationScore += '.0';
+          }
+        }
+        else {
+          item.evaluationScore = '5.0';
+        }
       }
     });
   }
@@ -705,7 +715,6 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   if ($scope.goodsInfo.orderId) {
     io.socket.get('/goodsOrder/' + $scope.goodsInfo.orderId, function serverResponded(body, JWR) {
       if (JWR.statusCode == 200) {
-
         $scope.goodsInfo.goodsName = body.goods.goodsName;//货物名称
         $scope.goodsInfo.goodsAttribute = body.goods.goodsAttribute;//货物属性:普通,加急
         $scope.goodsInfo.goodsNumber = body.goods.goodsNumber; //货物数量
@@ -717,7 +726,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
         $scope.goodsInfo.sCityCode = body.shipper.cityCode;//起始地城市代码
         $scope.goodsInfo.sStreet = body.shipper.street;//起始地街道
         $scope.goodsInfo.sAddress = body.shipper.address;//起始地详细地址
-        $scope.goodsInfo.consignee = body.carrier.realName;//收货人
+        $scope.goodsInfo.consignee = body.carrier.enterpriseName ? body.carrier.enterpriseName + ' ' + body.carrier.realName : body.carrier.realName;//收货人
         $scope.goodsInfo.ePhoneNumber = body.carrier.phoneNumber;//目的地手机号码
         $scope.goodsInfo.eCity = body.carrier.city;//目的地城市
         $scope.goodsInfo.eCityCode = body.carrier.cityCode;//目的地城市代码

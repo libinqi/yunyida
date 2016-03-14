@@ -246,8 +246,10 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
 
       .state('tab.user', {
         url: '/user',
+        cache: 'false',
         views: {
           'tab-user': {
+            cache: 'false',
             templateUrl: 'templates/tab-user.html',
             controller: 'UserCtrl'
           }

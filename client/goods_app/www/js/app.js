@@ -37,7 +37,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       //window.plugins.jPushPlugin.setDebugMode(true);
 
       window.plugins.jPushPlugin.openNotificationInAndroidCallback = function (data) {
-        window.location.href = '#/tab/order';
+        window.location.href = '#/tab/order?refresh=true';
       }
       if (ionic.Platform.isAndroid()) {
         //检查更新
@@ -137,43 +137,39 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
 
 
     //主页面显示退出提示框
-    // $ionicPlatform.registerBackButtonAction(function (e) {
-
-    //        e.preventDefault();
-
-    //        function showConfirm() {
-    //            var confirmPopup = $ionicPopup.confirm({
-    //                title: '<strong>退出应用?</strong>',
-    //                template: '你确定要退出应用吗?',
-    //                okText: '退出',
-    //                cancelText: '取消'
-    //            });
-
-    //            confirmPopup.then(function (res) {
-    //                if (res) {
-    //                    ionic.Platform.exitApp();
-    //                } else {
-    //                    // Don't close
-    //                }
-    //            });
-    //        }
-
-    //        // Is there a page to go back to?
-    //        if ($location.path() == '/index' ) {
-    //            showConfirm();
-    //        } else if ($rootScope.$viewHistory.backView ) {
-    //            console.log('currentView:', $rootScope.$viewHistory.currentView);
-    //            // Go back in history
-    //            $rootScope.$viewHistory.backView.go();
-    //        } else {
-    //            // This is the last page: Show confirmation popup
-    //            showConfirm();
-    //        }
-
-    //        return false;
-    //    }, 1000);
-
-
+    //$ionicPlatform.registerBackButtonAction(function (e) {
+    //  e.preventDefault();
+    //  function showConfirm() {
+    //    var confirmPopup = $ionicPopup.confirm({
+    //      title: '<strong>退出应用?</strong>',
+    //      template: '你确定要退出应用吗?',
+    //      okText: '退出',
+    //      cancelText: '取消'
+    //    });
+    //
+    //    confirmPopup.then(function (res) {
+    //      if (res) {
+    //        ionic.Platform.exitApp();
+    //      } else {
+    //        // Don't close
+    //      }
+    //    });
+    //  }
+    //
+    //  // Is there a page to go back to?
+    //  if ($location.path() == '/index') {
+    //    showConfirm();
+    //  } else if ($rootScope.$viewHistory.backView) {
+    //    console.log('currentView:', $rootScope.$viewHistory.currentView);
+    //    // Go back in history
+    //    $rootScope.$viewHistory.backView.go();
+    //  } else {
+    //    // This is the last page: Show confirmation popup
+    //    showConfirm();
+    //  }
+    //
+    //  return false;
+    //}, 1000);
   })
 
   .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider) {
@@ -244,8 +240,10 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
 
       .state('tab.user', {
         url: '/user',
+        cache: 'false',
         views: {
           'tab-user': {
+            cache: 'false',
             templateUrl: 'templates/tab-user.html',
             controller: 'UserCtrl'
           }
@@ -337,6 +335,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         cache: 'false',
         views: {
           'tab-order': {
+            cache: 'false',
             templateUrl: 'templates/order/allOrder.html',
             controller: 'AllOrderCtrl',
             abstract: true

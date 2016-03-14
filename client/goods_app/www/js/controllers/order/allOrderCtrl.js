@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('AllOrderCtrl', function ($scope, $http, $location, $timeout, $ionicModal, $ionicLoading, $ionicHistory, $ionicPopover, $ionicPopup, $ionicSideMenuDelegate, $state, $stateParams, UserInfo) {
+angular.module('starter.controllers').controller('AllOrderCtrl', function ($rootScope, $scope, $http, $location, $timeout, $ionicModal, $ionicLoading, $ionicHistory, $ionicPopover, $ionicPopup, $ionicSideMenuDelegate, $state, $stateParams, UserInfo) {
   $scope.backGo = function () {
     $ionicHistory.goBack();
   };
@@ -104,9 +104,29 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     }, 200);
   };
 
+  if ($location.search().refresh) {
+    $scope.loadMore();
+  }
   //$timeout(function () {
   //  $scope.loadMore();
   //});
+
+  // Resume refresh
+  $rootScope.$on('onResumeCordova', function (event) {
+    $scope.loadMore();
+  });
+
+  // System events
+  document.addEventListener("resume", resume, false);
+
+  function resume() {
+    var div = document.getElementsByTagName('body')[0];
+    var scope = angular.element(div).scope();
+    var rootScope = scope.$root;
+    rootScope.$apply(function () {
+      rootScope.$broadcast('onResumeCordova');
+    });
+  }
 
   $scope.orderFilter = function (orderStatus) {
     if (orderStatus == '全部')orderStatus = '';
@@ -188,7 +208,9 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
       orderStatus: '已完成'
     }, function serverResponded(data, JWR) {
       if (JWR.statusCode == 200) {
-        item.orderList = data;
+        $timeout(function(){
+          item.orderList = data;
+        });
       }
     });
   }
@@ -196,11 +218,19 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   $scope.getCarrierEvaluation = function (item) {
     io.socket.get('/order/carrierEvaluation', {carrier: item.userId}, function serverResponded(data, JWR) {
       if (JWR.statusCode == 200) {
-        item.orderTotal = data.body.orderTotal;
-        item.evaluationScore = data.body.evaluationScore;
-        if (item.evaluationScore) {
-          item.evaluationScore = item.evaluationScore.toString();
-        }
+        $timeout(function(){
+          item.orderTotal = data.body.orderTotal;
+          item.evaluationScore = data.body.evaluationScore;
+          if (item.evaluationScore) {
+            item.evaluationScore = item.evaluationScore.toString();
+            if (item.evaluationScore.length == 1) {
+              item.evaluationScore += '.0';
+            }
+          }
+          else {
+            item.evaluationScore = '5.0';
+          }
+        });
       }
     });
   }

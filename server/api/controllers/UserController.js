@@ -75,26 +75,71 @@ module.exports = {
         });
     },
     getCarrier: function (req, res) {
-        var sCity = req.body.sCity || req.query.sCity;
-        var eCity = req.body.eCity || req.query.eCity;
-        User.query("select u.userId from `user` as u inner join enterprise as e on e.`user`=u.userId inner join goodsline as l on l.`user`=u.userId where u.userType='物流企业' and e.businessType like '%零担%' and l.sCity like '%" + sCity + "%'and l.eCity like '%" + eCity + "%'"
-            , function (err, results) {
-                if (err) res.badRequest(err);
-                if (results && results.length > 0) {
-                    var userIds = [];
-                    for (var i = 0; i < results.length; i++) {
-                        userIds.push(results[i].userId);
+        var sCityCode = req.body.sCityCode || req.query.sCityCode;
+        var eCityCode = req.body.eCityCode || req.query.eCityCode;
+        var eStreet = req.body.eStreet || req.query.eStreet;
+        ;
+
+        var sql = "";
+        if (eStreet) {
+            sql = "SELECT userId FROM(";
+            sql += "SELECT";
+            sql += " u.*,l.eCity,l.eCityCode";
+            sql += " FROM `user` AS u";
+            sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
+            sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
+            sql += " WHERE u.userType = '物流企业'";
+            sql += " AND e.businessType LIKE '%零担%'";
+            sql += " AND l.eCity!='全国'";
+            sql += " AND l.sCityCode LIKE '%" + sCityCode.substr(0, 4) + "%')";
+            sql += " AND l.eStreet LIKE '%" + eStreet + "%')";
+            sql += " UNION ALL";
+            sql += " SELECT u.*,l.eCity,l.eCityCode";
+            sql += " FROM `user` AS u";
+            sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
+            sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
+            sql += " WHERE u.userType = '物流企业'";
+            sql += " AND e.businessType LIKE '%零担%'";
+            sql += " AND l.eCity!='全国'";
+            sql += " AND l.sCityCode LIKE '%" + sCityCode.substr(0, 4) + "%')";
+            sql += " AND l.eCityCode LIKE '%" + eCityCode.substr(0, 4) + "%')";
+            sql += "  ) as t";
+            sql += " ORDER BY t.eCityCode DESC;";
+        }
+        else {
+            sql = "SELECT u.*,l.eCity,l.eCityCode";
+            sql += " FROM `user` AS u";
+            sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
+            sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
+            sql += " WHERE u.userType = '物流企业'";
+            sql += " AND e.businessType LIKE '%零担%'";
+            sql += " AND l.eCity!='全国'";
+            sql += " AND l.sCityCode LIKE '%" + sCityCode.substr(0, 4) + "%')";
+            sql += " AND l.eCityCode LIKE '%" + eCityCode.substr(0, 4) + "%')";
+            sql += " ORDER BY l.eCityCode DESC;";
+        }
+
+
+        User.query(sql, function (err, results) {
+            if (err) res.badRequest(err);
+            if (results && results.length > 0) {
+                var userIds = [];
+                for (var i = 0; i < results.length; i++) {
+                    var userId = results[i].userId;
+                    if (userIds.indexOf(userId) == -1) {
+                        userIds.push(userId);
                     }
-                    User.find({userId: userIds})
-                        .populate('goodsLines')
-                        .exec(function (err, users) {
-                            if (err) res.badRequest(err);
-                            res.ok(users);
-                        });
-                } else {
-                    res.ok([]);
                 }
-            });
+                User.find({userId: userIds})
+                    .populate('goodsLines')
+                    .exec(function (err, users) {
+                        if (err) res.badRequest(err);
+                        res.ok(users);
+                    });
+            } else {
+                res.ok([]);
+            }
+        });
     },
     update: function (req, res) {
         var data_from = req.params.all();
@@ -123,14 +168,14 @@ module.exports = {
         var data_from = req.params.all();
         User.create(data_from).exec(function (err, user) {
             if (err) res.badRequest(err);
-            var goodsAddress={
-                consignor:  user.realName,//发/收货人
-                phoneNumber:  user.phoneNumber,//手机号码
-                city:  user.city,//所在城市
-                cityCode:  user.cityCode,//所在城市代码
-                street:  user.street,//街道
-                address:  user.address,//详细地址
-                lng:  user.lng,//经度
+            var goodsAddress = {
+                consignor: user.realName,//发/收货人
+                phoneNumber: user.phoneNumber,//手机号码
+                city: user.city,//所在城市
+                cityCode: user.cityCode,//所在城市代码
+                street: user.street,//街道
+                address: user.address,//详细地址
+                lng: user.lng,//经度
                 lat: user.lat,//纬度
                 isDefault: true,//是否默认发货地址
                 type: '发货',//收发货地址类型

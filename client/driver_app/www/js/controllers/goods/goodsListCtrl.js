@@ -154,56 +154,28 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
 
   $scope.addOrder = function (goodsItem) {
     var goodsOrder = goodsItem.goodsOrders[0];
-    if (!$scope.user.status || $scope.user.status == 'false') {
-      $scope.showMsg("您的账号未通过审核,暂时无法受理业务");
-      return false;
-    }
-    if ($scope.user.userType == '司机' && goodsItem.goodsType == '零担') {
-      $scope.showMsg('司机无法受理零担业务！');
-      return false;
-    }
-    else if ($scope.user.userType == '物流企业'
-      && ($scope.enterprise && $scope.enterprise.businessType.indexOf(goodsItem.goodsType) < 0)) {
-      $scope.showMsg('您暂时无法受理' + goodsItem.goodsType + '业务！');
-      return false;
-    }
-    io.socket.get('/order/carrierOrder', {
-      orderStatus: '已报价',
-      userId: $scope.user.userId,
-      page: 1,
-      row: 10
-    }, function serverResponded(body, JWR) {
-      if (JWR.statusCode !== 200) {
-        $scope.showMsg('请求失败,网络不给力！');
-      }
-      else {
-        if (body.length >= 1) {
-          var confirmPopup = $ionicPopup.confirm({
-            title: '报价提醒',
-            template: '您有1个订单未确认接单不能继续报价，是否马上去确认?',
-            buttons: [
-              {
-                text: '取消', onTap: function (e) {
-                return false;
-              }
-              },
-              {
-                text: '确定', type: 'button-positive', onTap: function (e) {
-                return true;
-              }
-              }
-            ]
-          });
-          confirmPopup.then(function (res) {
-            if (res) {
-              $scope.closeDetail();
-              $state.go('tab.order');
-            }
-          });
+    io.socket.get('/user/' + $scope.user.userId, function serverResponded(body, JWR) {
+      if (JWR.statusCode == 200) {
+        if(!body.status || body.status == 'false')
+        {
+          $scope.showMsg("您的账号未通过审核,暂时无法受理业务");
         }
-        else {
+        else{
+          //if (!$scope.user.status || $scope.user.status == 'false') {
+          //  $scope.showMsg("您的账号未通过审核,暂时无法受理业务");
+          //  return false;
+          //}
+          if ($scope.user.userType == '司机' && goodsItem.goodsType == '零担') {
+            $scope.showMsg('司机无法受理零担业务！');
+            return false;
+          }
+          else if ($scope.user.userType == '物流企业'
+            && ($scope.enterprise && $scope.enterprise.businessType.indexOf(goodsItem.goodsType) < 0)) {
+            $scope.showMsg('您暂时无法受理' + goodsItem.goodsType + '业务！');
+            return false;
+          }
           io.socket.get('/order/carrierOrder', {
-            orderStatus: '已接单',
+            orderStatus: '已报价',
             userId: $scope.user.userId,
             page: 1,
             row: 10
@@ -212,10 +184,10 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
               $scope.showMsg('请求失败,网络不给力！');
             }
             else {
-              if (body.length >= 10) {
+              if (body.length >= 1) {
                 var confirmPopup = $ionicPopup.confirm({
-                  title: '接单提醒',
-                  template: '您已有10个订单未确认承运不能继续接单，是否马上确认承运？',
+                  title: '报价提醒',
+                  template: '您有1个订单未确认接单不能继续报价，是否马上去确认?',
                   buttons: [
                     {
                       text: '取消', onTap: function (e) {
@@ -231,22 +203,60 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
                 });
                 confirmPopup.then(function (res) {
                   if (res) {
+                    $scope.closeDetail();
                     $state.go('tab.order');
                   }
                 });
               }
               else {
-                io.socket.post('/order/addOrder', {
-                  orderId: goodsOrder.goodsOrderId,
-                  userId: $scope.user.userId
+                io.socket.get('/order/carrierOrder', {
+                  orderStatus: '已接单',
+                  userId: $scope.user.userId,
+                  page: 1,
+                  row: 10
                 }, function serverResponded(body, JWR) {
                   if (JWR.statusCode !== 200) {
                     $scope.showMsg('请求失败,网络不给力！');
                   }
                   else {
-                    $scope.showMsg('报价成功！');
-                    $scope.closeDetail();
-                    $state.go('tab.order');
+                    if (body.length >= 10) {
+                      var confirmPopup = $ionicPopup.confirm({
+                        title: '接单提醒',
+                        template: '您已有10个订单未确认承运不能继续接单，是否马上确认承运？',
+                        buttons: [
+                          {
+                            text: '取消', onTap: function (e) {
+                            return false;
+                          }
+                          },
+                          {
+                            text: '确定', type: 'button-positive', onTap: function (e) {
+                            return true;
+                          }
+                          }
+                        ]
+                      });
+                      confirmPopup.then(function (res) {
+                        if (res) {
+                          $state.go('tab.order');
+                        }
+                      });
+                    }
+                    else {
+                      io.socket.post('/order/addOrder', {
+                        orderId: goodsOrder.goodsOrderId,
+                        userId: $scope.user.userId
+                      }, function serverResponded(body, JWR) {
+                        if (JWR.statusCode !== 200) {
+                          $scope.showMsg('请求失败,网络不给力！');
+                        }
+                        else {
+                          $scope.showMsg('报价成功！');
+                          $scope.closeDetail();
+                          $state.go('tab.order');
+                        }
+                      });
+                    }
                   }
                 });
               }

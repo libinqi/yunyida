@@ -23,7 +23,8 @@
           </label>
           <label class="item-detail" style="margin-left:27px">
             <div class="order-detail-label">地址：</div>
-            <label style="width: 64%;">{{orderItem.goods.sCity+orderItem.goods.sStreet+orderItem.goods.sAddress}}</label>
+            <label
+              style="width: 64%;">{{orderItem.goods.sCity+orderItem.goods.sStreet+orderItem.goods.sAddress}}</label>
           </label>
           <label class="item-detail" style="margin-left:27px;">
             <div class="order-detail-label">电话：</div>
@@ -37,7 +38,8 @@
           </label>
           <label class="item-detail" style="margin-left:27px">
             <div class="order-detail-label">地址：</div>
-            <label style="width: 64%;">{{orderItem.goods.eCity+orderItem.goods.eStreet+orderItem.goods.eAddress}}</label>
+            <label
+              style="width: 64%;">{{orderItem.goods.eCity+orderItem.goods.eStreet+orderItem.goods.eAddress}}</label>
           </label>
           <div class="item-detail" style="margin-left:27px;">
             <div class="order-detail-label">电话：</div>
@@ -53,14 +55,16 @@
         <div class="item item-text-wrap">
           <label class="item-detail">
             <div class="order-detail-label2" style="font-size: 16px;">货物信息：</div>
-            <label style="width: 64%;">{{orderItem.goods.goodsName+' '+orderItem.goods.goodsNumber+orderItem.goods.goodsUnit}}</label>
+            <label style="width: 64%;">{{orderItem.goods.goodsName+'
+              '+orderItem.goods.goodsNumber+orderItem.goods.goodsUnit}}</label>
           </label>
           <!-- 订单类型 -->
           <label class="item-detail">
             <div class="order-detail-label2" style="font-size: 16px;">订单类型：</div>
             <label style="width: 64%;" ng-if="orderItem.goods.goodsType=='零担'">{{orderItem.goods.goodsType}}-{{orderItem.goods.publishType}}
               <span style="color: #ef6600">{{orderItem.goods.goodsAttribute}}</span></label>
-            <label style="width: 64%;" ng-if="orderItem.goods.goodsType!='零担'">{{orderItem.goods.goodsType}} <span style="color: #ef6600">{{orderItem.goods.goodsAttribute}}</span></label>
+            <label style="width: 64%;" ng-if="orderItem.goods.goodsType!='零担'">{{orderItem.goods.goodsType}} <span
+              style="color: #ef6600">{{orderItem.goods.goodsAttribute}}</span></label>
           </label>
           <!-- 需求车辆 -->
           <!--<label class="item-detail" ng-if="orderItem.goods.carType!='不限'">-->
@@ -109,8 +113,10 @@
                      ng-class="{'stared':orderItem.carrier.evaluationScore>=4,'star':orderItem.carrier.evaluationScore<4}"></label>
               <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
                      ng-class="{'stared':orderItem.carrier.evaluationScore>=5,'star':orderItem.carrier.evaluationScore<5}"></label>
-              <label ng-if="orderItem.carrier.evaluationScore" style="border-radius:5px;border:1px solid #ffbd08;background: #ffbd08;padding:0px 10px 0px 10px;color: #ffffff;">{{orderItem.carrier.evaluationScore.length===1?orderItem.carrier.evaluationScore+'.0':orderItem.carrier.evaluationScore}}</label>
-              <label style="margin-left:5px;">{{orderItem.carrier.orderTotal}}单</label>
+              <label ng-if="orderItem.carrier.evaluationScore"
+                     style="border-radius:5px;border:1px solid #ffbd08;background: #ffbd08;padding:0px 10px 0px 10px;color: #ffffff;">{{orderItem.carrier.evaluationScore.length===1?orderItem.carrier.evaluationScore+'.0':orderItem.carrier.evaluationScore}}</label>
+              <label ng-if="orderItem.carrier.orderTotal>0"
+                     style="margin-left:5px;">{{orderItem.carrier.orderTotal}}单</label>
                 </span>
             </div>
             <div style="float: left;"><a href="tel:{{orderItem.carrier.phoneNumber}}"><img
@@ -135,7 +141,8 @@
                      ng-class="{'stared':orderItem.carrier.evaluationScore>=4,'star':orderItem.carrier.evaluationScore<4}"></label>
               <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
                      ng-class="{'stared':orderItem.carrier.evaluationScore>=5,'star':orderItem.carrier.evaluationScore<5}"></label>
-              <label ng-if="orderItem.carrier.evaluationScore" style="border-radius:5px;border:1px solid #ffbd08;background: #ffbd08;padding:0px 10px 0px 10px;color: #ffffff;">{{orderItem.carrier.evaluationScore.length===1?orderItem.carrier.evaluationScore+'.0':orderItem.carrier.evaluationScore}}</label>
+              <label ng-if="orderItem.carrier.evaluationScore"
+                     style="border-radius:5px;border:1px solid #ffbd08;background: #ffbd08;padding:0px 10px 0px 10px;color: #ffffff;">{{orderItem.carrier.evaluationScore.length===1?orderItem.carrier.evaluationScore+'.0':orderItem.carrier.evaluationScore}}</label>
               <label style="margin-left:5px;">{{orderItem.carrier.orderTotal}}单</label>
                 </span>
             </div>

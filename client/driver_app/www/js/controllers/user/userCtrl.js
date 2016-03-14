@@ -25,11 +25,32 @@ angular.module('starter.controllers').controller('UserCtrl', function ($scope, $
       // }
     });
 
+    $scope.getEvaluation();
+
     $scope.$broadcast("scroll.refreshComplete");
     $scope.pulltextchange = '下拉刷新';
   };
 
-  $scope.doRefresh();
+  $timeout(function(){
+    $scope.doRefresh();
+  });
+
+  $scope.getEvaluation = function () {
+    io.socket.get('/order/carrierEvaluation', {carrier: UserInfo.data.userId}, function serverResponded(data, JWR) {
+      if (JWR.statusCode == 200) {
+        $scope.userInfo.evaluationScore = data.body.evaluationScore;
+        if ($scope.userInfo.evaluationScore && $scope.userInfo.evaluationScore != 'null') {
+          $scope.userInfo.evaluationScore = $scope.userInfo.evaluationScore.toString();
+          if ($scope.userInfo.evaluationScore.length == 1) {
+            $scope.userInfo.evaluationScore += '.0';
+          }
+        }
+        else {
+          $scope.userInfo.evaluationScore = '5.0';
+        }
+      }
+    });
+  }
 
   $scope.showMsg = function (txt) {
     var template = '<ion-popover-view style = "background-color:#ef473a !important" class = "light padding" > ' + txt + ' </ion-popover-view>';
