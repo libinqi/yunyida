@@ -593,8 +593,8 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       return;
     }
     io.socket.post('/user/getCarrier', {
-      sCity: $scope.goodsInfo.sCityCode,
-      eCity: $scope.goodsInfo.eCityCode,
+      sCityCode: $scope.goodsInfo.sCityCode,
+      eCityCode: $scope.goodsInfo.eCityCode,
       eStreet:$scope.goodsInfo.eStreet
     }, function serverResponded(body, JWR) {
       if (JWR.statusCode !== 200) {
