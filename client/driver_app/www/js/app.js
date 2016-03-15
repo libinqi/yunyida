@@ -48,7 +48,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
 
       function checkUpdate() {
         $cordovaAppVersion.getVersionNumber().then(function (version) {
-          $http.get('http://www.yunyida56.com/assets/version.json').success(function (data) {
+          $http.get('http://www.yunyida56.com/assets/version.json?date' + new Date()).success(function (data) {
             if (data && version != data.driverapp.version) {
               showUpdateConfirm(data.driverapp.url);
             }

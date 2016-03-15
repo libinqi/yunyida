@@ -266,27 +266,8 @@ angular.module('starter.controllers').controller('EnterpriseRegisterCtrl', funct
         return false;
       }
       else {
-        if ($scope.userData.businessLicenseNumber.length == 15) {
-          var s = [];
-          var p = [];
-          var a = [];
-          var m = 10;
-          p[0] = m;
-          for (var i = 0; i < $scope.userData.businessLicenseNumber.length; i++) {
-            a[i] = parseInt($scope.userData.businessLicenseNumber.substring(i, i + 1), m);
-            s[i] = (p[i] % (m + 1)) + a[i];
-            if (0 == s[i] % m) {
-              p[i + 1] = 10 * 2;
-            } else {
-              p[i + 1] = (s[i] % m) * 2;
-            }
-          }
-          if (1 != (s[14] % m)) {
-            $scope.showMsg('营业执照编号不正确');
-            return false;
-          }
-        }
-        else {
+        if ($scope.userData.businessLicenseNumber.length != 15
+          && $scope.userData.businessLicenseNumber.length != 18) {
           $scope.showMsg('营业执照编号不正确');
           return false;
         }
