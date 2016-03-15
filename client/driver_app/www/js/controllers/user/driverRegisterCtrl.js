@@ -113,6 +113,7 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
 
     if (UserInfo.data) {
       $scope.userData = UserInfo.data;
+      $scope.userData.enterpriseName = '';
     }
 
     $scope.backGo = function () {
