@@ -123,7 +123,7 @@ module.exports = {
             sql += " AND e.businessType LIKE '%零担%'";
             sql += " AND l.eCity != '全国'";
             sql += " AND l.sCityCode = '" + sCityCode + "'";
-            sql += " AND (l.eCityCode = '" + sCityCode + "' OR l.eCityCode = '" + sCityCode.toString().substr(0, 4) + "00')";
+            sql += " AND (l.eCityCode = '" + eCityCode + "' OR l.eCityCode = '" + eCityCode.toString().substr(0, 4) + "00')";
             sql += " AND (l.eStreet IS NULL OR l.eStreet = '')";
             sql += " ORDER BY  l.eCityCode DESC";
             sql += " ) AS t";
@@ -148,7 +148,7 @@ module.exports = {
             sql += " AND e.businessType LIKE '%零担%'";
             sql += " AND l.eCity != '全国'";
             sql += " AND l.sCityCode = '" + sCityCode + "'";
-            sql += " AND (l.eCityCode = '" + sCityCode + "' OR l.eCityCode = '" + sCityCode.toString().substr(0, 4) + "00')";
+            sql += " AND (l.eCityCode = '" + eCityCode + "' OR l.eCityCode = '" + eCityCode.toString().substr(0, 4) + "00')";
             sql += " AND (l.eStreet IS NULL OR l.eStreet = '')";
             sql += " ORDER BY  l.eCityCode DESC";
             sql += " ) AS t";
