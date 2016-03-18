@@ -81,41 +81,77 @@ module.exports = {
 
         var sql = "";
         if (eStreet) {
-            sql = "SELECT userId FROM(";
-            sql += "SELECT";
-            sql += " u.*,l.eCity,l.eCityCode";
-            sql += " FROM `user` AS u";
+            //sql = "SELECT userId FROM(";
+            //sql += "SELECT";
+            //sql += " u.*,l.eCity,l.eCityCode";
+            //sql += " FROM `user` AS u";
+            //sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
+            //sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
+            //sql += " WHERE u.userType = '物流企业'";
+            //sql += " AND e.businessType LIKE '%零担%'";
+            //sql += " AND l.eCity!='全国'";
+            //sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
+            //sql += " AND l.eStreet LIKE '%" + eStreet + "%'";
+            //sql += " UNION ALL";
+            //sql += " SELECT u.*,l.eCity,l.eCityCode";
+            //sql += " FROM `user` AS u";
+            //sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
+            //sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
+            //sql += " WHERE u.userType = '物流企业'";
+            //sql += " AND e.businessType LIKE '%零担%'";
+            //sql += " AND l.eCity!='全国'";
+            //sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
+            //sql += " AND l.eCityCode LIKE '%" + eCityCode.toString().substr(0, 4) + "%'";
+            //sql += "  ) as t";
+            //sql += " ORDER BY t.eCityCode DESC;";
+
+            sql = "SELECT u.userId FROM `user` AS u";
             sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
             sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
             sql += " WHERE u.userType = '物流企业'";
             sql += " AND e.businessType LIKE '%零担%'";
-            sql += " AND l.eCity!='全国'";
-            sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
-            sql += " AND l.eStreet LIKE '%" + eStreet + "%'";
+            sql += " AND l.eCity != '全国'";
+            sql += " AND l.sCityCode = '" + sCityCode + "'";
+            sql += " AND l.eStreet = '" + eStreet + "'";
             sql += " UNION ALL";
-            sql += " SELECT u.*,l.eCity,l.eCityCode";
-            sql += " FROM `user` AS u";
+            sql += "   SELECT userId FROM";
+            sql += "   (";
+            sql += " SELECT u.*, l.eCity,l.eCityCode  FROM `user` AS u";
             sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
             sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
             sql += " WHERE u.userType = '物流企业'";
             sql += " AND e.businessType LIKE '%零担%'";
-            sql += " AND l.eCity!='全国'";
-            sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
-            sql += " AND l.eCityCode LIKE '%" + eCityCode.toString().substr(0, 4) + "%'";
-            sql += "  ) as t";
-            sql += " ORDER BY t.eCityCode DESC;";
+            sql += " AND l.eCity != '全国'";
+            sql += " AND l.sCityCode = '" + sCityCode + "'";
+            sql += " AND (l.eCityCode = '" + sCityCode + "' OR l.eCityCode = '" + sCityCode.toString().substr(0, 4) + "00')";
+            sql += " AND (l.eStreet IS NULL OR l.eStreet = '')";
+            sql += " ORDER BY  l.eCityCode DESC";
+            sql += " ) AS t";
         }
         else {
-            sql = "SELECT u.*,l.eCity,l.eCityCode";
-            sql += " FROM `user` AS u";
+            //sql = "SELECT u.*,l.eCity,l.eCityCode";
+            //sql += " FROM `user` AS u";
+            //sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
+            //sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
+            //sql += " WHERE u.userType = '物流企业'";
+            //sql += " AND e.businessType LIKE '%零担%'";
+            //sql += " AND l.eCity!='全国'";
+            //sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
+            //sql += " AND l.eCityCode LIKE '%" + eCityCode.toString().substr(0, 4) + "%'";
+            //sql += " ORDER BY l.eCityCode DESC;";
+            sql = " SELECT userId FROM";
+            sql += "   (";
+            sql += " SELECT u.*, l.eCity,l.eCityCode  FROM `user` AS u";
             sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
             sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
             sql += " WHERE u.userType = '物流企业'";
             sql += " AND e.businessType LIKE '%零担%'";
-            sql += " AND l.eCity!='全国'";
-            sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
-            sql += " AND l.eCityCode LIKE '%" + eCityCode.toString().substr(0, 4) + "%'";
-            sql += " ORDER BY l.eCityCode DESC;";
+            sql += " AND l.eCity != '全国'";
+            sql += " AND l.sCityCode = '" + sCityCode + "'";
+            sql += " AND (l.eCityCode = '" + sCityCode + "' OR l.eCityCode = '" + sCityCode.toString().substr(0, 4) + "00')";
+            sql += " AND (l.eStreet IS NULL OR l.eStreet = '')";
+            sql += " ORDER BY  l.eCityCode DESC";
+            sql += " ) AS t";
         }
 
 
