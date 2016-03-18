@@ -105,9 +105,17 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
   };
 
   if ($location.search().refresh) {
-    $scope.closeDetail();
-    $scope.hideDriverInfo();
-    $scope.closeEvaluate();
+    if ($scope.detail) {
+      $scope.detail.hide();
+    }
+    $scope.driverInfoModal.hide();
+    if ($scope.driverInfoModal) {
+      $scope.driverInfoModal.hide();
+    }
+    if($scope.evaluate)
+    {
+      $scope.evaluate.hide();
+    }
     $scope.loadMore();
   }
   //$timeout(function () {
@@ -116,9 +124,17 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
 
   // Resume refresh
   $rootScope.$on('onResumeCordova', function (event) {
-    $scope.closeDetail();
-    $scope.hideDriverInfo();
-    $scope.closeEvaluate();
+    if ($scope.detail) {
+      $scope.detail.hide();
+    }
+    $scope.driverInfoModal.hide();
+    if ($scope.driverInfoModal) {
+      $scope.driverInfoModal.hide();
+    }
+    if($scope.evaluate)
+    {
+      $scope.evaluate.hide();
+    }
     $scope.loadMore();
   });
 
@@ -214,7 +230,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
       orderStatus: '已完成'
     }, function serverResponded(data, JWR) {
       if (JWR.statusCode == 200) {
-        $timeout(function(){
+        $timeout(function () {
           item.orderList = data;
         });
       }
@@ -224,7 +240,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
   $scope.getCarrierEvaluation = function (item) {
     io.socket.get('/order/carrierEvaluation', {carrier: item.userId}, function serverResponded(data, JWR) {
       if (JWR.statusCode == 200) {
-        $timeout(function(){
+        $timeout(function () {
           item.orderTotal = data.body.orderTotal;
           item.evaluationScore = data.body.evaluationScore;
           if (item.evaluationScore) {

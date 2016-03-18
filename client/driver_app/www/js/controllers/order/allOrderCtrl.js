@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('AllOrderCtrl', function ($scope, $http, $timeout, $ionicModal, $ionicLoading, $ionicHistory, $ionicPopover, $ionicPopup, $ionicSideMenuDelegate, $state, $stateParams, UserInfo) {
+angular.module('starter.controllers').controller('AllOrderCtrl', function ($rootScope, $scope, $http, $timeout, $location, $ionicModal, $ionicLoading, $ionicHistory, $ionicPopover, $ionicPopup, $ionicSideMenuDelegate, $state, $stateParams, UserInfo) {
   $scope.backGo = function () {
     $ionicHistory.goBack();
   };
@@ -104,6 +104,10 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
   };
 
   if ($location.search().refresh) {
+    if($scope.detail)
+    {
+      $scope.detail.hide();
+    }
     $scope.loadMore();
   }
   //$timeout(function () {
@@ -112,6 +116,10 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
 
   // Resume refresh
   $rootScope.$on('onResumeCordova', function (event) {
+    if($scope.detail)
+    {
+      $scope.detail.hide();
+    }
     $scope.loadMore();
   });
 
@@ -185,7 +193,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
         }
         },
         {
-          text: '确定', type: 'button-assertive', onTap: function (e) {
+          text: '确定', type: 'button-positive', onTap: function (e) {
           return true;
         }
         }
