@@ -103,9 +103,29 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($scop
     }, 800);
   };
 
+  if ($location.search().refresh) {
+    $scope.loadMore();
+  }
   //$timeout(function () {
   //  $scope.loadMore();
   //});
+
+  // Resume refresh
+  $rootScope.$on('onResumeCordova', function (event) {
+    $scope.loadMore();
+  });
+
+  // System events
+  document.addEventListener("resume", resume, false);
+
+  function resume() {
+    var div = document.getElementsByTagName('body')[0];
+    var scope = angular.element(div).scope();
+    var rootScope = scope.$root;
+    rootScope.$apply(function () {
+      rootScope.$broadcast('onResumeCordova');
+    });
+  }
 
   $scope.orderFilter = function (orderStatus) {
     if (orderStatus == '全部')orderStatus = '';

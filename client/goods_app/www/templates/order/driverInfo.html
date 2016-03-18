@@ -120,6 +120,10 @@
               <label>{{driverItem.cars[0].carLength}}</label>
             </label>
             <label class="item-detail">
+              <div style="width:35%" class="order-detail-label">证件号码：</div>
+              <label>{{driverInfo.cardNumber|handleCardNumber}}</label>
+            </label>
+            <label class="item-detail">
               <div style="width:35%" class="order-detail-label">联系电话：</div>
               <label>{{driverInfo.phoneNumber}}</label>
             </label>
@@ -140,15 +144,15 @@
                 </span>
                 <span style="margin:10px 15px 0px 0px;float: right;width: 45%;text-align: right;">
                   <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
-                         ng-class="{'stared':orderItem.carrier.evaluationScore>=1,'star':orderItem.carrier.evaluationScore<1}"></label>
+                         ng-class="{'stared':order.evaluationLevel>=1,'star':order.evaluationLevel<1}"></label>
                   <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
-                         ng-class="{'stared':orderItem.carrier.evaluationScore>=2,'star':orderItem.carrier.evaluationScore<2}"></label>
+                         ng-class="{'stared':order.evaluationLevel>=2,'star':order.evaluationLevel<2}"></label>
                   <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
-                         ng-class="{'stared':orderItem.carrier.evaluationScore>=3,'star':orderItem.carrier.evaluationScore<3}"></label>
+                         ng-class="{'stared':order.evaluationLevel>=3,'star':order.evaluationLevel<3}"></label>
                   <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
-                         ng-class="{'stared':orderItem.carrier.evaluationScore>=4,'star':orderItem.carrier.evaluationScore<4}"></label>
+                         ng-class="{'stared':order.evaluationLevel>=4,'star':order.evaluationLevel<4}"></label>
                   <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
-                         ng-class="{'stared':orderItem.carrier.evaluationScore>=5,'star':orderItem.carrier.evaluationScore<5}"></label>
+                         ng-class="{'stared':order.evaluationLevel>=5,'star':order.evaluationLevel<5}"></label>
                 </span>
               </a>
             </div>

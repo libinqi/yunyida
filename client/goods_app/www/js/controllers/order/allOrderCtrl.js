@@ -105,6 +105,9 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
   };
 
   if ($location.search().refresh) {
+    $scope.closeDetail();
+    $scope.hideDriverInfo();
+    $scope.closeEvaluate();
     $scope.loadMore();
   }
   //$timeout(function () {
@@ -113,6 +116,9 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
 
   // Resume refresh
   $rootScope.$on('onResumeCordova', function (event) {
+    $scope.closeDetail();
+    $scope.hideDriverInfo();
+    $scope.closeEvaluate();
     $scope.loadMore();
   });
 

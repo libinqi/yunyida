@@ -238,6 +238,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
                       });
                       confirmPopup.then(function (res) {
                         if (res) {
+                          $scope.closeDetail();
                           $state.go('tab.order');
                         }
                       });

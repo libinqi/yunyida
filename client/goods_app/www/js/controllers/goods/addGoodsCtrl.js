@@ -640,6 +640,7 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
 
   $scope.getDriver = function (item) {
     $scope.driverInfo = item;
+    $scope.getGoodsLine($scope.driverInfo);
     $scope.getCarrierOrder($scope.driverInfo);
     $scope.getCarrierEvaluation($scope.driverInfo);
     var url = $scope.driverInfo.userType == '司机' ? '/driver/' + $scope.driverInfo.userId : '/enterprise/' + $scope.driverInfo.userId;
@@ -654,6 +655,18 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
     });
   }
 
+  $scope.getGoodsLine = function (item) {
+    io.socket.get('/goodsLine/userGoodsLine', {
+      userId: item.userId,
+      page: 1,
+      rows: 50,
+      orderStatus: '已完成'
+    }, function serverResponded(data, JWR) {
+      if (JWR.statusCode == 200) {
+        item.goodsLines = data;
+      }
+    });
+  }
 
   $scope.getCarrierOrder = function (item) {
     io.socket.get('/order/carrierOrder', {
@@ -735,6 +748,15 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
       }
     });
   }
+
+  $rootScope.$on('$locationChangeSuccess', function (evt, current, previous) {
+    $scope.hideDriverInfo();
+    $scope.hidePostionGoods();
+    $scope.hideGoodsAddress();
+    $scope.closeEndInfo();
+    $scope.closeGoodsInfo();
+    $scope.hideStartInfo();
+  });
 
   //$rootScope.$on('$locationChangeSuccess', function (evt, current, previous) {
   $scope.goodsInfo.orderId = $location.search().orderId;

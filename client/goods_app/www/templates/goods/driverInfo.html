@@ -16,12 +16,12 @@
             <!-- 物流企业信息 -->
             <label class="item-detail">
               <label style="width: 22em;font-size: 16px;font-weight: bold;text-align: center;">{{driverInfo.enterpriseName}}</label>
-              <label ng-if="orderItem.carrier.evaluationScore"
-                     style="background: url(img/fen.png) no-repeat;padding:5px 10px 0px 40px;color: #ffffff; width: 80px;height: 29px;background-size: 70px 29px;">{{orderItem.carrier.evaluationScore}}</label>
+              <label ng-if="driverInfo.evaluationScore"
+                     style="background: url(img/fen.png) no-repeat;padding:5px 10px 0px 40px;color: #ffffff; width: 80px;height: 29px;background-size: 70px 29px;">{{driverInfo.evaluationScore}}</label>
             </label>
             <label class="item-detail">
               <div style="width:35%" class="order-detail-label">公司详细地址：</div>
-              <label>{{driverInfo.city+driverInfo.street+driverInfo.address}}</label>
+              <label style="width: 70%">{{driverInfo.city+driverInfo.street+driverInfo.address}}</label>
             </label>
             <label class="item-detail">
               <div style="width:35%" class="order-detail-label">联系人：</div>
@@ -60,29 +60,29 @@
           </div>
         </div>
         <!-- 订单评价 -->
-        <div ng-if="orderItem.carrier.orderTotal&&orderItem.carrier.orderTotal>0" class="card"
+        <div ng-if="driverInfo.orderTotal&&driverInfo.orderTotal>0" class="card"
              style="margin:10px 0px !important;">
           <div class="item item-divider">
-            累计完成订单数({{orderItem.carrier.orderTotal}}单)
+            累计完成订单数({{driverInfo.orderTotal}}单)
           </div>
           <div style="padding: 0px" class="item item-text-wrap">
             <div class="list">
-              <a class="item item-thumbnail-right" href="#" ng-repeat="order in orderItem.carrier.orderList">
+              <a class="item item-thumbnail-right" href="#" ng-repeat="order in driverInfo.orderList">
                 <span style="display: inline-block;width: 45%;">
                   <h2>{{order.updatedAt | amDateFormat:'MM月DD日 HH:mm'}}</h2>
                   <p>{{order.evaluationContent}}</p>
                 </span>
                 <span style="margin:10px 15px 0px 0px;float: right;width: 45%;text-align: right;">
                   <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
-                         ng-class="{'stared':orderItem.carrier.evaluationScore>=1,'star':orderItem.carrier.evaluationScore<1}"></label>
+                         ng-class="{'stared':order.evaluationLevel>=1,'star':order.evaluationLevel<1}"></label>
                   <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
-                         ng-class="{'stared':orderItem.carrier.evaluationScore>=2,'star':orderItem.carrier.evaluationScore<2}"></label>
+                         ng-class="{'stared':order.evaluationLevel>=2,'star':order.evaluationLevel<2}"></label>
                   <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
-                         ng-class="{'stared':orderItem.carrier.evaluationScore>=3,'star':orderItem.carrier.evaluationScore<3}"></label>
+                         ng-class="{'stared':order.evaluationLevel>=3,'star':order.evaluationLevel<3}"></label>
                   <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
-                         ng-class="{'stared':orderItem.carrier.evaluationScore>=4,'star':orderItem.carrier.evaluationScore<4}"></label>
+                         ng-class="{'stared':order.evaluationLevel>=4,'star':order.evaluationLevel<4}"></label>
                   <label style="width: 16px;height: 15px;background-size: 16px 15px;margin:0px;"
-                         ng-class="{'stared':orderItem.carrier.evaluationScore>=5,'star':orderItem.carrier.evaluationScore<5}"></label>
+                         ng-class="{'stared':order.evaluationLevel>=5,'star':order.evaluationLevel<5}"></label>
                 </span>
               </a>
             </div>

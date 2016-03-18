@@ -105,7 +105,7 @@ module.exports = {
             //sql += "  ) as t";
             //sql += " ORDER BY t.eCityCode DESC;";
 
-            sql = "SELECT u.userId FROM `user` AS u";
+            sql = "SELECT u.* FROM `user` AS u";
             sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
             sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
             sql += " WHERE u.userType = '物流企业'";
@@ -114,9 +114,8 @@ module.exports = {
             sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
             sql += " AND l.eStreet = '" + eStreet + "'";
             sql += " UNION ALL";
-            sql += "   SELECT userId FROM";
             sql += "   (";
-            sql += " SELECT u.*, l.eCity,l.eCityCode  FROM `user` AS u";
+            sql += " SELECT u.* FROM `user` AS u";
             sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
             sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
             sql += " WHERE u.userType = '物流企业'";
@@ -126,7 +125,7 @@ module.exports = {
             sql += " AND (l.eCityCode = '" + eCityCode + "' OR l.eCityCode = '" + eCityCode.toString().substr(0, 4) + "00')";
             sql += " AND (l.eStreet IS NULL OR l.eStreet = '')";
             sql += " ORDER BY  l.eCityCode DESC";
-            sql += " ) AS t";
+            sql += " )";
         }
         else {
             //sql = "SELECT u.*,l.eCity,l.eCityCode";
@@ -139,9 +138,7 @@ module.exports = {
             //sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
             //sql += " AND l.eCityCode LIKE '%" + eCityCode.toString().substr(0, 4) + "%'";
             //sql += " ORDER BY l.eCityCode DESC;";
-            sql = " SELECT userId FROM";
-            sql += "   (";
-            sql += " SELECT u.*, l.eCity,l.eCityCode  FROM `user` AS u";
+            sql += " SELECT u.* FROM `user` AS u";
             sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
             sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
             sql += " WHERE u.userType = '物流企业'";
@@ -151,23 +148,23 @@ module.exports = {
             sql += " AND (l.eCityCode = '" + eCityCode + "' OR l.eCityCode = '" + eCityCode.toString().substr(0, 4) + "00')";
             sql += " AND (l.eStreet IS NULL OR l.eStreet = '')";
             sql += " ORDER BY  l.eCityCode DESC";
-            sql += " ) AS t";
         }
 
 
         User.query(sql, function (err, results) {
             if (err) res.badRequest(err);
             if (results && results.length > 0) {
-                var userIds = [];
-                for (var i = 0; i < results.length; i++) {
-                    userIds.push(results[i].userId);
-                }
-                User.find({userId: userIds})
-                    .populate('goodsLines')
-                    .exec(function (err, users) {
-                        if (err) res.badRequest(err);
-                        res.ok(users);
-                    });
+                res.ok(results);
+                //var userIds = [];
+                //for (var i = 0; i < results.length; i++) {
+                //    userIds.push(results[i].userId);
+                //}
+                //User.find({userId: userIds})
+                //    .populate('goodsLines')
+                //    .exec(function (err, users) {
+                //        if (err) res.badRequest(err);
+                //        res.ok(users);
+                //    });
             } else {
                 res.ok([]);
             }

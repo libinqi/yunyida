@@ -38,7 +38,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       //window.plugins.jPushPlugin.setDebugMode(true);
 
       window.plugins.jPushPlugin.openNotificationInAndroidCallback = function (data) {
-        window.location.href = '#/tab/order';
+        window.location.href = '#/tab/order?refresh=true';
       }
 
       if (ionic.Platform.isAndroid()) {
