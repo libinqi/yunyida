@@ -111,7 +111,7 @@ module.exports = {
             sql += " WHERE u.userType = '物流企业'";
             sql += " AND e.businessType LIKE '%零担%'";
             sql += " AND l.eCity != '全国'";
-            sql += " AND l.sCityCode = '" + sCityCode + "'";
+            sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
             sql += " AND l.eStreet = '" + eStreet + "'";
             sql += " UNION ALL";
             sql += "   SELECT userId FROM";
@@ -122,7 +122,7 @@ module.exports = {
             sql += " WHERE u.userType = '物流企业'";
             sql += " AND e.businessType LIKE '%零担%'";
             sql += " AND l.eCity != '全国'";
-            sql += " AND l.sCityCode = '" + sCityCode + "'";
+            sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
             sql += " AND (l.eCityCode = '" + eCityCode + "' OR l.eCityCode = '" + eCityCode.toString().substr(0, 4) + "00')";
             sql += " AND (l.eStreet IS NULL OR l.eStreet = '')";
             sql += " ORDER BY  l.eCityCode DESC";
@@ -147,7 +147,7 @@ module.exports = {
             sql += " WHERE u.userType = '物流企业'";
             sql += " AND e.businessType LIKE '%零担%'";
             sql += " AND l.eCity != '全国'";
-            sql += " AND l.sCityCode = '" + sCityCode + "'";
+            sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
             sql += " AND (l.eCityCode = '" + eCityCode + "' OR l.eCityCode = '" + eCityCode.toString().substr(0, 4) + "00')";
             sql += " AND (l.eStreet IS NULL OR l.eStreet = '')";
             sql += " ORDER BY  l.eCityCode DESC";
