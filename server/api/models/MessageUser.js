@@ -16,6 +16,9 @@ module.exports = {
     content: {type: 'string',required: true},//内容
     validate: {type: 'string'},//有效期
     status: {type: 'boolean', defaultsTo: true},//状态
+    message: {
+      model: 'message'//所属消息
+    },
     user: {
       model: 'user'//所属用户
     }

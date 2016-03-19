@@ -150,6 +150,7 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
     'post /message/send': 'MessageController.send',
+    '/message/userMessage': 'MessageController.userMessage',
     '/message/list': 'MessageController.list',
     'delete /message/:id': 'MessageController.delete',
 };

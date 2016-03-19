@@ -4,6 +4,7 @@
  * @description :: Server-side logic for managing messages
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var moment = require('moment');
 
 module.exports = {
     send: function (req, res) {
@@ -50,7 +51,8 @@ module.exports = {
         var userId = req.body.userId;
 
         var option = {
-            status: true
+            status: true,
+            validate: {'>': moment(new Date(), "YYYY-MM-DD")}
         };
 
         if (messageType) {
@@ -58,28 +60,16 @@ module.exports = {
         }
 
         if (userId) {
-            option.userType = userId;
+            option.user = userId;
         }
 
-        if (content) {
-            option.content = {'contains': content};
-        }
-
-        Message.count(option).exec(function countCB(err, count) {
-            if (err) res.badRequest(err);
-            if (count && count > 0) {
-                Message.find(option)
-                    .sort('updatedAt DESC')
-                    .paginate({page: page, limit: rows})
-                    .exec(function (err, data) {
-                        if (err) res.badRequest(err);
-                        res.ok({body: data, count: count});
-                    });
-            }
-            else {
-                res.ok({body: [], count: 0});
-            }
-        });
+        MessageUser.find(option)
+            .sort('updatedAt DESC')
+            .paginate({page: page, limit: rows})
+            .exec(function (err, data) {
+                if (err) res.badRequest(err);
+                res.ok({body: data});
+            });
     },
     list: function (req, res) {
         var page = req.body.page;
@@ -127,9 +117,9 @@ module.exports = {
      */
     delete: function (req, res) {
         var messageId = req.param('id');
-        Message.destroy({messageId:messageId}).exec(function (err){
+        Message.destroy({messageId: messageId}).exec(function (err) {
             if (err) res.badRequest(err);
-            MessageUser.destroy({message:messageId}).exec(function (err){
+            MessageUser.destroy({message: messageId}).exec(function (err) {
                 if (err) res.badRequest(err);
             });
             res.ok({result: '删除成功'});
