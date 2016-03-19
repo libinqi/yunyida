@@ -19,6 +19,9 @@ module.exports = {
     eCityCode: {type: 'string'},//目的地城市代码
     eStreet: {type: 'string'},//目的地街道
     eAddress: {type: 'string'},//目的地详细地址
+    lowGoodsPrice: {type: 'float'},//最低一票价格
+    heavyGoodsPrice: {type: 'float'},//重货价格
+    cargoGoodsPrice: {type: 'float'},//重货价格
     lng: {type: 'string'},//经度
     lat: {type: 'string'},//纬度
     user: {

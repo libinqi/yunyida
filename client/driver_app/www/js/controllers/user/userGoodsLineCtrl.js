@@ -33,11 +33,14 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
     sCity: '',//起始地城市
     sCityCode: '',//起始地城市代码
     sStreet: '',//起始地街道
-    sAddress: '',//起始地详细地址
+    //sAddress: '',//起始地详细地址
     eCity: '',//目的地城市
     eCityCode: '',//目的地城市代码
     eStreet: '',//目的地街道
-    eAddress: '',//目的地详细地址
+    //eAddress: '',//目的地详细地址
+    lowGoodsPrice: '',//最低一票价格
+    heavyGoodsPrice: '',//重货价格
+    cargoGoodsPrice: '',//重货价格
     lng: '',//经度
     lat: '',//纬度
     user: user.userId//所属用户
@@ -124,11 +127,14 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
         sCity: '',//起始地城市
         sCityCode: '',//起始地城市代码
         sStreet: '',//起始地街道
-        sAddress: '',//起始地详细地址
+        //sAddress: '',//起始地详细地址
         eCity: '',//目的地城市
         eCityCode: '',//目的地城市代码
         eStreet: '',//目的地街道
-        eAddress: '',//目的地详细地址
+        //eAddress: '',//目的地详细地址
+        lowGoodsPrice: '',//最低一票价格
+        heavyGoodsPrice: '',//重货价格
+        cargoGoodsPrice: '',//重货价格
         lng: '',//经度
         lat: '',//纬度
         user: user.userId//所属用户
@@ -186,6 +192,34 @@ angular.module('starter.controllers').controller('UserGoodsLineCtrl', function (
     //  $scope.showMsg('请选择目的地街道');
     //  return;
     //}
+     var reg=/^(([1-9]+\.[0-9]*[1-9][0-9]*)|([1-9]*[1-9][1-9]*\.[0-9]+)|([1-9]*[1-9][0-9]*))$/;
+    if (!$scope.goodsLine.lowGoodsPrice) {
+      $scope.showMsg('请填写最低一票价格');
+      return;
+    }
+    else if(reg.test($scope.goodsLine.lowGoodsPrice)===false)
+    {
+      $scope.showMsg('填写的最低一票价格有误');
+      return;
+    }
+    if (!$scope.goodsLine.heavyGoodsPrice) {
+      $scope.showMsg('请填写重货价格');
+      return;
+    }
+    else if(reg.test($scope.goodsLine.heavyGoodsPrice)===false)
+    {
+      $scope.showMsg('填写的重货价格有误');
+      return;
+    }
+    if (!$scope.goodsLine.cargoGoodsPrice) {
+      $scope.showMsg('请填写泡货价格');
+      return;
+    }
+    else if(reg.test($scope.goodsLine.cargoGoodsPrice)===false)
+    {
+      $scope.showMsg('填写的泡货价格有误');
+      return;
+    }
     $ionicLoading.show({
       template: "正在保存专线信息..."
     });
