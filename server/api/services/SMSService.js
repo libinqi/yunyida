@@ -8,7 +8,7 @@ module.exports = {
     // 发送注册验证码
     SendRegCode: function (phoneNumber, cb) {
         var code = '';
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 6; i++) {
             code += parseInt(Math.random() * (9 - 1 + 1) + 1);
         }
         app.smsSend({
@@ -26,7 +26,7 @@ module.exports = {
     // 发送找回密码验证码
     SendFindCode: function (phoneNumber, cb) {
         var code = '';
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 6; i++) {
             code += parseInt(Math.random() * (9 - 1 + 1) + 1);
         }
         app.smsSend({
