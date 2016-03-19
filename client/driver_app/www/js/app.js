@@ -361,6 +361,11 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         templateUrl: 'templates/user/message.html',
         controller: 'MessageCtrl'
       })
+      .state('about', {
+        url: '/about',
+        templateUrl: 'templates/user/about.html',
+        controller: ''
+      })
       .state('tab.order', {
         url: '/order',
         cache: 'false',

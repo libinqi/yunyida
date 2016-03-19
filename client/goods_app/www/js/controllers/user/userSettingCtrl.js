@@ -11,11 +11,11 @@ angular.module('starter.controllers').controller('UserSettingCtrl', function ($s
         $state.go('passwordInfo');
         break;
       case 2:
-        $state.go('passwordInfo');
+        $state.go('about');
         break;
-      case 3:
-        $state.go('passwordInfo');
-        break;
+      //case 3:
+      //  $state.go('passwordInfo');
+      //  break;
       default:
         break;
     }
