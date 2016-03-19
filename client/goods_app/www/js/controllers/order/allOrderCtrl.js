@@ -208,6 +208,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
       }
       else {
         $scope.driverInfo = user;
+        $scope.getGoodsLine($scope.driverInfo);
         var url = $scope.driverInfo.userType == '司机' ? '/driver/' + $scope.driverInfo.userId : '/enterprise/' + $scope.driverInfo.userId;
         io.socket.post(url, function serverResponded(body, JWR) {
           if (JWR.statusCode !== 200) {
@@ -218,6 +219,19 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
             //$scope.showDriverInfo();
           }
         });
+      }
+    });
+  }
+
+  $scope.getGoodsLine = function (item) {
+    io.socket.get('/goodsLine/userGoodsLine', {
+      userId: item.userId,
+      page: 1,
+      rows: 50,
+      orderStatus: '已完成'
+    }, function serverResponded(data, JWR) {
+      if (JWR.statusCode == 200) {
+        item.goodsLines = data;
       }
     });
   }
