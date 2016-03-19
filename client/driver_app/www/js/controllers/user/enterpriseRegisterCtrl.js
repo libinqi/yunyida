@@ -291,6 +291,7 @@ angular.module('starter.controllers').controller('EnterpriseRegisterCtrl', funct
 
       $scope.userData.businessType = businessType;
       $scope.userData.userType = '物流企业';
+      $scope.userData.status = false;
 
       $ionicLoading.show({
         template: "正在注册..."

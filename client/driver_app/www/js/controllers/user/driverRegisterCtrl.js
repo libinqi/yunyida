@@ -113,7 +113,6 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
 
     if (UserInfo.data) {
       $scope.userData = UserInfo.data;
-      $scope.userData.enterpriseName = '';
     }
 
     $scope.backGo = function () {
@@ -430,6 +429,8 @@ angular.module('starter.controllers').controller('DriverRegisterCtrl', function 
         template: "正在注册..."
       });
       $scope.userData.userType = '司机';
+      $scope.userData.enterpriseName = '';
+      $scope.userData.status = false;
       io.socket.post('/driver/register', $scope.userData, function serverResponded(body, JWR) {
         $ionicLoading.hide();
         if (JWR.statusCode !== 200) {
