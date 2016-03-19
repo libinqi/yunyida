@@ -4,7 +4,7 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($roo
     return;
   }
 
-  //window.plugins.jPushPlugin.setTagsWithAlias([UserInfo.data.userId, UserInfo.data.phoneNumber], UserInfo.data.userType);
+  window.plugins.jPushPlugin.setTagsWithAlias([UserInfo.data.userId, UserInfo.data.phoneNumber], UserInfo.data.userType);
 
   $scope.user = UserInfo.data;
   $scope.pulltextchange = '下拉刷新';
