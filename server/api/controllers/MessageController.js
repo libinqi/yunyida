@@ -18,7 +18,7 @@ module.exports = {
                     if (err) res.badRequest(err);
                     for (var u in users) {
                         data_from.user = users[u].userId;
-                        //data_from.message = message.messageId;
+                        data_from.message = message.messageId;
                         MessageUser.create(data_from).exec(function (err, messageUser) {
                             if (err) res.badRequest(err);
                         });
@@ -34,7 +34,7 @@ module.exports = {
                     if (err) res.badRequest(err);
                     for (var u in users) {
                         data_from.user = users[u].userId;
-                        //data_from.message = message.messageId;
+                        data_from.message = message.messageId;
                         MessageUser.create(data_from).exec(function (err, messageUser) {
                             if (err) res.badRequest(err);
                         });
@@ -52,7 +52,7 @@ module.exports = {
 
         var option = {
             status: true,
-            validate: {'>': moment(new Date(), "YYYY-MM-DD")}
+            validate: {'>': moment().format('YYYY-MM-DD')}
         };
 
         if (messageType) {
@@ -68,7 +68,7 @@ module.exports = {
             .paginate({page: page, limit: rows})
             .exec(function (err, data) {
                 if (err) res.badRequest(err);
-                res.ok({body: data});
+                res.ok(data);
             });
     },
     list: function (req, res) {

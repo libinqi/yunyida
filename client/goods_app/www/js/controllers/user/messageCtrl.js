@@ -7,7 +7,7 @@ angular.module('starter.controllers').controller('MessageCtrl', function ($scope
   $scope.query = {
     page: 1,
     rows: 8,
-    messageType: '',
+    messageType: '通知消息',
     userId: UserInfo.data.userId
   };
 
@@ -20,15 +20,13 @@ angular.module('starter.controllers').controller('MessageCtrl', function ($scope
   $scope.changeTab = function (evt) {
     var elem = evt.currentTarget;
     $scope.isActive = elem.getAttributeNode('data-active').value;
-    $scope.items = [];
-    $scope.query.page = 1;
     if ($scope.isActive == 'a') {
       $scope.query.messageType = '通知消息';
     }
     if ($scope.isActive == 'b') {
       $scope.query.messageType = '系统消息';
     }
-    $scope.loadMore();
+    $scope.doRefresh();
   };
 
   $scope.showMsg = function (txt) {
@@ -45,16 +43,16 @@ angular.module('starter.controllers').controller('MessageCtrl', function ($scope
   $scope.backGo = function () {
     $ionicHistory.goBack();
   };
-  // 通知消息
-  $scope.deleteMessage = function (id) {
-    io.socket.delete('/messageUser/' + id, function serverResponded(body, JWR) {
-      if (JWR.statusCode !== 200) {
-        $scope.showMsg('请求失败,网络不给力！');
-      }
-      else {
-        $scope.loadMore();
-      }
-    });
+
+  //下拉刷新
+  $scope.doRefresh = function () {
+    $scope.messageList = [];
+    $scope.query.page = 1;
+    $scope.load_over = false;
+    $scope.loadMore();
+    // 停止广播ion-refresher
+    $scope.$broadcast('scroll.refreshComplete');
+    $scope.pulltextchange = '下拉刷新';
   };
 
   $scope.loadMore = function () {
@@ -80,5 +78,21 @@ angular.module('starter.controllers').controller('MessageCtrl', function ($scope
         }
       });
     }, 200);
+  };
+
+  // 删除消息
+  $scope.deleteMessage = function (id) {
+    io.socket.delete('/messageUser/' + id, function serverResponded(body, JWR) {
+      if (JWR.statusCode !== 200) {
+        $scope.showMsg('请求失败,网络不给力！');
+      }
+      else {
+        $timeout(function () {
+          $scope.flag.showDelete = false;
+        });
+        $scope.messageList=[];
+        $scope.loadMore();
+      }
+    });
   };
 });

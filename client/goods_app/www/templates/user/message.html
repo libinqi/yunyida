@@ -15,13 +15,16 @@
 <ion-content class="has-subheader">
   <div ng-if="isActive == 'a'">
     <ion-list show-delete="flag.showDelete">
+      <ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()"
+                     on-pulling="pulltext()" spinner="ripple" pulling-icon="ion-ios-refresh-empty"></ion-refresher>
       <ion-item ng-repeat="message in messageList">
-        <p>{{message.createdAt}}</p>
+        <p>{{message.createdAt|amTimeAgo}}</p>
         <!--<p style="color:#000;font-weight:bold">{{item.title}}</p>-->
         <p style="color:#000;white-space: pre">{{message.content}}</p>
         <ion-option-button class="button-assertive icon ion-close-round"
                            ng-click="deleteMessage(message.messageUserId)"></ion-option-button>
-        <ion-delete-button class="ion-minus-circled" ng-click="deleteMessage(message.messageUserId)"></ion-delete-button>
+        <ion-delete-button class="ion-minus-circled"
+                           ng-click="deleteMessage(message.messageUserId)"></ion-delete-button>
       </ion-item>
     </ion-list>
     <div ng-if="messageList.length==0" class="bar bar-stable">
@@ -31,18 +34,21 @@
   </div>
   <div ng-if="isActive == 'b'">
     <ion-list show-delete="flag.showDelete">
+      <ion-refresher pulling-text="<span class='pulling-text-auto'>{{pulltextchange}}</span>" on-refresh="doRefresh()"
+                     on-pulling="pulltext()" spinner="ripple" pulling-icon="ion-ios-refresh-empty"></ion-refresher>
       <ion-item ng-repeat="message in messageList">
-        <p>{{message.createdAt}}</p>
+        <p>{{message.createdAt|amTimeAgo}}</p>
         <!--<p style="color:#000;font-weight:bold">{{message.title}}</p>-->
         <p style="color:#000;white-space: pre">{{message.content}}</p>
         <ion-option-button class="button-assertive icon ion-close-round"
                            ng-click="deleteMessage(message.messageUserId)"></ion-option-button>
-        <ion-delete-button class="ion-minus-circled" ng-click="deleteMessage(message.messageUserId)"></ion-delete-button>
+        <ion-delete-button class="ion-minus-circled"
+                           ng-click="deleteMessage(message.messageUserId)"></ion-delete-button>
       </ion-item>
     </ion-list>
     <div ng-if="messageList.length==0" class="bar bar-stable">
       <div class="no-content">暂无系统消息</div>
     </div>
-    <ion-infinite-scroll on-infinite="loadMore2()" ng-if="load_over"></ion-infinite-scroll>
-    <div>
+    <ion-infinite-scroll on-infinite="loadMore()" ng-if="load_over"></ion-infinite-scroll>
+  </div>
 </ion-content>
