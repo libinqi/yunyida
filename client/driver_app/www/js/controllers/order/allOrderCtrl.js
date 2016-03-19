@@ -108,11 +108,18 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
     {
       $scope.detail.hide();
     }
-    $scope.loadMore();
+    $scope.doRefresh();
   }
   //$timeout(function () {
   //  $scope.loadMore();
   //});
+  $rootScope.$on('orderRefresh', function (event) {
+    if($scope.detail)
+    {
+      $scope.detail.hide();
+    }
+    $scope.doRefresh();
+  });
 
   // Resume refresh
   $rootScope.$on('onResumeCordova', function (event) {
@@ -120,7 +127,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
     {
       $scope.detail.hide();
     }
-    $scope.loadMore();
+    $scope.doRefresh();
   });
 
   // System events

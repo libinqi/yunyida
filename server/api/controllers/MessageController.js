@@ -17,7 +17,7 @@ module.exports = {
                     if (err) res.badRequest(err);
                     for (var u in users) {
                         data_from.user = users[u].userId;
-                        data_from.message = message.messageId;
+                        //data_from.message = message.messageId;
                         MessageUser.create(data_from).exec(function (err, messageUser) {
                             if (err) res.badRequest(err);
                         });
@@ -33,7 +33,7 @@ module.exports = {
                     if (err) res.badRequest(err);
                     for (var u in users) {
                         data_from.user = users[u].userId;
-                        data_from.message = message.messageId;
+                        //data_from.message = message.messageId;
                         MessageUser.create(data_from).exec(function (err, messageUser) {
                             if (err) res.badRequest(err);
                         });
@@ -42,6 +42,44 @@ module.exports = {
                 });
             });
         }
+    },
+    userMessage: function (req, res) {
+        var page = req.body.page;
+        var rows = req.body.rows;
+        var messageType = req.body.messageType;
+        var userId = req.body.userId;
+
+        var option = {
+            status: true
+        };
+
+        if (messageType) {
+            option.messageType = messageType;
+        }
+
+        if (userId) {
+            option.userType = userId;
+        }
+
+        if (content) {
+            option.content = {'contains': content};
+        }
+
+        Message.count(option).exec(function countCB(err, count) {
+            if (err) res.badRequest(err);
+            if (count && count > 0) {
+                Message.find(option)
+                    .sort('updatedAt DESC')
+                    .paginate({page: page, limit: rows})
+                    .exec(function (err, data) {
+                        if (err) res.badRequest(err);
+                        res.ok({body: data, count: count});
+                    });
+            }
+            else {
+                res.ok({body: [], count: 0});
+            }
+        });
     },
     list: function (req, res) {
         var page = req.body.page;

@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('GoodsListCtrl', function ($scope, $state, loginService, UserInfo, $ionicListDelegate, $timeout, $ionicPopover, $ionicHistory, $ionicModal, $ionicPopup) {
+angular.module('starter.controllers').controller('GoodsListCtrl', function ($rootScope, $scope, $state, loginService, UserInfo, $ionicListDelegate, $timeout, $ionicPopover, $ionicHistory, $ionicModal, $ionicPopup) {
   if (!UserInfo.data.userId) {
     $state.go('login');
     return;
@@ -92,6 +92,22 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
     $scope.doRefresh();
   };
 
+  $rootScope.$on('onResumeCordova', function (event) {
+    $scope.doRefresh();
+  });
+
+  // System events
+  document.addEventListener("resume", resume, false);
+
+  function resume() {
+    var div = document.getElementsByTagName('body')[0];
+    var scope = angular.element(div).scope();
+    var rootScope = scope.$root;
+    rootScope.$apply(function () {
+      rootScope.$broadcast('onResumeCordova');
+    });
+  }
+
   //$timeout(function () {
   //  $scope.loadMore();
   //});
@@ -156,11 +172,10 @@ angular.module('starter.controllers').controller('GoodsListCtrl', function ($sco
     var goodsOrder = goodsItem.goodsOrders[0];
     io.socket.get('/user/' + $scope.user.userId, function serverResponded(body, JWR) {
       if (JWR.statusCode == 200) {
-        if(!body.status || body.status == 'false')
-        {
+        if (!body.status || body.status == 'false') {
           $scope.showMsg("您的账号未通过审核,暂时无法受理业务");
         }
-        else{
+        else {
           //if (!$scope.user.status || $scope.user.status == 'false') {
           //  $scope.showMsg("您的账号未通过审核,暂时无法受理业务");
           //  return false;

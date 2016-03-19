@@ -108,7 +108,6 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
     if ($scope.detail) {
       $scope.detail.hide();
     }
-    $scope.driverInfoModal.hide();
     if ($scope.driverInfoModal) {
       $scope.driverInfoModal.hide();
     }
@@ -116,18 +115,31 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
     {
       $scope.evaluate.hide();
     }
-    $scope.loadMore();
+    $scope.doRefresh();
   }
   //$timeout(function () {
   //  $scope.loadMore();
   //});
+
+  $rootScope.$on('orderRefresh', function (event) {
+    if ($scope.detail) {
+      $scope.detail.hide();
+    }
+    if ($scope.driverInfoModal) {
+      $scope.driverInfoModal.hide();
+    }
+    if($scope.evaluate)
+    {
+      $scope.evaluate.hide();
+    }
+    $scope.doRefresh();
+  });
 
   // Resume refresh
   $rootScope.$on('onResumeCordova', function (event) {
     if ($scope.detail) {
       $scope.detail.hide();
     }
-    $scope.driverInfoModal.hide();
     if ($scope.driverInfoModal) {
       $scope.driverInfoModal.hide();
     }
@@ -135,7 +147,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
     {
       $scope.evaluate.hide();
     }
-    $scope.loadMore();
+    $scope.doRefresh();
   });
 
   // System events

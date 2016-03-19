@@ -750,12 +750,30 @@ angular.module('starter.controllers').controller('AddGoodsCtrl', function ($root
   }
 
   $rootScope.$on('$locationChangeSuccess', function (evt, current, previous) {
-    $scope.hideDriverInfo();
-    $scope.hidePostionGoods();
-    $scope.hideGoodsAddress();
-    $scope.closeEndInfo();
-    $scope.closeGoodsInfo();
-    $scope.hideStartInfo();
+    if($scope.driverInfoModal)
+    {
+      $scope.driverInfoModal.hide();
+    }
+   if($scope.postionGoodsModal)
+    {
+      $scope.postionGoodsModal.hide();
+    }
+   if( $scope.goodsAddressModal)
+   {
+     $scope.goodsAddressModal.hide();
+   }
+   if($scope.endInfoModal.hide())
+   {
+     $scope.endInfoModal.hide();
+   }
+    if($scope.goodsInfoModal)
+    {
+      $scope.goodsInfoModal.hide();
+    }
+    if($scope.startInfoModal)
+    {
+      $scope.startInfoModal.hide();
+    }
   });
 
   //$rootScope.$on('$locationChangeSuccess', function (evt, current, previous) {
