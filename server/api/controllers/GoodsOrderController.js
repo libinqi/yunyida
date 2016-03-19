@@ -122,7 +122,7 @@ module.exports = {
     },
     carrierEvaluation: function (req, res) {
         var carrier = req.body.carrier;
-        var sql = "SELECT (SELECT COUNT(*) as orderTotal FROM goodsorder WHERE goodsOrderStatus='已承运' AND carrier="+ carrier+") as orderTotal,(SELECT round(AVG(evaluationLevel),1) FROM goodsorder WHERE goodsOrderStatus='已完成' AND carrier="+ carrier+") as evaluationScore";
+        var sql = "SELECT (SELECT COUNT(*) as orderTotal FROM goodsorder WHERE (goodsOrderStatus = '已承运' OR goodsOrderStatus = '已完成') AND carrier="+ carrier+") as orderTotal,(SELECT round(AVG(evaluationLevel),1) FROM goodsorder WHERE goodsOrderStatus='已完成' AND carrier="+ carrier+") as evaluationScore";
         GoodsOrder.query(sql, function (err, rows) {
             if (err) res.badRequest(err);
             res.ok({body: rows[0]});
