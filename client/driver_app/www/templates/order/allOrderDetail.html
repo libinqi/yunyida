@@ -110,7 +110,7 @@
           <!--</div>-->
       <!--</div>-->
       <div class="button-bar" style="margin-top:10px">
-        <button class="button button-assertive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus!='已承运'&&orderItem.goodsOrderStatus!='已完成'" ng-click="cancelOrder(orderItem.goodsOrderId)">取消
+        <button class="button button-assertive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus!='已承运'&&orderItem.goodsOrderStatus!='已完成'" ng-click="cancelOrder(orderItem.goodsOrderId,orderItem.goodsOrderStatus)">取消
         </button>
         <button class="button button-positive" style="margin-right:10px;margin-left:10px;" ng-if="orderItem.goodsOrderStatus=='已报价'"
                 ng-click="confirmOrder(orderItem.goodsOrderId)">接单

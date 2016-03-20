@@ -104,8 +104,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
   };
 
   if ($location.search().refresh) {
-    if($scope.detail)
-    {
+    if ($scope.detail) {
       $scope.detail.hide();
     }
     $scope.doRefresh();
@@ -114,8 +113,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
   //  $scope.loadMore();
   //});
   $rootScope.$on('orderRefresh', function (event) {
-    if($scope.detail)
-    {
+    if ($scope.detail) {
       $scope.detail.hide();
     }
     $scope.doRefresh();
@@ -123,8 +121,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
 
   // Resume refresh
   $rootScope.$on('onResumeCordova', function (event) {
-    if($scope.detail)
-    {
+    if ($scope.detail) {
       $scope.detail.hide();
     }
     $scope.doRefresh();
@@ -189,10 +186,11 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
   };
 
   //取消已报价
-  $scope.cancelOrder = function (orderId) {
+  $scope.cancelOrder = function (orderId, goodsOrderStatus) {
+    var orderStatus = goodsOrderStatus == "已报价" ? "报价" : "接单";
     var confirmPopup = $ionicPopup.confirm({
       title: '取消已报价',
-      template: '您确定要取消已报价吗?',
+      template: '您确定要取消' + orderStatus + '吗?',
       buttons: [
         {
           text: '暂不取消', onTap: function (e) {
@@ -223,7 +221,7 @@ angular.module('starter.controllers').controller('AllOrderCtrl', function ($root
                 }
               }
             }
-            $scope.showMsg('取消已报价成功！');
+            $scope.showMsg('取消' + orderStatus + '成功！');
             $scope.closeDetail();
             $scope.doRefresh();
           }

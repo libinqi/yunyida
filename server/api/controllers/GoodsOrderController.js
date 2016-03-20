@@ -122,7 +122,7 @@ module.exports = {
     },
     carrierEvaluation: function (req, res) {
         var carrier = req.body.carrier;
-        var sql = "SELECT (SELECT COUNT(*) as orderTotal FROM goodsorder WHERE (goodsOrderStatus = '已承运' OR goodsOrderStatus = '已完成') AND carrier="+ carrier+") as orderTotal,(SELECT round(AVG(evaluationLevel),1) FROM goodsorder WHERE goodsOrderStatus='已完成' AND carrier="+ carrier+") as evaluationScore";
+        var sql = "SELECT (SELECT COUNT(*) as orderTotal FROM goodsorder WHERE (goodsOrderStatus = '已承运' OR goodsOrderStatus = '已完成') AND carrier=" + carrier + ") as orderTotal,(SELECT round(AVG(evaluationLevel),1) FROM goodsorder WHERE goodsOrderStatus='已完成' AND carrier=" + carrier + ") as evaluationScore";
         GoodsOrder.query(sql, function (err, rows) {
             if (err) res.badRequest(err);
             res.ok({body: rows[0]});
@@ -184,6 +184,7 @@ module.exports = {
         var orderId = req.body.orderId;
         GoodsOrder.findOne(orderId).populate('goods').exec(function (err, order) {
             if (err) res.badRequest(err);
+            var orderStatus = order.goodsOrderStatus == "已报价" ? "报价" : "接单";
             order.goodsOrderStatus = '已下单';
             order.carrier = null;
             order.goods.publishType = (order.goods.goodsType == '零担' ? '快捷发货' : '立即发货');
@@ -192,7 +193,7 @@ module.exports = {
 
             push_goods_client.push().setPlatform('ios', 'android')
                 .setAudience(JPush.tag(order.shipper + ''))
-                .setNotification('您有一个订单被取消已报价', JPush.ios('您有一个订单被取消已报价'), JPush.android('您有一个订单被取消已报价', null, 1))
+                .setNotification('您有一个订单被取消' + orderStatus, JPush.ios('您有一个订单被取消' + orderStatus), JPush.android('您有一个订单被取消' + orderStatus, null, 1))
                 .send(function (err, res) {
                     if (err) {
                         console.log(err.message);
