@@ -79,96 +79,39 @@ module.exports = {
         var eCityCode = req.body.eCityCode || req.query.eCityCode;
         var eStreet = req.body.eStreet || req.query.eStreet;
 
-        var sql = "";
+        var sql = " SELECT u.* FROM `user` AS u";
+        sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
+        sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
+        sql += " WHERE u.userType = '物流企业'";
+        sql += " AND e.businessType LIKE '%零担%'";
+        sql += " AND l.eCity != '全国'";
+        sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
+        sql += " AND (l.eCityCode = '" + eCityCode + "' OR l.eCityCode = '" + eCityCode.toString().substr(0, 4) + "00')";
         if (eStreet) {
-            //sql = "SELECT userId FROM(";
-            //sql += "SELECT";
-            //sql += " u.*,l.eCity,l.eCityCode";
-            //sql += " FROM `user` AS u";
-            //sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
-            //sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
-            //sql += " WHERE u.userType = '物流企业'";
-            //sql += " AND e.businessType LIKE '%零担%'";
-            //sql += " AND l.eCity!='全国'";
-            //sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
-            //sql += " AND l.eStreet LIKE '%" + eStreet + "%'";
-            //sql += " UNION ALL";
-            //sql += " SELECT u.*,l.eCity,l.eCityCode";
-            //sql += " FROM `user` AS u";
-            //sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
-            //sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
-            //sql += " WHERE u.userType = '物流企业'";
-            //sql += " AND e.businessType LIKE '%零担%'";
-            //sql += " AND l.eCity!='全国'";
-            //sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
-            //sql += " AND l.eCityCode LIKE '%" + eCityCode.toString().substr(0, 4) + "%'";
-            //sql += "  ) as t";
-            //sql += " ORDER BY t.eCityCode DESC;";
-
-            sql = "SELECT u.* FROM `user` AS u";
-            sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
-            sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
-            sql += " WHERE u.userType = '物流企业'";
-            sql += " AND e.businessType LIKE '%零担%'";
-            sql += " AND l.eCity != '全国'";
-            sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
-            sql += " AND l.eStreet = '" + eStreet + "'";
-            sql += " UNION ALL";
-            sql += "   (";
-            sql += " SELECT u.* FROM `user` AS u";
-            sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
-            sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
-            sql += " WHERE u.userType = '物流企业'";
-            sql += " AND e.businessType LIKE '%零担%'";
-            sql += " AND l.eCity != '全国'";
-            sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
-            sql += " AND (l.eCityCode = '" + eCityCode + "' OR l.eCityCode = '" + eCityCode.toString().substr(0, 4) + "00')";
-            sql += " AND (l.eStreet IS NULL OR l.eStreet = '')";
-            sql += " ORDER BY  l.eCityCode DESC";
-            sql += " )";
+            sql += " OR l.eStreet = '" + eStreet + "'";
         }
         else {
-            //sql = "SELECT u.*,l.eCity,l.eCityCode";
-            //sql += " FROM `user` AS u";
-            //sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
-            //sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
-            //sql += " WHERE u.userType = '物流企业'";
-            //sql += " AND e.businessType LIKE '%零担%'";
-            //sql += " AND l.eCity!='全国'";
-            //sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
-            //sql += " AND l.eCityCode LIKE '%" + eCityCode.toString().substr(0, 4) + "%'";
-            //sql += " ORDER BY l.eCityCode DESC;";
-            sql += " SELECT u.* FROM `user` AS u";
-            sql += " INNER JOIN enterprise AS e ON e.`user` = u.userId";
-            sql += " INNER JOIN goodsline AS l ON l.`user` = u.userId";
-            sql += " WHERE u.userType = '物流企业'";
-            sql += " AND e.businessType LIKE '%零担%'";
-            sql += " AND l.eCity != '全国'";
-            sql += " AND l.sCityCode LIKE '%" + sCityCode.toString().substr(0, 4) + "%'";
-            sql += " AND (l.eCityCode = '" + eCityCode + "' OR l.eCityCode = '" + eCityCode.toString().substr(0, 4) + "00')";
             sql += " AND (l.eStreet IS NULL OR l.eStreet = '')";
-            sql += " ORDER BY  l.eCityCode DESC";
         }
-
+        sql += " ORDER BY  l.eCityCode DESC";
 
         User.query(sql, function (err, results) {
-            if (err) res.badRequest(err);
-            if (results && results.length > 0) {
-                res.ok(results);
-                //var userIds = [];
-                //for (var i = 0; i < results.length; i++) {
-                //    userIds.push(results[i].userId);
-                //}
-                //User.find({userId: userIds})
-                //    .populate('goodsLines')
-                //    .exec(function (err, users) {
-                //        if (err) res.badRequest(err);
-                //        res.ok(users);
-                //    });
-            } else {
-                res.ok([]);
+                if (err) res.badRequest(err);
+                if (results && results.length > 0) {
+                    var unique = {};
+                    results.forEach(function (user) {
+                        unique[JSON.stringify(user)] = user
+                    });
+                    results = Object.keys(unique).map(function (u) {
+                        return JSON.parse(u)
+                    });
+                    res.ok(results);
+                }
+                else {
+                    res.ok([]);
+                }
             }
-        });
+        );
     },
     update: function (req, res) {
         var data_from = req.params.all();
