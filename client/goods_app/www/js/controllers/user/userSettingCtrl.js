@@ -11,6 +11,9 @@ angular.module('starter.controllers').controller('UserSettingCtrl', function ($s
         $state.go('passwordInfo');
         break;
       case 2:
+        $state.go('legal');
+        break;
+      case 3:
         $state.go('about');
         break;
       //case 3:

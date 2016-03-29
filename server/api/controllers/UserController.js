@@ -4,6 +4,8 @@
  * @description :: Server-side logic for managing users
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var NodeCache = require("node-cache");
+var myCache = new NodeCache();
 
 module.exports = {
     login: function (req, res) {
@@ -192,7 +194,7 @@ module.exports = {
         var phoneNumber = req.body.phoneNumber || req.query.phoneNumber;
         SMSService.SendRegCode(phoneNumber, function (code) {
             if (code) {
-                req.session.validCode = code;
+                myCache.set(phoneNumber, code);
                 res.ok({validCode: code});
             }
         });
@@ -201,7 +203,7 @@ module.exports = {
         var phoneNumber = req.body.phoneNumber || req.query.phoneNumber;
         SMSService.SendFindCode(phoneNumber, function (code) {
             if (code) {
-                req.session.validCode = code;
+                myCache.set(phoneNumber, code);
                 res.ok({validCode: code});
             }
         });
@@ -209,12 +211,24 @@ module.exports = {
     checkValidCode: function (req, res) {
         var phoneNumber = req.body.phoneNumber || req.query.phoneNumber;
         var validCode = req.body.validCode || req.query.validCode;
-        if (req.session.validCode == validCode) {
-            res.ok({msg: 'ok'});
-        }
-        else {
-            res.serverError({msg: 'no'});
-        }
+
+        myCache.get( phoneNumber, function( err, value ){
+            if( !err ){
+                if(value == undefined){
+                    res.serverError({msg: 'no'});
+                }else{
+                    if (value == validCode) {
+                        res.ok({msg: 'ok'});
+                    }
+                    else {
+                        res.serverError({msg: 'no'});
+                    }
+                }
+            }
+            else{
+                res.serverError({msg: 'no'});
+            }
+        });
     },
     /**
      * 上传头像

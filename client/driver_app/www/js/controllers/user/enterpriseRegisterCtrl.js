@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('EnterpriseRegisterCtrl', function ($scope, $http, $timeout, $ionicHistory, $ionicLoading, $ionicPopover, $state, UserInfo, loginService, CityPickerService, dictService, geolocationService) {
+angular.module('starter.controllers').controller('EnterpriseRegisterCtrl', function ($scope, $http, $timeout, $ionicHistory, $ionicLoading, $ionicPopover, $state, UserInfo, loginService, CityPickerService, dictService) {
     $scope.userData = {
       phoneNumber: '', //手机
       userName: '', //用户名
@@ -137,6 +137,8 @@ angular.module('starter.controllers').controller('EnterpriseRegisterCtrl', funct
         }, 1000);
       }
     }
+
+    //io.sails.connect(io.sails.url, ['websocket', 'polling']);
 
     $scope.getValidCode = function () {
       var reg = /^1\d{10}$/;

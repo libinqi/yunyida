@@ -13,10 +13,12 @@
         <span class="input-label">手&nbsp;&nbsp;机&nbsp;&nbsp;号</span>
         <input type="tel" ng-model="userData.phoneNumber">
       </label>
-      <div class="item item-input-inset margin10" style="padding-top:6px;padding-bottom:6px;padding-left:12px;">
+      <div class="item item-input margin10" style="padding-top:6px;padding-bottom:6px;">
         <span class="input-label">验&nbsp;&nbsp;证&nbsp;&nbsp;码</span>
-        <input type="text" ng-model="formData.securityCode" style="width: 135px;padding-left:7px;">
-        <button class="button button-small button-positive" ng-click="getValidCode()" ng-disabled="flag==0">{{validBtnText}}</button>
+        <input type="text" ng-model="formData.securityCode" style="width: 35%;padding-left:7px;" maxlength="6">
+        <button class="button button-small button-positive" style="height: 40px;line-height: 35px; margin-right: 10px;padding:0px 10px 0px 10px;font-weight: bold;letter-spacing:3px;" ng-click="getValidCode()" ng-disabled="flag==0">
+          {{validBtnText}}
+        </button>
       </div>
       <label class="item item-input margin10">
         <span class="input-label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span>

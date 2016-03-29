@@ -265,7 +265,6 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
 
       .state('register', {
         url: '/register',
-        abstract: true,
         templateUrl: "templates/user/register.html",
         controller: 'RegisterCtrl'
       })
@@ -360,6 +359,11 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         url: '/message',
         templateUrl: 'templates/user/message.html',
         controller: 'MessageCtrl'
+      })
+      .state('legal', {
+        url: '/legal',
+        templateUrl: 'templates/user/legal.html',
+        controller: ''
       })
       .state('about', {
         url: '/about',

@@ -324,6 +324,11 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         templateUrl: 'templates/user/message.html',
         controller: 'MessageCtrl'
       })
+      .state('legal', {
+        url: '/legal',
+        templateUrl: 'templates/user/legal.html',
+        controller: ''
+      })
       .state('about', {
         url: '/about',
         templateUrl: 'templates/user/about.html',
