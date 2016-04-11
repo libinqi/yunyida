@@ -13,12 +13,12 @@
       <p style="height: 35px;color: #222222;font-size: 16px;"
          ng-click="showGoodsLine(item)">
         <img style="width: 20px;height: 32px;vertical-align: bottom" src="img/start.png"/>
-        <span>{{item.sCity+item.sStreet+item.sAddress}}</span>
+        <span>{{item.sCity+(item.sStreet?item.sStreet:'')+(item.sAddress?item.sAddress:'')}}</span>
       </p>
       <p style="height: 35px;color: #222222;font-size: 16px;"
          ng-click="showGoodsLine(item)">
         <img style="width: 20px;height: 32px;vertical-align: bottom" src="img/end.png"/>
-        <span>{{item.eCity+item.eStreet+item.eAddress}}</span>
+        <span>{{item.eCity+(item.eStreet?item.eStreet:'')+(item.eAddress?item.eAddress:'')}}</span>
       </p>
       <ion-delete-button class="ion-minus-circled" ng-click="delGoodsLine(item.goodsLineId)"></ion-delete-button>
     </ion-item>
@@ -28,6 +28,6 @@
     <div class="no-content">还没有专线,马上添加</div>
   </div>
 </ion-content>
-<div class="bar bar-footer bar-positive">
+<ion-footer-bar align-title="center" class="bar-positive">
   <div class="title" ng-click="showGoodsLine()">新增专线</div>
-</div>
+</ion-footer-bar>

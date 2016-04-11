@@ -6,24 +6,26 @@
                                                        style="width:20px;position:relative;top:2px;"></a>
 </ion-header-bar>
 <ion-view>
-<ion-content>
-  <ion-list>
-    <ion-item class="item item-thumbnail-right" ng-repeat="item in items">
-      <img style="width: 24px;height: 24px;" ng-if="item.isDefault" src="img/checkmark.png" ng-click="selectStartInfo(item)">
-      <h2 ng-click="selectStartInfo(item)">{{item.consignor}} {{item.phoneNumber}}</h2>
-      <p class="content" ng-click="selectStartInfo(item)"><span ng-if="item.isDefault">[默认]</span>{{item.city+item.street+item.address}}</p>
-      <ion-option-button class="button-stable" ng-if="!item.isDefault"
-                         ng-click="defaultGoodsAddress(item.goodsAddressId)">设为默认
-      </ion-option-button>
-    </ion-item>
-  </ion-list>
-  <ion-infinite-scroll ng-if="load_over" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
-  <div ng-if="items.length==0" class="bar bar-stable">
-    <div class="no-content">没有发货地址,马上添加</div>
-  </div>
-</ion-content>
-<div class="bar bar-footer bar-assertive">
-  <div class="title" ng-click="showGoodsAddress()">新增发货地址</div>
-</div>
+  <ion-content>
+    <ion-list>
+      <ion-item class="item item-thumbnail-right" ng-repeat="item in items">
+        <img style="width: 24px;height: 24px;" ng-if="item.isDefault" src="img/checkmark.png"
+             ng-click="selectStartInfo(item)">
+        <h2 ng-click="selectStartInfo(item)">{{item.consignor}} {{item.phoneNumber}}</h2>
+        <p class="content" ng-click="selectStartInfo(item)"><span ng-if="item.isDefault">[默认]</span>{{item.city+(item.street?item.street:'')+(item.address?item.address:'')}}
+        </p>
+        <ion-option-button class="button-stable" ng-if="!item.isDefault"
+                           ng-click="defaultGoodsAddress(item.goodsAddressId)">设为默认
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll ng-if="load_over" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+    <div ng-if="items.length==0" class="bar bar-stable">
+      <div class="no-content">没有发货地址,马上添加</div>
+    </div>
+  </ion-content>
+  <ion-footer-bar align-title="center" class="bar-assertive">
+    <div class="title" ng-click="showGoodsAddress()">新增发货地址</div>
+  </ion-footer-bar>
 </ion-view>
 

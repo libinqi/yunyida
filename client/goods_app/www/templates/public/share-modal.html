@@ -1,0 +1,16 @@
+<div class="share-picker-backdrop">
+  <ion-modal-view class="share-picker-bg">
+    <div class="share-picker">
+      <ion-header-bar align-title="center" class="bar-stable">
+        <h1 class="title subtitle">分享到</h1>
+      </ion-header-bar>
+      <ion-content>
+        <span><img src="img/weixin.png" width="65px" height="85px" ng-click="webChat()"></span>
+        <span><img src="img/weixinquan.png"width="65px" height="85px" ng-click="webChatFriend()"></span>
+      </ion-content>
+      <ion-footer-bar align-title="center" class="bar-stable">
+        <div class="title" ng-click="closeShareModal()">取消</div>
+      </ion-footer-bar>
+    </div>
+  </ion-modal-view>
+</div>
