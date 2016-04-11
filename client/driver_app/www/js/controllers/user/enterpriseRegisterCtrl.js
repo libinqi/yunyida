@@ -263,11 +263,7 @@ angular.module('starter.controllers').controller('EnterpriseRegisterCtrl', funct
         return false;
       }
 
-      if (!$scope.userData.businessLicenseNumber) {
-        $scope.showMsg('营业执照编号不能为空');
-        return false;
-      }
-      else {
+      if ($scope.userData.businessLicenseNumber) {
         if ($scope.userData.businessLicenseNumber.length != 15
           && $scope.userData.businessLicenseNumber.length != 18) {
           $scope.showMsg('营业执照编号不正确');

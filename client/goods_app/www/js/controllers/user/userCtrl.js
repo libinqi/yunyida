@@ -224,7 +224,7 @@ angular.module('starter.controllers').controller('UserCtrl', function ($scope, $
     Wechat.share({
       message: {
         title: '加入云驿达，免费推广品牌，汇集海量物流企业和司机，你也试试吧！',
-        description: '云驿达运力版',
+        description: '云驿达货主版',
         thumb: "www/img/icon.png",
         media: {
           type: Wechat.Type.LINK,
@@ -252,7 +252,7 @@ angular.module('starter.controllers').controller('UserCtrl', function ($scope, $
     Wechat.share({
       message: {
         title: '加入云驿达，免费推广品牌，汇集海量物流企业和司机，你也试试吧！',
-        description: '云驿达运力版',
+        description: '云驿达货主版',
         thumb: "www/img/icon.png",
         media: {
           type: Wechat.Type.LINK,
