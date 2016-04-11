@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers').controller('UserCtrl', function ($scope, $state, $http, $timeout, $ionicPopover, $ionicLoading, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, UserInfo) {
+angular.module('starter.controllers').controller('UserCtrl', function ($scope, $state, $http, $timeout, $ionicPopover, $ionicLoading, $cordovaActionSheet, $cordovaImagePicker, $cordovaFileTransfer, $cordovaCamera, $ionicModal, UserInfo) {
   $scope.pulltextchange = '下拉刷新';
   $scope.userInfo = UserInfo.data;
   $scope.userInfo.image = 'img/default-ava.png';
@@ -63,7 +63,8 @@ angular.module('starter.controllers').controller('UserCtrl', function ($scope, $
         $state.go('message');
         break;
       case 5:
-        $state.go('invitation');
+        $scope.openShareModal();
+        //$state.go('invitation');
         break;
       default:
         break;
@@ -187,6 +188,86 @@ angular.module('starter.controllers').controller('UserCtrl', function ($scope, $
         });
     }, function (err) {
       $scope.showMsg('上传失败，请重试');
+    });
+  };
+
+
+  $ionicModal.fromTemplateUrl('templates/public/share-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up',
+    backdropClickToClose: true
+  }).then(function (modal) {
+    $scope.shareModal = modal;
+  });
+
+  $scope.openShareModal = function () {
+    $scope.shareModal.show();
+  };
+  $scope.closeShareModal = function () {
+    $scope.shareModal.hide();
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function () {
+    $scope.shareModal && $scope.shareModal.remove();
+  });
+
+  $scope.invData = {
+    url: 'http://a.app.qq.com/o/simple.jsp?pkgname=com.yunyida56.goodsapp'
+  };
+
+  $scope.webChatFriend = function () {
+    Wechat.isInstalled(function (installed) {
+      if (!installed) {
+        alert("手机尚未安装微信应用");
+      }
+    });
+    Wechat.share({
+      message: {
+        title: '加入云驿达，免费推广品牌，汇集海量物流企业和司机，你也试试吧！',
+        description: '云驿达运力版',
+        thumb: "www/img/icon.png",
+        media: {
+          type: Wechat.Type.LINK,
+          webpageUrl: $scope.invData.url
+        }
+      },
+      scene: Wechat.Scene.TIMELINE // share to Timeline
+    }, function () {
+      $scope.closeShareModal();
+      alert("分享成功");
+    }, function (reason) {
+      if (reason == 'ERR_USER_CANCEL') {
+        return;
+      }
+      alert("分享失败: " + reason);
+    });
+  };
+
+  $scope.webChat = function () {
+    Wechat.isInstalled(function (installed) {
+      if (!installed) {
+        alert("手机尚未安装微信应用");
+      }
+    });
+    Wechat.share({
+      message: {
+        title: '加入云驿达，免费推广品牌，汇集海量物流企业和司机，你也试试吧！',
+        description: '云驿达运力版',
+        thumb: "www/img/icon.png",
+        media: {
+          type: Wechat.Type.LINK,
+          webpageUrl: $scope.invData.url
+        }
+      },
+      scene: Wechat.Scene.SESSION // share to Timeline
+    }, function () {
+      $scope.closeShareModal();
+      alert("分享成功");
+    }, function (reason) {
+      if (reason == 'ERR_USER_CANCEL') {
+        return;
+      }
+      alert("分享失败: " + reason);
     });
   };
 });
