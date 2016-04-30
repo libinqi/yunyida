@@ -43,3 +43,12 @@
 	.right-menu-list-box{padding:0 3em 3em 6em !important;}
 	.op-new-messenge{left:3.6em;}
 }
+
+.ng-pageslide {
+	background: #fbfbfb;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	border: 1px solid #ccc;
+	border-top-left-radius: 8px;
+	box-shadow: -2px 0px 2px rgba(0, 0, 0, 0.1);
+}
